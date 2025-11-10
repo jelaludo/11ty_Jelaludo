@@ -1,0 +1,32 @@
+<section class="kanri-page">
+    <header class="kanri-header">
+        <h1>Kanri Console</h1>
+        <p class="kanri-subtitle">Local-only manager for gallery images and metadata.</p>
+    </header>
+
+    <div id="kanri-app" data-admin-base="{{ env.admin.baseUrl }}">
+        <p class="kanri-loading">Loading image catalog…</p>
+    </div>
+
+    <template id="kanri-image-row">
+        <article class="kanri-card">
+            <label class="kanri-card__select">
+                <input type="checkbox" class="kanri-card__checkbox" />
+                <span>Select</span>
+            </label>
+            <figure class="kanri-card__preview">
+                <img src="" alt="" class="kanri-card__img" loading="lazy" />
+            </figure>
+            <div class="kanri-card__body">
+                <h3 class="kanri-card__title"></h3>
+                <dl class="kanri-card__meta"></dl>
+            </div>
+            <div class="kanri-card__actions">
+                <button type="button" class="kanri-card__edit">Edit</button>
+            </div>
+        </article>
+    </template>
+
+    <script type="module" src="/js/kanri.js"></script>
+</section>
+

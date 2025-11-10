@@ -1,0 +1,30 @@
+{   
+    "author": {
+        "firstName": "Jelaludo",
+        "lastName": "ジェラルド",
+        "email": "photo@jelaludo.com",
+        "twitterHandle": "Jelaludo",
+        "about": "Photographer, semi-retired MBA & BJJ coach living in Tokyo"
+    },
+    "socials": {
+        "twitter": "https://twitter.com/jelaludo",
+        "linkedin": "https://linkedin.com/in/jelaludo",
+        "Instagram": "https://instagram.com/jelaludo",
+        "github": "https://github.com/jelaludo"
+    },
+    "pageMetadata": {
+        "home": {
+            "content": "Check how to Add or remove images, create thumbnails, etc. with 11ty addon"
+        },
+        "gallery": {
+            "content": "A collection of images from Jelaludo's gallery."
+        },
+        "featured": {
+            "content": "Jelaludo's gallery."
+        },
+        "about": {
+            "content": "A page about photography by Jelaludo in Tokyo. 11ty template github."
+        }
+
+    }
+}
