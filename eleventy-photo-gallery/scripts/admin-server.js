@@ -57,6 +57,45 @@ function cleanText(value, fallback = "") {
   return fallback;
 }
 
+function normaliseTags(value, fallback = []) {
+  const base = Array.isArray(fallback)
+    ? fallback.map((tag) => (typeof tag === "string" ? tag.trim() : "")).filter(Boolean)
+    : [];
+
+  if (value === undefined || value === null) {
+    return base;
+  }
+
+  if (Array.isArray(value)) {
+    const cleaned = value
+      .map((tag) => (typeof tag === "string" ? tag.trim() : ""))
+      .filter(Boolean);
+    return cleaned.length ? cleaned : base;
+  }
+
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+    if (!trimmed) {
+      return base;
+    }
+    try {
+      const parsed = JSON.parse(trimmed);
+      if (Array.isArray(parsed)) {
+        return normaliseTags(parsed, base);
+      }
+    } catch (error) {
+      // not JSON, continue with comma-separated handling
+    }
+    const cleaned = trimmed
+      .split(",")
+      .map((tag) => tag.trim())
+      .filter(Boolean);
+    return cleaned.length ? cleaned : base;
+  }
+
+  return base;
+}
+
 function normaliseDir(dir) {
   const fallback = "/images/";
   if (!dir) return fallback;
@@ -113,12 +152,14 @@ async function augmentWithStats(entries) {
       const stats = await fs.stat(absolutePath);
       return {
         ...entry,
+        tags: normaliseTags(entry.tags),
         size: stats.size,
         mtime: stats.mtimeMs,
       };
     } catch {
       return {
         ...entry,
+        tags: normaliseTags(entry.tags),
         size: null,
         mtime: null,
       };
@@ -193,6 +234,7 @@ app.put("/admin/images/:src", async (req, res) => {
       alt: cleanText(payload.alt, entry.alt || entry.title || baseName),
       credit: cleanText(payload.credit, entry.credit || ""),
       linkToAuthor: cleanText(payload.linkToAuthor, entry.linkToAuthor || ""),
+      tags: normaliseTags(payload.tags, entry.tags || []),
       imgDir: normaliseDir(payload.imgDir ?? entry.imgDir ?? "/images/"),
     };
 
@@ -286,6 +328,7 @@ app.post("/admin/images", upload.single("file"), async (req, res) => {
       linkToAuthor: cleanText(payload.linkToAuthor),
       src: filename,
       imgDir,
+      tags: normaliseTags(payload.tags),
     };
 
     entries.push(newEntry);

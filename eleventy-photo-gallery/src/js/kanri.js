@@ -73,6 +73,12 @@ if (!appRoot || !template) {
                 <input type="text" name="linkToAuthor" />
               </label>
             </div>
+            <div class="kanri-form__group">
+              <label>Tags (comma separated)
+                <input type="text" name="tags" placeholder="portrait, tokyo, street" />
+              </label>
+              <p class="kanri-form__helper">Use commas to separate tags. Example: portrait, tokyo, street.</p>
+            </div>
             <div class="kanri-form__actions">
               <button type="submit" class="kanri-btn">Save Changes</button>
             </div>
@@ -121,6 +127,12 @@ if (!appRoot || !template) {
               <label>Author link
                 <input type="text" name="linkToAuthor" />
               </label>
+            </div>
+            <div class="kanri-form__group">
+              <label>Tags (comma separated)
+                <input type="text" name="tags" placeholder="portrait, tokyo, street" />
+              </label>
+              <p class="kanri-form__helper">Optional. Use commas to separate tags.</p>
             </div>
             <div class="kanri-form__actions">
               <button type="submit" class="kanri-btn">Upload &amp; Generate</button>
@@ -184,7 +196,7 @@ if (!appRoot || !template) {
         throw new Error(`Failed to load images (${response.status})`);
       }
       const payload = await response.json();
-      state.images = payload.images || [];
+      state.images = (payload.images || []).map(deserialiseImage);
       state.selected.clear();
       state.editing = null;
       renderList();
@@ -217,6 +229,7 @@ if (!appRoot || !template) {
       const img = card.querySelector(".kanri-card__img");
       const title = card.querySelector(".kanri-card__title");
       const meta = card.querySelector(".kanri-card__meta");
+      const tagList = card.querySelector(".kanri-card__tags");
 
       checkbox.checked = state.selected.has(item.src);
       checkbox.dataset.src = item.src;
@@ -232,6 +245,7 @@ if (!appRoot || !template) {
 
       title.textContent = item.title || item.alt || item.src;
       meta.innerHTML = buildMetadataList(item);
+      renderTagList(tagList, item.tags);
 
       fragment.appendChild(card);
     });
@@ -240,6 +254,7 @@ if (!appRoot || !template) {
   }
 
   function buildMetadataList(item) {
+    const tagsDisplay = formatTagsText(item.tags);
     const entries = [
       ["Source", item.src],
       ["Directory", item.imgDir || "/images/"],
@@ -247,6 +262,7 @@ if (!appRoot || !template) {
       ["Alt", item.alt || "—"],
       ["Credit", item.credit || "—"],
       ["Author Link", item.linkToAuthor || "—"],
+      ["Tags", tagsDisplay],
     ];
 
     return entries
@@ -317,6 +333,7 @@ if (!appRoot || !template) {
     form.alt.value = item.alt || "";
     form.credit.value = item.credit || "";
     form.linkToAuthor.value = item.linkToAuthor || "";
+    form.tags.value = tagsToInput(item.tags);
     showToast(`Editing ${item.src}.`);
   }
 
@@ -348,6 +365,7 @@ if (!appRoot || !template) {
           alt: payload.alt || "",
           credit: payload.credit || "",
           linkToAuthor: payload.linkToAuthor || "",
+          tags: parseTagsInput(payload.tags),
           imgDir: normaliseDir(payload.imgDir),
         }),
       });
@@ -374,6 +392,8 @@ if (!appRoot || !template) {
     }
 
     formData.set("imgDir", normaliseDir(formData.get("imgDir")));
+    const tags = parseTagsInput(formData.get("tags"));
+    formData.set("tags", JSON.stringify(tags));
 
     try {
       const response = await fetch(`${ADMIN_BASE}/admin/images`, {
@@ -438,6 +458,69 @@ if (!appRoot || !template) {
     autoInputs.forEach((input) => {
       input.dataset.auto = AUTO_MARK.manual;
     });
+  }
+
+  function deserialiseImage(raw = {}) {
+    return {
+      ...raw,
+      tags: normaliseTagsValue(raw.tags),
+    };
+  }
+
+  function normaliseTagsValue(value) {
+    if (!value) return [];
+    if (Array.isArray(value)) {
+      return value
+        .map((tag) => (typeof tag === "string" ? tag.trim() : ""))
+        .filter(Boolean);
+    }
+    if (typeof value === "string") {
+      const trimmed = value.trim();
+      if (!trimmed) return [];
+      try {
+        const parsed = JSON.parse(trimmed);
+        if (Array.isArray(parsed)) {
+          return normaliseTagsValue(parsed);
+        }
+      } catch (error) {
+        // not json, fall through to comma split
+      }
+      return trimmed
+        .split(",")
+        .map((tag) => tag.trim())
+        .filter(Boolean);
+    }
+    return [];
+  }
+
+  function parseTagsInput(value) {
+    if (!value) return [];
+    if (Array.isArray(value)) {
+      return normaliseTagsValue(value);
+    }
+    return normaliseTagsValue(String(value));
+  }
+
+  function tagsToInput(tags) {
+    const normalised = normaliseTagsValue(tags);
+    return normalised.join(", ");
+  }
+
+  function formatTagsText(tags) {
+    const normalised = normaliseTagsValue(tags);
+    return normalised.length ? normalised.join(", ") : "—";
+  }
+
+  function renderTagList(container, tags) {
+    if (!container) return;
+    const normalised = normaliseTagsValue(tags);
+    if (!normalised.length) {
+      container.innerHTML = "";
+      return;
+    }
+    container.innerHTML = normalised
+      .map((tag) => `<li><span class="kanri-card__chip">${tag}</span></li>`)
+      .join("");
   }
 }
 
