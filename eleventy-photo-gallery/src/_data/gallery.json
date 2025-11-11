@@ -182,5 +182,242 @@
       "#8C8682",
       "#3C2D07"
     ]
+  },
+  {
+    "title": "R6g 4896",
+    "date": "",
+    "alt": "Old Camera",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_4896.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Camera",
+      "Object"
+    ],
+    "palette": [
+      "#CFC6BC",
+      "#120B09",
+      "#6B4C33",
+      "#F2C280",
+      "#758E63",
+      "#4B4A46",
+      "#CD9665",
+      "#887766"
+    ]
+  },
+  {
+    "title": "n+1 Glass",
+    "date": "",
+    "alt": "R6g 5707 Enhanced Nr",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_5707-Enhanced-NR.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Camera",
+      "Object",
+      "Lens"
+    ],
+    "palette": [
+      "#D9A672",
+      "#110804",
+      "#DACCBD",
+      "#907659",
+      "#4E2504",
+      "#6E5030",
+      "#753B04",
+      "#F7C073"
+    ]
+  },
+  {
+    "title": "Okinawa Rest",
+    "date": "",
+    "alt": "R6g 5145",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_5145.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Okinawa",
+      "Object"
+    ],
+    "palette": [
+      "#99AED7",
+      "#D35503",
+      "#436B33",
+      "#580901",
+      "#C9B098",
+      "#524D4D",
+      "#EB9A1A",
+      "#1B1612"
+    ]
+  },
+  {
+    "title": "Jiyugaoka Etched",
+    "date": "",
+    "alt": "R6g 5317 Enhanced Nr",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_5317-Enhanced-NR.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Tokyo",
+      "Close-up"
+    ],
+    "palette": [
+      "#A48561",
+      "#0F0B09",
+      "#470C0D",
+      "#564E46",
+      "#B9A07E",
+      "#67492E",
+      "#E5CAA2",
+      "#995B46"
+    ]
+  },
+  {
+    "title": "Tennis Serve",
+    "date": "",
+    "alt": "R6g 6701",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_6701.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Monaco",
+      "Tennis",
+      "Sports"
+    ],
+    "palette": [
+      "#3B2D1D",
+      "#C8DAE4",
+      "#E67533",
+      "#AD6445",
+      "#8DA1B1",
+      "#84826E",
+      "#B54F1F",
+      "#F29051"
+    ]
+  },
+  {
+    "title": "Origami Gorilla by Hiro",
+    "date": "",
+    "alt": "R6g 7169",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_7169.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Origami",
+      "Tokyo",
+      "Object"
+    ],
+    "palette": [
+      "#17141D",
+      "#FBB635",
+      "#753521",
+      "#E9AF78",
+      "#4F3F3B",
+      "#D56B1F",
+      "#183461",
+      "#4A251C"
+    ]
+  },
+  {
+    "title": "Porsche 911 3.2L, 1988, reflections",
+    "date": "",
+    "alt": "R6g 6270",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_6270.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "object",
+      "car",
+      "reflections"
+    ],
+    "palette": [
+      "#0D0F0A",
+      "#936727",
+      "#777970",
+      "#4E3615",
+      "#C4B996",
+      "#A7ABA9",
+      "#7D6E4B",
+      "#4A483F"
+    ]
+  },
+  {
+    "title": "Shibuya Police at night",
+    "date": "",
+    "alt": "R6g 7297 2",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_7297-2.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Tokyo",
+      "Shibuya",
+      "Night"
+    ],
+    "palette": [
+      "#191620",
+      "#E8AB32",
+      "#D32026",
+      "#487A3C",
+      "#263A7F",
+      "#5F5036",
+      "#A3C087",
+      "#444042"
+    ]
+  },
+  {
+    "title": "Karuizawa Waterfall",
+    "date": "",
+    "alt": "R6g 7663",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_7663.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Karuizawa",
+      "Reflection",
+      "Water"
+    ],
+    "palette": [
+      "#181720",
+      "#B1B570",
+      "#697685",
+      "#4D5C3E",
+      "#7F9829",
+      "#32394C",
+      "#867231",
+      "#465150"
+    ]
+  },
+  {
+    "title": "USMC, Table of the Fallen",
+    "date": "",
+    "alt": "R6g 8286",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_8286.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Hiroshima",
+      "USMC",
+      "Object"
+    ],
+    "palette": [
+      "#050303",
+      "#935B35",
+      "#6E8BB7",
+      "#595460",
+      "#4F2810",
+      "#D1A588",
+      "#9BB3CD",
+      "#161D29"
+    ]
   }
 ]
