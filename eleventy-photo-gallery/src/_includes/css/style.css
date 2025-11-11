@@ -202,7 +202,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 3.5rem clamp(1.5rem, 6vw, 3.5rem);
+  gap: clamp(1rem, 3vw, 2rem);
+  padding: clamp(1.75rem, 5vw, 3rem) clamp(1.2rem, 5vw, 3rem);
   background: linear-gradient(to top, rgba(18, 18, 18, 0.92), rgba(18, 18, 18, 0.35) 55%, rgba(18, 18, 18, 0.05));
 }
 .feature-frame__meta {
@@ -237,9 +238,9 @@
   border-color: #ffffff;
 }
 .feature-frame__palette {
-  margin-top: auto;
-  align-self: flex-end;
-  max-width: min(360px, 60%);
+  margin-top: clamp(0.75rem, 2vw, 1.5rem);
+  align-self: flex-start;
+  max-width: min(360px, 70%);
 }
 .feature-frame__palette .palette {
   background: rgba(16, 16, 16, 0.7);
@@ -269,7 +270,19 @@
 
 @media screen and (max-width: 720px) {
   .feature-frame__overlay {
-    padding: 3rem 1.5rem 2.5rem;
+    padding: 1.75rem 1rem 1.5rem;
+    gap: 1.2rem;
+  }
+  .feature-frame__meta {
+    text-align: left;
+    gap: 0.6rem;
+  }
+  .feature-frame__palette {
+    align-self: center;
+    max-width: 100%;
+  }
+  .feature-frame__palette .palette__swatches {
+    justify-content: center;
   }
   .feature-frame__nav {
     justify-content: space-between;
@@ -864,6 +877,8 @@ footer .social-links li {
 
 .palette__swatches {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 0.4rem;
   margin: 0;
   padding: 0;
