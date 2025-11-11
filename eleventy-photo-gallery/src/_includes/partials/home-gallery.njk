@@ -1,3 +1,5 @@
+{% import "partials/palette.njk" as palette %}
+
 <div class="immersive-gallery" data-gallery>
   {% for image in gallery %}
   <section class="gallery-slide">
@@ -20,6 +22,7 @@
         <p>{{ image.date }}</p>
         {% endif %}
       </div>
+      {{ palette.render(image.palette, "gallery-slide__palette") }}
     </a>
   </section>
   {% endfor %}

@@ -6,6 +6,7 @@ const path = require("path");
 const fs = require("fs/promises");
 const { constants } = require("fs");
 const Image = require("@11ty/eleventy-img");
+const { topColoursHex } = require("@colour-extractor/colour-extractor");
 
 const projectRoot = path.resolve(__dirname, "..");
 const galleryPath = path.join(projectRoot, "src", "_data", "gallery.json");
@@ -55,6 +56,45 @@ function cleanText(value, fallback = "") {
     if (trimmed.length) return trimmed;
   }
   return fallback;
+}
+
+function normalisePalette(value, fallback = []) {
+  const base = Array.isArray(fallback)
+    ? fallback.map((colour) => (typeof colour === "string" ? colour.trim().toUpperCase() : "")).filter(Boolean)
+    : [];
+
+  if (value === undefined || value === null) {
+    return base;
+  }
+
+  if (Array.isArray(value)) {
+    const cleaned = value
+      .map((colour) => (typeof colour === "string" ? colour.trim().toUpperCase() : ""))
+      .filter(Boolean);
+    return cleaned.length ? cleaned : base;
+  }
+
+  if (typeof value === "string") {
+    const trimmed = value.trim();
+    if (!trimmed) {
+      return base;
+    }
+    try {
+      const parsed = JSON.parse(trimmed);
+      if (Array.isArray(parsed)) {
+        return normalisePalette(parsed, base);
+      }
+    } catch (error) {
+      // ignore, fall back to comma separated parsing
+    }
+    const cleaned = trimmed
+      .split(",")
+      .map((colour) => colour.trim().toUpperCase())
+      .filter(Boolean);
+    return cleaned.length ? cleaned : base;
+  }
+
+  return base;
 }
 
 function normaliseTags(value, fallback = []) {
@@ -153,6 +193,7 @@ async function augmentWithStats(entries) {
       return {
         ...entry,
         tags: normaliseTags(entry.tags),
+        palette: normalisePalette(entry.palette),
         size: stats.size,
         mtime: stats.mtimeMs,
       };
@@ -160,6 +201,7 @@ async function augmentWithStats(entries) {
       return {
         ...entry,
         tags: normaliseTags(entry.tags),
+        palette: normalisePalette(entry.palette),
         size: null,
         mtime: null,
       };
@@ -202,6 +244,22 @@ async function removeDerivatives(src) {
   }
 }
 
+async function extractPalette(absolutePath, colourCount = 6) {
+  try {
+    const swatches = await topColoursHex(absolutePath);
+    if (!Array.isArray(swatches)) {
+      return [];
+    }
+    return swatches
+      .slice(0, colourCount)
+      .map((colour) => (typeof colour === "string" ? colour.trim().toUpperCase() : ""))
+      .filter(Boolean);
+  } catch (error) {
+    console.warn(`[Kanri] Failed to extract palette for ${absolutePath}:`, error.message || error);
+    return [];
+  }
+}
+
 app.get("/admin/images", async (_req, res) => {
   try {
     const entries = await readGallery();
@@ -235,6 +293,7 @@ app.put("/admin/images/:src", async (req, res) => {
       credit: cleanText(payload.credit, entry.credit || ""),
       linkToAuthor: cleanText(payload.linkToAuthor, entry.linkToAuthor || ""),
       tags: normaliseTags(payload.tags, entry.tags || []),
+      palette: normalisePalette(entry.palette),
       imgDir: normaliseDir(payload.imgDir ?? entry.imgDir ?? "/images/"),
     };
 
@@ -247,6 +306,7 @@ app.put("/admin/images/:src", async (req, res) => {
       await fs.unlink(currentPath.absolutePath);
       await removeDerivatives(entry.src);
       await generateDerivatives(desiredPath.absolutePath);
+      updated.palette = await extractPalette(desiredPath.absolutePath);
     }
 
     entries[index] = updated;
@@ -317,6 +377,7 @@ app.post("/admin/images", upload.single("file"), async (req, res) => {
     await fs.chmod(absolutePath, constants.S_IRUSR | constants.S_IWUSR | constants.S_IRGRP | constants.S_IROTH);
 
     await generateDerivatives(absolutePath);
+    const palette = await extractPalette(absolutePath);
 
     const baseName = path.parse(filename).name;
 
@@ -329,6 +390,7 @@ app.post("/admin/images", upload.single("file"), async (req, res) => {
       src: filename,
       imgDir,
       tags: normaliseTags(payload.tags),
+      palette,
     };
 
     entries.push(newEntry);

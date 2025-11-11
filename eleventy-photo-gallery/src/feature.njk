@@ -6,6 +6,7 @@ pagination:
 permalink: "/gallery/{{ image.title | slug }}/"
 url: https://eleventy-gallery.netlify.app
 ---
+{% import "partials/palette.njk" as palette %}
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
     <head>
@@ -55,6 +56,7 @@ url: https://eleventy-gallery.netlify.app
                     <a class="feature-frame__source" href="{{ image.linkToAuthor }}" target="_blank" rel="noopener">View Original</a>
                     {% endif %}
                 </header>
+                {{ palette.render(image.palette, "feature-frame__palette") }}
                 <nav class="feature-frame__nav" aria-label="Gallery navigation">
                     {% if pagination.href.previous %}
                     <a class="feature-frame__navlink" href="{{ pagination.href.previous }}">

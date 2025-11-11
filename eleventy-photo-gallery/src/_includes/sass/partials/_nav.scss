@@ -26,106 +26,53 @@
     }
 
     .nav-main {
-        margin: 1rem auto 0 auto;
+        margin: 0 auto;
         max-width: 1100px;
+        padding: 1.1rem 1.5rem;
+    }
+
+    .nav-list {
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: .9rem 1.5rem;
-        border-top: 1px solid #444444;
-        border-bottom: 1px solid #444444;
-
-        a {
-            &:hover {
-                background: rgba(136, 136, 136, 0.15);
-                text-decoration: none;
-            }
-        }
-
-        .nav-list {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-left: 0;
-            list-style: none;
-            width: 100%;
-
-            li {
-                margin: 0 1rem;
-            }
-            
-            a {
-                &:hover {
-                    background: rgba(136, 136, 136, 0.1);
-                    text-decoration: none;
-                }
-            }
-
-            .link {
-                color: #e0e0e0;
-                padding: .8rem .75rem;
-                margin: 0 .4rem;
-                font-size: 16px;
-                font-size: clamp(1.0625rem, 4vw, 1.2rem);
-                text-decoration: none;
-                display: block;
-
-                &:first-child {
-                    margin-left: 0;
-                }
-            }
-        }
-
-        .home-button {
-            text-decoration: none;
-            color: #e0e0e0;
-            padding-right: .5rem;
-            font-size: 24px;
-            font-size: clamp(1.3rem, 4vw, 1.5rem);
-            font-weight: 500;
-        }
+        gap: clamp(1.25rem, 4vw, 2.5rem);
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        border-top: 1px solid #2f2f2f;
+        border-bottom: 1px solid #2f2f2f;
     }
 
-    .intro {
-        display: flex;
-        justify-content: space-between;
-        margin: 2rem auto 1rem auto;
-        max-width: 1100px;
-        padding: 0 1.5rem;
+    .link {
+        color: #e0e0e0;
+        padding: 0.75rem 0;
+        font-size: clamp(1rem, 3.5vw, 1.15rem);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        text-decoration: none;
+        position: relative;
 
-        div {
-            p {
-                color: #b0b0b0;
-            }
-            &:first-child {
-                margin-right: 2rem;
-            }
+        &:hover,
+        &:focus-visible {
+            color: #ffffff;
         }
 
-        .home-button {
-            display: block;
-            font-size: 28px;
-            font-size: clamp(26px, 4vw, 28px);
-            color: #e0e0e0;
-            margin-bottom: 14px;
+        &::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0.2rem;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.35);
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.25s ease;
         }
 
-        .hire-me {
-            border: 1px solid #444444;
-            margin-top: 3px;
-            padding: .5rem 1rem;
-            text-decoration: none;
-            height: fit-content;
-            height: -moz-fit-content;
-            border-radius: 3px;
-            background: rgba(18, 18, 18, 0.6);
-            color: #e0e0e0;
-            font-weight: 400;
-            white-space: nowrap;
-
-            &:hover {
-                background: rgba(136, 136, 136, 0.25);
-            }
+        &:hover::after,
+        &:focus-visible::after {
+            transform: scaleX(1);
         }
     }
 }

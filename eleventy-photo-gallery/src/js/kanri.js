@@ -230,6 +230,7 @@ if (!appRoot || !template) {
       const title = card.querySelector(".kanri-card__title");
       const meta = card.querySelector(".kanri-card__meta");
       const tagList = card.querySelector(".kanri-card__tags");
+      const paletteList = card.querySelector(".kanri-card__palette");
 
       checkbox.checked = state.selected.has(item.src);
       checkbox.dataset.src = item.src;
@@ -246,6 +247,7 @@ if (!appRoot || !template) {
       title.textContent = item.title || item.alt || item.src;
       meta.innerHTML = buildMetadataList(item);
       renderTagList(tagList, item.tags);
+      renderPalette(paletteList, item.palette);
 
       fragment.appendChild(card);
     });
@@ -464,6 +466,7 @@ if (!appRoot || !template) {
     return {
       ...raw,
       tags: normaliseTagsValue(raw.tags),
+      palette: normalisePaletteValue(raw.palette),
     };
   }
 
@@ -522,5 +525,42 @@ if (!appRoot || !template) {
       .map((tag) => `<li><span class="kanri-card__chip">${tag}</span></li>`)
       .join("");
   }
-}
 
+  function normalisePaletteValue(value) {
+    if (!value) return [];
+    if (Array.isArray(value)) {
+      return value
+        .map((colour) => (typeof colour === "string" ? colour.trim().toUpperCase() : ""))
+        .filter(Boolean);
+    }
+    if (typeof value === "string") {
+      const trimmed = value.trim();
+      if (!trimmed) return [];
+      try {
+        const parsed = JSON.parse(trimmed);
+        if (Array.isArray(parsed)) {
+          return normalisePaletteValue(parsed);
+        }
+      } catch (error) {
+        // ignore
+      }
+      return trimmed
+        .split(",")
+        .map((colour) => colour.trim().toUpperCase())
+        .filter(Boolean);
+    }
+    return [];
+  }
+
+  function renderPalette(container, palette) {
+    if (!container) return;
+    const normalised = normalisePaletteValue(palette);
+    if (!normalised.length) {
+      container.innerHTML = "";
+      return;
+    }
+    container.innerHTML = normalised
+      .map((colour) => `<li class="kanri-card__swatch" style="--palette-color: ${colour}"><span class="sr-only">${colour}</span></li>`)
+      .join("");
+  }
+}

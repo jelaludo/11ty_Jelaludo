@@ -92,6 +92,16 @@
         }
     }
 
+    &__palette {
+        margin-top: auto;
+        align-self: flex-end;
+        max-width: min(360px, 60%);
+
+        .palette {
+            background: rgba(16, 16, 16, 0.7);
+        }
+    }
+
     &__nav {
         display: flex;
         gap: 1rem;

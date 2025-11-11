@@ -1,0 +1,15 @@
+{% macro render(palette=[], modifier="") %}
+  {% set colors = palette or [] %}
+  {% if colors and colors | length %}
+  <div class="palette {{ modifier }}">
+    <ul class="palette__swatches">
+      {% for colour in colors %}
+      {% set swatch = colour | upper %}
+      <li class="palette__swatch" style="--palette-color: {{ swatch }}">
+        <span class="sr-only">{{ swatch }}</span>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+{% endmacro %}

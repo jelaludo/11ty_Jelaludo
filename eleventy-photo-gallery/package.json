@@ -37,6 +37,7 @@
     "@11ty/eleventy": "^2.0.1",
     "@11ty/eleventy-img": "^4.0.2",
     "@11ty/eleventy-navigation": "^0.3.3",
+    "@colour-extractor/colour-extractor": "^1.0.1",
     "clean-css": "^4.2.3",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
