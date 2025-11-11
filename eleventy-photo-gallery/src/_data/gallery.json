@@ -419,5 +419,52 @@
       "#9BB3CD",
       "#161D29"
     ]
+  },
+  {
+    "title": "Shibuya Tapioca Neons",
+    "date": "",
+    "alt": "R6g 5889 Enhanced Nr",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_5889-Enhanced-NR.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Tokyo",
+      "Street",
+      "Neons"
+    ],
+    "palette": [
+      "#841818",
+      "#FBCA5C",
+      "#E845ED",
+      "#1860AE",
+      "#E22004",
+      "#BCAB96",
+      "#2B2029",
+      "#FE93FE"
+    ]
+  },
+  {
+    "title": "God Rays Amp",
+    "date": "",
+    "alt": "R6g 7869",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_7869.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Music",
+      "God rays"
+    ],
+    "palette": [
+      "#0C1019",
+      "#D35A03",
+      "#98757F",
+      "#2F3652",
+      "#DABCBF",
+      "#605271",
+      "#0E1728",
+      "#453B4A"
+    ]
   }
 ]

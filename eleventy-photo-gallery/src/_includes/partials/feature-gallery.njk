@@ -16,12 +16,6 @@
                     sizes="100vw"
                 %}
             </div>
-            <div class="gallery-slide__meta">
-                <h2>{{ image.title }}</h2>
-                {% if image.date %}
-                <p>{{ image.date }}</p>
-                {% endif %}
-            </div>
             {{ palette.render(image.palette, "gallery-slide__palette") }}
         </a>
     </section>
