@@ -1,105 +1,113 @@
-.main-gallery {
+.gallery-intro {
     max-width: 1100px;
-    margin: 3rem auto 0 auto;
-}
+    margin: 0 auto;
+    padding: 3rem 1.5rem 1.5rem;
+    text-align: left;
 
-.gallery-h1 {
-    text-align: center;
-    margin-bottom: 4.25rem;
-}
-
-.gallery-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
-    max-width: 1100px;
-    gap: 50px;
-    margin: 1.5rem auto 1rem auto;
-    list-style: none;
-}
-    
-.gallery-item {
-    margin: .5rem auto;
-    width: 100%;
-
-    &:last-child {
-        border-bottom: none;
+    h1 {
+        margin-bottom: 0.5rem;
+        font-size: clamp(2rem, 6vw, 2.8rem);
     }
 
-    .image-block {
-        display: flex;
-        flex-direction: column;
+    p {
+        margin: 0;
+        color: #b0b0b0;
+        font-size: 0.95rem;
+    }
+}
+
+.immersive-gallery {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    scroll-snap-type: y mandatory;
+}
+
+.gallery-slide {
+    position: relative;
+    min-height: 100vh;
+    scroll-snap-align: start;
+    overflow: hidden;
+    isolation: isolate;
+    background: #121212;
+
+    &:focus-within {
+        outline: none;
+    }
+}
+
+.gallery-slide__link {
+    display: block;
+    height: 100%;
+    color: inherit;
+    text-decoration: none;
+}
+
+.gallery-slide__media {
+    position: absolute;
+    inset: 0;
+
+    picture,
+    img {
         width: 100%;
-        max-width: 80ch;
-
-        .block-details {
-            margin: 1rem 0 0;
-
-            p {
-                margin-bottom: 0;
-                color: #333;
-            }
-        }
+        height: 100%;
     }
 
-    a {
-        color: #212121;
+    picture {
+        display: block;
+        height: 100%;
+    }
 
-        .gallery-photo {
-            max-width: 100%;
-            height: 500px;
-            max-height: 500px;
-            object-fit: cover;
-            border-radius: 2px;
-            filter: brightness(99%);
-            transition: filter 0.5s ease;
-
-            &:hover {
-                filter: brightness(105%);
-                transform-origin: 50% 50%;
-                cursor: pointer;
-            }
-        }
+    img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+        filter: brightness(0.88);
+        transition: transform 0.6s ease, filter 0.6s ease;
     }
 }
 
-.image-grid {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
-    gap: 3px;
-    max-width: 1100px;
-    margin: 1rem auto 3rem auto;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+.gallery-slide__link:hover .gallery-slide__img,
+.gallery-slide__link:focus-visible .gallery-slide__img {
+    transform: scale(1.02);
+    filter: brightness(1);
+}
 
-    .image-container {
-        width: 100%;
-        height: 20rem;
-        overflow: hidden;
-        border-radius: 2px;
+.gallery-slide__meta {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 3rem 2.5rem 3.5rem;
+    background: linear-gradient(to top, rgba(18, 18, 18, 0.92), rgba(18, 18, 18, 0.15) 60%, transparent);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
 
-        a {
-            .grid-image {
-                object-fit: cover;
-                height: 100%;
-                width: 100%;
-                transform-origin: 50% 50%;
-                filter: brightness(99%);
-                transition: filter 0.5s ease;
-            }
-            img {
-                &:hover {
-                    filter: brightness(110%);
-                    box-shadow: 0px 0px 0px 2px #000;
-                    transform-origin: 50% 50%;
-                    cursor: pointer;
-                }
-            }
-            &:focus {
-                img {
-                    border: 3px solid #07c;
-                }
-            }
+    h2 {
+        margin: 0;
+        font-size: clamp(1.6rem, 5vw, 2.6rem);
+        font-weight: 600;
+        letter-spacing: 0.04em;
+    }
+
+    p {
+        margin: 0;
+        color: #b0b0b0;
+        font-size: 0.95rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .gallery-slide__meta {
+        padding: 2.5rem 1.5rem 2.5rem;
+
+        h2 {
+            font-size: clamp(1.4rem, 7vw, 2.1rem);
+        }
+
+        p {
+            font-size: 0.8rem;
         }
     }
 }

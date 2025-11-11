@@ -16,7 +16,8 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    background: $page-background;
+    background: #121212;
+    color: #e0e0e0;
     font-family: $system-font;
     font-size: 16px;
     line-height: 1.6;
@@ -34,16 +35,17 @@ p {
     font-size: clamp(1rem, 3vw, 1.0625rem);
     line-height: 1.5;
     font-family: $system-font;
+    color: #b0b0b0;
 }
 
 a {
-    color: $link-blue-accessible;
+    color: #e0e0e0;
     text-decoration: none;
     font-family: $system-font;
 
     &:hover, &:focus {
         text-decoration: underline;
-        color: $link-blue-accessible-hover;
+        color: #ffffff;
     }
 }
 
@@ -78,8 +80,8 @@ main {
     transform: translateY(-10rem);
     transition: transform .3s ease-in-out;
     padding: .5rem;
-    background: rgb(255, 255, 255);
-    color: #222;
+    background: #e0e0e0;
+    color: #121212;
     z-index: 999;
 
     &:focus {
@@ -89,7 +91,53 @@ main {
 
 h1, h2, h3, h4, h5 {
     font-family: $system-font;
-    color: #212121;
+    color: #e0e0e0;
+}
+
+.inspiration {
+    max-width: 820px;
+    margin: 3rem auto 4rem;
+    padding: 0 1.5rem;
+
+    &__intro {
+        margin-bottom: 2rem;
+
+        p {
+            color: #b0b0b0;
+        }
+    }
+}
+
+.inspiration-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1.5rem;
+
+    li {
+        font-size: 1.1rem;
+        letter-spacing: 0.04em;
+    }
+
+    a {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-size: 0.95rem;
+        color: #e0e0e0;
+        padding-bottom: 0.35rem;
+        border-bottom: 1px solid transparent;
+        transition: border-color 0.3s ease, color 0.3s ease;
+
+        &:hover,
+        &:focus-visible {
+            border-color: #888888;
+            color: #ffffff;
+        }
+    }
 }
 
 h1, .h1 {

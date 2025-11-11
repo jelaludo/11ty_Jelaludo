@@ -1,56 +1,112 @@
-.featured-img {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+.feature-frame {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    align-items: stretch;
+    overflow: hidden;
+    background: #121212;
 
-    .image-container {
-        width: 100%;
-        max-width: 1050px;
-        padding: 0;
+    &__media {
+        position: absolute;
+        inset: 0;
+
+        picture,
+        img {
+            width: 100%;
+            height: 100%;
+        }
+
+        img {
+            object-fit: cover;
+            filter: brightness(0.9);
+        }
     }
 
-    .showcase-img {
-        object-fit: cover;
-        /* object-fit: contain; this is best but causes letterboxing" */
-        max-width: 100%;
-        height: 90vh;
-        max-height: 600px;
-        margin: 1rem auto 1rem auto;
-    }
-
-    .prev-next {
+    &__overlay {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
-        align-items: center;
-        margin-top: 2rem;
-        margin-bottom: 1rem;
+        padding: 3.5rem clamp(1.5rem, 6vw, 3.5rem);
+        background: linear-gradient(
+            to top,
+            rgba(18, 18, 18, 0.92),
+            rgba(18, 18, 18, 0.35) 55%,
+            rgba(18, 18, 18, 0.05)
+        );
+    }
+
+    &__meta {
+        max-width: 520px;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2rem, 6vw, 3rem);
+            letter-spacing: 0.05em;
+        }
+
+        p {
+            margin: 0;
+            color: #b0b0b0;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+    }
+
+    &__source {
+        align-self: flex-start;
+        font-size: 0.85rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding-bottom: 2px;
+        border-bottom: 1px solid #888888;
+
+        &:hover {
+            color: #ffffff;
+            border-color: #ffffff;
+        }
+    }
+
+    &__nav {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
 
         a {
-            padding: 7px 10px;
-            border: 1px solid lightgray;
-            border-radius: 3px;
-            text-decoration: none;
-            background: inherit;
-            font-size: 1em;
-            color: #333;
-            background: rgb(242, 242, 242);
-
-            &:hover {
-                background: rgb(237, 237, 237);
-            }
+            color: #e0e0e0;
         }
     }
 
-    .image-description {
-        .credit {
-            text-decoration: underline;
-            &:hover {
-                text-decoration: none;
-            }
+    &__navlink {
+        border: 1px solid #444444;
+        border-radius: 999px;
+        padding: 0.45rem 1.4rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+        background: rgba(18, 18, 18, 0.55);
+        transition: border 0.3s ease, background 0.3s ease;
+
+        &:hover,
+        &:focus-visible {
+            border-color: #888888;
+            background: rgba(18, 18, 18, 0.75);
         }
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .feature-frame__overlay {
+        padding: 3rem 1.5rem 2.5rem;
+    }
+
+    .feature-frame__nav {
+        justify-content: space-between;
     }
 }

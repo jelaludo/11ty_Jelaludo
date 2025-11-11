@@ -9,10 +9,10 @@ footer {
     bottom: 0;
 
     a {
-        color: #212121;
+        color: #e0e0e0;
 
         &:hover {
-            color: $link-blue-accessible-hover;
+            color: #ffffff;
         }
     }
 }
@@ -35,13 +35,13 @@ footer {
     align-items: center;
 
     hr {
-        background: #000;
+        background: #444444;
         height: 2px;
         width: 100%;
     }
 
     p {
-        color: #222;
+        color: #b0b0b0;
     }
 }
 
@@ -51,7 +51,7 @@ footer {
     justify-content: space-between;
     align-items: center;
     padding-top: 1.4rem;
-    border-top: .1rem solid lightgray;
+    border-top: .1rem solid #444444;
 
     .footer-links {
         padding-left: 0;

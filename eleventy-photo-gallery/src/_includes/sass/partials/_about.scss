@@ -35,6 +35,7 @@
     display: -webkit-flex;
     flex-direction: column;
     max-width: 60ch;
+    color: #e0e0e0;
 
     label {
         &.form-label {
@@ -44,11 +45,18 @@
 
     input, textarea {
         margin: .2rem 0;
-        border: 1px solid lightgray;
+        border: 1px solid #444444;
         padding: .5rem;
         border-radius: .15rem;
         font-size: 16px;
         -webkit-appearance: none;
+        background: #1a1a1a;
+        color: #e0e0e0;
+
+        &:focus {
+            outline: none;
+            border-color: #888888;
+        }
     }
 
     input {
@@ -62,21 +70,20 @@
 
     button {
         margin-bottom: 36px;
-        background: rgb(27, 110, 226);
-        background: rgb(26, 107, 221);
+        background: #1f1f1f;
         padding: 11px 1.35rem;
         border-radius: 3px;
         font-family: $system-font;
-        border: none;
-        color: #fff;
+        border: 1px solid #444444;
+        color: #e0e0e0;
         margin-top: 1.35rem;
         max-width: fit-content;
         max-width: -moz-fit-content;
     
             &:hover {
-                border: none;
+                border-color: #888888;
                 cursor: pointer;
-                background: rgb(23, 100, 209);
+                background: #2a2a2a;
             }
         
     }

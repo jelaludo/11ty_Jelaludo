@@ -36,33 +36,38 @@ url: https://eleventy-gallery.netlify.app
     <body>
         <a href="#main" class="skip-link">Skip to main content</a>
         {% include "partials/nav.njk" %}
-        <main id="main" class="main-container">
-            <div class="featured-img">
-                <div class="image-container">
-                    {% img
-                        src=image.src,
-                        alt=image.alt,
-                        className="showcase-img",
-                        sizes="(max-width: 480px) 33.3vw, (min-width: 640px) 50vw, (min-width: 1000px) 100vw, 33.3vw"
-                    %}
-                    <div class="image-description">
-                        <h1 class="h2">{{ image.title }}</h1>
-                        <p>{{ image.credit }} on <a class="credit" href="{{ image.linkToAuthor }}">Pexels</a></p>
-                    </div>
-                    <div class="prev-next">
-                        {% if pagination.href.previous %}
-                            <a class="prev" href="{{ pagination.href.previous }}"><span class="lt">&lt;</span> Prev</a>
-                        {% endif %}
-                        {% if pagination.href.next %}
-                            {% if not pagination.href.previous %}
-                            <a class="next" style="margin-left: auto; margin-right: 0;" href="{{ pagination.href.next }}">Next <span class="gt">&gt;</span></a>
-                            {% else %}
-                            <a class="next" href="{{ pagination.href.next }}">Next <span class="gt">&gt;</span></a>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                </div>
+        <main id="main" class="feature-frame">
+            <div class="feature-frame__media">
+                {% img
+                    src=image.src,
+                    alt=image.alt,
+                    className="feature-frame__img",
+                    sizes="100vw"
+                %}
             </div>
+            <section class="feature-frame__overlay">
+                <header class="feature-frame__meta">
+                    <h1>{{ image.title }}</h1>
+                    {% if image.credit %}
+                    <p>{{ image.credit }}</p>
+                    {% endif %}
+                    {% if image.linkToAuthor %}
+                    <a class="feature-frame__source" href="{{ image.linkToAuthor }}" target="_blank" rel="noopener">View Original</a>
+                    {% endif %}
+                </header>
+                <nav class="feature-frame__nav" aria-label="Gallery navigation">
+                    {% if pagination.href.previous %}
+                    <a class="feature-frame__navlink" href="{{ pagination.href.previous }}">
+                        <span class="feature-frame__label">Previous</span>
+                    </a>
+                    {% endif %}
+                    {% if pagination.href.next %}
+                    <a class="feature-frame__navlink" href="{{ pagination.href.next }}">
+                        <span class="feature-frame__label">Next</span>
+                    </a>
+                    {% endif %}
+                </nav>
+            </section>
         </main>
         {% include "partials/footer.njk" %}
     </body>

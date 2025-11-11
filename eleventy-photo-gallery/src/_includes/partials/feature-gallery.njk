@@ -1,25 +1,26 @@
-<div class="gallery">
-    <ul class="gallery-list">
-        {% for image in gallery %}
-        <li class="gallery-item">
-            <div class="image-block">
-                <a
-                    href="{{ image.title | slug }}"
-                    aria-label="Gallery image {{ image.title }}"
-                >
+<div class="immersive-gallery">
+    {% for image in gallery %}
+    <section class="gallery-slide">
+        <a
+            class="gallery-slide__link"
+            href="/gallery/{{ image.title | slug }}"
+            aria-label="Open {{ image.title }}"
+        >
+            <div class="gallery-slide__media">
                 {% img
                     src=image.src,
                     alt=image.alt,
-                    className="gallery-photo",
-                    sizes="(max-width: 480px) 33.3vw, (min-width: 640px) 50vw, (min-width: 950px) 50vw, 33.3vw"
+                    className="gallery-slide__img",
+                    sizes="100vw"
                 %}
-                </a>
-                <div class="block-details">
-                    <p>{{ image.date }}</p>
-                    <h2><a href="/gallery/{{ image.title | slug }}">{{ image.title }}</a></h2>
-                </div>
             </div>
-        </li>
-        {% endfor %}
-    </ul>
+            <div class="gallery-slide__meta">
+                <h2>{{ image.title }}</h2>
+                {% if image.date %}
+                <p>{{ image.date }}</p>
+                {% endif %}
+            </div>
+        </a>
+    </section>
+    {% endfor %}
 </div>
