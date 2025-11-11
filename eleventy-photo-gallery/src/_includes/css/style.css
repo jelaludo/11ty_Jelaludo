@@ -154,37 +154,37 @@
 .gallery-slide__media {
   position: absolute;
   inset: 0;
-}
-.gallery-slide__media picture,
-.gallery-slide__media img {
-  width: 100%;
-  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #121212;
 }
 .gallery-slide__media picture {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   height: 100%;
 }
 .gallery-slide__media img {
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  filter: brightness(0.9);
+  transition: filter 0.6s ease;
+  object-fit: contain;
+}
+.gallery-slide__media img.is-landscape {
   width: 100%;
-  height: 100%;
-  filter: brightness(0.88);
-  transition: transform 0.6s ease, filter 0.6s ease;
+  height: auto;
 }
 .gallery-slide__media img.is-portrait {
-  object-fit: contain;
-  background: #121212;
-  transform: none;
+  height: 100%;
+  width: auto;
 }
 
 .gallery-slide__link:hover .gallery-slide__img,
 .gallery-slide__link:focus-visible .gallery-slide__img {
-  transform: scale(1.02);
   filter: brightness(1);
-}
-.gallery-slide__link:hover .gallery-slide__img.is-portrait,
-.gallery-slide__link:focus-visible .gallery-slide__img.is-portrait {
-  transform: none;
 }
 
 .gallery-slide__meta {
@@ -232,21 +232,32 @@
 .feature-frame__media {
   position: absolute;
   inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #121212;
 }
-.feature-frame__media picture,
-.feature-frame__media img {
+.feature-frame__media picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
 }
 .feature-frame__media img {
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
   filter: brightness(0.9);
-  transition: transform 0.6s ease, filter 0.6s ease;
+  transition: filter 0.6s ease;
+}
+.feature-frame__media img.is-landscape {
+  width: 100%;
+  height: auto;
 }
 .feature-frame__media img.is-portrait {
-  object-fit: contain;
-  background: #121212;
-  transform: none;
+  height: 100%;
+  width: auto;
 }
 .feature-frame__overlay {
   position: relative;
@@ -505,20 +516,25 @@ footer .social-links li {
   position: absolute;
   inset: 0;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #121212;
 }
 .splash-hero__image .splash-hero__img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: brightness(0.85);
+  transition: filter 0.6s ease;
+}
+.splash-hero__image .splash-hero__img.is-landscape {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  filter: brightness(0.82);
-  transform: scale(1.05);
-  transition: transform 0.6s ease, filter 0.6s ease;
+  height: auto;
 }
 .splash-hero__image .splash-hero__img.is-portrait {
-  object-fit: contain;
-  transform: none;
-  background: #121212;
+  height: 100%;
+  width: auto;
 }
 .splash-hero__overlay {
   position: absolute;
