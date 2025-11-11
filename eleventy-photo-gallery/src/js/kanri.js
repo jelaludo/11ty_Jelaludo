@@ -560,7 +560,10 @@ if (!appRoot || !template) {
       return;
     }
     container.innerHTML = normalised
-      .map((colour) => `<li class="kanri-card__swatch" style="--palette-color: ${colour}"><span class="sr-only">${colour}</span></li>`)
+      .map(
+        (colour) =>
+          `<li class="kanri-card__swatch" style="--palette-color: ${colour}"><span class="kanri-card__swatch-label">${colour}</span></li>`
+      )
       .join("");
   }
 }

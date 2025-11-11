@@ -1,21 +1,18 @@
 [
   {
-    "title": "Roppongi Lights",
-    "date": "",
-    "alt": "Roppongi lights",
-    "credit": "",
-    "linkToAuthor": "",
-    "src": "R6G_7947.jpg",
-    "imgDir": "/images/"
-  },
-  {
-    "title": "Miyajima",
+    "title": "Miyajima Torii",
     "date": "",
     "alt": "R6g 8123",
     "credit": "",
     "linkToAuthor": "",
     "src": "R6G_8123.jpg",
-    "imgDir": "/images/"
+    "imgDir": "/images/",
+    "tags": [
+      "Miyajima",
+      "Nature",
+      "Temple"
+    ],
+    "palette": []
   },
   {
     "title": "250th USMC Sake",
@@ -24,15 +21,6 @@
     "credit": "",
     "linkToAuthor": "",
     "src": "R6G_8616.jpg",
-    "imgDir": "/images/"
-  },
-  {
-    "title": "Kyoto Reflection",
-    "date": "",
-    "alt": "R6g 3719",
-    "credit": "",
-    "linkToAuthor": "",
-    "src": "R6G_3719.jpg",
     "imgDir": "/images/"
   },
   {
@@ -124,5 +112,75 @@
     "linkToAuthor": "",
     "src": "R6G_5313-Enhanced-NR.jpg",
     "imgDir": "/images/"
+  },
+  {
+    "title": "Knots",
+    "date": "",
+    "alt": "R6g 4107",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_4087.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Abstract",
+      "Close-up",
+      "Knots"
+    ],
+    "palette": [
+      "#B63E15",
+      "#5F5358",
+      "#601105",
+      "#C07B5F",
+      "#FAD58C",
+      "#0F0808"
+    ]
+  },
+  {
+    "title": "Roppongi Reflections",
+    "date": "",
+    "alt": "R6g 7945",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_7945.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Tokyo",
+      "Street",
+      "Abstract"
+    ],
+    "palette": [
+      "#0C0903",
+      "#E1573E",
+      "#026C54",
+      "#907755",
+      "#9DB9CD",
+      "#6A2A10",
+      "#FF9272",
+      "#43361F"
+    ]
+  },
+  {
+    "title": "Kyoto Reflection",
+    "date": "",
+    "alt": "R6g 3719",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_3719.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Kyoto",
+      "Temple",
+      "Reflection"
+    ],
+    "palette": [
+      "#0A0502",
+      "#E4C730",
+      "#58490B",
+      "#87A870",
+      "#7089B1",
+      "#F0D490",
+      "#8C8682",
+      "#3C2D07"
+    ]
   }
 ]

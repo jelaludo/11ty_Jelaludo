@@ -244,7 +244,7 @@ async function removeDerivatives(src) {
   }
 }
 
-async function extractPalette(absolutePath, colourCount = 6) {
+async function extractPalette(absolutePath, colourCount = 8) {
   try {
     const swatches = await topColoursHex(absolutePath);
     if (!Array.isArray(swatches)) {

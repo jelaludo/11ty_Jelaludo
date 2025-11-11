@@ -6,7 +6,7 @@
       {% for colour in colors %}
       {% set swatch = colour | upper %}
       <li class="palette__swatch" style="--palette-color: {{ swatch }}">
-        <span class="sr-only">{{ swatch }}</span>
+        <span class="palette__label">{{ swatch }}</span>
       </li>
       {% endfor %}
     </ul>
