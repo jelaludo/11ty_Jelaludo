@@ -93,6 +93,7 @@ module.exports = (eleventyConfig) => {
         loading="lazy"
         decoding="async"
         class="${className || ''}"
+        data-orientation-watch="true"
       >`;
 
     return `<picture>\n\t${sources}\n\t${img}</picture>`;

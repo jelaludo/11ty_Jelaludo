@@ -171,11 +171,20 @@
   filter: brightness(0.88);
   transition: transform 0.6s ease, filter 0.6s ease;
 }
+.gallery-slide__media img.is-portrait {
+  object-fit: contain;
+  background: #121212;
+  transform: none;
+}
 
 .gallery-slide__link:hover .gallery-slide__img,
 .gallery-slide__link:focus-visible .gallery-slide__img {
   transform: scale(1.02);
   filter: brightness(1);
+}
+.gallery-slide__link:hover .gallery-slide__img.is-portrait,
+.gallery-slide__link:focus-visible .gallery-slide__img.is-portrait {
+  transform: none;
 }
 
 .gallery-slide__meta {
@@ -232,6 +241,12 @@
 .feature-frame__media img {
   object-fit: cover;
   filter: brightness(0.9);
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+.feature-frame__media img.is-portrait {
+  object-fit: contain;
+  background: #121212;
+  transform: none;
 }
 .feature-frame__overlay {
   position: relative;
@@ -498,6 +513,12 @@ footer .social-links li {
   object-position: center;
   filter: brightness(0.82);
   transform: scale(1.05);
+  transition: transform 0.6s ease, filter 0.6s ease;
+}
+.splash-hero__image .splash-hero__img.is-portrait {
+  object-fit: contain;
+  transform: none;
+  background: #121212;
 }
 .splash-hero__overlay {
   position: absolute;
