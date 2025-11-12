@@ -12,10 +12,28 @@ alt: Terrace outside shop window with green plants and pink tree on night street
 cardType: summary_large_image
 ---
 
-<section class="inspiration">
+<section class="inspiration-hero">
+  <div class="inspiration-hero__overlay"></div>
+  <div class="inspiration-hero__grid" aria-hidden="true">
+    <span class="inspiration-hero__corner inspiration-hero__corner--tl">╭</span>
+    <span class="inspiration-hero__corner inspiration-hero__corner--tr">╮</span>
+    <span class="inspiration-hero__corner inspiration-hero__corner--bl">╰</span>
+    <span class="inspiration-hero__corner inspiration-hero__corner--br">╯</span>
+    <span class="inspiration-hero__bracket inspiration-hero__bracket--top">┅</span>
+    <span class="inspiration-hero__bracket inspiration-hero__bracket--bottom">┅</span>
+    <span class="inspiration-hero__bracket inspiration-hero__bracket--left">┇</span>
+    <span class="inspiration-hero__bracket inspiration-hero__bracket--right">┇</span>
+    <span class="inspiration-hero__focus">◎</span>
+  </div>
+  <div class="inspiration-hero__content">
+    <div class="inspiration-hero__quotes" data-quote-rotator role="list" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="inspiration inspiration--sources">
   <header class="inspiration__intro">
-    <h1>Inspiration</h1>
-    <p>A handful of photographers whose work guides my sense of tone, composition, and storytelling.</p>
+    <h2>Photographers to Explore</h2>
+    <p>Mentors from afar whose work shapes my sense of tone, composition, and storytelling.</p>
   </header>
 
   <ul class="inspiration-list">
@@ -86,4 +104,9 @@ cardType: summary_large_image
     </li>
   </ul>
 </section>
+
+<script type="application/json" id="inspiration-quotes-data">
+{{ inspirationQuotes | dump | safe }}
+</script>
+<script type="module" src="/js/inspiration-quotes.js"></script>
 
