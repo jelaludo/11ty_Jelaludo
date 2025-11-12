@@ -11,9 +11,9 @@ const CONFLICT_GROUPS = [
 
 const MIN_VISIBLE = 2;
 const MAX_VISIBLE = 3;
-const MIN_DURATION = 3500;
-const MAX_DURATION = 6200;
-const FADE_DURATION = 900;
+const MIN_DURATION = 6800;
+const MAX_DURATION = 12000;
+const FADE_DURATION = 1200;
 
 const pickRandom = (source, count) => {
     const copy = [...source];
@@ -55,9 +55,10 @@ const pickPosition = (selectedPositions) => {
     return 'center';
 };
 
-const createQuoteElement = (quote, className) => {
+const createQuoteElement = (quote, className, delaySeconds = 0) => {
     const el = document.createElement('div');
-    el.className = `inspiration-hero__quote inspiration-hero__quote--${className}`;
+    el.className = `inspiration-hero__quote inspiration-hero__quote--${className} inspiration-hero__quote--focus`;
+    el.style.setProperty('--delay', `${delaySeconds}s`);
     el.textContent = quote;
     return el;
 };
@@ -82,11 +83,12 @@ const rotateQuotes = (quotes, container) => {
             window.setTimeout(() => item.remove(), FADE_DURATION);
         });
 
-        nextQuotes.forEach((quote) => {
+        nextQuotes.forEach((quote, index) => {
             const position = pickPosition(selectedPositions);
             selectedPositions.push(position);
 
-            const quoteEl = createQuoteElement(quote, position);
+            const delay = index * 1.05;
+            const quoteEl = createQuoteElement(quote, position, delay);
             quoteEl.classList.add('is-hidden');
             container.appendChild(quoteEl);
             requestAnimationFrame(() => {

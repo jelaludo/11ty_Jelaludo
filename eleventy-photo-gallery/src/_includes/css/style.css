@@ -849,6 +849,13 @@ body.is-lightbox-open {
   transform: translate3d(0, 0, 0);
   transition: opacity 1.5s ease, transform 1.5s ease;
 }
+.inspiration-hero__quote--focus {
+  --delay: 0s;
+  opacity: 0;
+  filter: blur(14px);
+  animation: inspiration-focus 5.8s ease-out forwards;
+  animation-delay: var(--delay);
+}
 .inspiration-hero__quote--center {
   top: 50%;
   left: 50%;
@@ -939,6 +946,43 @@ body.is-lightbox-open {
   transform: translateY(-3px);
 }
 
+@keyframes inspiration-focus {
+  0% {
+    opacity: 0;
+    filter: blur(14px);
+    transform: translate3d(0, 22px, 0);
+  }
+  25% {
+    opacity: 0.4;
+    filter: blur(10px);
+    transform: translate3d(0, 14px, 0);
+  }
+  55% {
+    opacity: 0.7;
+    filter: blur(5px);
+    transform: translate3d(0, 7px, 0);
+  }
+  78% {
+    opacity: 0.9;
+    filter: blur(1.6px);
+    transform: translate3d(0, 1px, 0);
+  }
+  88% {
+    opacity: 0.96;
+    filter: blur(2.4px);
+    transform: translate3d(0, -1px, 0);
+  }
+  95% {
+    opacity: 0.98;
+    filter: blur(0.9px);
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0);
+  }
+}
 @media screen and (max-width: 640px) {
   .inspiration-hero__grid {
     inset: clamp(2.5rem, 8vw, 4rem);
