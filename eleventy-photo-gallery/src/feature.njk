@@ -7,6 +7,7 @@ permalink: "/gallery/{{ image.title | slug }}/"
 url: https://eleventy-gallery.netlify.app
 ---
 {% import "partials/palette.njk" as palette %}
+{% import "partials/color-treemap.njk" as treemap %}
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
     <head>
@@ -56,7 +57,11 @@ url: https://eleventy-gallery.netlify.app
                     <a class="feature-frame__source" href="{{ image.linkToAuthor }}" target="_blank" rel="noopener">View Original</a>
                     {% endif %}
                 </header>
+                {% set treemapData = colorTreemap[image.src] %}
+                {% if not treemapData %}
                 {{ palette.render(image.palette, "feature-frame__palette") }}
+                {% endif %}
+                {{ treemap.render(treemapData, "feature-frame__treemap") }}
                 {% set exifData = exif[image.src] %}
                 {% if exifData %}
                 <section class="feature-frame__exif" aria-label="Photo metadata">

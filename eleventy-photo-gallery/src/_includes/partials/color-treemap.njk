@@ -1,0 +1,30 @@
+{% macro render(blocks, className="") %}
+{% if blocks and blocks | length %}
+<figure class="color-treemap {{ className }}">
+    <svg class="color-treemap__map" viewBox="0 0 100 100" role="img" aria-label="Color coverage">
+        {% for block in blocks %}
+        <rect
+            class="color-treemap__rect"
+            x="{{ block.x }}"
+            y="{{ block.y }}"
+            width="{{ block.width }}"
+            height="{{ block.height }}"
+            fill="{{ block.hex }}"
+            aria-hidden="true"
+        ></rect>
+        {% endfor %}
+    </svg>
+    <figcaption class="color-treemap__legend">
+        <ul class="color-treemap__list">
+            {% for block in blocks %}
+            <li class="color-treemap__item">
+                <span class="color-treemap__swatch" style="--color: {{ block.hex }}"></span>
+                <span class="color-treemap__label">{{ block.hex }} · {{ block.percentage }}%</span>
+            </li>
+            {% endfor %}
+        </ul>
+    </figcaption>
+</figure>
+{% endif %}
+{% endmacro %}
+
