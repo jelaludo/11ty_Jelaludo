@@ -1,0 +1,3944 @@
+{
+  "R6G_8123.jpg": [
+    {
+      "hex": "#171509",
+      "percentage": 8.7,
+      "population": 476,
+      "x": 0,
+      "y": 0,
+      "width": 33.6,
+      "height": 24.9
+    },
+    {
+      "hex": "#3C3811",
+      "percentage": 8.7,
+      "population": 476,
+      "x": 0,
+      "y": 25.7,
+      "width": 33.6,
+      "height": 25
+    },
+    {
+      "hex": "#5F6362",
+      "percentage": 8.41,
+      "population": 460,
+      "x": 0,
+      "y": 51.5,
+      "width": 33.6,
+      "height": 24
+    },
+    {
+      "hex": "#8DA7D5",
+      "percentage": 8.28,
+      "population": 453,
+      "x": 0,
+      "y": 76.3,
+      "width": 33.6,
+      "height": 23.7
+    },
+    {
+      "hex": "#7F7971",
+      "percentage": 8.21,
+      "population": 449,
+      "x": 34.4,
+      "y": 0,
+      "width": 21.5,
+      "height": 36.5
+    },
+    {
+      "hex": "#748296",
+      "percentage": 8.13,
+      "population": 445,
+      "x": 56.7,
+      "y": 0,
+      "width": 21.4,
+      "height": 36.5
+    },
+    {
+      "hex": "#B1B9D2",
+      "percentage": 8.02,
+      "population": 439,
+      "x": 78.9,
+      "y": 0,
+      "width": 21.1,
+      "height": 36.5
+    },
+    {
+      "hex": "#D3D0DC",
+      "percentage": 6.01,
+      "population": 329,
+      "x": 34.4,
+      "y": 37.3,
+      "width": 27.6,
+      "height": 20.6
+    },
+    {
+      "hex": "#6589C3",
+      "percentage": 5.94,
+      "population": 325,
+      "x": 34.4,
+      "y": 58.7,
+      "width": 27.6,
+      "height": 20.5
+    },
+    {
+      "hex": "#A1978E",
+      "percentage": 5.83,
+      "population": 319,
+      "x": 34.4,
+      "y": 80,
+      "width": 27.6,
+      "height": 20
+    },
+    {
+      "hex": "#414645",
+      "percentage": 5.23,
+      "population": 286,
+      "x": 62.8,
+      "y": 37.3,
+      "width": 18.3,
+      "height": 27
+    },
+    {
+      "hex": "#4A6692",
+      "percentage": 5.19,
+      "population": 284,
+      "x": 81.9,
+      "y": 37.3,
+      "width": 18.1,
+      "height": 27
+    },
+    {
+      "hex": "#66661F",
+      "percentage": 4,
+      "population": 219,
+      "x": 62.8,
+      "y": 65.1,
+      "width": 21.7,
+      "height": 17.3
+    },
+    {
+      "hex": "#AD7C52",
+      "percentage": 3.89,
+      "population": 213,
+      "x": 62.8,
+      "y": 83.2,
+      "width": 21.7,
+      "height": 16.8
+    },
+    {
+      "hex": "#814437",
+      "percentage": 3.86,
+      "population": 211,
+      "x": 85.3,
+      "y": 65.1,
+      "width": 14.7,
+      "height": 24.4
+    },
+    {
+      "hex": "#EAAF8F",
+      "percentage": 1.61,
+      "population": 88,
+      "x": 85.3,
+      "y": 90.3,
+      "width": 14.7,
+      "height": 9.7
+    }
+  ],
+  "R6G_8616.jpg": [
+    {
+      "hex": "#27181E",
+      "percentage": 13.34,
+      "population": 730,
+      "x": 0,
+      "y": 0,
+      "width": 41.5,
+      "height": 31.3
+    },
+    {
+      "hex": "#341D1F",
+      "percentage": 12.72,
+      "population": 696,
+      "x": 0,
+      "y": 32.1,
+      "width": 41.5,
+      "height": 29.7
+    },
+    {
+      "hex": "#412523",
+      "percentage": 8.85,
+      "population": 484,
+      "x": 0,
+      "y": 62.6,
+      "width": 41.5,
+      "height": 20.5
+    },
+    {
+      "hex": "#AB6239",
+      "percentage": 7.04,
+      "population": 385,
+      "x": 0,
+      "y": 83.9,
+      "width": 41.5,
+      "height": 16.1
+    },
+    {
+      "hex": "#935334",
+      "percentage": 6.74,
+      "population": 369,
+      "x": 42.3,
+      "y": 0,
+      "width": 19.5,
+      "height": 33
+    },
+    {
+      "hex": "#533028",
+      "percentage": 6.47,
+      "population": 354,
+      "x": 62.6,
+      "y": 0,
+      "width": 18.6,
+      "height": 33
+    },
+    {
+      "hex": "#6A3A2B",
+      "percentage": 6.23,
+      "population": 341,
+      "x": 82,
+      "y": 0,
+      "width": 18,
+      "height": 33
+    },
+    {
+      "hex": "#1B131C",
+      "percentage": 6.21,
+      "population": 340,
+      "x": 42.3,
+      "y": 33.8,
+      "width": 19.6,
+      "height": 30.1
+    },
+    {
+      "hex": "#EBAF72",
+      "percentage": 6.07,
+      "population": 332,
+      "x": 62.7,
+      "y": 33.8,
+      "width": 19.2,
+      "height": 30.1
+    },
+    {
+      "hex": "#82412B",
+      "percentage": 5.52,
+      "population": 302,
+      "x": 82.7,
+      "y": 33.8,
+      "width": 17.3,
+      "height": 30.1
+    },
+    {
+      "hex": "#DE9A61",
+      "percentage": 5.35,
+      "population": 293,
+      "x": 42.3,
+      "y": 64.7,
+      "width": 28,
+      "height": 18
+    },
+    {
+      "hex": "#C26F39",
+      "percentage": 4.9,
+      "population": 268,
+      "x": 42.3,
+      "y": 83.5,
+      "width": 28,
+      "height": 16.5
+    },
+    {
+      "hex": "#C28052",
+      "percentage": 4.37,
+      "population": 239,
+      "x": 71.1,
+      "y": 64.7,
+      "width": 17.2,
+      "height": 23.8
+    },
+    {
+      "hex": "#EEC493",
+      "percentage": 2.83,
+      "population": 155,
+      "x": 89.1,
+      "y": 64.7,
+      "width": 10.9,
+      "height": 23.8
+    },
+    {
+      "hex": "#5E1B1C",
+      "percentage": 2.16,
+      "population": 118,
+      "x": 71.1,
+      "y": 89.3,
+      "width": 18.2,
+      "height": 10.7
+    },
+    {
+      "hex": "#EEDEC4",
+      "percentage": 1.21,
+      "population": 66,
+      "x": 90.1,
+      "y": 89.3,
+      "width": 9.9,
+      "height": 10.7
+    }
+  ],
+  "R6G_3549.jpg": [
+    {
+      "hex": "#141007",
+      "percentage": 25.57,
+      "population": 1399,
+      "x": 0,
+      "y": 0,
+      "width": 60.3,
+      "height": 41.7
+    },
+    {
+      "hex": "#070603",
+      "percentage": 20.21,
+      "population": 1106,
+      "x": 0,
+      "y": 42.5,
+      "width": 60.3,
+      "height": 32.9
+    },
+    {
+      "hex": "#231C0D",
+      "percentage": 14.8,
+      "population": 810,
+      "x": 0,
+      "y": 76.2,
+      "width": 60.3,
+      "height": 23.8
+    },
+    {
+      "hex": "#342A13",
+      "percentage": 13.54,
+      "population": 741,
+      "x": 61.1,
+      "y": 0,
+      "width": 38.9,
+      "height": 33.8
+    },
+    {
+      "hex": "#4C3C1D",
+      "percentage": 8.1,
+      "population": 443,
+      "x": 61.1,
+      "y": 34.6,
+      "width": 21.1,
+      "height": 36.7
+    },
+    {
+      "hex": "#5E5030",
+      "percentage": 6.56,
+      "population": 359,
+      "x": 83,
+      "y": 34.6,
+      "width": 17,
+      "height": 36.7
+    },
+    {
+      "hex": "#33352F",
+      "percentage": 2.85,
+      "population": 156,
+      "x": 61.1,
+      "y": 72.1,
+      "width": 18.5,
+      "height": 14.2
+    },
+    {
+      "hex": "#726349",
+      "percentage": 2.61,
+      "population": 143,
+      "x": 61.1,
+      "y": 87.1,
+      "width": 18.5,
+      "height": 12.9
+    },
+    {
+      "hex": "#8D8160",
+      "percentage": 1.35,
+      "population": 74,
+      "x": 80.4,
+      "y": 72.1,
+      "width": 9.1,
+      "height": 13.1
+    },
+    {
+      "hex": "#EE9A48",
+      "percentage": 0.75,
+      "population": 41,
+      "x": 90.3,
+      "y": 72.1,
+      "width": 4.6,
+      "height": 13.1
+    },
+    {
+      "hex": "#163565",
+      "percentage": 0.69,
+      "population": 38,
+      "x": 95.7,
+      "y": 72.1,
+      "width": 4.3,
+      "height": 13.1
+    },
+    {
+      "hex": "#ADAC07",
+      "percentage": 0.68,
+      "population": 37,
+      "x": 80.4,
+      "y": 86,
+      "width": 7.9,
+      "height": 7.2
+    },
+    {
+      "hex": "#908898",
+      "percentage": 0.58,
+      "population": 32,
+      "x": 80.4,
+      "y": 94,
+      "width": 7.9,
+      "height": 6
+    },
+    {
+      "hex": "#DAD4C7",
+      "percentage": 0.57,
+      "population": 31,
+      "x": 89.1,
+      "y": 86,
+      "width": 5,
+      "height": 9.1
+    },
+    {
+      "hex": "#0A59B2",
+      "percentage": 0.57,
+      "population": 31,
+      "x": 94.9,
+      "y": 86,
+      "width": 5.1,
+      "height": 9.1
+    },
+    {
+      "hex": "#94361C",
+      "percentage": 0.57,
+      "population": 31,
+      "x": 89.1,
+      "y": 95.9,
+      "width": 10.9,
+      "height": 4.1
+    }
+  ],
+  "R6G_3744.jpg": [
+    {
+      "hex": "#0A0906",
+      "percentage": 23.46,
+      "population": 1284,
+      "x": 0,
+      "y": 0,
+      "width": 46.1,
+      "height": 50.1
+    },
+    {
+      "hex": "#181410",
+      "percentage": 12.46,
+      "population": 682,
+      "x": 0,
+      "y": 50.9,
+      "width": 46.1,
+      "height": 26.2
+    },
+    {
+      "hex": "#CBCCC1",
+      "percentage": 10.58,
+      "population": 579,
+      "x": 0,
+      "y": 77.9,
+      "width": 46.1,
+      "height": 22.1
+    },
+    {
+      "hex": "#BDBDB2",
+      "percentage": 9.8,
+      "population": 536,
+      "x": 46.9,
+      "y": 0,
+      "width": 31.7,
+      "height": 29.8
+    },
+    {
+      "hex": "#AAA6A2",
+      "percentage": 6.47,
+      "population": 354,
+      "x": 79.4,
+      "y": 0,
+      "width": 20.6,
+      "height": 29.8
+    },
+    {
+      "hex": "#938E8D",
+      "percentage": 5.63,
+      "population": 308,
+      "x": 46.9,
+      "y": 30.6,
+      "width": 17.9,
+      "height": 29.8
+    },
+    {
+      "hex": "#7B7674",
+      "percentage": 5.5,
+      "population": 301,
+      "x": 65.6,
+      "y": 30.6,
+      "width": 17.5,
+      "height": 29.8
+    },
+    {
+      "hex": "#625D5B",
+      "percentage": 5.1,
+      "population": 279,
+      "x": 83.9,
+      "y": 30.6,
+      "width": 16.1,
+      "height": 29.8
+    },
+    {
+      "hex": "#312A26",
+      "percentage": 4.99,
+      "population": 273,
+      "x": 46.9,
+      "y": 61.2,
+      "width": 23.3,
+      "height": 20.2
+    },
+    {
+      "hex": "#4E4340",
+      "percentage": 4.42,
+      "population": 242,
+      "x": 46.9,
+      "y": 82.2,
+      "width": 23.3,
+      "height": 17.8
+    },
+    {
+      "hex": "#4A7888",
+      "percentage": 2.78,
+      "population": 152,
+      "x": 71,
+      "y": 61.2,
+      "width": 15,
+      "height": 17.1
+    },
+    {
+      "hex": "#6998A5",
+      "percentage": 2.47,
+      "population": 135,
+      "x": 86.8,
+      "y": 61.2,
+      "width": 13.2,
+      "height": 17.1
+    },
+    {
+      "hex": "#EBC0A3",
+      "percentage": 2.23,
+      "population": 122,
+      "x": 71,
+      "y": 79.1,
+      "width": 17.8,
+      "height": 11.5
+    },
+    {
+      "hex": "#D0956F",
+      "percentage": 1.72,
+      "population": 94,
+      "x": 71,
+      "y": 91.4,
+      "width": 17.8,
+      "height": 8.6
+    },
+    {
+      "hex": "#9D6443",
+      "percentage": 1.41,
+      "population": 77,
+      "x": 89.6,
+      "y": 79.1,
+      "width": 10.4,
+      "height": 12
+    },
+    {
+      "hex": "#EAE4DF",
+      "percentage": 0.99,
+      "population": 54,
+      "x": 89.6,
+      "y": 91.9,
+      "width": 10.4,
+      "height": 8.1
+    }
+  ],
+  "R6G_3776.jpg": [
+    {
+      "hex": "#0A0809",
+      "percentage": 19.94,
+      "population": 1091,
+      "x": 0,
+      "y": 0,
+      "width": 46.2,
+      "height": 42.3
+    },
+    {
+      "hex": "#1D180D",
+      "percentage": 14.22,
+      "population": 778,
+      "x": 0,
+      "y": 43.1,
+      "width": 46.2,
+      "height": 30
+    },
+    {
+      "hex": "#2C2A18",
+      "percentage": 12.43,
+      "population": 680,
+      "x": 0,
+      "y": 73.9,
+      "width": 46.2,
+      "height": 26.1
+    },
+    {
+      "hex": "#0F1921",
+      "percentage": 9.81,
+      "population": 537,
+      "x": 47,
+      "y": 0,
+      "width": 26.3,
+      "height": 36
+    },
+    {
+      "hex": "#3B3B28",
+      "percentage": 9.69,
+      "population": 530,
+      "x": 74.1,
+      "y": 0,
+      "width": 25.9,
+      "height": 36
+    },
+    {
+      "hex": "#514F33",
+      "percentage": 6.73,
+      "population": 368,
+      "x": 47,
+      "y": 36.8,
+      "width": 19.9,
+      "height": 32.2
+    },
+    {
+      "hex": "#1E2F36",
+      "percentage": 6.25,
+      "population": 342,
+      "x": 67.7,
+      "y": 36.8,
+      "width": 18.4,
+      "height": 32.2
+    },
+    {
+      "hex": "#5D6155",
+      "percentage": 4.5,
+      "population": 246,
+      "x": 86.9,
+      "y": 36.8,
+      "width": 13.1,
+      "height": 32.2
+    },
+    {
+      "hex": "#3A4D4E",
+      "percentage": 3.86,
+      "population": 211,
+      "x": 47,
+      "y": 69.8,
+      "width": 23.3,
+      "height": 15.4
+    },
+    {
+      "hex": "#74796B",
+      "percentage": 3.53,
+      "population": 193,
+      "x": 47,
+      "y": 86,
+      "width": 23.3,
+      "height": 14
+    },
+    {
+      "hex": "#94917C",
+      "percentage": 2.56,
+      "population": 140,
+      "x": 71.1,
+      "y": 69.8,
+      "width": 15.3,
+      "height": 15.4
+    },
+    {
+      "hex": "#B8B5A3",
+      "percentage": 2.17,
+      "population": 119,
+      "x": 87.2,
+      "y": 69.8,
+      "width": 12.8,
+      "height": 15.4
+    },
+    {
+      "hex": "#71822D",
+      "percentage": 1.68,
+      "population": 92,
+      "x": 71.1,
+      "y": 86,
+      "width": 17.5,
+      "height": 8.5
+    },
+    {
+      "hex": "#7392A5",
+      "percentage": 0.99,
+      "population": 54,
+      "x": 71.1,
+      "y": 95.3,
+      "width": 17.5,
+      "height": 4.7
+    },
+    {
+      "hex": "#E3DDCE",
+      "percentage": 0.95,
+      "population": 52,
+      "x": 89.4,
+      "y": 86,
+      "width": 5.7,
+      "height": 14
+    },
+    {
+      "hex": "#ACBD3A",
+      "percentage": 0.71,
+      "population": 39,
+      "x": 95.9,
+      "y": 86,
+      "width": 4.1,
+      "height": 14
+    }
+  ],
+  "R6G_3782.jpg": [
+    {
+      "hex": "#0C0C07",
+      "percentage": 19.28,
+      "population": 1055,
+      "x": 0,
+      "y": 0,
+      "width": 43,
+      "height": 43.9
+    },
+    {
+      "hex": "#1D1F0E",
+      "percentage": 13.21,
+      "population": 723,
+      "x": 0,
+      "y": 44.7,
+      "width": 43,
+      "height": 29.9
+    },
+    {
+      "hex": "#2D3018",
+      "percentage": 10.95,
+      "population": 599,
+      "x": 0,
+      "y": 75.4,
+      "width": 43,
+      "height": 24.6
+    },
+    {
+      "hex": "#3A3D2F",
+      "percentage": 8.3,
+      "population": 454,
+      "x": 43.8,
+      "y": 0,
+      "width": 21,
+      "height": 37.8
+    },
+    {
+      "hex": "#4D5144",
+      "percentage": 6.98,
+      "population": 382,
+      "x": 65.6,
+      "y": 0,
+      "width": 17.6,
+      "height": 37.8
+    },
+    {
+      "hex": "#444B1A",
+      "percentage": 6.38,
+      "population": 349,
+      "x": 84,
+      "y": 0,
+      "width": 16,
+      "height": 37.8
+    },
+    {
+      "hex": "#686D5C",
+      "percentage": 5.72,
+      "population": 313,
+      "x": 43.8,
+      "y": 38.6,
+      "width": 20.9,
+      "height": 25.9
+    },
+    {
+      "hex": "#5F683E",
+      "percentage": 4.66,
+      "population": 255,
+      "x": 65.5,
+      "y": 38.6,
+      "width": 17,
+      "height": 25.9
+    },
+    {
+      "hex": "#5A6321",
+      "percentage": 4.61,
+      "population": 252,
+      "x": 83.3,
+      "y": 38.6,
+      "width": 16.7,
+      "height": 25.9
+    },
+    {
+      "hex": "#788434",
+      "percentage": 4.57,
+      "population": 250,
+      "x": 43.8,
+      "y": 65.3,
+      "width": 24.7,
+      "height": 17.4
+    },
+    {
+      "hex": "#929958",
+      "percentage": 4.33,
+      "population": 237,
+      "x": 43.8,
+      "y": 83.5,
+      "width": 24.7,
+      "height": 16.5
+    },
+    {
+      "hex": "#80847C",
+      "percentage": 3.58,
+      "population": 196,
+      "x": 69.3,
+      "y": 65.3,
+      "width": 18.1,
+      "height": 18.4
+    },
+    {
+      "hex": "#A5A99B",
+      "percentage": 2.38,
+      "population": 130,
+      "x": 88.2,
+      "y": 65.3,
+      "width": 11.8,
+      "height": 18.4
+    },
+    {
+      "hex": "#BEC671",
+      "percentage": 2.21,
+      "population": 121,
+      "x": 69.3,
+      "y": 84.5,
+      "width": 12.9,
+      "height": 15.5
+    },
+    {
+      "hex": "#9EB52A",
+      "percentage": 1.5,
+      "population": 82,
+      "x": 83,
+      "y": 84.5,
+      "width": 17,
+      "height": 7.8
+    },
+    {
+      "hex": "#D7DAC7",
+      "percentage": 1.35,
+      "population": 74,
+      "x": 83,
+      "y": 93.1,
+      "width": 17,
+      "height": 6.9
+    }
+  ],
+  "R6G_5073.jpg": [
+    {
+      "hex": "#FEF4E4",
+      "percentage": 20.25,
+      "population": 1108,
+      "x": 0,
+      "y": 0,
+      "width": 52.2,
+      "height": 38
+    },
+    {
+      "hex": "#FCEBD4",
+      "percentage": 11.86,
+      "population": 649,
+      "x": 0,
+      "y": 38.8,
+      "width": 52.2,
+      "height": 22
+    },
+    {
+      "hex": "#749CCE",
+      "percentage": 10.29,
+      "population": 563,
+      "x": 0,
+      "y": 61.6,
+      "width": 52.2,
+      "height": 18.9
+    },
+    {
+      "hex": "#80A5D5",
+      "percentage": 10.16,
+      "population": 556,
+      "x": 0,
+      "y": 81.3,
+      "width": 52.2,
+      "height": 18.7
+    },
+    {
+      "hex": "#236881",
+      "percentage": 7.8,
+      "population": 427,
+      "x": 53,
+      "y": 0,
+      "width": 24.1,
+      "height": 31
+    },
+    {
+      "hex": "#358091",
+      "percentage": 7.15,
+      "population": 391,
+      "x": 77.9,
+      "y": 0,
+      "width": 22.1,
+      "height": 31
+    },
+    {
+      "hex": "#519390",
+      "percentage": 6.47,
+      "population": 354,
+      "x": 53,
+      "y": 31.8,
+      "width": 23.4,
+      "height": 26.3
+    },
+    {
+      "hex": "#6392CA",
+      "percentage": 6.29,
+      "population": 344,
+      "x": 77.2,
+      "y": 31.8,
+      "width": 22.8,
+      "height": 26.3
+    },
+    {
+      "hex": "#15506D",
+      "percentage": 4.93,
+      "population": 270,
+      "x": 53,
+      "y": 58.9,
+      "width": 22,
+      "height": 21.2
+    },
+    {
+      "hex": "#90B0DD",
+      "percentage": 4.48,
+      "population": 245,
+      "x": 53,
+      "y": 80.9,
+      "width": 22,
+      "height": 19.1
+    },
+    {
+      "hex": "#EFDABD",
+      "percentage": 2.23,
+      "population": 122,
+      "x": 75.8,
+      "y": 58.9,
+      "width": 11.9,
+      "height": 17
+    },
+    {
+      "hex": "#B0C4E5",
+      "percentage": 2.16,
+      "population": 118,
+      "x": 88.5,
+      "y": 58.9,
+      "width": 11.5,
+      "height": 17
+    },
+    {
+      "hex": "#2F261A",
+      "percentage": 1.83,
+      "population": 100,
+      "x": 75.8,
+      "y": 76.7,
+      "width": 14.4,
+      "height": 11.4
+    },
+    {
+      "hex": "#7E9F94",
+      "percentage": 1.79,
+      "population": 98,
+      "x": 75.8,
+      "y": 88.9,
+      "width": 14.4,
+      "height": 11.1
+    },
+    {
+      "hex": "#100C06",
+      "percentage": 1.68,
+      "population": 92,
+      "x": 91,
+      "y": 76.7,
+      "width": 9,
+      "height": 16.7
+    },
+    {
+      "hex": "#56432F",
+      "percentage": 0.64,
+      "population": 35,
+      "x": 91,
+      "y": 94.2,
+      "width": 9,
+      "height": 5.8
+    }
+  ],
+  "R6G_5580-Enhanced-NR.jpg": [
+    {
+      "hex": "#0A0E0F",
+      "percentage": 34.3,
+      "population": 1877,
+      "x": 0,
+      "y": 0,
+      "width": 55.1,
+      "height": 61.6
+    },
+    {
+      "hex": "#0D0906",
+      "percentage": 21.11,
+      "population": 1155,
+      "x": 0,
+      "y": 62.4,
+      "width": 55.1,
+      "height": 37.6
+    },
+    {
+      "hex": "#050504",
+      "percentage": 18.64,
+      "population": 1020,
+      "x": 55.9,
+      "y": 0,
+      "width": 44.1,
+      "height": 41.3
+    },
+    {
+      "hex": "#0E1313",
+      "percentage": 16.34,
+      "population": 894,
+      "x": 55.9,
+      "y": 42.1,
+      "width": 44.1,
+      "height": 36.2
+    },
+    {
+      "hex": "#21130D",
+      "percentage": 3.11,
+      "population": 170,
+      "x": 55.9,
+      "y": 79.1,
+      "width": 25.1,
+      "height": 11.3
+    },
+    {
+      "hex": "#162920",
+      "percentage": 2.45,
+      "population": 134,
+      "x": 55.9,
+      "y": 91.2,
+      "width": 25.1,
+      "height": 8.8
+    },
+    {
+      "hex": "#3D2410",
+      "percentage": 1.15,
+      "population": 63,
+      "x": 81.8,
+      "y": 79.1,
+      "width": 8.9,
+      "height": 11.2
+    },
+    {
+      "hex": "#4E0305",
+      "percentage": 1.1,
+      "population": 60,
+      "x": 91.5,
+      "y": 79.1,
+      "width": 8.5,
+      "height": 11.2
+    },
+    {
+      "hex": "#694B18",
+      "percentage": 0.38,
+      "population": 21,
+      "x": 81.8,
+      "y": 91.1,
+      "width": 7.1,
+      "height": 4.2
+    },
+    {
+      "hex": "#16493D",
+      "percentage": 0.37,
+      "population": 20,
+      "x": 81.8,
+      "y": 96.1,
+      "width": 7.1,
+      "height": 3.9
+    },
+    {
+      "hex": "#EB211B",
+      "percentage": 0.27,
+      "population": 15,
+      "x": 89.7,
+      "y": 91.1,
+      "width": 4.7,
+      "height": 4.2
+    },
+    {
+      "hex": "#D8B378",
+      "percentage": 0.26,
+      "population": 14,
+      "x": 89.7,
+      "y": 96.1,
+      "width": 4.7,
+      "height": 3.9
+    },
+    {
+      "hex": "#2AB8B5",
+      "percentage": 0.22,
+      "population": 12,
+      "x": 95.2,
+      "y": 91.1,
+      "width": 2.8,
+      "height": 5.6
+    },
+    {
+      "hex": "#980407",
+      "percentage": 0.13,
+      "population": 7,
+      "x": 98.8,
+      "y": 91.1,
+      "width": 1.2,
+      "height": 5.6
+    },
+    {
+      "hex": "#21756C",
+      "percentage": 0.11,
+      "population": 6,
+      "x": 95.2,
+      "y": 97.5,
+      "width": 2.6,
+      "height": 2.5
+    },
+    {
+      "hex": "#D49104",
+      "percentage": 0.07,
+      "population": 4,
+      "x": 98.6,
+      "y": 97.5,
+      "width": 1.4,
+      "height": 2.5
+    }
+  ],
+  "R6G_3204.jpg": [
+    {
+      "hex": "#030402",
+      "percentage": 31.27,
+      "population": 1711,
+      "x": 0,
+      "y": 0,
+      "width": 61.2,
+      "height": 50.4
+    },
+    {
+      "hex": "#050C04",
+      "percentage": 30.26,
+      "population": 1656,
+      "x": 0,
+      "y": 51.2,
+      "width": 61.2,
+      "height": 48.8
+    },
+    {
+      "hex": "#131306",
+      "percentage": 9.94,
+      "population": 544,
+      "x": 62,
+      "y": 0,
+      "width": 21.3,
+      "height": 45
+    },
+    {
+      "hex": "#142314",
+      "percentage": 7.55,
+      "population": 413,
+      "x": 84.1,
+      "y": 0,
+      "width": 15.9,
+      "height": 45
+    },
+    {
+      "hex": "#032705",
+      "percentage": 4.97,
+      "population": 272,
+      "x": 62,
+      "y": 45.8,
+      "width": 20.7,
+      "height": 22.7
+    },
+    {
+      "hex": "#362E11",
+      "percentage": 3.98,
+      "population": 218,
+      "x": 83.5,
+      "y": 45.8,
+      "width": 16.5,
+      "height": 22.7
+    },
+    {
+      "hex": "#014606",
+      "percentage": 3,
+      "population": 164,
+      "x": 62,
+      "y": 69.3,
+      "width": 22.2,
+      "height": 12.4
+    },
+    {
+      "hex": "#028C03",
+      "percentage": 2.19,
+      "population": 120,
+      "x": 62,
+      "y": 82.5,
+      "width": 22.2,
+      "height": 8.9
+    },
+    {
+      "hex": "#01A908",
+      "percentage": 1.94,
+      "population": 106,
+      "x": 62,
+      "y": 92.2,
+      "width": 22.2,
+      "height": 7.8
+    },
+    {
+      "hex": "#026408",
+      "percentage": 1.7,
+      "population": 93,
+      "x": 85,
+      "y": 69.3,
+      "width": 8.1,
+      "height": 18.7
+    },
+    {
+      "hex": "#07CA25",
+      "percentage": 1.33,
+      "population": 73,
+      "x": 93.9,
+      "y": 69.3,
+      "width": 6.1,
+      "height": 18.7
+    },
+    {
+      "hex": "#6C5B52",
+      "percentage": 0.6,
+      "population": 33,
+      "x": 85,
+      "y": 88.8,
+      "width": 9,
+      "height": 5.5
+    },
+    {
+      "hex": "#1DD653",
+      "percentage": 0.55,
+      "population": 30,
+      "x": 85,
+      "y": 95.1,
+      "width": 9,
+      "height": 4.9
+    },
+    {
+      "hex": "#51E775",
+      "percentage": 0.26,
+      "population": 14,
+      "x": 94.8,
+      "y": 88.8,
+      "width": 2.2,
+      "height": 7.8
+    },
+    {
+      "hex": "#EEE8DF",
+      "percentage": 0.26,
+      "population": 14,
+      "x": 97.8,
+      "y": 88.8,
+      "width": 2.2,
+      "height": 7.8
+    },
+    {
+      "hex": "#99FAB3",
+      "percentage": 0.2,
+      "population": 11,
+      "x": 94.8,
+      "y": 97.4,
+      "width": 5.2,
+      "height": 2.6
+    }
+  ],
+  "R6G_2193.JPG": [
+    {
+      "hex": "#080503",
+      "percentage": 38.23,
+      "population": 2092,
+      "x": 0,
+      "y": 0,
+      "width": 59.3,
+      "height": 63.8
+    },
+    {
+      "hex": "#ECEFF4",
+      "percentage": 11.04,
+      "population": 604,
+      "x": 0,
+      "y": 64.6,
+      "width": 59.3,
+      "height": 17.9
+    },
+    {
+      "hex": "#DADCE3",
+      "percentage": 10.38,
+      "population": 568,
+      "x": 0,
+      "y": 83.3,
+      "width": 59.3,
+      "height": 16.7
+    },
+    {
+      "hex": "#CCC7CD",
+      "percentage": 4.95,
+      "population": 271,
+      "x": 60.1,
+      "y": 0,
+      "width": 20.3,
+      "height": 23.1
+    },
+    {
+      "hex": "#2D292A",
+      "percentage": 4.62,
+      "population": 253,
+      "x": 81.2,
+      "y": 0,
+      "width": 18.8,
+      "height": 23.1
+    },
+    {
+      "hex": "#514D4B",
+      "percentage": 3.86,
+      "population": 211,
+      "x": 60.1,
+      "y": 23.9,
+      "width": 13.2,
+      "height": 27.3
+    },
+    {
+      "hex": "#F5B6BD",
+      "percentage": 3.82,
+      "population": 209,
+      "x": 74.1,
+      "y": 23.9,
+      "width": 13,
+      "height": 27.3
+    },
+    {
+      "hex": "#7E746B",
+      "percentage": 3.58,
+      "population": 196,
+      "x": 87.9,
+      "y": 23.9,
+      "width": 12.1,
+      "height": 27.3
+    },
+    {
+      "hex": "#BFB4AA",
+      "percentage": 3.4,
+      "population": 186,
+      "x": 60.1,
+      "y": 52,
+      "width": 13.4,
+      "height": 23.6
+    },
+    {
+      "hex": "#9E958F",
+      "percentage": 3.22,
+      "population": 176,
+      "x": 74.3,
+      "y": 52,
+      "width": 12.6,
+      "height": 23.6
+    },
+    {
+      "hex": "#ED2635",
+      "percentage": 3.14,
+      "population": 172,
+      "x": 87.7,
+      "y": 52,
+      "width": 12.3,
+      "height": 23.6
+    },
+    {
+      "hex": "#F4949C",
+      "percentage": 2.91,
+      "population": 159,
+      "x": 60.1,
+      "y": 76.4,
+      "width": 21.8,
+      "height": 12.3
+    },
+    {
+      "hex": "#BF1420",
+      "percentage": 2.52,
+      "population": 138,
+      "x": 60.1,
+      "y": 89.5,
+      "width": 21.8,
+      "height": 10.5
+    },
+    {
+      "hex": "#D7777D",
+      "percentage": 1.81,
+      "population": 99,
+      "x": 82.7,
+      "y": 76.4,
+      "width": 9.6,
+      "height": 16.9
+    },
+    {
+      "hex": "#C5474E",
+      "percentage": 1.33,
+      "population": 73,
+      "x": 93.1,
+      "y": 76.4,
+      "width": 6.9,
+      "height": 16.9
+    },
+    {
+      "hex": "#F44D57",
+      "percentage": 1.19,
+      "population": 65,
+      "x": 82.7,
+      "y": 94.1,
+      "width": 17.3,
+      "height": 5.9
+    }
+  ],
+  "R6G_2204.JPG": [
+    {
+      "hex": "#020202",
+      "percentage": 30.96,
+      "population": 1694,
+      "x": 0,
+      "y": 0,
+      "width": 57.5,
+      "height": 53.2
+    },
+    {
+      "hex": "#B7C5D8",
+      "percentage": 13.91,
+      "population": 761,
+      "x": 0,
+      "y": 54,
+      "width": 57.5,
+      "height": 23.4
+    },
+    {
+      "hex": "#BCD3E9",
+      "percentage": 12.96,
+      "population": 709,
+      "x": 0,
+      "y": 78.2,
+      "width": 57.5,
+      "height": 21.8
+    },
+    {
+      "hex": "#CFD4DD",
+      "percentage": 7.53,
+      "population": 412,
+      "x": 58.3,
+      "y": 0,
+      "width": 22.6,
+      "height": 31.8
+    },
+    {
+      "hex": "#19181C",
+      "percentage": 6.12,
+      "population": 335,
+      "x": 81.7,
+      "y": 0,
+      "width": 18.3,
+      "height": 31.8
+    },
+    {
+      "hex": "#2D2B30",
+      "percentage": 4.08,
+      "population": 223,
+      "x": 58.3,
+      "y": 32.6,
+      "width": 14.9,
+      "height": 25.6
+    },
+    {
+      "hex": "#4D4641",
+      "percentage": 3.64,
+      "population": 199,
+      "x": 74,
+      "y": 32.6,
+      "width": 13.2,
+      "height": 25.6
+    },
+    {
+      "hex": "#897B70",
+      "percentage": 3.33,
+      "population": 182,
+      "x": 88,
+      "y": 32.6,
+      "width": 12,
+      "height": 25.6
+    },
+    {
+      "hex": "#C8B1AE",
+      "percentage": 3.29,
+      "population": 180,
+      "x": 58.3,
+      "y": 59,
+      "width": 20.4,
+      "height": 14.9
+    },
+    {
+      "hex": "#685F59",
+      "percentage": 2.87,
+      "population": 157,
+      "x": 58.3,
+      "y": 74.7,
+      "width": 20.4,
+      "height": 13
+    },
+    {
+      "hex": "#C4101D",
+      "percentage": 2.58,
+      "population": 141,
+      "x": 58.3,
+      "y": 88.5,
+      "width": 20.4,
+      "height": 11.5
+    },
+    {
+      "hex": "#9C0309",
+      "percentage": 2.49,
+      "population": 136,
+      "x": 79.5,
+      "y": 59,
+      "width": 10.8,
+      "height": 20.9
+    },
+    {
+      "hex": "#A29A9B",
+      "percentage": 2.07,
+      "population": 113,
+      "x": 91.1,
+      "y": 59,
+      "width": 8.9,
+      "height": 20.9
+    },
+    {
+      "hex": "#E23240",
+      "percentage": 1.81,
+      "population": 99,
+      "x": 79.5,
+      "y": 80.7,
+      "width": 14.6,
+      "height": 11.2
+    },
+    {
+      "hex": "#162F73",
+      "percentage": 1.22,
+      "population": 67,
+      "x": 79.5,
+      "y": 92.7,
+      "width": 14.6,
+      "height": 7.3
+    },
+    {
+      "hex": "#EEECEB",
+      "percentage": 1.17,
+      "population": 64,
+      "x": 94.9,
+      "y": 80.7,
+      "width": 5.1,
+      "height": 19.3
+    }
+  ],
+  "R6G_5313-Enhanced-NR.jpg": [
+    {
+      "hex": "#EDF1F5",
+      "percentage": 14.38,
+      "population": 787,
+      "x": 0,
+      "y": 0,
+      "width": 44.1,
+      "height": 31.8
+    },
+    {
+      "hex": "#BFC7C4",
+      "percentage": 10.53,
+      "population": 576,
+      "x": 0,
+      "y": 32.6,
+      "width": 44.1,
+      "height": 23
+    },
+    {
+      "hex": "#121407",
+      "percentage": 9.94,
+      "population": 544,
+      "x": 0,
+      "y": 56.4,
+      "width": 44.1,
+      "height": 21.7
+    },
+    {
+      "hex": "#D9DEDF",
+      "percentage": 9.67,
+      "population": 529,
+      "x": 0,
+      "y": 78.9,
+      "width": 44.1,
+      "height": 21.1
+    },
+    {
+      "hex": "#282F33",
+      "percentage": 8.21,
+      "population": 449,
+      "x": 44.9,
+      "y": 0,
+      "width": 19.9,
+      "height": 39.4
+    },
+    {
+      "hex": "#474C50",
+      "percentage": 7.4,
+      "population": 405,
+      "x": 65.6,
+      "y": 0,
+      "width": 17.9,
+      "height": 39.4
+    },
+    {
+      "hex": "#A3ADAC",
+      "percentage": 6.52,
+      "population": 357,
+      "x": 84.3,
+      "y": 0,
+      "width": 15.7,
+      "height": 39.4
+    },
+    {
+      "hex": "#8B928A",
+      "percentage": 5.28,
+      "population": 289,
+      "x": 44.9,
+      "y": 40.2,
+      "width": 18.5,
+      "height": 27
+    },
+    {
+      "hex": "#89BF07",
+      "percentage": 5.15,
+      "population": 282,
+      "x": 64.2,
+      "y": 40.2,
+      "width": 18,
+      "height": 27
+    },
+    {
+      "hex": "#3A4E05",
+      "percentage": 4.86,
+      "population": 266,
+      "x": 83,
+      "y": 40.2,
+      "width": 17,
+      "height": 27
+    },
+    {
+      "hex": "#647179",
+      "percentage": 4.59,
+      "population": 251,
+      "x": 44.9,
+      "y": 68,
+      "width": 26.9,
+      "height": 16
+    },
+    {
+      "hex": "#5D8E05",
+      "percentage": 4.37,
+      "population": 239,
+      "x": 44.9,
+      "y": 84.8,
+      "width": 26.9,
+      "height": 15.2
+    },
+    {
+      "hex": "#ADD130",
+      "percentage": 3.05,
+      "population": 167,
+      "x": 72.6,
+      "y": 68,
+      "width": 15.4,
+      "height": 18.3
+    },
+    {
+      "hex": "#C3D975",
+      "percentage": 2.25,
+      "population": 123,
+      "x": 88.8,
+      "y": 68,
+      "width": 11.2,
+      "height": 18.3
+    },
+    {
+      "hex": "#21768F",
+      "percentage": 1.99,
+      "population": 109,
+      "x": 72.6,
+      "y": 87.1,
+      "width": 14,
+      "height": 12.9
+    },
+    {
+      "hex": "#747D47",
+      "percentage": 1.81,
+      "population": 99,
+      "x": 87.4,
+      "y": 87.1,
+      "width": 12.6,
+      "height": 12.9
+    }
+  ],
+  "R6G_4087.jpg": [
+    {
+      "hex": "#DFDFDF",
+      "percentage": 44.54,
+      "population": 2437,
+      "x": 0,
+      "y": 0,
+      "width": 55.1,
+      "height": 80.2
+    },
+    {
+      "hex": "#D7D7D7",
+      "percentage": 10.87,
+      "population": 595,
+      "x": 0,
+      "y": 81,
+      "width": 55.1,
+      "height": 19
+    },
+    {
+      "hex": "#8A8E92",
+      "percentage": 10.6,
+      "population": 580,
+      "x": 55.9,
+      "y": 0,
+      "width": 26.1,
+      "height": 39.2
+    },
+    {
+      "hex": "#ABABAC",
+      "percentage": 7.09,
+      "population": 388,
+      "x": 82.8,
+      "y": 0,
+      "width": 17.2,
+      "height": 39.2
+    },
+    {
+      "hex": "#BDBDBD",
+      "percentage": 7.02,
+      "population": 384,
+      "x": 55.9,
+      "y": 40,
+      "width": 21.5,
+      "height": 31.1
+    },
+    {
+      "hex": "#7D1906",
+      "percentage": 3.67,
+      "population": 201,
+      "x": 78.2,
+      "y": 40,
+      "width": 10.9,
+      "height": 31.1
+    },
+    {
+      "hex": "#560B03",
+      "percentage": 3.42,
+      "population": 187,
+      "x": 89.9,
+      "y": 40,
+      "width": 10.1,
+      "height": 31.1
+    },
+    {
+      "hex": "#150505",
+      "percentage": 2.32,
+      "population": 127,
+      "x": 55.9,
+      "y": 71.9,
+      "width": 15.4,
+      "height": 13.7
+    },
+    {
+      "hex": "#A63311",
+      "percentage": 2.3,
+      "population": 126,
+      "x": 55.9,
+      "y": 86.4,
+      "width": 15.4,
+      "height": 13.6
+    },
+    {
+      "hex": "#D05A27",
+      "percentage": 1.75,
+      "population": 96,
+      "x": 72.1,
+      "y": 71.9,
+      "width": 10.4,
+      "height": 15.2
+    },
+    {
+      "hex": "#743521",
+      "percentage": 1.41,
+      "population": 77,
+      "x": 83.3,
+      "y": 71.9,
+      "width": 8.1,
+      "height": 15.2
+    },
+    {
+      "hex": "#EE873D",
+      "percentage": 1.35,
+      "population": 74,
+      "x": 92.2,
+      "y": 71.9,
+      "width": 7.8,
+      "height": 15.2
+    },
+    {
+      "hex": "#43231C",
+      "percentage": 1.32,
+      "population": 72,
+      "x": 72.1,
+      "y": 87.9,
+      "width": 9.5,
+      "height": 12.1
+    },
+    {
+      "hex": "#F5A95F",
+      "percentage": 0.9,
+      "population": 49,
+      "x": 82.4,
+      "y": 87.9,
+      "width": 13.2,
+      "height": 5.7
+    },
+    {
+      "hex": "#936451",
+      "percentage": 0.88,
+      "population": 48,
+      "x": 82.4,
+      "y": 94.4,
+      "width": 13.2,
+      "height": 5.6
+    },
+    {
+      "hex": "#414757",
+      "percentage": 0.57,
+      "population": 31,
+      "x": 96.4,
+      "y": 87.9,
+      "width": 3.6,
+      "height": 12.1
+    }
+  ],
+  "R6G_7945.jpg": [
+    {
+      "hex": "#090803",
+      "percentage": 57.51,
+      "population": 3147,
+      "x": 0,
+      "y": 0,
+      "width": 79.4,
+      "height": 72.1
+    },
+    {
+      "hex": "#151007",
+      "percentage": 22,
+      "population": 1204,
+      "x": 0,
+      "y": 72.9,
+      "width": 79.4,
+      "height": 27.1
+    },
+    {
+      "hex": "#291C0E",
+      "percentage": 6.3,
+      "population": 345,
+      "x": 80.2,
+      "y": 0,
+      "width": 19.8,
+      "height": 30.2
+    },
+    {
+      "hex": "#3A3221",
+      "percentage": 2.41,
+      "population": 132,
+      "x": 80.2,
+      "y": 31,
+      "width": 11.4,
+      "height": 19.3
+    },
+    {
+      "hex": "#564F3F",
+      "percentage": 1.66,
+      "population": 91,
+      "x": 92.4,
+      "y": 31,
+      "width": 7.6,
+      "height": 19.3
+    },
+    {
+      "hex": "#642F14",
+      "percentage": 1.43,
+      "population": 78,
+      "x": 80.2,
+      "y": 51.1,
+      "width": 10.3,
+      "height": 12.2
+    },
+    {
+      "hex": "#A1AEB5",
+      "percentage": 1.22,
+      "population": 67,
+      "x": 91.3,
+      "y": 51.1,
+      "width": 8.7,
+      "height": 12.2
+    },
+    {
+      "hex": "#FDD9BB",
+      "percentage": 1.08,
+      "population": 59,
+      "x": 80.2,
+      "y": 64.1,
+      "width": 6.6,
+      "height": 13.9
+    },
+    {
+      "hex": "#EFEDE4",
+      "percentage": 1.01,
+      "population": 55,
+      "x": 87.6,
+      "y": 64.1,
+      "width": 6.2,
+      "height": 13.9
+    },
+    {
+      "hex": "#FCB28F",
+      "percentage": 0.9,
+      "population": 49,
+      "x": 94.6,
+      "y": 64.1,
+      "width": 5.4,
+      "height": 13.9
+    },
+    {
+      "hex": "#868375",
+      "percentage": 0.9,
+      "population": 49,
+      "x": 80.2,
+      "y": 78.8,
+      "width": 6.5,
+      "height": 11.5
+    },
+    {
+      "hex": "#894513",
+      "percentage": 0.86,
+      "population": 47,
+      "x": 87.5,
+      "y": 78.8,
+      "width": 6.3,
+      "height": 11.5
+    },
+    {
+      "hex": "#CAD4D7",
+      "percentage": 0.75,
+      "population": 41,
+      "x": 94.6,
+      "y": 78.8,
+      "width": 5.4,
+      "height": 11.5
+    },
+    {
+      "hex": "#806B4B",
+      "percentage": 0.75,
+      "population": 41,
+      "x": 80.2,
+      "y": 91.1,
+      "width": 7,
+      "height": 8.9
+    },
+    {
+      "hex": "#C0492D",
+      "percentage": 0.62,
+      "population": 34,
+      "x": 88,
+      "y": 91.1,
+      "width": 12,
+      "height": 4.1
+    },
+    {
+      "hex": "#F2795C",
+      "percentage": 0.6,
+      "population": 33,
+      "x": 88,
+      "y": 96,
+      "width": 12,
+      "height": 4
+    }
+  ],
+  "R6G_3719.jpg": [
+    {
+      "hex": "#080301",
+      "percentage": 21.66,
+      "population": 1185,
+      "x": 0,
+      "y": 0,
+      "width": 52.6,
+      "height": 40.4
+    },
+    {
+      "hex": "#1A1203",
+      "percentage": 19.68,
+      "population": 1077,
+      "x": 0,
+      "y": 41.2,
+      "width": 52.6,
+      "height": 36.7
+    },
+    {
+      "hex": "#302606",
+      "percentage": 11.64,
+      "population": 637,
+      "x": 0,
+      "y": 78.7,
+      "width": 52.6,
+      "height": 21.3
+    },
+    {
+      "hex": "#4D3D09",
+      "percentage": 7.05,
+      "population": 386,
+      "x": 53.4,
+      "y": 0,
+      "width": 25.2,
+      "height": 26.8
+    },
+    {
+      "hex": "#6783AC",
+      "percentage": 5.83,
+      "population": 319,
+      "x": 79.4,
+      "y": 0,
+      "width": 20.6,
+      "height": 26.8
+    },
+    {
+      "hex": "#A4B1CA",
+      "percentage": 5.61,
+      "population": 307,
+      "x": 53.4,
+      "y": 27.6,
+      "width": 16.3,
+      "height": 32.6
+    },
+    {
+      "hex": "#8497B8",
+      "percentage": 5.39,
+      "population": 295,
+      "x": 70.5,
+      "y": 27.6,
+      "width": 15.6,
+      "height": 32.6
+    },
+    {
+      "hex": "#C8D0DB",
+      "percentage": 4.55,
+      "population": 249,
+      "x": 86.9,
+      "y": 27.6,
+      "width": 13.1,
+      "height": 32.6
+    },
+    {
+      "hex": "#785E0E",
+      "percentage": 3.33,
+      "population": 182,
+      "x": 53.4,
+      "y": 61,
+      "width": 23.4,
+      "height": 13.1
+    },
+    {
+      "hex": "#EBEBED",
+      "percentage": 3.11,
+      "population": 170,
+      "x": 53.4,
+      "y": 74.9,
+      "width": 23.4,
+      "height": 12.3
+    },
+    {
+      "hex": "#514A3A",
+      "percentage": 3.05,
+      "population": 167,
+      "x": 53.4,
+      "y": 88,
+      "width": 23.4,
+      "height": 12
+    },
+    {
+      "hex": "#B39013",
+      "percentage": 2.27,
+      "population": 124,
+      "x": 77.6,
+      "y": 61,
+      "width": 11.1,
+      "height": 18.5
+    },
+    {
+      "hex": "#88733E",
+      "percentage": 2.16,
+      "population": 118,
+      "x": 89.5,
+      "y": 61,
+      "width": 10.5,
+      "height": 18.5
+    },
+    {
+      "hex": "#6A6F74",
+      "percentage": 2.01,
+      "population": 110,
+      "x": 77.6,
+      "y": 80.3,
+      "width": 17,
+      "height": 10.7
+    },
+    {
+      "hex": "#E5BB42",
+      "percentage": 1.57,
+      "population": 86,
+      "x": 77.6,
+      "y": 91.8,
+      "width": 17,
+      "height": 8.2
+    },
+    {
+      "hex": "#B9A985",
+      "percentage": 1.1,
+      "population": 60,
+      "x": 95.4,
+      "y": 80.3,
+      "width": 4.6,
+      "height": 19.7
+    }
+  ],
+  "R6G_4896.jpg": [
+    {
+      "hex": "#110B09",
+      "percentage": 21.09,
+      "population": 1154,
+      "x": 0,
+      "y": 0,
+      "width": 44.5,
+      "height": 46.5
+    },
+    {
+      "hex": "#503F31",
+      "percentage": 13.18,
+      "population": 721,
+      "x": 0,
+      "y": 47.3,
+      "width": 44.5,
+      "height": 28.8
+    },
+    {
+      "hex": "#D1C9BF",
+      "percentage": 10.65,
+      "population": 583,
+      "x": 0,
+      "y": 76.9,
+      "width": 44.5,
+      "height": 23.1
+    },
+    {
+      "hex": "#403228",
+      "percentage": 8.13,
+      "population": 445,
+      "x": 45.3,
+      "y": 0,
+      "width": 21.8,
+      "height": 35.8
+    },
+    {
+      "hex": "#624F3F",
+      "percentage": 6.34,
+      "population": 347,
+      "x": 67.9,
+      "y": 0,
+      "width": 16.8,
+      "height": 35.8
+    },
+    {
+      "hex": "#F0C182",
+      "percentage": 5.5,
+      "population": 301,
+      "x": 85.5,
+      "y": 0,
+      "width": 14.5,
+      "height": 35.8
+    },
+    {
+      "hex": "#7A624D",
+      "percentage": 4.93,
+      "population": 270,
+      "x": 45.3,
+      "y": 36.6,
+      "width": 19.7,
+      "height": 23.6
+    },
+    {
+      "hex": "#A66F46",
+      "percentage": 4.31,
+      "population": 236,
+      "x": 65.8,
+      "y": 36.6,
+      "width": 17.1,
+      "height": 23.6
+    },
+    {
+      "hex": "#D29D68",
+      "percentage": 4.13,
+      "population": 226,
+      "x": 83.7,
+      "y": 36.6,
+      "width": 16.3,
+      "height": 23.6
+    },
+    {
+      "hex": "#281C15",
+      "percentage": 4.02,
+      "population": 220,
+      "x": 45.3,
+      "y": 61,
+      "width": 28.2,
+      "height": 13.3
+    },
+    {
+      "hex": "#BC8557",
+      "percentage": 3.73,
+      "population": 204,
+      "x": 45.3,
+      "y": 75.1,
+      "width": 28.2,
+      "height": 12.2
+    },
+    {
+      "hex": "#F8D4A2",
+      "percentage": 3.62,
+      "population": 198,
+      "x": 45.3,
+      "y": 88.1,
+      "width": 28.2,
+      "height": 11.9
+    },
+    {
+      "hex": "#A19587",
+      "percentage": 3.49,
+      "population": 191,
+      "x": 74.3,
+      "y": 61,
+      "width": 12.7,
+      "height": 25.5
+    },
+    {
+      "hex": "#827566",
+      "percentage": 3.36,
+      "population": 184,
+      "x": 87.8,
+      "y": 61,
+      "width": 12.2,
+      "height": 25.5
+    },
+    {
+      "hex": "#BEB3A8",
+      "percentage": 2.41,
+      "population": 132,
+      "x": 74.3,
+      "y": 87.3,
+      "width": 17.4,
+      "height": 12.7
+    },
+    {
+      "hex": "#F5EBDE",
+      "percentage": 1.1,
+      "population": 60,
+      "x": 92.5,
+      "y": 87.3,
+      "width": 7.5,
+      "height": 12.7
+    }
+  ],
+  "R6G_5707-Enhanced-NR.jpg": [
+    {
+      "hex": "#633205",
+      "percentage": 10.23,
+      "population": 560,
+      "x": 0,
+      "y": 0,
+      "width": 35.3,
+      "height": 28
+    },
+    {
+      "hex": "#F7C681",
+      "percentage": 9.16,
+      "population": 501,
+      "x": 0,
+      "y": 28.8,
+      "width": 35.3,
+      "height": 25
+    },
+    {
+      "hex": "#705233",
+      "percentage": 8.61,
+      "population": 471,
+      "x": 0,
+      "y": 54.6,
+      "width": 35.3,
+      "height": 23.4
+    },
+    {
+      "hex": "#0F0703",
+      "percentage": 7.8,
+      "population": 427,
+      "x": 0,
+      "y": 78.8,
+      "width": 35.3,
+      "height": 21.2
+    },
+    {
+      "hex": "#7C440D",
+      "percentage": 7.68,
+      "population": 420,
+      "x": 36.1,
+      "y": 0,
+      "width": 22.3,
+      "height": 32.9
+    },
+    {
+      "hex": "#FCDDA3",
+      "percentage": 7.24,
+      "population": 396,
+      "x": 59.2,
+      "y": 0,
+      "width": 21.1,
+      "height": 32.9
+    },
+    {
+      "hex": "#DDA769",
+      "percentage": 6.54,
+      "population": 358,
+      "x": 81.1,
+      "y": 0,
+      "width": 18.9,
+      "height": 32.9
+    },
+    {
+      "hex": "#28190D",
+      "percentage": 6.4,
+      "population": 350,
+      "x": 36.1,
+      "y": 33.7,
+      "width": 21.5,
+      "height": 28.4
+    },
+    {
+      "hex": "#462003",
+      "percentage": 6.23,
+      "population": 341,
+      "x": 58.4,
+      "y": 33.7,
+      "width": 20.9,
+      "height": 28.4
+    },
+    {
+      "hex": "#8C7154",
+      "percentage": 5.96,
+      "population": 326,
+      "x": 80.1,
+      "y": 33.7,
+      "width": 19.9,
+      "height": 28.4
+    },
+    {
+      "hex": "#BD884F",
+      "percentage": 5.15,
+      "population": 282,
+      "x": 36.1,
+      "y": 62.9,
+      "width": 23.4,
+      "height": 20.8
+    },
+    {
+      "hex": "#4E3C2A",
+      "percentage": 3.87,
+      "population": 212,
+      "x": 36.1,
+      "y": 84.5,
+      "width": 23.4,
+      "height": 15.5
+    },
+    {
+      "hex": "#DED2C4",
+      "percentage": 3.84,
+      "population": 210,
+      "x": 60.3,
+      "y": 62.9,
+      "width": 19.6,
+      "height": 18.2
+    },
+    {
+      "hex": "#915F2C",
+      "percentage": 3.8,
+      "population": 208,
+      "x": 60.3,
+      "y": 81.9,
+      "width": 19.6,
+      "height": 18.1
+    },
+    {
+      "hex": "#CEB8A0",
+      "percentage": 3.76,
+      "population": 206,
+      "x": 80.7,
+      "y": 62.9,
+      "width": 19.3,
+      "height": 18.2
+    },
+    {
+      "hex": "#AF987F",
+      "percentage": 3.73,
+      "population": 204,
+      "x": 80.7,
+      "y": 81.9,
+      "width": 19.3,
+      "height": 18.1
+    }
+  ],
+  "R6G_5145.jpg": [
+    {
+      "hex": "#ECEFF8",
+      "percentage": 15.68,
+      "population": 858,
+      "x": 0,
+      "y": 0,
+      "width": 40.9,
+      "height": 37.4
+    },
+    {
+      "hex": "#D7DEF3",
+      "percentage": 14.04,
+      "population": 768,
+      "x": 0,
+      "y": 38.2,
+      "width": 40.9,
+      "height": 33.4
+    },
+    {
+      "hex": "#93A4C9",
+      "percentage": 11.64,
+      "population": 637,
+      "x": 0,
+      "y": 72.4,
+      "width": 40.9,
+      "height": 27.6
+    },
+    {
+      "hex": "#C1CFEF",
+      "percentage": 10.54,
+      "population": 577,
+      "x": 41.7,
+      "y": 0,
+      "width": 29.8,
+      "height": 34.2
+    },
+    {
+      "hex": "#7D94BE",
+      "percentage": 9.8,
+      "population": 536,
+      "x": 72.3,
+      "y": 0,
+      "width": 27.7,
+      "height": 34.2
+    },
+    {
+      "hex": "#AAB7D4",
+      "percentage": 6.76,
+      "population": 370,
+      "x": 41.7,
+      "y": 35,
+      "width": 21.9,
+      "height": 29.5
+    },
+    {
+      "hex": "#6785B2",
+      "percentage": 6.01,
+      "population": 329,
+      "x": 64.4,
+      "y": 35,
+      "width": 19.3,
+      "height": 29.5
+    },
+    {
+      "hex": "#6E686B",
+      "percentage": 4.86,
+      "population": 266,
+      "x": 84.5,
+      "y": 35,
+      "width": 15.5,
+      "height": 29.5
+    },
+    {
+      "hex": "#9FBEF7",
+      "percentage": 4.61,
+      "population": 252,
+      "x": 41.7,
+      "y": 65.3,
+      "width": 25.4,
+      "height": 17
+    },
+    {
+      "hex": "#4C4845",
+      "percentage": 4.57,
+      "population": 250,
+      "x": 41.7,
+      "y": 83.1,
+      "width": 25.4,
+      "height": 16.9
+    },
+    {
+      "hex": "#848087",
+      "percentage": 3.93,
+      "population": 215,
+      "x": 67.9,
+      "y": 65.3,
+      "width": 18,
+      "height": 20.5
+    },
+    {
+      "hex": "#AAA4A0",
+      "percentage": 2.96,
+      "population": 162,
+      "x": 86.7,
+      "y": 65.3,
+      "width": 13.3,
+      "height": 20.5
+    },
+    {
+      "hex": "#DCD2C9",
+      "percentage": 1.7,
+      "population": 93,
+      "x": 67.9,
+      "y": 86.6,
+      "width": 11.4,
+      "height": 13.4
+    },
+    {
+      "hex": "#C14603",
+      "percentage": 1.21,
+      "population": 66,
+      "x": 80.1,
+      "y": 86.6,
+      "width": 14.9,
+      "height": 6.9
+    },
+    {
+      "hex": "#870C01",
+      "percentage": 1.01,
+      "population": 55,
+      "x": 80.1,
+      "y": 94.3,
+      "width": 14.9,
+      "height": 5.7
+    },
+    {
+      "hex": "#E87A03",
+      "percentage": 0.69,
+      "population": 38,
+      "x": 95.8,
+      "y": 86.6,
+      "width": 4.2,
+      "height": 13.4
+    }
+  ],
+  "R6G_5317-Enhanced-NR.jpg": [
+    {
+      "hex": "#D6B991",
+      "percentage": 13.18,
+      "population": 721,
+      "x": 0,
+      "y": 0,
+      "width": 45.8,
+      "height": 28
+    },
+    {
+      "hex": "#CBAD87",
+      "percentage": 11.18,
+      "population": 612,
+      "x": 0,
+      "y": 28.8,
+      "width": 45.8,
+      "height": 23.6
+    },
+    {
+      "hex": "#B39672",
+      "percentage": 10.98,
+      "population": 601,
+      "x": 0,
+      "y": 53.2,
+      "width": 45.8,
+      "height": 23.1
+    },
+    {
+      "hex": "#E0C59F",
+      "percentage": 10.84,
+      "population": 593,
+      "x": 0,
+      "y": 77.1,
+      "width": 45.8,
+      "height": 22.9
+    },
+    {
+      "hex": "#BFA27C",
+      "percentage": 10.12,
+      "population": 554,
+      "x": 46.6,
+      "y": 0,
+      "width": 29.3,
+      "height": 33.3
+    },
+    {
+      "hex": "#A88A68",
+      "percentage": 8.08,
+      "population": 442,
+      "x": 76.7,
+      "y": 0,
+      "width": 23.3,
+      "height": 33.3
+    },
+    {
+      "hex": "#9A7D5D",
+      "percentage": 6.52,
+      "population": 357,
+      "x": 46.6,
+      "y": 34.1,
+      "width": 21.2,
+      "height": 29.3
+    },
+    {
+      "hex": "#EDD5B1",
+      "percentage": 4.92,
+      "population": 269,
+      "x": 68.6,
+      "y": 34.1,
+      "width": 15.8,
+      "height": 29.3
+    },
+    {
+      "hex": "#14100E",
+      "percentage": 4.62,
+      "population": 253,
+      "x": 85.2,
+      "y": 34.1,
+      "width": 14.8,
+      "height": 29.3
+    },
+    {
+      "hex": "#070504",
+      "percentage": 4.53,
+      "population": 248,
+      "x": 46.6,
+      "y": 64.2,
+      "width": 23.4,
+      "height": 18.1
+    },
+    {
+      "hex": "#8A6E50",
+      "percentage": 4.22,
+      "population": 231,
+      "x": 46.6,
+      "y": 83.1,
+      "width": 23.4,
+      "height": 16.9
+    },
+    {
+      "hex": "#241D18",
+      "percentage": 3.91,
+      "population": 214,
+      "x": 70.8,
+      "y": 64.2,
+      "width": 15.5,
+      "height": 23.7
+    },
+    {
+      "hex": "#765D43",
+      "percentage": 3.31,
+      "population": 181,
+      "x": 87.1,
+      "y": 64.2,
+      "width": 12.9,
+      "height": 23.7
+    },
+    {
+      "hex": "#644A32",
+      "percentage": 1.81,
+      "population": 99,
+      "x": 70.8,
+      "y": 88.7,
+      "width": 14.4,
+      "height": 11.3
+    },
+    {
+      "hex": "#3E3023",
+      "percentage": 1.04,
+      "population": 57,
+      "x": 86,
+      "y": 88.7,
+      "width": 14,
+      "height": 6.3
+    },
+    {
+      "hex": "#4A433A",
+      "percentage": 0.73,
+      "population": 40,
+      "x": 86,
+      "y": 95.8,
+      "width": 14,
+      "height": 4.2
+    }
+  ],
+  "R6G_6701.jpg": [
+    {
+      "hex": "#534534",
+      "percentage": 14.04,
+      "population": 768,
+      "x": 0,
+      "y": 0,
+      "width": 38,
+      "height": 36
+    },
+    {
+      "hex": "#EF8441",
+      "percentage": 13.91,
+      "population": 761,
+      "x": 0,
+      "y": 36.8,
+      "width": 38,
+      "height": 35.7
+    },
+    {
+      "hex": "#DE7031",
+      "percentage": 10.51,
+      "population": 575,
+      "x": 0,
+      "y": 73.3,
+      "width": 38,
+      "height": 26.7
+    },
+    {
+      "hex": "#F59858",
+      "percentage": 9.03,
+      "population": 494,
+      "x": 38.8,
+      "y": 0,
+      "width": 22.4,
+      "height": 38.6
+    },
+    {
+      "hex": "#3A2D1C",
+      "percentage": 8.68,
+      "population": 475,
+      "x": 62,
+      "y": 0,
+      "width": 21.6,
+      "height": 38.6
+    },
+    {
+      "hex": "#C05724",
+      "percentage": 6.38,
+      "population": 349,
+      "x": 84.4,
+      "y": 0,
+      "width": 15.6,
+      "height": 38.6
+    },
+    {
+      "hex": "#74634E",
+      "percentage": 6.09,
+      "population": 333,
+      "x": 38.8,
+      "y": 39.4,
+      "width": 26.5,
+      "height": 21.8
+    },
+    {
+      "hex": "#C3D7E3",
+      "percentage": 5.61,
+      "population": 307,
+      "x": 38.8,
+      "y": 62,
+      "width": 26.5,
+      "height": 20
+    },
+    {
+      "hex": "#19110A",
+      "percentage": 4.84,
+      "population": 265,
+      "x": 38.8,
+      "y": 82.8,
+      "width": 26.5,
+      "height": 17.2
+    },
+    {
+      "hex": "#ABC2CF",
+      "percentage": 4.33,
+      "population": 237,
+      "x": 66.1,
+      "y": 39.4,
+      "width": 17.7,
+      "height": 23.1
+    },
+    {
+      "hex": "#DEEBF2",
+      "percentage": 3.82,
+      "population": 209,
+      "x": 84.6,
+      "y": 39.4,
+      "width": 15.4,
+      "height": 23.1
+    },
+    {
+      "hex": "#973E15",
+      "percentage": 3.45,
+      "population": 189,
+      "x": 66.1,
+      "y": 63.3,
+      "width": 12.6,
+      "height": 25.6
+    },
+    {
+      "hex": "#7D8B92",
+      "percentage": 2.91,
+      "population": 159,
+      "x": 79.5,
+      "y": 63.3,
+      "width": 10.4,
+      "height": 25.6
+    },
+    {
+      "hex": "#94A8B2",
+      "percentage": 2.61,
+      "population": 143,
+      "x": 90.7,
+      "y": 63.3,
+      "width": 9.3,
+      "height": 25.6
+    },
+    {
+      "hex": "#B37858",
+      "percentage": 2.45,
+      "population": 134,
+      "x": 66.1,
+      "y": 89.7,
+      "width": 21.6,
+      "height": 10.3
+    },
+    {
+      "hex": "#D8A48B",
+      "percentage": 1.35,
+      "population": 74,
+      "x": 88.5,
+      "y": 89.7,
+      "width": 11.5,
+      "height": 10.3
+    }
+  ],
+  "R6G_7169.jpg": [
+    {
+      "hex": "#14111B",
+      "percentage": 45.83,
+      "population": 2508,
+      "x": 0,
+      "y": 0,
+      "width": 71.7,
+      "height": 63.4
+    },
+    {
+      "hex": "#1A161F",
+      "percentage": 26.13,
+      "population": 1430,
+      "x": 0,
+      "y": 64.2,
+      "width": 71.7,
+      "height": 35.8
+    },
+    {
+      "hex": "#2A1F24",
+      "percentage": 7,
+      "population": 383,
+      "x": 72.5,
+      "y": 0,
+      "width": 27.5,
+      "height": 24.4
+    },
+    {
+      "hex": "#3A2E30",
+      "percentage": 3.09,
+      "population": 169,
+      "x": 72.5,
+      "y": 25.2,
+      "width": 15.5,
+      "height": 18.4
+    },
+    {
+      "hex": "#DBCAB7",
+      "percentage": 2.27,
+      "population": 124,
+      "x": 88.8,
+      "y": 25.2,
+      "width": 11.2,
+      "height": 18.4
+    },
+    {
+      "hex": "#71594B",
+      "percentage": 2.16,
+      "population": 118,
+      "x": 72.5,
+      "y": 44.4,
+      "width": 13.6,
+      "height": 14.5
+    },
+    {
+      "hex": "#4D261B",
+      "percentage": 2.1,
+      "population": 115,
+      "x": 86.9,
+      "y": 44.4,
+      "width": 13.1,
+      "height": 14.5
+    },
+    {
+      "hex": "#503F3A",
+      "percentage": 2.07,
+      "population": 113,
+      "x": 72.5,
+      "y": 59.7,
+      "width": 10.3,
+      "height": 18.2
+    },
+    {
+      "hex": "#8A705D",
+      "percentage": 1.85,
+      "population": 101,
+      "x": 83.6,
+      "y": 59.7,
+      "width": 9.1,
+      "height": 18.2
+    },
+    {
+      "hex": "#C8AE98",
+      "percentage": 1.37,
+      "population": 75,
+      "x": 93.5,
+      "y": 59.7,
+      "width": 6.5,
+      "height": 18.2
+    },
+    {
+      "hex": "#A75C34",
+      "percentage": 1.32,
+      "population": 72,
+      "x": 72.5,
+      "y": 78.7,
+      "width": 11.4,
+      "height": 10.3
+    },
+    {
+      "hex": "#AA8F7B",
+      "percentage": 1.32,
+      "population": 72,
+      "x": 72.5,
+      "y": 89.8,
+      "width": 11.4,
+      "height": 10.2
+    },
+    {
+      "hex": "#7E3C23",
+      "percentage": 1.24,
+      "population": 68,
+      "x": 84.7,
+      "y": 78.7,
+      "width": 8.2,
+      "height": 13.1
+    },
+    {
+      "hex": "#C97F46",
+      "percentage": 0.97,
+      "population": 53,
+      "x": 93.7,
+      "y": 78.7,
+      "width": 6.3,
+      "height": 13.1
+    },
+    {
+      "hex": "#D2966A",
+      "percentage": 0.66,
+      "population": 36,
+      "x": 84.7,
+      "y": 92.6,
+      "width": 7.3,
+      "height": 7.4
+    },
+    {
+      "hex": "#152B4D",
+      "percentage": 0.64,
+      "population": 35,
+      "x": 92.8,
+      "y": 92.6,
+      "width": 7.2,
+      "height": 7.4
+    }
+  ],
+  "R6G_6270.jpg": [
+    {
+      "hex": "#0B0D09",
+      "percentage": 44.72,
+      "population": 2447,
+      "x": 0,
+      "y": 0,
+      "width": 57.8,
+      "height": 76.7
+    },
+    {
+      "hex": "#11140E",
+      "percentage": 13.43,
+      "population": 735,
+      "x": 0,
+      "y": 77.5,
+      "width": 57.8,
+      "height": 22.5
+    },
+    {
+      "hex": "#1C1F17",
+      "percentage": 6.87,
+      "population": 376,
+      "x": 58.6,
+      "y": 0,
+      "width": 20.5,
+      "height": 32
+    },
+    {
+      "hex": "#5C574C",
+      "percentage": 6.76,
+      "population": 370,
+      "x": 79.9,
+      "y": 0,
+      "width": 20.1,
+      "height": 32
+    },
+    {
+      "hex": "#4C4A41",
+      "percentage": 5.54,
+      "population": 303,
+      "x": 58.6,
+      "y": 32.8,
+      "width": 21.1,
+      "height": 24.9
+    },
+    {
+      "hex": "#2B2C21",
+      "percentage": 5.14,
+      "population": 281,
+      "x": 80.5,
+      "y": 32.8,
+      "width": 19.5,
+      "height": 24.9
+    },
+    {
+      "hex": "#3A3A30",
+      "percentage": 4.31,
+      "population": 236,
+      "x": 58.6,
+      "y": 58.5,
+      "width": 16.5,
+      "height": 24.6
+    },
+    {
+      "hex": "#67655B",
+      "percentage": 3.65,
+      "population": 200,
+      "x": 75.9,
+      "y": 58.5,
+      "width": 13.8,
+      "height": 24.6
+    },
+    {
+      "hex": "#787B73",
+      "percentage": 2.56,
+      "population": 140,
+      "x": 90.5,
+      "y": 58.5,
+      "width": 9.5,
+      "height": 24.6
+    },
+    {
+      "hex": "#D3D8D7",
+      "percentage": 1.66,
+      "population": 91,
+      "x": 58.6,
+      "y": 83.9,
+      "width": 18.3,
+      "height": 8
+    },
+    {
+      "hex": "#96978F",
+      "percentage": 1.52,
+      "population": 83,
+      "x": 58.6,
+      "y": 92.7,
+      "width": 18.3,
+      "height": 7.3
+    },
+    {
+      "hex": "#E8E5E8",
+      "percentage": 1.43,
+      "population": 78,
+      "x": 77.7,
+      "y": 83.9,
+      "width": 14.4,
+      "height": 8.8
+    },
+    {
+      "hex": "#B8BAB5",
+      "percentage": 1.1,
+      "population": 60,
+      "x": 77.7,
+      "y": 93.5,
+      "width": 14.4,
+      "height": 6.5
+    },
+    {
+      "hex": "#C9BB95",
+      "percentage": 0.62,
+      "population": 34,
+      "x": 92.9,
+      "y": 83.9,
+      "width": 7.1,
+      "height": 7.2
+    },
+    {
+      "hex": "#6D4B1E",
+      "percentage": 0.42,
+      "population": 23,
+      "x": 92.9,
+      "y": 91.9,
+      "width": 4,
+      "height": 8.1
+    },
+    {
+      "hex": "#A37B3E",
+      "percentage": 0.27,
+      "population": 15,
+      "x": 97.7,
+      "y": 91.9,
+      "width": 2.3,
+      "height": 8.1
+    }
+  ],
+  "R6G_7297-2.jpg": [
+    {
+      "hex": "#191722",
+      "percentage": 20.94,
+      "population": 1139,
+      "x": 0,
+      "y": 0,
+      "width": 55.5,
+      "height": 37
+    },
+    {
+      "hex": "#15121C",
+      "percentage": 19.14,
+      "population": 1041,
+      "x": 0,
+      "y": 37.8,
+      "width": 55.5,
+      "height": 33.7
+    },
+    {
+      "hex": "#221F26",
+      "percentage": 15.81,
+      "population": 860,
+      "x": 0,
+      "y": 72.3,
+      "width": 55.5,
+      "height": 27.7
+    },
+    {
+      "hex": "#2C272C",
+      "percentage": 15.04,
+      "population": 818,
+      "x": 56.3,
+      "y": 0,
+      "width": 43.7,
+      "height": 33.6
+    },
+    {
+      "hex": "#393130",
+      "percentage": 6.31,
+      "population": 343,
+      "x": 56.3,
+      "y": 34.4,
+      "width": 23.1,
+      "height": 26
+    },
+    {
+      "hex": "#3E3E43",
+      "percentage": 5.46,
+      "population": 297,
+      "x": 80.2,
+      "y": 34.4,
+      "width": 19.8,
+      "height": 26
+    },
+    {
+      "hex": "#47515D",
+      "percentage": 3.55,
+      "population": 193,
+      "x": 56.3,
+      "y": 61.2,
+      "width": 23.8,
+      "height": 13.9
+    },
+    {
+      "hex": "#1F2A3F",
+      "percentage": 3.24,
+      "population": 176,
+      "x": 56.3,
+      "y": 75.9,
+      "width": 23.8,
+      "height": 12.6
+    },
+    {
+      "hex": "#60543C",
+      "percentage": 2.79,
+      "population": 152,
+      "x": 56.3,
+      "y": 89.3,
+      "width": 23.8,
+      "height": 10.7
+    },
+    {
+      "hex": "#697471",
+      "percentage": 1.91,
+      "population": 104,
+      "x": 80.9,
+      "y": 61.2,
+      "width": 10.3,
+      "height": 16.7
+    },
+    {
+      "hex": "#ACB4AB",
+      "percentage": 1.51,
+      "population": 82,
+      "x": 92,
+      "y": 61.2,
+      "width": 8,
+      "height": 16.7
+    },
+    {
+      "hex": "#7C96A6",
+      "percentage": 1.42,
+      "population": 77,
+      "x": 80.9,
+      "y": 78.7,
+      "width": 10,
+      "height": 12.6
+    },
+    {
+      "hex": "#CFD3D0",
+      "percentage": 1.19,
+      "population": 65,
+      "x": 91.7,
+      "y": 78.7,
+      "width": 8.3,
+      "height": 12.6
+    },
+    {
+      "hex": "#997F46",
+      "percentage": 0.81,
+      "population": 44,
+      "x": 80.9,
+      "y": 92.1,
+      "width": 8.6,
+      "height": 7.9
+    },
+    {
+      "hex": "#C32024",
+      "percentage": 0.57,
+      "population": 31,
+      "x": 90.3,
+      "y": 92.1,
+      "width": 9.7,
+      "height": 4.7
+    },
+    {
+      "hex": "#F2A13F",
+      "percentage": 0.33,
+      "population": 18,
+      "x": 90.3,
+      "y": 97.6,
+      "width": 9.7,
+      "height": 2.4
+    }
+  ],
+  "R6G_7663.jpg": [
+    {
+      "hex": "#16141E",
+      "percentage": 19.04,
+      "population": 1042,
+      "x": 0,
+      "y": 0,
+      "width": 47.6,
+      "height": 39.1
+    },
+    {
+      "hex": "#25251E",
+      "percentage": 15.5,
+      "population": 848,
+      "x": 0,
+      "y": 39.9,
+      "width": 47.6,
+      "height": 31.7
+    },
+    {
+      "hex": "#333122",
+      "percentage": 13.52,
+      "population": 740,
+      "x": 0,
+      "y": 72.4,
+      "width": 47.6,
+      "height": 27.6
+    },
+    {
+      "hex": "#453F29",
+      "percentage": 8.33,
+      "population": 456,
+      "x": 48.4,
+      "y": 0,
+      "width": 26.5,
+      "height": 30.3
+    },
+    {
+      "hex": "#22242E",
+      "percentage": 7.69,
+      "population": 421,
+      "x": 75.7,
+      "y": 0,
+      "width": 24.3,
+      "height": 30.3
+    },
+    {
+      "hex": "#5C4F2D",
+      "percentage": 6.96,
+      "population": 381,
+      "x": 48.4,
+      "y": 31.1,
+      "width": 21,
+      "height": 31.8
+    },
+    {
+      "hex": "#323A3F",
+      "percentage": 5.17,
+      "population": 283,
+      "x": 70.2,
+      "y": 31.1,
+      "width": 15.3,
+      "height": 31.8
+    },
+    {
+      "hex": "#444F51",
+      "percentage": 4.64,
+      "population": 254,
+      "x": 86.3,
+      "y": 31.1,
+      "width": 13.7,
+      "height": 31.8
+    },
+    {
+      "hex": "#76632E",
+      "percentage": 3.45,
+      "population": 189,
+      "x": 48.4,
+      "y": 63.7,
+      "width": 25.4,
+      "height": 12.6
+    },
+    {
+      "hex": "#6C6947",
+      "percentage": 3.2,
+      "population": 175,
+      "x": 48.4,
+      "y": 77.1,
+      "width": 25.4,
+      "height": 11.6
+    },
+    {
+      "hex": "#57666F",
+      "percentage": 2.92,
+      "population": 160,
+      "x": 48.4,
+      "y": 89.5,
+      "width": 25.4,
+      "height": 10.5
+    },
+    {
+      "hex": "#8C7D3D",
+      "percentage": 2.58,
+      "population": 141,
+      "x": 74.6,
+      "y": 63.7,
+      "width": 12.5,
+      "height": 19
+    },
+    {
+      "hex": "#728089",
+      "percentage": 2.52,
+      "population": 138,
+      "x": 87.9,
+      "y": 63.7,
+      "width": 12.1,
+      "height": 19
+    },
+    {
+      "hex": "#9C986D",
+      "percentage": 1.7,
+      "population": 93,
+      "x": 74.6,
+      "y": 83.5,
+      "width": 18.9,
+      "height": 8
+    },
+    {
+      "hex": "#9AA3A4",
+      "percentage": 1.64,
+      "population": 90,
+      "x": 74.6,
+      "y": 92.3,
+      "width": 18.9,
+      "height": 7.7
+    },
+    {
+      "hex": "#C5C9C8",
+      "percentage": 1.11,
+      "population": 61,
+      "x": 94.3,
+      "y": 83.5,
+      "width": 5.7,
+      "height": 16.5
+    }
+  ],
+  "R6G_8286.jpg": [
+    {
+      "hex": "#000000",
+      "percentage": 82.07,
+      "population": 4491,
+      "x": 0,
+      "y": 0,
+      "width": 81.9,
+      "height": 100
+    },
+    {
+      "hex": "#080604",
+      "percentage": 7.84,
+      "population": 429,
+      "x": 82.7,
+      "y": 0,
+      "width": 17.3,
+      "height": 43.3
+    },
+    {
+      "hex": "#181414",
+      "percentage": 2.5,
+      "population": 137,
+      "x": 82.7,
+      "y": 44.1,
+      "width": 17.3,
+      "height": 13.3
+    },
+    {
+      "hex": "#1F2531",
+      "percentage": 1.02,
+      "population": 56,
+      "x": 82.7,
+      "y": 58.2,
+      "width": 8.8,
+      "height": 10
+    },
+    {
+      "hex": "#3D2517",
+      "percentage": 0.91,
+      "population": 50,
+      "x": 92.3,
+      "y": 58.2,
+      "width": 7.7,
+      "height": 10
+    },
+    {
+      "hex": "#D7CBC4",
+      "percentage": 0.82,
+      "population": 45,
+      "x": 82.7,
+      "y": 69,
+      "width": 6.2,
+      "height": 11.3
+    },
+    {
+      "hex": "#383E52",
+      "percentage": 0.68,
+      "population": 37,
+      "x": 89.7,
+      "y": 69,
+      "width": 4.9,
+      "height": 11.3
+    },
+    {
+      "hex": "#6B412E",
+      "percentage": 0.64,
+      "population": 35,
+      "x": 95.4,
+      "y": 69,
+      "width": 4.6,
+      "height": 11.3
+    },
+    {
+      "hex": "#C5AFA3",
+      "percentage": 0.58,
+      "population": 32,
+      "x": 82.7,
+      "y": 81.1,
+      "width": 5.8,
+      "height": 8.2
+    },
+    {
+      "hex": "#A18779",
+      "percentage": 0.55,
+      "population": 30,
+      "x": 89.3,
+      "y": 81.1,
+      "width": 5.4,
+      "height": 8.2
+    },
+    {
+      "hex": "#465676",
+      "percentage": 0.48,
+      "population": 26,
+      "x": 95.5,
+      "y": 81.1,
+      "width": 4.5,
+      "height": 8.2
+    },
+    {
+      "hex": "#59729B",
+      "percentage": 0.46,
+      "population": 25,
+      "x": 82.7,
+      "y": 90.1,
+      "width": 7.9,
+      "height": 4.6
+    },
+    {
+      "hex": "#9C6E54",
+      "percentage": 0.46,
+      "population": 25,
+      "x": 82.7,
+      "y": 95.5,
+      "width": 7.9,
+      "height": 4.5
+    },
+    {
+      "hex": "#835D49",
+      "percentage": 0.4,
+      "population": 22,
+      "x": 91.4,
+      "y": 90.1,
+      "width": 4,
+      "height": 7.7
+    },
+    {
+      "hex": "#8FA5C3",
+      "percentage": 0.38,
+      "population": 21,
+      "x": 96.2,
+      "y": 90.1,
+      "width": 3.8,
+      "height": 7.7
+    },
+    {
+      "hex": "#FCF0E0",
+      "percentage": 0.2,
+      "population": 11,
+      "x": 91.4,
+      "y": 98.6,
+      "width": 8.6,
+      "height": 1.4
+    }
+  ],
+  "R6G_5889-Enhanced-NR.jpg": [
+    {
+      "hex": "#09070A",
+      "percentage": 39.4,
+      "population": 2156,
+      "x": 0,
+      "y": 0,
+      "width": 64.2,
+      "height": 60.8
+    },
+    {
+      "hex": "#22181F",
+      "percentage": 25.05,
+      "population": 1371,
+      "x": 0,
+      "y": 61.6,
+      "width": 64.2,
+      "height": 38.4
+    },
+    {
+      "hex": "#3F3039",
+      "percentage": 10.64,
+      "population": 582,
+      "x": 65,
+      "y": 0,
+      "width": 35,
+      "height": 29.4
+    },
+    {
+      "hex": "#D88036",
+      "percentage": 2.7,
+      "population": 148,
+      "x": 65,
+      "y": 30.2,
+      "width": 11.4,
+      "height": 21.6
+    },
+    {
+      "hex": "#055EAD",
+      "percentage": 2.65,
+      "population": 145,
+      "x": 77.2,
+      "y": 30.2,
+      "width": 11.3,
+      "height": 21.6
+    },
+    {
+      "hex": "#C0C2B9",
+      "percentage": 2.54,
+      "population": 139,
+      "x": 89.3,
+      "y": 30.2,
+      "width": 10.7,
+      "height": 21.6
+    },
+    {
+      "hex": "#62607D",
+      "percentage": 2.27,
+      "population": 124,
+      "x": 65,
+      "y": 52.6,
+      "width": 11.3,
+      "height": 18.2
+    },
+    {
+      "hex": "#0C2961",
+      "percentage": 2.25,
+      "population": 123,
+      "x": 77.1,
+      "y": 52.6,
+      "width": 11.2,
+      "height": 18.2
+    },
+    {
+      "hex": "#700D1E",
+      "percentage": 2.19,
+      "population": 120,
+      "x": 89.1,
+      "y": 52.6,
+      "width": 10.9,
+      "height": 18.2
+    },
+    {
+      "hex": "#97572A",
+      "percentage": 2.03,
+      "population": 111,
+      "x": 65,
+      "y": 71.6,
+      "width": 17.6,
+      "height": 10.4
+    },
+    {
+      "hex": "#8A097B",
+      "percentage": 1.74,
+      "population": 95,
+      "x": 65,
+      "y": 82.8,
+      "width": 17.6,
+      "height": 8.7
+    },
+    {
+      "hex": "#F6B956",
+      "percentage": 1.54,
+      "population": 84,
+      "x": 65,
+      "y": 92.3,
+      "width": 17.6,
+      "height": 7.7
+    },
+    {
+      "hex": "#E01506",
+      "percentage": 1.5,
+      "population": 82,
+      "x": 83.4,
+      "y": 71.6,
+      "width": 8.4,
+      "height": 15.7
+    },
+    {
+      "hex": "#D342D0",
+      "percentage": 1.33,
+      "population": 73,
+      "x": 92.6,
+      "y": 71.6,
+      "width": 7.4,
+      "height": 15.7
+    },
+    {
+      "hex": "#B517A6",
+      "percentage": 1.1,
+      "population": 60,
+      "x": 83.4,
+      "y": 88.1,
+      "width": 16.6,
+      "height": 5.6
+    },
+    {
+      "hex": "#ED7BEF",
+      "percentage": 1.08,
+      "population": 59,
+      "x": 83.4,
+      "y": 94.5,
+      "width": 16.6,
+      "height": 5.5
+    }
+  ],
+  "R6G_7869.jpg": [
+    {
+      "hex": "#07090F",
+      "percentage": 22.28,
+      "population": 1219,
+      "x": 0,
+      "y": 0,
+      "width": 57.3,
+      "height": 38.2
+    },
+    {
+      "hex": "#030407",
+      "percentage": 20.07,
+      "population": 1098,
+      "x": 0,
+      "y": 39,
+      "width": 57.3,
+      "height": 34.2
+    },
+    {
+      "hex": "#0A0F19",
+      "percentage": 15.3,
+      "population": 837,
+      "x": 0,
+      "y": 74,
+      "width": 57.3,
+      "height": 26
+    },
+    {
+      "hex": "#0F1726",
+      "percentage": 11.81,
+      "population": 646,
+      "x": 58.1,
+      "y": 0,
+      "width": 27.9,
+      "height": 41
+    },
+    {
+      "hex": "#122138",
+      "percentage": 5.77,
+      "population": 316,
+      "x": 86.8,
+      "y": 0,
+      "width": 13.2,
+      "height": 41
+    },
+    {
+      "hex": "#262C42",
+      "percentage": 5.15,
+      "population": 282,
+      "x": 58.1,
+      "y": 41.8,
+      "width": 16.7,
+      "height": 29.2
+    },
+    {
+      "hex": "#20202C",
+      "percentage": 4.11,
+      "population": 225,
+      "x": 75.6,
+      "y": 41.8,
+      "width": 13.1,
+      "height": 29.2
+    },
+    {
+      "hex": "#393951",
+      "percentage": 3.34,
+      "population": 183,
+      "x": 89.5,
+      "y": 41.8,
+      "width": 10.5,
+      "height": 29.2
+    },
+    {
+      "hex": "#7D606C",
+      "percentage": 2.23,
+      "population": 122,
+      "x": 58.1,
+      "y": 71.8,
+      "width": 21.3,
+      "height": 9.5
+    },
+    {
+      "hex": "#594B5E",
+      "percentage": 2.14,
+      "population": 117,
+      "x": 58.1,
+      "y": 82.1,
+      "width": 21.3,
+      "height": 9
+    },
+    {
+      "hex": "#AE8D93",
+      "percentage": 1.94,
+      "population": 106,
+      "x": 58.1,
+      "y": 91.9,
+      "width": 21.3,
+      "height": 8.1
+    },
+    {
+      "hex": "#C3A4A6",
+      "percentage": 1.75,
+      "population": 96,
+      "x": 80.2,
+      "y": 71.8,
+      "width": 9.7,
+      "height": 16.2
+    },
+    {
+      "hex": "#97757E",
+      "percentage": 1.68,
+      "population": 92,
+      "x": 90.7,
+      "y": 71.8,
+      "width": 9.3,
+      "height": 16.2
+    },
+    {
+      "hex": "#D8B9BC",
+      "percentage": 1.68,
+      "population": 92,
+      "x": 80.2,
+      "y": 88.8,
+      "width": 13.5,
+      "height": 11.2
+    },
+    {
+      "hex": "#F3E0E1",
+      "percentage": 0.64,
+      "population": 35,
+      "x": 94.5,
+      "y": 88.8,
+      "width": 5.5,
+      "height": 9.4
+    },
+    {
+      "hex": "#C55601",
+      "percentage": 0.11,
+      "population": 6,
+      "x": 94.5,
+      "y": 99,
+      "width": 5.5,
+      "height": 1
+    }
+  ]
+}
