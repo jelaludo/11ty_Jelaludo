@@ -1,0 +1,105 @@
+{% import "partials/palette.njk" as palette %}
+
+<section class="themes-gallery">
+    <header class="themes-gallery__header">
+        <div class="themes-gallery__tags" role="tablist" aria-label="Gallery themes">
+            <button
+                class="themes-gallery__tag is-active"
+                type="button"
+                data-tag-filter="all"
+                role="tab"
+                aria-selected="true"
+            >
+                All
+                <span class="themes-gallery__count">{{ gallery | length }}</span>
+            </button>
+            {% for tag in galleryThemes.tags %}
+            <button
+                class="themes-gallery__tag"
+                type="button"
+                data-tag-filter="{{ tag.slug }}"
+                data-tag-label="{{ tag.tag }}"
+                role="tab"
+                aria-selected="false"
+            >
+                {{ tag.tag }}
+                <span class="themes-gallery__count">{{ tag.count }}</span>
+            </button>
+            {% endfor %}
+        </div>
+        {% if galleryThemes.lenses and galleryThemes.lenses | length %}
+        <label class="themes-gallery__lens">
+            <span class="themes-gallery__lens-label">Lens</span>
+            <select class="themes-gallery__select" data-lens-filter aria-label="Filter by lens">
+                <option value="all" selected>All lenses</option>
+                {% for lens in galleryThemes.lenses %}
+                <option value="{{ lens.slug }}">{{ lens.lens }} ({{ lens.count }})</option>
+                {% endfor %}
+            </select>
+        </label>
+        {% endif %}
+    </header>
+    <div class="themes-gallery__grid" data-gallery-grid>
+        {% for image in gallery %}
+        {% set exifData = exif[image.src] %}
+        {% set lensInfo = galleryThemes.imageLens[image.src] %}
+        {% set tags = image.tags or [] %}
+        <article
+            class="themes-gallery__item"
+            data-gallery-item
+            data-tags="{{ tags | join('|') | lower }}"
+            data-tag-labels="{{ tags | join(', ') }}"
+            data-lens="{{ lensInfo.slug if lensInfo else '' }}"
+            data-title="{{ image.title }}"
+            data-src="{{ image.imgDir }}{{ image.src }}"
+            data-alt="{{ image.alt }}"
+            data-href="/gallery/{{ image.title | slug }}/"
+        >
+            <button class="themes-gallery__image" type="button" data-lightbox-trigger>
+                {% img
+                    src=image.src,
+                    alt=image.alt,
+                    className="themes-gallery__thumb",
+                    widths=[480, 720, 960],
+                    sizes="(min-width: 900px) 320px, (min-width: 560px) 45vw, 90vw"
+                %}
+                {% if image.palette and image.palette | length %}
+                {{ palette.render(image.palette, "themes-gallery__palette") }}
+                {% endif %}
+            </button>
+            <footer class="themes-gallery__meta">
+                <h2 class="themes-gallery__title">{{ image.title }}</h2>
+                {% if tags and tags | length %}
+                <ul class="themes-gallery__tags-list">
+                    {% for tag in tags %}
+                    <li>{{ tag }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                {% if lensInfo %}
+                <p class="themes-gallery__lens-name">{{ lensInfo.label }}</p>
+                {% elseif exifData and exifData.lens %}
+                <p class="themes-gallery__lens-name">{{ exifData.lens }}</p>
+                {% endif %}
+                <a class="themes-gallery__details" href="/gallery/{{ image.title | slug }}/">Open feature page</a>
+            </footer>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="themes-lightbox" data-lightbox hidden>
+    <button class="themes-lightbox__close" type="button" aria-label="Close viewer" data-lightbox-close>&times;</button>
+    <div class="themes-lightbox__content" data-lightbox-content>
+        <img class="themes-lightbox__img" alt="" data-lightbox-img />
+        <div class="themes-lightbox__details">
+            <h2 class="themes-lightbox__heading" data-lightbox-title></h2>
+            <p class="themes-lightbox__tags" data-lightbox-tags></p>
+            <p class="themes-lightbox__lens" data-lightbox-lens></p>
+            <p class="themes-lightbox__meta">
+                <a class="themes-lightbox__link" href="" data-lightbox-link>View details</a>
+            </p>
+        </div>
+    </div>
+</section>
+
