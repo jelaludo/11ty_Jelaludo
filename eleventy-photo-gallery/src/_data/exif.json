@@ -224,5 +224,81 @@
     "exposure": "1/60, f/1.4, ISO 500",
     "resolution": "240 ppi",
     "flash": "Flash did not fire"
+  },
+  "R6G_6577.jpg": {
+    "model": "Canon EOS R6",
+    "lens": "EF50mm f/1.4 USM",
+    "focalLength": "50mm",
+    "exposure": "1/3200, f/1.4, ISO 100",
+    "imageSize": "4899 x 3266",
+    "resolution": "240 ppi",
+    "flash": "Flash did not fire"
+  },
+  "R6G_4517.jpg": {
+    "model": "Canon EOS R6",
+    "lens": "EF50mm f/1.4 USM",
+    "focalLength": "50mm",
+    "exposure": "1/2000, f/1.4, ISO 160",
+    "imageSize": "4898 x 3265",
+    "resolution": "240 ppi",
+    "flash": "Flash did not fire"
+  },
+  "R6G_6125.jpg": {
+    "model": "Canon EOS R6",
+    "lens": "EF50mm f/1.4 USM",
+    "focalLength": "50mm",
+    "exposure": "1/100, f/1.4, ISO 160",
+    "resolution": "240 ppi",
+    "flash": "Flash did not fire"
+  },
+  "Garance_TokyoLastPics-36.jpg": {
+    "model": "Canon EOS R6",
+    "lens": "70.0-200.0 mm",
+    "focalLength": "200mm",
+    "exposure": "1/1000, f/6.3, ISO 25600",
+    "resolution": "240 ppi",
+    "flash": "Flash did not fire"
+  },
+  "R6G_4181.jpg": {
+    "model": "Canon EOS R6",
+    "lens": "70.0-200.0 mm",
+    "focalLength": "91mm",
+    "exposure": "1/100, f/2.8, ISO 400",
+    "resolution": "240 ppi",
+    "flash": "Flash did not fire"
+  },
+  "R6G_6612.jpg": {
+    "model": "Canon EOS R6",
+    "lens": "EF50mm f/1.4 USM",
+    "focalLength": "50mm",
+    "exposure": "1/80, f/1.4, ISO 160",
+    "imageSize": "4898 x 3265",
+    "resolution": "240 ppi",
+    "flash": "Flash did not fire"
+  },
+  "R6G_6109-2.jpg": {
+    "model": "Canon EOS R6",
+    "lens": "EF50mm f/1.4 USM",
+    "focalLength": "50mm",
+    "exposure": "1/1600, f/1.4, ISO 125",
+    "imageSize": "4899 x 3266",
+    "resolution": "240 ppi",
+    "flash": "Flash did not fire"
+  },
+  "R6G_5118.jpg": {
+    "model": "Canon EOS R6",
+    "lens": "EF50mm f/1.4 USM",
+    "focalLength": "50mm",
+    "exposure": "1/6400, f/2.5, ISO 125",
+    "resolution": "240 ppi",
+    "flash": "Flash did not fire"
+  },
+  "R6G_5861-Enhanced-NR.jpg": {
+    "model": "Canon EOS R6",
+    "lens": "70.0-200.0 mm",
+    "focalLength": "70mm",
+    "exposure": "1/100, f/2.8, ISO 1250",
+    "resolution": "240 ppi",
+    "flash": "Flash did not fire"
   }
 }

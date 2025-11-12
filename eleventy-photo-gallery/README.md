@@ -5,7 +5,22 @@ npm run build:exifgit
 
 how to git branch and merge...
 
+## Kanri Admin Workflow
 
+When using the `/kanri` console to manage images:
+
+- **Run both dev servers** so uploads can generate thumbnails immediately.
+
+  ```bash
+  npm run watch:admin      # Kanri API on http://localhost:8686
+  npm run watch:eleventy   # 11ty dev server on http://localhost:8080
+  ```
+
+- **After each upload batch**, rebuild the project so `_site/images`, `_site/img`, and global data stay in sync.
+
+  ```bash
+  npm run build            # runs build:colors → build:exif → build:sass → build:eleventy
+  ```
 
 # Eleventy Photo Gallery
 

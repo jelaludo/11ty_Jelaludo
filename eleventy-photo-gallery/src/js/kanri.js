@@ -87,6 +87,18 @@ if (!appRoot || !template) {
 
         <section class="kanri-section">
           <h2>Add New Image</h2>
+          <div class="kanri-callout">
+            <p><strong>Before uploading</strong></p>
+            <ul>
+              <li>Make sure both dev servers are running:</li>
+            </ul>
+            <pre><code>npm run watch:admin      # Kanri API on http://localhost:8686
+npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
+            <ul>
+              <li>After each upload batch, rebuild the site so <code>_site/images</code> and derived data stay in sync:</li>
+            </ul>
+            <pre><code>npm run build            # build:colors → build:exif → build:sass → build:eleventy</code></pre>
+          </div>
           <form id="kanri-add-form" class="kanri-form">
             <div class="kanri-form__group">
               <label>Select image file
