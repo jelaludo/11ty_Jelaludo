@@ -23,6 +23,8 @@ layout: main.njk
   Secondary Text: #B0B0B0 (medium gray)
   Borders/Dividers: #444444 (dark gray)
   Accent: #888888 (soft gray)</p>
+
+  <p>Implemented EXIF metadata by adding a prebuild script (scripts/extract-exif.js) that walks the gallery entries, parses image metadata with the exifr library, normalizes fields (model, lens, focal length, exposure, image size, resolution, flash), and saves them to src/_data/exif.json; the single-photo template (src/feature.njk) then reads that JSON to render the metadata block.</p>
   
   <p>You can find me around the web at the following places:</p>
 

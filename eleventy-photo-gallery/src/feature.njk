@@ -60,51 +60,29 @@ url: https://eleventy-gallery.netlify.app
                 {% set exifData = exif[image.src] %}
                 {% if exifData %}
                 <section class="feature-frame__exif" aria-label="Photo metadata">
-                    <h2 class="feature-frame__exif-heading">Image Metadata</h2>
-                    <dl class="feature-frame__exif-list">
+                    <ul class="feature-frame__exif-list">
                         {% if exifData.model %}
-                        <div class="feature-frame__exif-row">
-                            <dt>Model</dt>
-                            <dd>{{ exifData.model }}</dd>
-                        </div>
+                        <li>{{ exifData.model }}</li>
                         {% endif %}
                         {% if exifData.lens %}
-                        <div class="feature-frame__exif-row">
-                            <dt>Lens</dt>
-                            <dd>{{ exifData.lens }}</dd>
-                        </div>
+                        <li>{{ exifData.lens }}</li>
                         {% endif %}
                         {% if exifData.focalLength %}
-                        <div class="feature-frame__exif-row">
-                            <dt>Focal Length</dt>
-                            <dd>{{ exifData.focalLength }}</dd>
-                        </div>
+                        <li>{{ exifData.focalLength }}</li>
                         {% endif %}
                         {% if exifData.exposure %}
-                        <div class="feature-frame__exif-row">
-                            <dt>Exposure</dt>
-                            <dd>{{ exifData.exposure }}</dd>
-                        </div>
+                        <li>{{ exifData.exposure }}</li>
                         {% endif %}
                         {% if exifData.imageSize %}
-                        <div class="feature-frame__exif-row">
-                            <dt>Image Size</dt>
-                            <dd>{{ exifData.imageSize }}</dd>
-                        </div>
+                        <li>{{ exifData.imageSize }}</li>
                         {% endif %}
                         {% if exifData.resolution %}
-                        <div class="feature-frame__exif-row">
-                            <dt>Resolution</dt>
-                            <dd>{{ exifData.resolution }}</dd>
-                        </div>
+                        <li>{{ exifData.resolution }}</li>
                         {% endif %}
                         {% if exifData.flash %}
-                        <div class="feature-frame__exif-row">
-                            <dt>Flash</dt>
-                            <dd>{{ exifData.flash }}</dd>
-                        </div>
+                        <li>{{ exifData.flash }}</li>
                         {% endif %}
-                    </dl>
+                    </ul>
                 </section>
                 {% endif %}
                 <nav class="feature-frame__nav" aria-label="Gallery navigation">
