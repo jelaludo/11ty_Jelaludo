@@ -3,12 +3,10 @@ const SELECTORS = {
     dataScript: '#inspiration-quotes-data',
 };
 
-const POSITIONS = [
-    'center',
-    'top-left',
-    'top-right',
-    'bottom-left',
-    'bottom-right',
+const POSITIONS = ['center', 'top-left', 'top-right', 'bottom-left', 'bottom-right'];
+const CONFLICT_GROUPS = [
+    new Set(['top-left', 'top-right']),
+    new Set(['bottom-left', 'bottom-right']),
 ];
 
 const MIN_VISIBLE = 2;
@@ -38,12 +36,23 @@ const parseQuotes = () => {
     }
 };
 
-const pickPosition = (usedPositions) => {
-    const available = POSITIONS.filter((pos) => !usedPositions.includes(pos));
-    if (!available.length) {
-        return POSITIONS[Math.floor(Math.random() * POSITIONS.length)];
+const conflictsWithSelection = (selected, candidate) =>
+    CONFLICT_GROUPS.some(
+        (group) => group.has(candidate) && selected.some((position) => group.has(position)),
+    );
+
+const pickPosition = (selectedPositions) => {
+    const available = POSITIONS.filter((pos) => !selectedPositions.includes(pos));
+    const pool = available.length ? available : POSITIONS;
+    const shuffled = [...pool].sort(() => Math.random() - 0.5);
+
+    for (const candidate of shuffled) {
+        if (!conflictsWithSelection(selectedPositions, candidate)) {
+            return candidate;
+        }
     }
-    return available[Math.floor(Math.random() * available.length)];
+
+    return 'center';
 };
 
 const createQuoteElement = (quote, className) => {
@@ -65,7 +74,7 @@ const rotateQuotes = (quotes, container) => {
         const nextCount = Math.floor(Math.random() * (MAX_VISIBLE - MIN_VISIBLE + 1)) + MIN_VISIBLE;
         const nextQuotes = pickRandom(quotes, nextCount);
 
-        const usedPositions = [];
+        const selectedPositions = [];
         const currentQuotes = container.querySelectorAll('.inspiration-hero__quote');
 
         currentQuotes.forEach((item) => {
@@ -73,9 +82,9 @@ const rotateQuotes = (quotes, container) => {
             window.setTimeout(() => item.remove(), FADE_DURATION);
         });
 
-        nextQuotes.forEach((quote, index) => {
-            const position = pickPosition(usedPositions);
-            usedPositions.push(position);
+        nextQuotes.forEach((quote) => {
+            const position = pickPosition(selectedPositions);
+            selectedPositions.push(position);
 
             const quoteEl = createQuoteElement(quote, position);
             quoteEl.classList.add('is-hidden');

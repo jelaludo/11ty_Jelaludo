@@ -1,3 +1,12 @@
+run from root
+PS C:\01_Projects\01a_Coding\02_CodingProjects\11ty_Jelaludo\eleventy-photo-gallery> npm run dev
+npm run build:colors
+npm run build:exifgit 
+
+how to git branch and merge...
+
+
+
 # Eleventy Photo Gallery
 
 A starter site for creating your own photo or art gallery using the [Eleventy](https://github.com/11ty/eleventy) static site generator.
