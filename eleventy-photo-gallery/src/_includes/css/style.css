@@ -120,6 +120,8 @@
 
 .gallery-slide__media {
   width: 100%;
+  max-width: min(1920px, 100%);
+  margin: 0 auto;
   display: block;
 }
 
@@ -129,8 +131,10 @@
 }
 
 .gallery-slide__media img {
+  display: block;
   width: 100%;
   height: auto;
+  max-height: min(92vh, 1200px);
   object-fit: contain;
   filter: brightness(0.92);
   transition: filter 0.4s ease;
