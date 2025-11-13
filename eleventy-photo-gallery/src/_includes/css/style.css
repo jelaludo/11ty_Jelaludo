@@ -485,10 +485,17 @@ body.is-lightbox-open {
   width: 100%;
 }
 .feature-frame__media img {
+  max-width: 100%;
+  max-height: min(80vh, 900px);
+  object-fit: contain;
+}
+.feature-frame__media img.is-landscape {
   width: 100%;
   height: auto;
-  max-height: min(80vh, 900px);
-  object-fit: cover;
+}
+.feature-frame__media img.is-portrait {
+  height: min(80vh, 900px);
+  width: auto;
 }
 .feature-frame__overlay {
   width: min(1100px, 92vw);
