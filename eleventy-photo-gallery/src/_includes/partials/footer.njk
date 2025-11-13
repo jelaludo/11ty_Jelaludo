@@ -1,12 +1,22 @@
-<footer>
-    <div class="footer-content">
-        <div class="footer-info home">
-            <p>&copy; {% getYear %} {{ site.author.firstName }} {{ site.author.lastName }}. Built with Eleventy</a></p>
-            <ul class="footer-links">
-                <li class="footer-link"><a href="{{ site.socials.github }}">GitHub</a></li>
-                <li class="footer-link"><a href="{{ site.socials.twitter }}">Twitter</a></li>
-                <li class="footer-link"><a href="{{ site.socials.linkedin }}">LinkedIn</a></li>
-            </ul>
-        </div>
-    </div>
+{% set navigation = collections.all | eleventyNavigation %}
+{% set navClass = "top-nav" %}
+<footer class="{{ navClass }}">
+    <nav class="nav-main">
+        <ul class="nav-list">
+            {% for link in navigation %}
+                {% if link.key == "Home" %}
+                    <li><a href="{{ link.url | url }}" class="link">HOME</a></li>
+                {% elseif link.key == "Gallery" %}
+                    <li><a href="{{ link.url | url }}" class="link">GALLERY</a></li>
+                {% elseif link.key == "Spark" %}
+                    <li><a href="{{ link.url | url }}" class="link">SPARK</a></li>
+                {% elseif link.key == "Jelaludo" %}
+                    <li><a href="{{ link.url | url }}" class="link">JELALUDO</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if env.isDev %}
+            <li><a class="link kanri-link" href="/kanri/">KANRI</a></li>
+            {% endif %}
+        </ul>
+    </nav>
 </footer>

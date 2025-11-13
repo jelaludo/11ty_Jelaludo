@@ -7,10 +7,18 @@
     <nav class="nav-main">
         <ul class="nav-list">
             {% for link in navigation %}
-            <li><a href="{{ link.url | url }}" class="link">{{ link.title }}</a></li>
+                {% if link.key == "Home" %}
+                    <li><a href="{{ link.url | url }}" class="link">HOME</a></li>
+                {% elseif link.key == "Gallery" %}
+                    <li><a href="{{ link.url | url }}" class="link">GALLERY</a></li>
+                {% elseif link.key == "Spark" %}
+                    <li><a href="{{ link.url | url }}" class="link">SPARK</a></li>
+                {% elseif link.key == "Jelaludo" %}
+                    <li><a href="{{ link.url | url }}" class="link">JELALUDO</a></li>
+                {% endif %}
             {% endfor %}
             {% if env.isDev %}
-            <li><a class="link kanri-link" href="/kanri/">Kanri</a></li>
+            <li><a class="link kanri-link" href="/kanri/">KANRI</a></li>
             {% endif %}
         </ul>
     </nav>
