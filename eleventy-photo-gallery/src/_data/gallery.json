@@ -675,5 +675,103 @@
       "#3E2F2E",
       "#845A3A"
     ]
+  },
+  {
+    "title": "Halloween Rainy Night",
+    "date": "",
+    "alt": "R6g 7993 2",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_7993-2.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Red",
+      "Night",
+      "Street",
+      "Tokyo"
+    ],
+    "palette": [
+      "#13120D",
+      "#FA2001",
+      "#FFC237",
+      "#700904",
+      "#48686A",
+      "#A75919",
+      "#654532",
+      "#FF8200"
+    ]
+  },
+  {
+    "title": "Rainbow Bridge Background",
+    "date": "",
+    "alt": "R6g 5770",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_5770.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Night",
+      "Street",
+      "Tokyo"
+    ],
+    "palette": [
+      "#090708",
+      "#FFBC33",
+      "#C20013",
+      "#A86737",
+      "#4F4E56",
+      "#F7E2BC",
+      "#FF8D3D",
+      "#C2BAAF"
+    ]
+  },
+  {
+    "title": "Abstract 250th USMC",
+    "date": "",
+    "alt": "R6g 8975 2",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_8975-2.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Abstract",
+      "Neons",
+      "Hiroshima",
+      "USMC"
+    ],
+    "palette": [
+      "#040301",
+      "#32E2A1",
+      "#D5261E",
+      "#FFC67F",
+      "#00581A",
+      "#501206",
+      "#D4FADF",
+      "#F8A54D"
+    ]
+  },
+  {
+    "title": "Porsche Generational Gap",
+    "date": "",
+    "alt": "R6g 6272",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_6272.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Car",
+      "Mechanical",
+      "Porsche"
+    ],
+    "palette": [
+      "#5B5B5B",
+      "#DDB14B",
+      "#5BB470",
+      "#C2651F",
+      "#13101A",
+      "#8C8A89",
+      "#634B2E",
+      "#6B7278"
+    ]
   }
 ]
