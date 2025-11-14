@@ -27,7 +27,8 @@
             max-width: 100%;
             max-height: min(80vh, 900px);
             object-fit: contain;
-            
+            transition: opacity 0.2s ease;
+
             &.is-landscape {
                 width: 100%;
                 height: auto;
@@ -36,6 +37,13 @@
             &.is-portrait {
                 height: min(80vh, 900px);
                 width: auto;
+            }
+
+            // When clickable (came from gallery)
+            &[style*="cursor: pointer"] {
+                &:hover {
+                    opacity: 0.9;
+                }
             }
         }
     }

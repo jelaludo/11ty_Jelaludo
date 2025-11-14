@@ -6,11 +6,7 @@ const SELECTORS = {
     lensFilter: '[data-lens-filter]',
     lightbox: '[data-lightbox]',
     lightboxTrigger: '[data-lightbox-trigger]',
-    lightboxClose: '[data-lightbox-close]',
     lightboxImg: '[data-lightbox-img]',
-    lightboxTitle: '[data-lightbox-title]',
-    lightboxTags: '[data-lightbox-tags]',
-    lightboxLens: '[data-lightbox-lens]',
     lightboxLink: '[data-lightbox-link]',
 };
 
@@ -78,12 +74,39 @@ const mountFilters = () => {
         });
     }
 
+    // Check URL parameters for filter state (when returning from detail page)
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlTag = urlParams.get('tag');
+    const urlLens = urlParams.get('lens');
+
     const state = {
         items,
-        activeTag: 'all',
-        activeLens: 'all',
+        activeTag: urlTag || 'all',
+        activeLens: urlLens || 'all',
         tagSlugMap,
     };
+
+    // Restore filter UI from URL parameters
+    if (urlTag) {
+        // Check if tag matches a button
+        const matchingButton = tagButtons.find(btn => btn.dataset.tagFilter === urlTag);
+        if (matchingButton) {
+            updateActiveTag(tagButtons, urlTag);
+            if (tagSelect) {
+                tagSelect.value = '';
+            }
+        } else if (tagSelect) {
+            // Tag might be from dropdown, check and set it
+            const matchingOption = Array.from(tagSelect.options).find(opt => opt.value === urlTag);
+            if (matchingOption) {
+                tagSelect.value = urlTag;
+                updateActiveTag(tagButtons, urlTag);
+            }
+        }
+    }
+    if (urlLens && lensSelect) {
+        lensSelect.value = urlLens;
+    }
 
     tagButtons.forEach((button) => {
         button.addEventListener('click', () => {
@@ -123,19 +146,17 @@ const mountFilters = () => {
 
     applyFilters(state);
 
-    return { grid, items };
+    return { grid, items, state };
 };
 
-const mountLightbox = ({ items }) => {
+const mountLightbox = ({ items, state }) => {
     const lightbox = document.querySelector(SELECTORS.lightbox);
     if (!lightbox) return;
 
-    const closeButton = lightbox.querySelector(SELECTORS.lightboxClose);
     const imageEl = lightbox.querySelector(SELECTORS.lightboxImg);
-    const titleEl = lightbox.querySelector(SELECTORS.lightboxTitle);
-    const tagsEl = lightbox.querySelector(SELECTORS.lightboxTags);
-    const lensEl = lightbox.querySelector(SELECTORS.lightboxLens);
     const linkEl = lightbox.querySelector(SELECTORS.lightboxLink);
+    const header = document.querySelector('[data-site-nav]');
+    const footer = document.querySelector('footer');
 
     const closeLightbox = () => {
         lightbox.setAttribute('hidden', '');
@@ -144,43 +165,47 @@ const mountLightbox = ({ items }) => {
         imageEl.removeAttribute('alt');
         linkEl.removeAttribute('href');
         document.body.classList.remove('is-lightbox-open');
+        // Show header and footer
+        if (header) header.style.display = '';
+        if (footer) footer.style.display = '';
     };
 
     const openLightbox = (item) => {
         const src = item.dataset.src;
-        const title = item.dataset.title || '';
-        const alt = item.dataset.alt || title;
-        const tags = item.dataset.tagLabels || '';
-        const lensLabel = item.querySelector('.themes-gallery__lens-name')?.textContent || '';
-        const linkHref = item.dataset.href || '';
+        const alt = item.dataset.alt || item.dataset.title || '';
+        let linkHref = item.dataset.href || '';
 
         if (src) {
             imageEl.src = src;
             imageEl.alt = alt;
         }
 
-        if (lensLabel) {
-            lensEl.textContent = lensLabel;
-            lensEl.removeAttribute('hidden');
-        } else {
-            lensEl.textContent = '';
-            lensEl.setAttribute('hidden', '');
-        }
-        titleEl.textContent = title;
-        tagsEl.textContent = tags;
-        lensEl.textContent = lensLabel;
-        if (linkHref) {
+        // Store current filter state and append to detail page URL
+        if (linkHref && state) {
+            const urlParams = new URLSearchParams();
+            if (state.activeTag && state.activeTag !== 'all') {
+                urlParams.set('tag', state.activeTag);
+            }
+            if (state.activeLens && state.activeLens !== 'all') {
+                urlParams.set('lens', state.activeLens);
+            }
+            const queryString = urlParams.toString();
+            if (queryString) {
+                linkHref += (linkHref.includes('?') ? '&' : '?') + queryString;
+            }
             linkEl.href = linkHref;
-            linkEl.removeAttribute('hidden');
+        } else if (linkHref) {
+            linkEl.href = linkHref;
         } else {
             linkEl.removeAttribute('href');
-            linkEl.setAttribute('hidden', '');
         }
 
         lightbox.classList.add('is-open');
         lightbox.removeAttribute('hidden');
         document.body.classList.add('is-lightbox-open');
-        closeButton.focus({ preventScroll: true });
+        // Hide header and footer
+        if (header) header.style.display = 'none';
+        if (footer) footer.style.display = 'none';
     };
 
     const onKeyDown = (event) => {
@@ -195,11 +220,23 @@ const mountLightbox = ({ items }) => {
         trigger.addEventListener('click', () => openLightbox(item));
     });
 
-    closeButton.addEventListener('click', closeLightbox);
+    // Click image to close
+    imageEl.addEventListener('click', (event) => {
+        event.stopPropagation();
+        closeLightbox();
+    });
+
+    // Click lightbox background to close
     lightbox.addEventListener('click', (event) => {
         if (event.target === lightbox) {
             closeLightbox();
         }
+    });
+
+    // Prevent link clicks from closing lightbox
+    linkEl.addEventListener('click', (event) => {
+        event.stopPropagation();
+        // Link will navigate naturally
     });
 
     document.addEventListener('keydown', onKeyDown);
