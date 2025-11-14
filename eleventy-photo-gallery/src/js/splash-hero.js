@@ -1,74 +1,57 @@
-const heroSection = document.querySelector("[data-hero]");
-
-if (heroSection) {
-  const siteNav = document.querySelector("[data-site-nav]");
-  const imageData = parseImageData(heroSection.dataset.images);
-  const heroImg = heroSection.querySelector(".splash-hero__img");
-  const cta = heroSection.querySelector(".splash-hero__cta");
-  const scrollButton = heroSection.querySelector("[data-scroll-gallery]");
-
-  if (imageData.length && heroImg) {
-    const chosen = pickRandom(imageData);
-    heroImg.src = chosen.src;
-    heroImg.alt = chosen.alt || chosen.title || "";
-    heroSection.dataset.currentTitle = chosen.title || "";
-  }
-
-  if (siteNav && siteNav.classList.contains("top-nav--hidden")) {
-    const revealNav = () => {
-      siteNav.classList.remove("top-nav--hidden");
-      siteNav.classList.add("top-nav--revealed");
-      document.removeEventListener("click", handlePictureClick, true);
-    };
-
-    const handlePictureClick = (event) => {
-      const isHeroImage = Boolean(event.target.closest(".splash-hero__img"));
-      const isGalleryImage = Boolean(
-        event.target.closest("[data-gallery] .grid-image")
-      );
-      if (isHeroImage || isGalleryImage) {
-        revealNav();
+// Apply bokeh-focus animation to first gallery slide
+(function() {
+  const applyBokehFocus = () => {
+    const gallery = document.querySelector('[data-gallery]');
+    if (!gallery) return;
+    
+    const firstSlide = gallery.querySelector('.gallery-slide--first');
+    if (!firstSlide) {
+      // If no first slide found, try the first slide in DOM order
+      const firstSlideInDOM = gallery.querySelector('.gallery-slide');
+      if (!firstSlideInDOM) return;
+      
+      // Try multiple selectors to find the image
+      const img = firstSlideInDOM.querySelector('.gallery-slide__img') || 
+                  firstSlideInDOM.querySelector('.gallery-slide__media img') ||
+                  firstSlideInDOM.querySelector('img');
+      if (!img) return;
+      
+      // Only apply if not already applied
+      if (!img.classList.contains('gallery-slide__img--focus')) {
+        img.classList.add('gallery-slide__img--focus');
       }
-    };
-
-    document.addEventListener("click", handlePictureClick, true);
-  }
-
-  if (scrollButton) {
-    scrollButton.addEventListener("click", () => {
-      const gallery = document.querySelector("[data-gallery]");
-      if (gallery) {
-        gallery.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    });
-  }
-
-  if (cta) {
-    heroSection.addEventListener("mousemove", () => {
-      cta.classList.add("is-visible");
-    });
-    heroSection.addEventListener("mouseleave", () => {
-      cta.classList.remove("is-visible");
-    });
-  }
-}
-
-function parseImageData(raw) {
-  if (!raw) return [];
-  try {
-    const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed)) {
-      return parsed.filter((item) => typeof item?.src === "string");
+      return;
     }
-  } catch (error) {
-    console.warn("[Splash] Failed to parse hero image data:", error);
+    
+    // Try multiple selectors to find the image
+    const img = firstSlide.querySelector('.gallery-slide__img') || 
+                firstSlide.querySelector('.gallery-slide__media img') ||
+                firstSlide.querySelector('img');
+    if (!img) return;
+    
+    // Only apply if not already applied (to avoid restarting animation)
+    if (!img.classList.contains('gallery-slide__img--focus')) {
+      img.classList.add('gallery-slide__img--focus');
+    }
+  };
+  
+  // Listen for gallery randomization event (this happens first)
+  const gallery = document.querySelector('[data-gallery]');
+  if (gallery) {
+    gallery.addEventListener('galleryRandomized', () => {
+      // Wait a tiny bit for DOM to update, then apply animation
+      setTimeout(applyBokehFocus, 50);
+    });
   }
-  return [];
-}
-
-function pickRandom(list) {
-  if (!list.length) return {};
-  const index = Math.floor(Math.random() * list.length);
-  return list[index];
-}
+  
+  // Also try on DOMContentLoaded as fallback
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(applyBokehFocus, 100);
+    });
+  } else {
+    // If DOM already loaded, try after a short delay
+    setTimeout(applyBokehFocus, 200);
+  }
+})();
 

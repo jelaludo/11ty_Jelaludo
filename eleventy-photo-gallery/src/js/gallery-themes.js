@@ -4,6 +4,7 @@ const SELECTORS = {
     tagFilter: '[data-tag-filter]',
     tagFilterSelect: '[data-tag-filter-select]',
     lensFilter: '[data-lens-filter]',
+    sortFilter: '[data-sort-filter]',
     lightbox: '[data-lightbox]',
     lightboxTrigger: '[data-lightbox-trigger]',
     lightboxImg: '[data-lightbox-img]',
@@ -51,6 +52,7 @@ const mountFilters = () => {
     const tagButtons = Array.from(document.querySelectorAll(SELECTORS.tagFilter));
     const tagSelect = document.querySelector(SELECTORS.tagFilterSelect);
     const lensSelect = document.querySelector(SELECTORS.lensFilter);
+    const sortSelect = document.querySelector(SELECTORS.sortFilter);
 
     // Build a map from tag labels to slugs for filtering
     const tagSlugMap = new Map();
@@ -83,6 +85,7 @@ const mountFilters = () => {
         items,
         activeTag: urlTag || 'all',
         activeLens: urlLens || 'all',
+        sortOrder: 'default',
         tagSlugMap,
     };
 
@@ -140,6 +143,54 @@ const mountFilters = () => {
     if (lensSelect) {
         lensSelect.addEventListener('change', (event) => {
             state.activeLens = event.target.value || 'all';
+            applyFilters(state);
+        });
+    }
+
+    // Store original order for restoring default sort
+    const originalOrder = [...items];
+    
+    // Sort functionality
+    const sortItems = (order) => {
+        const fragment = document.createDocumentFragment();
+        let sortedItems;
+        
+        if (order === 'latest') {
+            sortedItems = [...items].sort((a, b) => {
+                const dateA = a.dataset.date || '';
+                const dateB = b.dataset.date || '';
+                // Parse dates if available
+                if (dateA && dateB) {
+                    const parsedA = new Date(dateA);
+                    const parsedB = new Date(dateB);
+                    if (!isNaN(parsedA.getTime()) && !isNaN(parsedB.getTime())) {
+                        return parsedB - parsedA; // Latest first
+                    }
+                }
+                // If one has a date and the other doesn't, prioritize the one with date
+                if (dateA && !dateB) return -1;
+                if (!dateA && dateB) return 1;
+                // If dates are equal or invalid, maintain original order
+                return 0;
+            });
+        } else {
+            // Default order - restore original order
+            sortedItems = [...originalOrder];
+        }
+
+        // Re-append items in sorted order
+        sortedItems.forEach(item => fragment.appendChild(item));
+        grid.innerHTML = ''; // Clear grid
+        grid.appendChild(fragment);
+        
+        // Update state.items to reflect new order
+        state.items = sortedItems;
+    };
+
+    if (sortSelect) {
+        sortSelect.addEventListener('change', (event) => {
+            state.sortOrder = event.target.value || 'default';
+            sortItems(state.sortOrder);
             applyFilters(state);
         });
     }
@@ -217,21 +268,54 @@ const mountLightbox = ({ items, state }) => {
     items.forEach((item) => {
         const trigger = item.querySelector(SELECTORS.lightboxTrigger);
         if (!trigger) return;
-        trigger.addEventListener('click', () => openLightbox(item));
+        
+        // Handle both mouse clicks and touch events for mobile compatibility
+        let touchHandled = false;
+        
+        // Touch events for mobile (iOS/Safari)
+        trigger.addEventListener('touchend', (event) => {
+            touchHandled = true;
+            event.preventDefault();
+            event.stopPropagation();
+            openLightbox(item);
+            // Reset flag after delay to prevent blocking future clicks
+            setTimeout(() => {
+                touchHandled = false;
+            }, 300);
+        }, { passive: false });
+        
+        // Click events for desktop and as fallback
+        trigger.addEventListener('click', (event) => {
+            // Prevent double-firing on mobile (ignore click if touch was just handled)
+            if (touchHandled) {
+                event.preventDefault();
+                event.stopPropagation();
+                return;
+            }
+            event.preventDefault();
+            event.stopPropagation();
+            openLightbox(item);
+        });
     });
 
-    // Click image to close
-    imageEl.addEventListener('click', (event) => {
+    // Click/touch image to close
+    const handleImageClose = (event) => {
         event.stopPropagation();
+        event.preventDefault();
         closeLightbox();
-    });
+    };
+    imageEl.addEventListener('click', handleImageClose);
+    imageEl.addEventListener('touchend', handleImageClose);
 
-    // Click lightbox background to close
-    lightbox.addEventListener('click', (event) => {
+    // Click/touch lightbox background to close
+    const handleBackgroundClose = (event) => {
         if (event.target === lightbox) {
+            event.preventDefault();
             closeLightbox();
         }
-    });
+    };
+    lightbox.addEventListener('click', handleBackgroundClose);
+    lightbox.addEventListener('touchend', handleBackgroundClose);
 
     // Prevent link clicks from closing lightbox
     linkEl.addEventListener('click', (event) => {

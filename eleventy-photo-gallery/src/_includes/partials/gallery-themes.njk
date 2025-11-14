@@ -59,17 +59,26 @@
             </label>
             {% endif %}
         </div>
-        {% if galleryThemes.lenses and galleryThemes.lenses | length %}
-        <label class="themes-gallery__lens">
-            <span class="themes-gallery__lens-label">Lens</span>
-            <select class="themes-gallery__select" data-lens-filter aria-label="Filter by lens">
-                <option value="all" selected>All lenses</option>
-                {% for lens in galleryThemes.lenses %}
-                <option value="{{ lens.slug }}">{{ lens.lens }} ({{ lens.count }})</option>
-                {% endfor %}
-            </select>
-        </label>
-        {% endif %}
+        <div class="themes-gallery__controls">
+            <label class="themes-gallery__sort">
+                <span class="themes-gallery__sort-label">Sort:</span>
+                <select class="themes-gallery__select" data-sort-filter aria-label="Sort gallery">
+                    <option value="default" selected>Default</option>
+                    <option value="latest">Latest</option>
+                </select>
+            </label>
+            {% if galleryThemes.lenses and galleryThemes.lenses | length %}
+            <label class="themes-gallery__lens">
+                <span class="themes-gallery__lens-label">Lens</span>
+                <select class="themes-gallery__select" data-lens-filter aria-label="Filter by lens">
+                    <option value="all" selected>All lenses</option>
+                    {% for lens in galleryThemes.lenses %}
+                    <option value="{{ lens.slug }}">{{ lens.lens }} ({{ lens.count }})</option>
+                    {% endfor %}
+                </select>
+            </label>
+            {% endif %}
+        </div>
     </header>
     <div class="themes-gallery__grid" data-gallery-grid>
         {% for image in gallery %}
@@ -86,6 +95,7 @@
             data-src="{{ image.imgDir }}{{ image.src }}"
             data-alt="{{ image.alt }}"
             data-href="/gallery/{{ image.title | slug }}/"
+            data-date="{{ image.date or '' }}"
         >
             <button class="themes-gallery__image" type="button" data-lightbox-trigger>
                 {% img

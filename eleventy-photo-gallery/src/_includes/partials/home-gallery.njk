@@ -2,7 +2,7 @@
 
 <div class="immersive-gallery" data-gallery>
   {% for image in gallery %}
-  <section class="gallery-slide">
+  <section class="gallery-slide{% if loop.first %} gallery-slide--first{% endif %}">
     <a
       class="gallery-slide__link"
       href="/gallery/{{ image.title | slug }}"
@@ -16,6 +16,14 @@
           sizes="100vw"
         %}
       </div>
+      {% if loop.first %}
+      <div class="gallery-slide__bokeh-overlay">
+        <p class="gallery-slide__cta">
+          <span class="gallery-slide__cta-line">Scroll to</span>
+          <span class="gallery-slide__cta-line">Explore</span>
+        </p>
+      </div>
+      {% endif %}
     </a>
   </section>
   {% endfor %}
