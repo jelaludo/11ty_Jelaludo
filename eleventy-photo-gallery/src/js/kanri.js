@@ -10,6 +10,8 @@ if (!appRoot || !template) {
     filteredImages: [],
     selected: new Set(),
     editing: null,
+    editingTags: new Set(),
+    addingTags: new Set(),
     loading: false,
     filterTheme: "",
     filterUntagged: false,
@@ -23,6 +25,9 @@ if (!appRoot || !template) {
   renderShell();
   attachHandlers();
   refreshImages();
+  checkServerStatus();
+  // Check server status every 10 seconds
+  setInterval(checkServerStatus, 10000);
 
   function renderShell() {
     appRoot.innerHTML = `
@@ -30,6 +35,24 @@ if (!appRoot || !template) {
         <h2>Add New Image</h2>
         <div class="kanri-callout">
           <p><strong>Before uploading</strong></p>
+          <div class="kanri-server-status">
+            <div class="kanri-server-status__item">
+              <span class="kanri-server-status__label">Admin Server:</span>
+              <span class="kanri-server-status__indicator" id="kanri-status-admin" data-status="checking">
+                <span class="kanri-server-status__dot"></span>
+                <span class="kanri-server-status__text">Checking...</span>
+              </span>
+              <span class="kanri-server-status__url">http://localhost:8686</span>
+            </div>
+            <div class="kanri-server-status__item">
+              <span class="kanri-server-status__label">Eleventy Server:</span>
+              <span class="kanri-server-status__indicator" id="kanri-status-eleventy" data-status="checking">
+                <span class="kanri-server-status__dot"></span>
+                <span class="kanri-server-status__text">Checking...</span>
+              </span>
+              <span class="kanri-server-status__url">http://localhost:8080</span>
+            </div>
+          </div>
           <ul>
             <li>Make sure both dev servers are running:</li>
           </ul>
@@ -82,10 +105,18 @@ npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
             </label>
           </div>
           <div class="kanri-form__group">
-            <label>Tags (comma separated)
-              <input type="text" name="tags" placeholder="portrait, tokyo, street" />
-            </label>
-            <p class="kanri-form__helper">Optional. Use commas to separate tags.</p>
+            <label>Tags</label>
+            <div class="kanri-tag-selector">
+              <div class="kanri-tag-selector__controls">
+                <select id="kanri-add-tag-dropdown" class="kanri-tag-selector__dropdown">
+                  <option value="">Select existing tag...</option>
+                </select>
+                <input type="text" id="kanri-add-tag-input" class="kanri-tag-selector__input" placeholder="Or type new tags (comma separated)" />
+                <input type="hidden" name="tags" id="kanri-add-tags-hidden" />
+              </div>
+              <div class="kanri-tag-selector__selected" id="kanri-add-tags-selected"></div>
+              <p class="kanri-form__helper">Select from existing tags or type new ones. Use commas to separate multiple tags.</p>
+            </div>
           </div>
           <div class="kanri-form__actions">
             <button type="submit" class="kanri-btn">Upload &amp; Generate</button>
@@ -163,10 +194,18 @@ npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
               </label>
             </div>
             <div class="kanri-form__group">
-              <label>Tags (comma separated)
-                <input type="text" name="tags" placeholder="portrait, tokyo, street" />
-              </label>
-              <p class="kanri-form__helper">Use commas to separate tags. Example: portrait, tokyo, street.</p>
+              <label>Tags</label>
+              <div class="kanri-tag-selector">
+                <div class="kanri-tag-selector__controls">
+                  <select id="kanri-tag-dropdown" class="kanri-tag-selector__dropdown">
+                    <option value="">Select existing tag...</option>
+                  </select>
+                  <input type="text" id="kanri-tag-input" class="kanri-tag-selector__input" placeholder="Or type new tags (comma separated)" />
+                  <input type="hidden" name="tags" id="kanri-tags-hidden" />
+                </div>
+                <div class="kanri-tag-selector__selected" id="kanri-tags-selected"></div>
+                <p class="kanri-form__helper">Select from existing tags or type new ones. Use commas to separate multiple tags.</p>
+              </div>
             </div>
             <div class="kanri-form__actions">
               <button type="button" class="kanri-btn" data-kanri-modal-close>Cancel</button>
@@ -212,6 +251,93 @@ npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
         applyFilters();
       });
     }
+
+    // Tag selector handlers for edit modal
+    const tagDropdown = appRoot.querySelector("#kanri-tag-dropdown");
+    const tagInput = appRoot.querySelector("#kanri-tag-input");
+    
+    if (tagDropdown) {
+      tagDropdown.addEventListener("change", (e) => {
+        if (e.target.value) {
+          addTag(e.target.value, "edit");
+          e.target.value = ""; // Reset dropdown
+        }
+      });
+    }
+    
+    if (tagInput) {
+      tagInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          const value = tagInput.value.trim();
+          if (value) {
+            // Split by comma and add each tag
+            value.split(",").forEach(tag => {
+              const trimmed = tag.trim();
+              if (trimmed) addTag(trimmed, "edit");
+            });
+            tagInput.value = "";
+          }
+        }
+      });
+      
+      tagInput.addEventListener("blur", () => {
+        const value = tagInput.value.trim();
+        if (value) {
+          // Split by comma and add each tag
+          value.split(",").forEach(tag => {
+            const trimmed = tag.trim();
+            if (trimmed) addTag(trimmed, "edit");
+          });
+          tagInput.value = "";
+        }
+      });
+    }
+
+    // Tag selector handlers for add form
+    const addTagDropdown = appRoot.querySelector("#kanri-add-tag-dropdown");
+    const addTagInput = appRoot.querySelector("#kanri-add-tag-input");
+    
+    if (addTagDropdown) {
+      addTagDropdown.addEventListener("change", (e) => {
+        if (e.target.value) {
+          addTag(e.target.value, "add");
+          e.target.value = ""; // Reset dropdown
+        }
+      });
+    }
+    
+    if (addTagInput) {
+      addTagInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          const value = addTagInput.value.trim();
+          if (value) {
+            // Split by comma and add each tag
+            value.split(",").forEach(tag => {
+              const trimmed = tag.trim();
+              if (trimmed) addTag(trimmed, "add");
+            });
+            addTagInput.value = "";
+          }
+        }
+      });
+      
+      addTagInput.addEventListener("blur", () => {
+        const value = addTagInput.value.trim();
+        if (value) {
+          // Split by comma and add each tag
+          value.split(",").forEach(tag => {
+            const trimmed = tag.trim();
+            if (trimmed) addTag(trimmed, "add");
+          });
+          addTagInput.value = "";
+        }
+      });
+    }
+
+    // Initialize add form tag dropdown
+    initializeAddTagDropdown();
 
     // Modal close handlers
     modalCloseButtons.forEach(button => {
@@ -266,6 +392,7 @@ npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
       state.selected.clear();
       state.editing = null;
       updateThemeFilter();
+      initializeAddTagDropdown();
       syncFilterUI();
       applyFilters();
       clearEditForm();
@@ -481,8 +608,143 @@ npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
     form.alt.value = item.alt || "";
     form.credit.value = item.credit || "";
     form.linkToAuthor.value = item.linkToAuthor || "";
-    form.tags.value = tagsToInput(item.tags);
+    
+    // Initialize tag selector
+    initializeTagSelector(item.tags);
     openEditModal();
+  }
+
+  function initializeAddTagDropdown() {
+    const dropdown = appRoot.querySelector("#kanri-add-tag-dropdown");
+    if (!dropdown) return;
+
+    // Collect all unique tags from all images
+    const allTags = new Set();
+    state.images.forEach((img) => {
+      const tags = normaliseTagsValue(img.tags);
+      tags.forEach((tag) => allTags.add(tag));
+    });
+    const sortedTags = Array.from(allTags).sort();
+
+    // Populate dropdown
+    dropdown.innerHTML = '<option value="">Select existing tag...</option>';
+    sortedTags.forEach((tag) => {
+      const option = document.createElement("option");
+      option.value = tag;
+      option.textContent = tag;
+      dropdown.appendChild(option);
+    });
+  }
+
+  function initializeTagSelector(currentTags) {
+    const dropdown = appRoot.querySelector("#kanri-tag-dropdown");
+    const input = appRoot.querySelector("#kanri-tag-input");
+    const selectedContainer = appRoot.querySelector("#kanri-tags-selected");
+    const hiddenInput = appRoot.querySelector("#kanri-tags-hidden");
+    
+    if (!dropdown || !input || !selectedContainer || !hiddenInput) return;
+
+    // Collect all unique tags from all images
+    const allTags = new Set();
+    state.images.forEach((img) => {
+      const tags = normaliseTagsValue(img.tags);
+      tags.forEach((tag) => allTags.add(tag));
+    });
+    const sortedTags = Array.from(allTags).sort();
+
+    // Populate dropdown
+    dropdown.innerHTML = '<option value="">Select existing tag...</option>';
+    sortedTags.forEach((tag) => {
+      const option = document.createElement("option");
+      option.value = tag;
+      option.textContent = tag;
+      dropdown.appendChild(option);
+    });
+
+    // Set current tags
+    const tags = normaliseTagsValue(currentTags);
+    state.editingTags = new Set(tags);
+    renderSelectedTags();
+    updateHiddenInput();
+  }
+
+  function renderSelectedTags(context = "edit") {
+    const containerId = context === "add" ? "#kanri-add-tags-selected" : "#kanri-tags-selected";
+    const selectedContainer = appRoot.querySelector(containerId);
+    if (!selectedContainer) return;
+
+    const tagsSet = context === "add" ? state.addingTags : state.editingTags;
+    selectedContainer.innerHTML = "";
+    if (!tagsSet || tagsSet.size === 0) return;
+
+    Array.from(tagsSet).sort().forEach((tag) => {
+      const chip = document.createElement("span");
+      chip.className = "kanri-tag-chip";
+      chip.dataset.tag = tag;
+      
+      const tagText = document.createTextNode(tag);
+      chip.appendChild(tagText);
+      
+      const removeBtn = document.createElement("button");
+      removeBtn.type = "button";
+      removeBtn.className = "kanri-tag-chip__remove";
+      removeBtn.innerHTML = "&times;";
+      removeBtn.setAttribute("aria-label", `Remove ${tag}`);
+      removeBtn.addEventListener("click", () => removeTag(tag, context));
+      
+      chip.appendChild(removeBtn);
+      selectedContainer.appendChild(chip);
+    });
+  }
+
+  function addTag(tag, context = "edit") {
+    if (!tag || !tag.trim()) return;
+    const normalizedTag = tag.trim();
+    
+    if (context === "add") {
+      if (!state.addingTags) {
+        state.addingTags = new Set();
+      }
+      state.addingTags.add(normalizedTag);
+      renderSelectedTags("add");
+      updateHiddenInput("add");
+    } else {
+      if (!state.editingTags) {
+        state.editingTags = new Set();
+      }
+      state.editingTags.add(normalizedTag);
+      renderSelectedTags("edit");
+      updateHiddenInput("edit");
+    }
+  }
+
+  function removeTag(tag, context = "edit") {
+    if (context === "add") {
+      if (!state.addingTags) return;
+      state.addingTags.delete(tag);
+      renderSelectedTags("add");
+      updateHiddenInput("add");
+    } else {
+      if (!state.editingTags) return;
+      state.editingTags.delete(tag);
+      renderSelectedTags("edit");
+      updateHiddenInput("edit");
+    }
+  }
+
+  function updateHiddenInput(context = "edit") {
+    const inputId = context === "add" ? "#kanri-add-tags-hidden" : "#kanri-tags-hidden";
+    const hiddenInput = appRoot.querySelector(inputId);
+    if (!hiddenInput) return;
+    
+    const tagsSet = context === "add" ? state.addingTags : state.editingTags;
+    if (!tagsSet) {
+      hiddenInput.value = "";
+      return;
+    }
+    
+    const tagsArray = Array.from(tagsSet);
+    hiddenInput.value = tagsArray.join(", ");
   }
 
   function openEditModal() {
@@ -511,6 +773,31 @@ npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
   function clearEditForm() {
     const form = appRoot.querySelector("#kanri-edit-form");
     form.reset();
+    state.editingTags = new Set();
+    const selectedContainer = appRoot.querySelector("#kanri-tags-selected");
+    if (selectedContainer) {
+      selectedContainer.innerHTML = "";
+    }
+    const tagInput = appRoot.querySelector("#kanri-tag-input");
+    if (tagInput) {
+      tagInput.value = "";
+    }
+  }
+
+  function clearAddForm() {
+    const form = appRoot.querySelector("#kanri-add-form");
+    if (form) {
+      form.reset();
+    }
+    state.addingTags = new Set();
+    const selectedContainer = appRoot.querySelector("#kanri-add-tags-selected");
+    if (selectedContainer) {
+      selectedContainer.innerHTML = "";
+    }
+    const tagInput = appRoot.querySelector("#kanri-add-tag-input");
+    if (tagInput) {
+      tagInput.value = "";
+    }
   }
 
   async function handleEditSubmit(event) {
@@ -524,6 +811,10 @@ npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
       return;
     }
 
+    // Get tags from hidden input (which contains selected tags)
+    const tagsValue = payload.tags || "";
+    const tagsArray = parseTagsInput(tagsValue);
+
     try {
       const response = await fetch(`${ADMIN_BASE}/admin/images/${encodeURIComponent(payload.src)}`, {
         method: "PUT",
@@ -536,7 +827,7 @@ npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
           alt: payload.alt || "",
           credit: payload.credit || "",
           linkToAuthor: payload.linkToAuthor || "",
-          tags: parseTagsInput(payload.tags),
+          tags: tagsArray,
           imgDir: normaliseDir(payload.imgDir),
         }),
       });
@@ -564,8 +855,11 @@ npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
     }
 
     formData.set("imgDir", normaliseDir(formData.get("imgDir")));
-    const tags = parseTagsInput(formData.get("tags"));
-    formData.set("tags", JSON.stringify(tags));
+    
+    // Get tags from hidden input (which contains selected tags)
+    const tagsValue = formData.get("tags") || "";
+    const tagsArray = parseTagsInput(tagsValue);
+    formData.set("tags", JSON.stringify(tagsArray));
 
     try {
       const response = await fetch(`${ADMIN_BASE}/admin/images`, {
@@ -576,7 +870,7 @@ npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
         const errorText = await response.text();
         throw new Error(errorText || `Upload failed (${response.status})`);
       }
-      form.reset();
+      clearAddForm();
       resetAutoMarkers(form);
       showToast("Image uploaded and derivatives generated.");
       await refreshImages();
@@ -735,5 +1029,56 @@ npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
           `<li class="kanri-card__swatch" style="--palette-color: ${colour}"><span class="kanri-card__swatch-label">${colour}</span></li>`
       )
       .join("");
+  }
+
+  async function checkServerStatus() {
+    const adminIndicator = appRoot.querySelector("#kanri-status-admin");
+    const eleventyIndicator = appRoot.querySelector("#kanri-status-eleventy");
+
+    if (!adminIndicator || !eleventyIndicator) return;
+
+    // Check Admin Server (8686)
+    try {
+      const adminResponse = await fetch(`${ADMIN_BASE}/admin/images`, {
+        method: "HEAD",
+        signal: AbortSignal.timeout(2000),
+      });
+      updateServerStatus(adminIndicator, adminResponse.ok);
+    } catch (err) {
+      updateServerStatus(adminIndicator, false);
+    }
+
+    // Check Eleventy Server (8080)
+    // Use a simple fetch - if it fails, server is likely down
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2000);
+      const eleventyResponse = await fetch("http://localhost:8080", {
+        method: "HEAD",
+        mode: "no-cors",
+        signal: controller.signal,
+      });
+      clearTimeout(timeoutId);
+      // no-cors mode returns opaque response, but if no error, server is likely up
+      updateServerStatus(eleventyIndicator, true);
+    } catch (err) {
+      // Server is not responding
+      updateServerStatus(eleventyIndicator, false);
+    }
+  }
+
+  function updateServerStatus(indicator, isRunning) {
+    if (!indicator) return;
+    
+    const dot = indicator.querySelector(".kanri-server-status__dot");
+    const text = indicator.querySelector(".kanri-server-status__text");
+    
+    if (isRunning) {
+      indicator.setAttribute("data-status", "running");
+      if (text) text.textContent = "Running";
+    } else {
+      indicator.setAttribute("data-status", "stopped");
+      if (text) text.textContent = "Stopped";
+    }
   }
 }

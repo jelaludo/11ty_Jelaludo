@@ -13,19 +13,51 @@
                 All
                 <span class="themes-gallery__count">{{ gallery | length }}</span>
             </button>
+            {% set tagCount = 0 %}
             {% for tag in galleryThemes.tags %}
-            <button
-                class="themes-gallery__tag"
-                type="button"
-                data-tag-filter="{{ tag.slug }}"
-                data-tag-label="{{ tag.tag }}"
-                role="tab"
-                aria-selected="false"
-            >
-                {{ tag.tag }}
-                <span class="themes-gallery__count">{{ tag.count }}</span>
-            </button>
+                {% if tag.count > 0 %}
+                    {% if tagCount < 10 %}
+                    <button
+                        class="themes-gallery__tag"
+                        type="button"
+                        data-tag-filter="{{ tag.slug }}"
+                        data-tag-label="{{ tag.tag }}"
+                        role="tab"
+                        aria-selected="false"
+                    >
+                        {{ tag.tag }}
+                        <span class="themes-gallery__count">{{ tag.count }}</span>
+                    </button>
+                    {% endif %}
+                    {% set tagCount = tagCount + 1 %}
+                {% endif %}
             {% endfor %}
+            {% set hasMoreTags = false %}
+            {% set tagCount = 0 %}
+            {% for tag in galleryThemes.tags %}
+                {% if tag.count > 0 %}
+                    {% set tagCount = tagCount + 1 %}
+                    {% if tagCount > 10 %}
+                        {% set hasMoreTags = true %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if hasMoreTags %}
+            <label class="themes-gallery__more-tags">
+                <select class="themes-gallery__select themes-gallery__select--tags" data-tag-filter-select aria-label="More tags">
+                    <option value="">More tags...</option>
+                    {% set tagCount = 0 %}
+                    {% for tag in galleryThemes.tags %}
+                        {% if tag.count > 0 %}
+                            {% set tagCount = tagCount + 1 %}
+                            {% if tagCount > 10 %}
+                            <option value="{{ tag.slug }}" data-tag-label="{{ tag.tag }}">{{ tag.tag }} ({{ tag.count }})</option>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </label>
+            {% endif %}
         </div>
         {% if galleryThemes.lenses and galleryThemes.lenses | length %}
         <label class="themes-gallery__lens">

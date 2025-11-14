@@ -164,6 +164,34 @@
     padding: 0.45rem 0.9rem;
     border-radius: 8px;
     font-size: 0.85rem;
+    cursor: pointer;
+    transition: border 0.3s ease, background 0.3s ease;
+
+    &:hover,
+    &:focus-visible {
+        border-color: rgba(255, 255, 255, 0.4);
+        background: rgba(18, 18, 18, 0.9);
+        outline: none;
+    }
+
+    option {
+        background: rgba(18, 18, 18, 0.98);
+        color: #ffffff;
+    }
+}
+
+.themes-gallery__more-tags {
+    display: inline-flex;
+    align-items: center;
+}
+
+.themes-gallery__select--tags {
+    border-radius: 999px;
+    padding: 0.45rem 0.95rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    min-width: 140px;
 }
 
 .themes-gallery__grid {

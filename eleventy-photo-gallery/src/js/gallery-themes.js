@@ -2,6 +2,7 @@ const SELECTORS = {
     grid: '[data-gallery-grid]',
     items: '[data-gallery-item]',
     tagFilter: '[data-tag-filter]',
+    tagFilterSelect: '[data-tag-filter-select]',
     lensFilter: '[data-lens-filter]',
     lightbox: '[data-lightbox]',
     lightboxTrigger: '[data-lightbox-trigger]',
@@ -13,13 +14,26 @@ const SELECTORS = {
     lightboxLink: '[data-lightbox-link]',
 };
 
+// Slugify function matching galleryThemes.js
+const slugify = (value = '') =>
+    value
+        .toString()
+        .normalize('NFKD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .replace(/-{2,}/g, '-');
+
 const applyFilters = (state) => {
-    const { items, activeTag, activeLens } = state;
+    const { items, activeTag, activeLens, tagSlugMap } = state;
     items.forEach((item) => {
         const tagData = item.dataset.tags || '';
-        const tags = tagData ? tagData.split('|') : [];
+        const tagValues = tagData ? tagData.split('|') : [];
+        // Convert tag values to slugs for comparison
+        const tagSlugs = tagValues.map(tag => tagSlugMap.get(tag) || slugify(tag));
         const lens = item.dataset.lens || '';
-        const matchesTag = activeTag === 'all' || tags.includes(activeTag);
+        const matchesTag = activeTag === 'all' || tagSlugs.includes(activeTag);
         const matchesLens = activeLens === 'all' || lens === activeLens;
         item.hidden = !(matchesTag && matchesLens);
     });
@@ -39,12 +53,36 @@ const mountFilters = () => {
 
     const items = Array.from(grid.querySelectorAll(SELECTORS.items));
     const tagButtons = Array.from(document.querySelectorAll(SELECTORS.tagFilter));
+    const tagSelect = document.querySelector(SELECTORS.tagFilterSelect);
     const lensSelect = document.querySelector(SELECTORS.lensFilter);
+
+    // Build a map from tag labels to slugs for filtering
+    const tagSlugMap = new Map();
+    tagButtons.forEach((button) => {
+        const slug = button.dataset.tagFilter;
+        const label = button.dataset.tagLabel;
+        if (slug && label && slug !== 'all') {
+            // Map both the original label and lowercase version to the slug
+            tagSlugMap.set(label.toLowerCase(), slug);
+            tagSlugMap.set(label, slug);
+        }
+    });
+    if (tagSelect) {
+        Array.from(tagSelect.options).forEach((option) => {
+            const slug = option.value;
+            const label = option.dataset.tagLabel;
+            if (slug && label) {
+                tagSlugMap.set(label.toLowerCase(), slug);
+                tagSlugMap.set(label, slug);
+            }
+        });
+    }
 
     const state = {
         items,
         activeTag: 'all',
         activeLens: 'all',
+        tagSlugMap,
     };
 
     tagButtons.forEach((button) => {
@@ -52,9 +90,29 @@ const mountFilters = () => {
             const nextTag = button.dataset.tagFilter || 'all';
             state.activeTag = nextTag;
             updateActiveTag(tagButtons, nextTag);
+            // Reset dropdown if a button is clicked
+            if (tagSelect) {
+                tagSelect.value = '';
+            }
             applyFilters(state);
         });
     });
+
+    if (tagSelect) {
+        tagSelect.addEventListener('change', (event) => {
+            const selectedTag = event.target.value;
+            if (selectedTag) {
+                state.activeTag = selectedTag;
+                updateActiveTag(tagButtons, selectedTag);
+                applyFilters(state);
+            } else {
+                // If "More tags..." placeholder is selected, reset to "all"
+                state.activeTag = 'all';
+                updateActiveTag(tagButtons, 'all');
+                applyFilters(state);
+            }
+        });
+    }
 
     if (lensSelect) {
         lensSelect.addEventListener('change', (event) => {
