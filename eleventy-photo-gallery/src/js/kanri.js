@@ -7,9 +7,12 @@ if (!appRoot || !template) {
   const ADMIN_BASE = appRoot.dataset.adminBase || "http://localhost:8686";
   const state = {
     images: [],
+    filteredImages: [],
     selected: new Set(),
     editing: null,
     loading: false,
+    filterTheme: "",
+    filterUntagged: false,
   };
 
   const AUTO_MARK = {
@@ -23,20 +26,106 @@ if (!appRoot || !template) {
 
   function renderShell() {
     appRoot.innerHTML = `
-      <div class="kanri-grid">
-        <section class="kanri-section kanri-section--list">
-          <div class="kanri-section__header">
-            <h2>Current Images</h2>
-            <div class="kanri-actions">
-              <button type="button" class="kanri-btn" data-kanri-action="refresh">Refresh</button>
-              <button type="button" class="kanri-btn kanri-btn--danger" data-kanri-action="delete" disabled>Delete Selected</button>
-            </div>
+      <section class="kanri-section kanri-section--add">
+        <h2>Add New Image</h2>
+        <div class="kanri-callout">
+          <p><strong>Before uploading</strong></p>
+          <ul>
+            <li>Make sure both dev servers are running:</li>
+          </ul>
+          <pre><code>npm run watch:admin      # Kanri API on http://localhost:8686
+npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
+          <ul>
+            <li>After each upload batch, rebuild the site so <code>_site/images</code> and derived data stay in sync:</li>
+          </ul>
+          <pre><code>npm run build            # build:colors → build:exif → build:sass → build:eleventy</code></pre>
+        </div>
+        <form id="kanri-add-form" class="kanri-form">
+          <div class="kanri-form__group">
+            <label>Select image file
+              <input type="file" name="file" accept="image/*" required />
+            </label>
           </div>
-          <div class="kanri-list" aria-live="polite"></div>
-        </section>
+          <div class="kanri-form__group">
+            <label>Source filename (optional override)
+              <input type="text" name="src" placeholder="Defaults to uploaded filename" />
+            </label>
+          </div>
+          <div class="kanri-form__group">
+            <label>Image directory
+              <input type="text" name="imgDir" placeholder="/images/" />
+            </label>
+          </div>
+          <div class="kanri-form__group">
+            <label>Title
+              <input type="text" name="title" />
+            </label>
+          </div>
+          <div class="kanri-form__group">
+            <label>Date
+              <input type="text" name="date" />
+            </label>
+          </div>
+          <div class="kanri-form__group">
+            <label>Alt text
+              <input type="text" name="alt" />
+            </label>
+          </div>
+          <div class="kanri-form__group">
+            <label>Credit
+              <input type="text" name="credit" />
+            </label>
+          </div>
+          <div class="kanri-form__group">
+            <label>Author link
+              <input type="text" name="linkToAuthor" />
+            </label>
+          </div>
+          <div class="kanri-form__group">
+            <label>Tags (comma separated)
+              <input type="text" name="tags" placeholder="portrait, tokyo, street" />
+            </label>
+            <p class="kanri-form__helper">Optional. Use commas to separate tags.</p>
+          </div>
+          <div class="kanri-form__actions">
+            <button type="submit" class="kanri-btn">Upload &amp; Generate</button>
+          </div>
+        </form>
+      </section>
 
-        <section class="kanri-section">
-          <h2>Edit Metadata</h2>
+      <section class="kanri-section kanri-section--list">
+        <div class="kanri-section__header">
+          <h2>Current Images</h2>
+          <div class="kanri-actions">
+            <button type="button" class="kanri-btn" data-kanri-action="refresh">Refresh</button>
+            <button type="button" class="kanri-btn kanri-btn--danger" data-kanri-action="delete" disabled>Delete Selected</button>
+          </div>
+        </div>
+        <div class="kanri-filters">
+          <div class="kanri-filter-group">
+            <label for="kanri-filter-theme">Filter by Theme:</label>
+            <select id="kanri-filter-theme" class="kanri-select" data-kanri-filter="theme">
+              <option value="">All Themes</option>
+            </select>
+          </div>
+          <div class="kanri-filter-group">
+            <label class="kanri-checkbox-label">
+              <input type="checkbox" id="kanri-filter-untagged" class="kanri-checkbox" data-kanri-filter="untagged" />
+              <span>Show only untagged images</span>
+            </label>
+          </div>
+        </div>
+        <div class="kanri-list" aria-live="polite"></div>
+      </section>
+
+      <!-- Edit Modal -->
+      <div id="kanri-edit-modal" class="kanri-modal" role="dialog" aria-labelledby="kanri-modal-title" aria-hidden="true">
+        <div class="kanri-modal__overlay" data-kanri-modal-close></div>
+        <div class="kanri-modal__content">
+          <div class="kanri-modal__header">
+            <h2 id="kanri-modal-title">Edit Metadata</h2>
+            <button type="button" class="kanri-modal__close" data-kanri-modal-close aria-label="Close modal">&times;</button>
+          </div>
           <form id="kanri-edit-form" class="kanri-form">
             <div class="kanri-form__group">
               <label>Source filename
@@ -80,78 +169,13 @@ if (!appRoot || !template) {
               <p class="kanri-form__helper">Use commas to separate tags. Example: portrait, tokyo, street.</p>
             </div>
             <div class="kanri-form__actions">
+              <button type="button" class="kanri-btn" data-kanri-modal-close>Cancel</button>
               <button type="submit" class="kanri-btn">Save Changes</button>
             </div>
           </form>
-        </section>
-
-        <section class="kanri-section">
-          <h2>Add New Image</h2>
-          <div class="kanri-callout">
-            <p><strong>Before uploading</strong></p>
-            <ul>
-              <li>Make sure both dev servers are running:</li>
-            </ul>
-            <pre><code>npm run watch:admin      # Kanri API on http://localhost:8686
-npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
-            <ul>
-              <li>After each upload batch, rebuild the site so <code>_site/images</code> and derived data stay in sync:</li>
-            </ul>
-            <pre><code>npm run build            # build:colors → build:exif → build:sass → build:eleventy</code></pre>
-          </div>
-          <form id="kanri-add-form" class="kanri-form">
-            <div class="kanri-form__group">
-              <label>Select image file
-                <input type="file" name="file" accept="image/*" required />
-              </label>
-            </div>
-            <div class="kanri-form__group">
-              <label>Source filename (optional override)
-                <input type="text" name="src" placeholder="Defaults to uploaded filename" />
-              </label>
-            </div>
-            <div class="kanri-form__group">
-              <label>Image directory
-                <input type="text" name="imgDir" placeholder="/images/" />
-              </label>
-            </div>
-            <div class="kanri-form__group">
-              <label>Title
-                <input type="text" name="title" />
-              </label>
-            </div>
-            <div class="kanri-form__group">
-              <label>Date
-                <input type="text" name="date" />
-              </label>
-            </div>
-            <div class="kanri-form__group">
-              <label>Alt text
-                <input type="text" name="alt" />
-              </label>
-            </div>
-            <div class="kanri-form__group">
-              <label>Credit
-                <input type="text" name="credit" />
-              </label>
-            </div>
-            <div class="kanri-form__group">
-              <label>Author link
-                <input type="text" name="linkToAuthor" />
-              </label>
-            </div>
-            <div class="kanri-form__group">
-              <label>Tags (comma separated)
-                <input type="text" name="tags" placeholder="portrait, tokyo, street" />
-              </label>
-              <p class="kanri-form__helper">Optional. Use commas to separate tags.</p>
-            </div>
-            <div class="kanri-form__actions">
-              <button type="submit" class="kanri-btn">Upload &amp; Generate</button>
-            </div>
-          </form>
-        </section>
+        </div>
       </div>
+
       <output id="kanri-toast" class="kanri-toast" role="status" aria-live="polite"></output>
     `;
   }
@@ -165,11 +189,41 @@ npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
     const addTitleInput = addForm.querySelector('input[name="title"]');
     const addAltInput = addForm.querySelector('input[name="alt"]');
     const addSrcInput = addForm.querySelector('input[name="src"]');
+    const modal = appRoot.querySelector("#kanri-edit-modal");
+    const modalCloseButtons = appRoot.querySelectorAll('[data-kanri-modal-close]');
+    const filterTheme = appRoot.querySelector('[data-kanri-filter="theme"]');
+    const filterUntagged = appRoot.querySelector('[data-kanri-filter="untagged"]');
 
     refreshButton.addEventListener("click", refreshImages);
     deleteButton.addEventListener("click", handleDeleteSelected);
     editForm.addEventListener("submit", handleEditSubmit);
     addForm.addEventListener("submit", handleAddSubmit);
+
+    // Filter handlers
+    if (filterTheme) {
+      filterTheme.addEventListener("change", (e) => {
+        state.filterTheme = e.target.value;
+        applyFilters();
+      });
+    }
+    if (filterUntagged) {
+      filterUntagged.addEventListener("change", (e) => {
+        state.filterUntagged = e.target.checked;
+        applyFilters();
+      });
+    }
+
+    // Modal close handlers
+    modalCloseButtons.forEach(button => {
+      button.addEventListener("click", closeEditModal);
+    });
+
+    // Close modal on Escape key
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal && modal.getAttribute("aria-hidden") === "false") {
+        closeEditModal();
+      }
+    });
 
     addTitleInput.addEventListener("input", () => {
       addTitleInput.dataset.auto = AUTO_MARK.manual;
@@ -211,7 +265,9 @@ npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
       state.images = (payload.images || []).map(deserialiseImage);
       state.selected.clear();
       state.editing = null;
-      renderList();
+      updateThemeFilter();
+      syncFilterUI();
+      applyFilters();
       clearEditForm();
       syncDeleteButton();
       showToast(`Loaded ${state.images.length} image${state.images.length === 1 ? "" : "s"}.`);
@@ -224,17 +280,95 @@ npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
     }
   }
 
+  function updateThemeFilter() {
+    const filterSelect = appRoot.querySelector('[data-kanri-filter="theme"]');
+    if (!filterSelect) return;
+
+    // Collect all unique tags
+    const allTags = new Set();
+    state.images.forEach((img) => {
+      const tags = normaliseTagsValue(img.tags);
+      tags.forEach((tag) => allTags.add(tag));
+    });
+
+    // Sort tags alphabetically
+    const sortedTags = Array.from(allTags).sort();
+
+    // Store current selection
+    const currentValue = filterSelect.value;
+
+    // Clear existing options except "All Themes"
+    filterSelect.innerHTML = '<option value="">All Themes</option>';
+
+    // Add tag options
+    sortedTags.forEach((tag) => {
+      const option = document.createElement("option");
+      option.value = tag;
+      option.textContent = tag;
+      filterSelect.appendChild(option);
+    });
+
+    // Restore selection if it still exists
+    if (currentValue && sortedTags.includes(currentValue)) {
+      filterSelect.value = currentValue;
+      state.filterTheme = currentValue;
+    }
+  }
+
+  function syncFilterUI() {
+    const filterTheme = appRoot.querySelector('[data-kanri-filter="theme"]');
+    const filterUntagged = appRoot.querySelector('[data-kanri-filter="untagged"]');
+    
+    if (filterTheme) {
+      filterTheme.value = state.filterTheme || "";
+    }
+    if (filterUntagged) {
+      filterUntagged.checked = state.filterUntagged;
+    }
+  }
+
+  function applyFilters() {
+    let filtered = [...state.images];
+
+    // Filter by theme
+    if (state.filterTheme) {
+      filtered = filtered.filter((img) => {
+        const tags = normaliseTagsValue(img.tags);
+        return tags.includes(state.filterTheme);
+      });
+    }
+
+    // Filter by untagged
+    if (state.filterUntagged) {
+      filtered = filtered.filter((img) => {
+        const tags = normaliseTagsValue(img.tags);
+        return tags.length === 0;
+      });
+    }
+
+    state.filteredImages = filtered;
+    renderList();
+  }
+
   function renderList() {
     const list = appRoot.querySelector(".kanri-list");
     list.innerHTML = "";
 
-    if (!state.images.length) {
-      list.innerHTML = `<p>No images found. Add one using the form on the right.</p>`;
+    // Use filtered images if filters are active, otherwise show all
+    const hasActiveFilters = state.filterTheme || state.filterUntagged;
+    const imagesToRender = hasActiveFilters ? state.filteredImages : state.images;
+
+    if (!imagesToRender.length) {
+      if (state.filterTheme || state.filterUntagged) {
+        list.innerHTML = `<p>No images match the current filters.</p>`;
+      } else {
+        list.innerHTML = `<p>No images found. Add one using the form above.</p>`;
+      }
       return;
     }
 
     const fragment = document.createDocumentFragment();
-    state.images.forEach((item) => {
+    imagesToRender.forEach((item) => {
       const card = template.content.firstElementChild.cloneNode(true);
       const checkbox = card.querySelector(".kanri-card__checkbox");
       const editButton = card.querySelector(".kanri-card__edit");
@@ -348,7 +482,30 @@ npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
     form.credit.value = item.credit || "";
     form.linkToAuthor.value = item.linkToAuthor || "";
     form.tags.value = tagsToInput(item.tags);
-    showToast(`Editing ${item.src}.`);
+    openEditModal();
+  }
+
+  function openEditModal() {
+    const modal = appRoot.querySelector("#kanri-edit-modal");
+    if (modal) {
+      modal.setAttribute("aria-hidden", "false");
+      modal.classList.add("is-open");
+      // Focus first input
+      const firstInput = modal.querySelector('input:not([readonly])');
+      if (firstInput) {
+        setTimeout(() => firstInput.focus(), 100);
+      }
+    }
+  }
+
+  function closeEditModal() {
+    const modal = appRoot.querySelector("#kanri-edit-modal");
+    if (modal) {
+      modal.setAttribute("aria-hidden", "true");
+      modal.classList.remove("is-open");
+      state.editing = null;
+      clearEditForm();
+    }
   }
 
   function clearEditForm() {
@@ -387,6 +544,7 @@ npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
         throw new Error(`Update failed (${response.status})`);
       }
       showToast("Metadata updated.");
+      closeEditModal();
       await refreshImages();
     } catch (err) {
       console.error(err);

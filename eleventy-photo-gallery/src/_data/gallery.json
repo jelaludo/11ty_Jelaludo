@@ -10,7 +10,8 @@
     "tags": [
       "Miyajima",
       "Nature",
-      "Temple"
+      "Temple",
+      "Punctum"
     ],
     "palette": []
   },
@@ -21,7 +22,14 @@
     "credit": "",
     "linkToAuthor": "",
     "src": "R6G_8616.jpg",
-    "imgDir": "/images/"
+    "imgDir": "/images/",
+    "tags": [
+      "Hiroshima",
+      "USMC",
+      "Object",
+      "Punctum"
+    ],
+    "palette": []
   },
   {
     "title": "Shinjuku Alley",
@@ -30,7 +38,14 @@
     "credit": "",
     "linkToAuthor": "",
     "src": "R6G_3549.jpg",
-    "imgDir": "/images/"
+    "imgDir": "/images/",
+    "tags": [
+      "Tokyo",
+      "Shinjuku",
+      "Neon",
+      "Street"
+    ],
+    "palette": []
   },
   {
     "title": "BJJ Friends",
@@ -39,7 +54,12 @@
     "credit": "",
     "linkToAuthor": "",
     "src": "R6G_3744.jpg",
-    "imgDir": "/images/"
+    "imgDir": "/images/",
+    "tags": [
+      "BJJ",
+      "Jiyugaoka"
+    ],
+    "palette": []
   },
   {
     "title": "Hakone Waterfall",
@@ -48,7 +68,12 @@
     "credit": "",
     "linkToAuthor": "",
     "src": "R6G_3776.jpg",
-    "imgDir": "/images/"
+    "imgDir": "/images/",
+    "tags": [
+      "Nature",
+      "Hakone"
+    ],
+    "palette": []
   },
   {
     "title": "Pareidolia",
@@ -57,7 +82,12 @@
     "credit": "",
     "linkToAuthor": "",
     "src": "R6G_3782.jpg",
-    "imgDir": "/images/"
+    "imgDir": "/images/",
+    "tags": [
+      "Nature",
+      "Hakone"
+    ],
+    "palette": []
   },
   {
     "title": "Okinawa Beach",
@@ -66,7 +96,12 @@
     "credit": "",
     "linkToAuthor": "",
     "src": "R6G_5073.jpg",
-    "imgDir": "/images/"
+    "imgDir": "/images/",
+    "tags": [
+      "Nature",
+      "Okinawa"
+    ],
+    "palette": []
   },
   {
     "title": "Triple Threat",
@@ -75,7 +110,13 @@
     "credit": "",
     "linkToAuthor": "",
     "src": "R6G_5580-Enhanced-NR.jpg",
-    "imgDir": "/images/"
+    "imgDir": "/images/",
+    "tags": [
+      "Night",
+      "Street",
+      "Jiyugaoka"
+    ],
+    "palette": []
   },
   {
     "title": "Empty",

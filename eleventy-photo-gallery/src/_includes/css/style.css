@@ -1163,16 +1163,8 @@ footer {
   color: #b0b0b0;
 }
 
-.kanri-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
-  gap: 2rem;
-  align-items: flex-start;
-}
-@media screen and (max-width: 1080px) {
-  .kanri-grid {
-    grid-template-columns: 1fr;
-  }
+.kanri-section--add {
+  margin-bottom: 2rem;
 }
 
 .kanri-section {
@@ -1194,6 +1186,71 @@ footer {
 
 .kanri-section--list {
   gap: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.kanri-filters {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1rem;
+  background: rgba(8, 8, 8, 0.6);
+  border-radius: 10px;
+  border: 1px solid #1f1f1f;
+}
+
+.kanri-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.kanri-filter-group label {
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #e0e0e0;
+  white-space: nowrap;
+}
+
+.kanri-select {
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  background: rgba(8, 8, 8, 0.92);
+  color: #e0e0e0;
+  cursor: pointer;
+  transition: border 0.2s ease;
+  min-width: 180px;
+}
+.kanri-select:focus {
+  outline: none;
+  border-color: #888888;
+}
+.kanri-select option {
+  background: rgba(18, 18, 18, 0.98);
+  color: #e0e0e0;
+}
+
+.kanri-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: #e0e0e0;
+  user-select: none;
+}
+
+.kanri-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #888888;
+  cursor: pointer;
 }
 
 .kanri-section__header {
@@ -1449,6 +1506,99 @@ footer {
   color: #b0b0b0;
 }
 
+.kanri-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.kanri-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.kanri-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  cursor: pointer;
+}
+.kanri-modal__content {
+  position: relative;
+  z-index: 1;
+  background: rgba(18, 18, 18, 0.98);
+  border: 1px solid #1f1f1f;
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+  transform: scale(0.95) translateY(20px);
+  transition: transform 0.3s ease;
+}
+.kanri-modal.is-open .kanri-modal__content {
+  transform: scale(1) translateY(0);
+}
+.kanri-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #2a2a2a;
+}
+.kanri-modal__header h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.kanri-modal__close {
+  background: transparent;
+  border: none;
+  color: #e0e0e0;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.kanri-modal__close:hover, .kanri-modal__close:focus-visible {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+}
+
+@media screen and (max-width: 640px) {
+  .kanri-modal__content {
+    padding: 1.5rem;
+    width: 95%;
+  }
+  .kanri-modal__header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+  }
+  .kanri-modal__header h2 {
+    font-size: 1rem;
+  }
+}
 .palette {
   background: rgba(8, 8, 8, 0.68);
   border-radius: 12px;
