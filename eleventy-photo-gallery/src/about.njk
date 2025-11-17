@@ -14,8 +14,8 @@ layout: main.njk
 
 <div class="about-me-content">
   <h1>{{ heading }}</h1>
-  <p>Hi, 50mm is my happy place.  I'm {{ site.author.firstName }} {{ site.author.lastName}}. This static website acts as a compendium of images I've taken over the years.  Github template + Cloudfare hosting + some vibe coding tweaks with Cursor.</p>
-  <p>Born in Europe, 30 years in Japan. Camera Enthusiast (Canon R6, 50mm 1.4, 70-200mm 2.8, 100mm 2.8). Martial arts enthusiast (BJJ Coach at Strapple and Carpe Diem), Semi-retired MBA (Managing a VC-company's retreat from Japan), Trilingual French-English-Japanese. Bike enthusiast (Ducati Monster 696).</p>
+  <p>Hi, 50mm is my happy place.  I'm {{ site.author.firstName }} {{ site.author.lastName}},European based in Tokyo since the 1990's. This is a creative outlet of images I've taken over the years.   Github template + Cloudfare hosting + tweaks with Cursor.</p>
+  <p>Camera Enthusiast of course (Canon R6, 50mm 1.4, 70-200mm 2.8, 100mm 2.8).  Also a Martial arts enthusiast (BJJ Coach at Strapple and Carpe Diem), Semi-retired MBA (Managing a VC-company's retreat from Japan), Trilingual French-English-Japanese. Bike enthusiast (Ducati Monster 696).  Uxorious husband and proud father.</p>
   
   <p>Palette: 
   Background: #121212 (charcoal black)
@@ -26,24 +26,11 @@ layout: main.njk
 
   <p>Implemented EXIF metadata by adding a prebuild script (scripts/extract-exif.js) that walks the gallery entries, parses image metadata with the exifr library, normalizes fields (model, lens, focal length, exposure, image size, resolution, flash), and saves them to src/_data/exif.json; the single-photo template (src/feature.njk) then reads that JSON to render the metadata block.</p>
   
-  <p>You can find me around the web at the following places:</p>
+  <p>DM Here if interested in photo projects</p>
 
   <ul class="about-socials">
     {% for key, value in site.socials %}
       <li><a href="{{ value }}">{{ key | title }}</a></li>
     {% endfor %}
   </ul>
-
-  <h2 id="contact-me">Contact</h2>
-  <p>Reach out if you think my work aligns with your projects needs.</p>
-  
-  <form class="contact-form" onsubmit="sendMail()">
-      <label for="name">What's Your Name?</label>
-      <input type="text" name="name" id="name" required>
-      <label class="form-label" for="subject">Subject</label>
-      <input class="email-subject" type="text" name="subject" id="subject" required>
-      <label class="form-label" for="message">Message</label>
-      <textarea class="email-msg" rows="5" cols="30" name="message" id="message" required></textarea>
-      <button type="submit" class="reach-me button submit-contact">Message me</button>
-  </form>
 </div>

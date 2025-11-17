@@ -7,23 +7,21 @@
         "about": "European Photographer, 30 years in Tokyo, semi-retired MBA & BJJ coach"
     },
     "socials": {
-        "twitter": "https://twitter.com/jelaludo",
-        "linkedin": "https://linkedin.com/in/jelaludo",
         "Instagram": "https://instagram.com/jelaludo",
         "github": "https://github.com/jelaludo"
     },
     "pageMetadata": {
         "home": {
-            "content": "Check how to Add or remove images, create thumbnails, etc. with 11ty addon"
+            "content": "Landing page"
         },
         "gallery": {
-            "content": "A collection of images from Jelaludo's gallery."
+            "content": "A collection of images from Jelaludo's Portfolio."
         },
         "featured": {
-            "content": "Jelaludo's gallery."
+            "content": "Jelaludo's Portfolio."
         },
         "about": {
-            "content": "A page about photography by Jelaludo in Tokyo. 11ty template github."
+            "content": "Photographs by Jelaludo in Tokyo."
         }
 
     }
