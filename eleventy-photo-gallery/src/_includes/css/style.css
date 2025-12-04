@@ -138,7 +138,7 @@
   border: none;
   outline: none;
   background: #121212;
-  touch-action: manipulation;
+  touch-action: pan-y;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;

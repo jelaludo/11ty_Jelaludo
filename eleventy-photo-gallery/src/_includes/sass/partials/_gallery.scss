@@ -45,7 +45,9 @@
     border: none;
     outline: none;
     background: #121212;
-    touch-action: manipulation;
+    // ATTEMPT 5: Change from manipulation to pan-y to allow vertical scrolling
+    // manipulation prioritizes taps, pan-y allows vertical panning (scrolling)
+    touch-action: pan-y;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;

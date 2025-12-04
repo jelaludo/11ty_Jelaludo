@@ -137,15 +137,16 @@ const mountHomeLightbox = () => {
         }
     };
 
-    // SIMPLE CLICK EVENTS ONLY - Let mobile browsers handle scroll detection naturally
-    // Mobile browsers automatically suppress click events if scrolling occurred
-    // This is the simplest, most reliable approach that was working before
+    // ATTEMPT 5: Remove preventDefault to let browser detect scroll naturally
+    // Change: Don't call preventDefault() - let browser's natural behavior work
+    // Theory: preventDefault() may be blocking browser's scroll detection
     items.forEach((item) => {
         const trigger = item.querySelector(SELECTORS.lightboxTrigger);
         if (!trigger) return;
         
         trigger.addEventListener('click', (event) => {
-            event.preventDefault();
+            // DON'T call preventDefault - let browser handle scroll detection
+            // Only stop propagation to prevent bubbling
             event.stopPropagation();
             openLightbox(item);
         });
