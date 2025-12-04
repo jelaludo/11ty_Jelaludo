@@ -11,8 +11,29 @@
 }
 
 .about-me-content {
+    max-width: 80ch;
+    margin: 0.75rem auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    
     .about-socials {
         padding-left: 30px;
+    }
+    
+    .build-info {
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(68, 68, 68, 0.3);
+        font-size: 0.65rem;
+        line-height: 1.6;
+        color: rgba(176, 176, 176, 0.6);
+        letter-spacing: 0.02em;
+        
+        p {
+            margin: 0.25rem 0;
+            font-size: inherit;
+            color: inherit;
+        }
     }
 }
 
@@ -21,13 +42,6 @@
         margin: .75rem auto;
         list-style: disc;
     }
-}
-
-.about-me-content {
-    max-width: 80ch;
-    margin: 0.75rem auto;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
 }
 
 .contact-form {

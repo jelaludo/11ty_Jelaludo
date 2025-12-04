@@ -137,18 +137,85 @@ const mountHomeLightbox = () => {
         }
     };
 
+    // Track scrolling state to prevent clicks during scroll
+    let isScrolling = false;
+    let scrollTimer = null;
+    let lastScrollY = window.scrollY || window.pageYOffset;
+    let touchStartY = 0;
+    let touchStartTime = 0;
+    let touchMoved = false;
+    
+    // Track actual scroll events - most reliable indicator
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY || window.pageYOffset;
+        const scrollDelta = Math.abs(currentScrollY - lastScrollY);
+        
+        // If page actually scrolled, mark as scrolling
+        if (scrollDelta > 1) {
+            isScrolling = true;
+            lastScrollY = currentScrollY;
+            
+            // Clear scrolling flag after scroll stops
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(() => {
+                isScrolling = false;
+            }, 200);
+        }
+    }, { passive: true });
+    
+    // Track touch events to detect scrolling intent
+    document.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+        touchMoved = false;
+    }, { passive: true });
+    
+    document.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+            const deltaY = Math.abs(e.touches[0].clientY - touchStartY);
+            // If finger moved more than 10px vertically, likely scrolling
+            if (deltaY > 10) {
+                touchMoved = true;
+                isScrolling = true;
+            }
+        }
+    }, { passive: true });
+    
+    document.addEventListener('touchend', () => {
+        // Clear touch movement flag after a delay
+        if (touchMoved) {
+            setTimeout(() => {
+                touchMoved = false;
+            }, 100);
+        }
+    }, { passive: true });
+
     items.forEach((item) => {
         const trigger = item.querySelector(SELECTORS.lightboxTrigger);
         if (!trigger) return;
         
-        // Use click events only - they work reliably on both desktop and mobile
-        // Mobile browsers fire click events after touchend, naturally preventing
-        // accidental triggers during scrolling
+        // Click handler with robust scroll detection
         trigger.addEventListener('click', (event) => {
+            // CRITICAL: Prevent click if user was scrolling
+            if (isScrolling || touchMoved) {
+                event.preventDefault();
+                event.stopPropagation();
+                return;
+            }
+            
+            // Additional check: if too much time passed since touch start, likely a scroll
+            const timeSinceTouchStart = Date.now() - touchStartTime;
+            if (timeSinceTouchStart > 500) {
+                event.preventDefault();
+                event.stopPropagation();
+                return;
+            }
+            
+            // Only proceed if it's a genuine tap (not a scroll)
             event.preventDefault();
             event.stopPropagation();
             openLightbox(item);
-        });
+        }, { passive: false });
     });
 
     // Click/touch image to close lightbox and return to home

@@ -45,6 +45,11 @@
     border: none;
     outline: none;
     background: #121212;
+    touch-action: manipulation;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
 }
 
 .gallery-slide__media {

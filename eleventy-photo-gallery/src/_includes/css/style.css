@@ -138,6 +138,11 @@
   border: none;
   outline: none;
   background: #121212;
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
 }
 
 .gallery-slide__media {
@@ -911,20 +916,33 @@ body.is-lightbox-open {
   margin-top: auto;
 }
 
-.about-me-content .about-socials {
-  padding-left: 30px;
-}
-
-.about-socials li {
-  margin: 0.75rem auto;
-  list-style: disc;
-}
-
 .about-me-content {
   max-width: 80ch;
   margin: 0.75rem auto;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+.about-me-content .about-socials {
+  padding-left: 30px;
+}
+.about-me-content .build-info {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(68, 68, 68, 0.3);
+  font-size: 0.65rem;
+  line-height: 1.6;
+  color: rgba(176, 176, 176, 0.6);
+  letter-spacing: 0.02em;
+}
+.about-me-content .build-info p {
+  margin: 0.25rem 0;
+  font-size: inherit;
+  color: inherit;
+}
+
+.about-socials li {
+  margin: 0.75rem auto;
+  list-style: disc;
 }
 
 .contact-form {

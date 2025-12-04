@@ -33,4 +33,9 @@ layout: main.njk
       <li><a href="{{ value }}">{{ key | title }}</a></li>
     {% endfor %}
   </ul>
+  
+  <div class="build-info">
+    <p>Built: {{ buildInfo.buildDateFormatted }}</p>
+    <p>Version: {{ buildInfo.gitHash }} — {{ buildInfo.gitCommitMessage }}</p>
+  </div>
 </div>
