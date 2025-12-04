@@ -137,40 +137,44 @@ const mountHomeLightbox = () => {
         }
     };
 
-    // ATTEMPT 6: Track touch movement to prevent click after scroll
-    // Add touch tracking per trigger to detect scroll vs tap
+    // ATTEMPT 7: Track scroll at document level to prevent click after scroll
+    // Strategy: iOS cancels touchmove on elements during scroll, so track scroll globally
     items.forEach((item) => {
         const trigger = item.querySelector(SELECTORS.lightboxTrigger);
         if (!trigger) return;
 
-        let touchStartY = 0;
-        let touchStartX = 0;
-        let touchMoved = false;
+        let scrollStartY = 0;
+        let scrolledDuringTouch = false;
+        let lastTouchEndTime = 0;
+
+        // Scroll handler specific to this trigger
+        const handleScroll = () => {
+            if (Math.abs(window.scrollY - scrollStartY) > 5) {
+                scrolledDuringTouch = true;
+            }
+        };
 
         trigger.addEventListener('touchstart', (event) => {
-            const touch = event.touches[0];
-            touchStartY = touch.clientY;
-            touchStartX = touch.clientX;
-            touchMoved = false;
+            scrollStartY = window.scrollY;
+            scrolledDuringTouch = false;
+            // Add scroll listener when touch starts
+            window.addEventListener('scroll', handleScroll, { passive: true });
         }, { passive: true });
 
-        trigger.addEventListener('touchmove', (event) => {
-            if (!touchMoved) {
-                const touch = event.touches[0];
-                const deltaY = Math.abs(touch.clientY - touchStartY);
-                const deltaX = Math.abs(touch.clientX - touchStartX);
+        trigger.addEventListener('touchend', () => {
+            // Remove scroll listener when touch ends
+            window.removeEventListener('scroll', handleScroll);
 
-                // If user moved more than 10px, consider it a scroll
-                if (deltaY > 10 || deltaX > 10) {
-                    touchMoved = true;
-                }
+            // If scrolling was detected, mark the time
+            if (scrolledDuringTouch) {
+                lastTouchEndTime = Date.now();
             }
+            scrolledDuringTouch = false;
         }, { passive: true });
 
         trigger.addEventListener('click', (event) => {
-            // If touch moved (scroll detected), prevent lightbox from opening
-            if (touchMoved) {
-                touchMoved = false; // Reset for next interaction
+            // Suppress click if scroll just happened (within 500ms)
+            if (Date.now() - lastTouchEndTime < 500) {
                 return;
             }
 
