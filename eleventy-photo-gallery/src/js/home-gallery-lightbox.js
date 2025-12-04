@@ -137,16 +137,43 @@ const mountHomeLightbox = () => {
         }
     };
 
-    // ATTEMPT 5: Remove preventDefault to let browser detect scroll naturally
-    // Change: Don't call preventDefault() - let browser's natural behavior work
-    // Theory: preventDefault() may be blocking browser's scroll detection
+    // ATTEMPT 6: Track touch movement to prevent click after scroll
+    // Add touch tracking per trigger to detect scroll vs tap
     items.forEach((item) => {
         const trigger = item.querySelector(SELECTORS.lightboxTrigger);
         if (!trigger) return;
-        
+
+        let touchStartY = 0;
+        let touchStartX = 0;
+        let touchMoved = false;
+
+        trigger.addEventListener('touchstart', (event) => {
+            const touch = event.touches[0];
+            touchStartY = touch.clientY;
+            touchStartX = touch.clientX;
+            touchMoved = false;
+        }, { passive: true });
+
+        trigger.addEventListener('touchmove', (event) => {
+            if (!touchMoved) {
+                const touch = event.touches[0];
+                const deltaY = Math.abs(touch.clientY - touchStartY);
+                const deltaX = Math.abs(touch.clientX - touchStartX);
+
+                // If user moved more than 10px, consider it a scroll
+                if (deltaY > 10 || deltaX > 10) {
+                    touchMoved = true;
+                }
+            }
+        }, { passive: true });
+
         trigger.addEventListener('click', (event) => {
-            // DON'T call preventDefault - let browser handle scroll detection
-            // Only stop propagation to prevent bubbling
+            // If touch moved (scroll detected), prevent lightbox from opening
+            if (touchMoved) {
+                touchMoved = false; // Reset for next interaction
+                return;
+            }
+
             event.stopPropagation();
             openLightbox(item);
         });
