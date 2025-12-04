@@ -141,76 +141,10 @@ const mountHomeLightbox = () => {
         const trigger = item.querySelector(SELECTORS.lightboxTrigger);
         if (!trigger) return;
         
-        // Touch handling with robust scroll detection
-        let touchStartX = 0;
-        let touchStartY = 0;
-        let touchStartScrollY = 0;
-        let touchMoved = false;
-        let touchWasScroll = false;
-        let touchHandled = false;
-        const tapThreshold = 10; // Maximum movement in pixels to consider it a tap
-        
-        // Track touch start
-        trigger.addEventListener('touchstart', (event) => {
-            touchStartX = event.touches[0].clientX;
-            touchStartY = event.touches[0].clientY;
-            touchStartScrollY = window.scrollY || window.pageYOffset;
-            touchMoved = false;
-            touchWasScroll = false;
-            touchHandled = false;
-        }, { passive: true });
-        
-        // Track touch movement to detect scrolling
-        trigger.addEventListener('touchmove', (event) => {
-            if (!touchMoved) {
-                const deltaX = Math.abs(event.touches[0].clientX - touchStartX);
-                const deltaY = Math.abs(event.touches[0].clientY - touchStartY);
-                // If vertical movement exceeds threshold, it's likely a scroll
-                if (deltaY > tapThreshold) {
-                    touchMoved = true;
-                    touchWasScroll = true;
-                } else if (deltaX > tapThreshold || deltaY > tapThreshold) {
-                    touchMoved = true;
-                }
-            }
-        }, { passive: true });
-        
-        // Handle touch end - only trigger if it was a clear tap (not a scroll)
-        trigger.addEventListener('touchend', (event) => {
-            // Use requestAnimationFrame to check scroll after browser has processed it
-            requestAnimationFrame(() => {
-                const currentScrollY = window.scrollY || window.pageYOffset;
-                const scrollDelta = Math.abs(currentScrollY - touchStartScrollY);
-                
-                // Check if page actually scrolled (most reliable indicator)
-                const didScroll = scrollDelta > 5;
-                
-                // Only trigger if: no movement detected AND page didn't scroll
-                if (!touchMoved && !touchWasScroll && !didScroll && !touchHandled) {
-                    // It was a clear tap - trigger lightbox
-                    touchHandled = true;
-                    event.preventDefault();
-                    event.stopPropagation();
-                    openLightbox(item);
-                    
-                    // Prevent click event from firing
-                    setTimeout(() => {
-                        touchHandled = false;
-                    }, 300);
-                }
-            });
-        }, { passive: false });
-        
-        // Click events for desktop (prevent double-firing on mobile)
+        // Use click events only - they work reliably on both desktop and mobile
+        // Mobile browsers fire click events after touchend, naturally preventing
+        // accidental triggers during scrolling
         trigger.addEventListener('click', (event) => {
-            // On mobile, if touch was handled, ignore click
-            if (touchHandled) {
-                event.preventDefault();
-                event.stopPropagation();
-                return;
-            }
-            
-            // Desktop click - trigger lightbox
             event.preventDefault();
             event.stopPropagation();
             openLightbox(item);
