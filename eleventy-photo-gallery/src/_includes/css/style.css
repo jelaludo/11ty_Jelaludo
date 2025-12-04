@@ -145,6 +145,10 @@
   cursor: pointer;
 }
 
+body.is-scrolling .gallery-slide__link {
+  pointer-events: none;
+}
+
 .gallery-slide__media {
   width: 100%;
   max-width: 100%;

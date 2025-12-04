@@ -137,47 +137,23 @@ const mountHomeLightbox = () => {
         }
     };
 
-    // ATTEMPT 7: Track scroll at document level to prevent click after scroll
-    // Strategy: iOS cancels touchmove on elements during scroll, so track scroll globally
+    // Simple approach: Disable pointer events during scroll
+    let scrollTimeout;
+    const handleScroll = () => {
+        document.body.classList.add('is-scrolling');
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+            document.body.classList.remove('is-scrolling');
+        }, 150);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Simple click handlers - CSS will prevent clicks during scroll
     items.forEach((item) => {
         const trigger = item.querySelector(SELECTORS.lightboxTrigger);
         if (!trigger) return;
 
-        let scrollStartY = 0;
-        let scrolledDuringTouch = false;
-        let lastTouchEndTime = 0;
-
-        // Scroll handler specific to this trigger
-        const handleScroll = () => {
-            if (Math.abs(window.scrollY - scrollStartY) > 5) {
-                scrolledDuringTouch = true;
-            }
-        };
-
-        trigger.addEventListener('touchstart', (event) => {
-            scrollStartY = window.scrollY;
-            scrolledDuringTouch = false;
-            // Add scroll listener when touch starts
-            window.addEventListener('scroll', handleScroll, { passive: true });
-        }, { passive: true });
-
-        trigger.addEventListener('touchend', () => {
-            // Remove scroll listener when touch ends
-            window.removeEventListener('scroll', handleScroll);
-
-            // If scrolling was detected, mark the time
-            if (scrolledDuringTouch) {
-                lastTouchEndTime = Date.now();
-            }
-            scrolledDuringTouch = false;
-        }, { passive: true });
-
         trigger.addEventListener('click', (event) => {
-            // Suppress click if scroll just happened (within 500ms)
-            if (Date.now() - lastTouchEndTime < 500) {
-                return;
-            }
-
             event.stopPropagation();
             openLightbox(item);
         });

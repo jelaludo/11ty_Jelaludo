@@ -54,6 +54,11 @@
     cursor: pointer;
 }
 
+// Disable pointer events during scroll to prevent clicks
+body.is-scrolling .gallery-slide__link {
+    pointer-events: none;
+}
+
 .gallery-slide__media {
     width: 100%;
     max-width: 100%;
