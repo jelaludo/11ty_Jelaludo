@@ -102,31 +102,45 @@
 .gallery-slide {
   scroll-snap-align: start;
   position: relative;
-  background: transparent;
+  background: #121212;
   isolation: isolate;
-  padding: clamp(0.4rem, 2vw, 1rem);
+  padding: 0;
   margin: 0;
+  border: none;
+  outline: none;
 }
 
 .gallery-slide__link {
-  display: flex;
-  justify-content: center;
+  display: block;
   color: inherit;
   text-decoration: none;
   width: 100%;
   position: relative;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: #121212;
 }
 
 .gallery-slide__media {
   width: 100%;
-  max-width: min(1920px, 100%);
-  margin: 0 auto;
+  max-width: 100%;
+  margin: 0;
   display: block;
+  background: #121212;
+  border: none;
+  outline: none;
 }
 
 .gallery-slide__media picture {
   display: block;
   width: 100%;
+  background: #121212;
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
 }
 
 .gallery-slide__media img {
@@ -134,9 +148,14 @@
   width: 100%;
   height: auto;
   max-height: min(92vh, 1200px);
-  object-fit: contain;
+  object-fit: cover;
   filter: brightness(0.92);
   transition: filter 0.4s ease;
+  background: #121212;
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
 }
 
 .gallery-slide__img--focus,
@@ -249,7 +268,7 @@
 }
 @media screen and (max-width: 720px) {
   .gallery-slide {
-    padding: clamp(0.3rem, 3vw, 0.8rem);
+    padding: 0;
   }
   .gallery-slide__palette {
     top: clamp(0.4rem, 4vw, 1.2rem);
@@ -517,10 +536,17 @@
   -ms-user-select: none;
 }
 
-.themes-lightbox__link {
+.themes-lightbox__actions {
   position: fixed;
   bottom: clamp(1rem, 3vw, 2rem);
   right: clamp(1rem, 3vw, 2rem);
+  display: flex;
+  gap: 0.75rem;
+  z-index: 1001;
+  pointer-events: auto;
+}
+
+.themes-lightbox__link {
   font-size: clamp(0.65rem, 1.5vw, 0.75rem);
   text-transform: uppercase;
   letter-spacing: 0.16em;
@@ -532,8 +558,6 @@
   border-radius: 4px;
   backdrop-filter: blur(8px);
   transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-  z-index: 1001;
-  pointer-events: auto;
 }
 .themes-lightbox__link:hover {
   color: rgba(255, 255, 255, 0.95);
@@ -541,6 +565,30 @@
   background: rgba(6, 6, 6, 0.8);
 }
 .themes-lightbox__link:active {
+  color: rgb(255, 255, 255);
+}
+
+.themes-lightbox__copy {
+  font-size: clamp(0.65rem, 1.5vw, 0.75rem);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(255, 255, 255, 0.75);
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  background: rgba(6, 6, 6, 0.6);
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+.themes-lightbox__copy:hover {
+  color: rgba(255, 255, 255, 0.95);
+  border-bottom-color: rgba(255, 255, 255, 0.5);
+  background: rgba(6, 6, 6, 0.8);
+}
+.themes-lightbox__copy:active {
   color: rgb(255, 255, 255);
 }
 
@@ -685,6 +733,47 @@ body.is-lightbox-open {
   letter-spacing: 0.06em;
   color: rgba(224, 224, 224, 0.92);
 }
+.feature-frame__arrows {
+  width: min(1100px, 92vw);
+  margin: clamp(1rem, 2vw, 1.5rem) auto 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  align-items: center;
+}
+.feature-frame__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(18, 18, 18, 0.6);
+  color: rgba(224, 224, 224, 0.9);
+  text-decoration: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  transition: border 0.3s ease, background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+.feature-frame__arrow span {
+  display: inline-block;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+}
+.feature-frame__arrow:hover, .feature-frame__arrow:focus-visible {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(18, 18, 18, 0.8);
+  color: #ffffff;
+  transform: scale(1.1);
+}
+.feature-frame__arrow--disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 .feature-frame__nav {
   display: flex;
   gap: 1rem;
@@ -764,6 +853,16 @@ body.is-lightbox-open {
     width: 100%;
     border-radius: 0;
     box-shadow: none;
+  }
+  .feature-frame__arrows {
+    width: 100%;
+    margin: 1rem auto 0;
+    gap: 1.5rem;
+  }
+  .feature-frame__arrow {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.25rem;
   }
   .feature-frame__overlay {
     width: 100%;
@@ -2078,9 +2177,7 @@ body {
 
 img {
   max-width: 100%;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  display: block;
 }
 
 p {

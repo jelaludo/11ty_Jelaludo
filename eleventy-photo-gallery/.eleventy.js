@@ -58,6 +58,20 @@ module.exports = (eleventyConfig) => {
     return year.toString();
   });
 
+  // Custom slug filter that properly handles apostrophes
+  eleventyConfig.addFilter("slug", function (value) {
+    if (!value) return '';
+    return value
+      .toString()
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .replace(/[''"]/g, '') // Remove apostrophes and quotes
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '')
+      .replace(/-{2,}/g, '-');
+  });
+
   eleventyConfig.addShortcode("img", async function ({ src, alt, width, height, widths, className, imgDir, sizes = "100vw"}) {
     if (alt === undefined) {
       throw new Error(`Missing \`alt\` on responsive image from: ${src}`);

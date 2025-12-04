@@ -26,31 +26,45 @@
 .gallery-slide {
     scroll-snap-align: start;
     position: relative;
-    background: transparent;
+    background: #121212;
     isolation: isolate;
-    padding: clamp(0.4rem, 2vw, 1rem);
+    padding: 0;
     margin: 0;
+    border: none;
+    outline: none;
 }
 
 .gallery-slide__link {
-    display: flex;
-    justify-content: center;
+    display: block;
     color: inherit;
     text-decoration: none;
     width: 100%;
     position: relative;
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    background: #121212;
 }
 
 .gallery-slide__media {
     width: 100%;
-    max-width: min(1920px, 100%);
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
     display: block;
+    background: #121212;
+    border: none;
+    outline: none;
 }
 
 .gallery-slide__media picture {
     display: block;
     width: 100%;
+    background: #121212;
+    border: none;
+    outline: none;
+    margin: 0;
+    padding: 0;
 }
 
 .gallery-slide__media img {
@@ -58,9 +72,14 @@
     width: 100%;
     height: auto;
     max-height: min(92vh, 1200px);
-    object-fit: contain;
+    object-fit: cover;
     filter: brightness(0.92);
     transition: filter 0.4s ease;
+    background: #121212;
+    border: none;
+    outline: none;
+    margin: 0;
+    padding: 0;
 }
 
 .gallery-slide__img--focus,
@@ -184,7 +203,7 @@
 
 @media screen and (max-width: 720px) {
     .gallery-slide {
-        padding: clamp(0.3rem, 3vw, 0.8rem);
+        padding: 0;
     }
 
     .gallery-slide__palette {
@@ -467,10 +486,17 @@
     -ms-user-select: none;
 }
 
-.themes-lightbox__link {
+.themes-lightbox__actions {
     position: fixed;
     bottom: clamp(1rem, 3vw, 2rem);
     right: clamp(1rem, 3vw, 2rem);
+    display: flex;
+    gap: 0.75rem;
+    z-index: 1001;
+    pointer-events: auto;
+}
+
+.themes-lightbox__link {
     font-size: clamp(0.65rem, 1.5vw, 0.75rem);
     text-transform: uppercase;
     letter-spacing: 0.16em;
@@ -482,8 +508,32 @@
     border-radius: 4px;
     backdrop-filter: blur(8px);
     transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-    z-index: 1001;
-    pointer-events: auto;
+
+    &:hover {
+        color: rgba(255, 255, 255, 0.95);
+        border-bottom-color: rgba(255, 255, 255, 0.5);
+        background: rgba(6, 6, 6, 0.8);
+    }
+
+    &:active {
+        color: rgba(255, 255, 255, 1);
+    }
+}
+
+.themes-lightbox__copy {
+    font-size: clamp(0.65rem, 1.5vw, 0.75rem);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: rgba(255, 255, 255, 0.75);
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(6, 6, 6, 0.6);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+    font-family: inherit;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 
     &:hover {
         color: rgba(255, 255, 255, 0.95);

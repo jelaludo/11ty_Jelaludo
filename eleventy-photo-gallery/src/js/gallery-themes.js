@@ -9,6 +9,8 @@ const SELECTORS = {
     lightboxTrigger: '[data-lightbox-trigger]',
     lightboxImg: '[data-lightbox-img]',
     lightboxLink: '[data-lightbox-link]',
+    lightboxGallery: '[data-lightbox-gallery]',
+    lightboxCopy: '[data-lightbox-copy]',
 };
 
 // Slugify function matching galleryThemes.js
@@ -206,8 +208,12 @@ const mountLightbox = ({ items, state }) => {
 
     const imageEl = lightbox.querySelector(SELECTORS.lightboxImg);
     const linkEl = lightbox.querySelector(SELECTORS.lightboxLink);
+    const copyBtn = lightbox.querySelector(SELECTORS.lightboxCopy);
     const header = document.querySelector('[data-site-nav]');
     const footer = document.querySelector('footer');
+
+    // Store the previous page URL (home or gallery)
+    let previousUrl = '/gallery/';
 
     const closeLightbox = () => {
         lightbox.setAttribute('hidden', '');
@@ -251,12 +257,53 @@ const mountLightbox = ({ items, state }) => {
             linkEl.removeAttribute('href');
         }
 
+        // Store current page as previous URL (preserve filters)
+        const currentUrl = new URL(window.location.href);
+        previousUrl = currentUrl.pathname + currentUrl.search;
+
         lightbox.classList.add('is-open');
         lightbox.removeAttribute('hidden');
         document.body.classList.add('is-lightbox-open');
         // Hide header and footer
         if (header) header.style.display = 'none';
         if (footer) footer.style.display = 'none';
+    };
+
+    const copyLinkToClipboard = async () => {
+        const linkHref = linkEl.getAttribute('href');
+        if (!linkHref) return;
+
+        const fullUrl = new URL(linkHref, window.location.origin).toString();
+        
+        try {
+            await navigator.clipboard.writeText(fullUrl);
+            // Visual feedback
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'Copied!';
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+            }, 2000);
+        } catch (err) {
+            console.error('Failed to copy link:', err);
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = fullUrl;
+            textArea.style.position = 'fixed';
+            textArea.style.opacity = '0';
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                }, 2000);
+            } catch (e) {
+                console.error('Fallback copy failed:', e);
+            }
+            document.body.removeChild(textArea);
+        }
     };
 
     const onKeyDown = (event) => {
@@ -298,14 +345,15 @@ const mountLightbox = ({ items, state }) => {
         });
     });
 
-    // Click/touch image to close
-    const handleImageClose = (event) => {
+    // Click/touch image to go back to previous screen (gallery with filters preserved)
+    const handleImageBack = (event) => {
         event.stopPropagation();
         event.preventDefault();
-        closeLightbox();
+        // Navigate back to previous URL (gallery with filters)
+        window.location.href = previousUrl;
     };
-    imageEl.addEventListener('click', handleImageClose);
-    imageEl.addEventListener('touchend', handleImageClose);
+    imageEl.addEventListener('click', handleImageBack);
+    imageEl.addEventListener('touchend', handleImageBack);
 
     // Click/touch lightbox background to close
     const handleBackgroundClose = (event) => {
@@ -322,6 +370,23 @@ const mountLightbox = ({ items, state }) => {
         event.stopPropagation();
         // Link will navigate naturally
     });
+
+    // Handle gallery button click
+    const galleryBtn = lightbox.querySelector(SELECTORS.lightboxGallery);
+    if (galleryBtn) {
+        galleryBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            // Link will navigate naturally to /gallery/
+        });
+    }
+
+    // Handle copy button click
+    if (copyBtn) {
+        copyBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            copyLinkToClipboard();
+        });
+    }
 
     document.addEventListener('keydown', onKeyDown);
 };

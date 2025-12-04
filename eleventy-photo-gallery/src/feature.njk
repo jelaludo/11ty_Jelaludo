@@ -47,6 +47,26 @@ url: https://eleventy-gallery.netlify.app
                     sizes="100vw"
                 %}
             </div>
+            <nav class="feature-frame__arrows" aria-label="Image navigation">
+                {% if pagination.href.previous %}
+                <a class="feature-frame__arrow" href="{{ pagination.href.previous }}" aria-label="Previous image">
+                    <span>&lt;</span>
+                </a>
+                {% else %}
+                <span class="feature-frame__arrow feature-frame__arrow--disabled" aria-hidden="true">
+                    <span>&lt;</span>
+                </span>
+                {% endif %}
+                {% if pagination.href.next %}
+                <a class="feature-frame__arrow" href="{{ pagination.href.next }}" aria-label="Next image">
+                    <span>&gt;</span>
+                </a>
+                {% else %}
+                <span class="feature-frame__arrow feature-frame__arrow--disabled" aria-hidden="true">
+                    <span>&gt;</span>
+                </span>
+                {% endif %}
+            </nav>
             <section class="feature-frame__overlay">
                 <header class="feature-frame__meta">
                     <h1>{{ image.title }}</h1>
@@ -107,5 +127,6 @@ url: https://eleventy-gallery.netlify.app
         {% include "partials/footer.njk" %}
         <script type="module" src="/js/orientation.js"></script>
         <script src="/js/feature-navigation.js"></script>
+        <script src="/js/feature-swipe.js"></script>
     </body>
 </html>

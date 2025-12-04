@@ -2,10 +2,18 @@
 
 <div class="immersive-gallery" data-gallery>
   {% for image in gallery %}
-  <section class="gallery-slide{% if loop.first %} gallery-slide--first{% endif %}">
-    <a
+  <section 
+    class="gallery-slide{% if loop.first %} gallery-slide--first{% endif %}"
+    data-gallery-item
+    data-title="{{ image.title }}"
+    data-src="{{ image.imgDir }}{{ image.src }}"
+    data-alt="{{ image.alt }}"
+    data-href="/gallery/{{ image.title | slug }}/"
+  >
+    <button
       class="gallery-slide__link"
-      href="/gallery/{{ image.title | slug }}"
+      type="button"
+      data-lightbox-trigger
       aria-label="Open {{ image.title }}"
     >
       <div class="gallery-slide__media">
@@ -24,7 +32,16 @@
         </p>
       </div>
       {% endif %}
-    </a>
+    </button>
   </section>
   {% endfor %}
 </div>
+
+<section class="themes-lightbox" data-lightbox hidden>
+    <img class="themes-lightbox__img" alt="" data-lightbox-img />
+    <div class="themes-lightbox__actions">
+        <a class="themes-lightbox__link" href="/gallery/" data-lightbox-gallery>Gallery</a>
+        <a class="themes-lightbox__link" href="" data-lightbox-link>Details</a>
+        <button class="themes-lightbox__copy" type="button" data-lightbox-copy>Link</button>
+    </div>
+</section>
