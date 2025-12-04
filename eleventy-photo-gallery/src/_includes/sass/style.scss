@@ -311,13 +311,14 @@ h2, .h2 {
 @media screen and (max-width: 450px) {
     header {
         .nav-main {
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
+            // Keep navigation horizontal on mobile
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
 
             .nav-list {
                 li {
-                    margin: 0 .5rem;
+                    margin: 0;
                 }
             }
         }

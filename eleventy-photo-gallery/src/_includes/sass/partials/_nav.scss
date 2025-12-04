@@ -39,7 +39,7 @@
         padding: 0.2rem 0;
         margin: 0;
         list-style: none;
-        flex-wrap: wrap;
+        flex-wrap: nowrap; // Prevent wrapping to keep all items on one line
     }
 
     .link {
@@ -78,12 +78,32 @@
 
 @media screen and (max-width: 520px) {
     .top-nav .nav-list {
-        gap: clamp(0.6rem, 3vw, 1rem);
+        gap: clamp(0.4rem, 2vw, 0.8rem);
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+
+    .top-nav .link {
+        font-size: clamp(0.6rem, 2.5vw, 0.7rem);
+        letter-spacing: 0.08em;
+        padding: 0.4rem 0.2rem;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .top-nav .nav-main {
+        padding: 0.5rem clamp(0.5rem, 3vw, 1rem);
+    }
+
+    .top-nav .nav-list {
+        gap: clamp(0.3rem, 1.5vw, 0.6rem);
+        flex-wrap: nowrap;
         justify-content: space-between;
     }
 
     .top-nav .link {
-        font-size: clamp(0.65rem, 3vw, 0.75rem);
-        letter-spacing: 0.1em;
+        font-size: clamp(0.55rem, 2.2vw, 0.65rem);
+        letter-spacing: 0.06em;
+        padding: 0.35rem 0.15rem;
     }
 }

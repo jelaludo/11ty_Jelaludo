@@ -36,7 +36,7 @@
   padding: 0.2rem 0;
   margin: 0;
   list-style: none;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 .top-nav .link {
   color: #e0e0e0;
@@ -68,12 +68,29 @@
 
 @media screen and (max-width: 520px) {
   .top-nav .nav-list {
-    gap: clamp(0.6rem, 3vw, 1rem);
+    gap: clamp(0.4rem, 2vw, 0.8rem);
+    justify-content: space-between;
+    flex-wrap: nowrap;
+  }
+  .top-nav .link {
+    font-size: clamp(0.6rem, 2.5vw, 0.7rem);
+    letter-spacing: 0.08em;
+    padding: 0.4rem 0.2rem;
+  }
+}
+@media screen and (max-width: 450px) {
+  .top-nav .nav-main {
+    padding: 0.5rem clamp(0.5rem, 3vw, 1rem);
+  }
+  .top-nav .nav-list {
+    gap: clamp(0.3rem, 1.5vw, 0.6rem);
+    flex-wrap: nowrap;
     justify-content: space-between;
   }
   .top-nav .link {
-    font-size: clamp(0.65rem, 3vw, 0.75rem);
-    letter-spacing: 0.1em;
+    font-size: clamp(0.55rem, 2.2vw, 0.65rem);
+    letter-spacing: 0.06em;
+    padding: 0.35rem 0.15rem;
   }
 }
 .gallery-intro {
@@ -742,32 +759,25 @@ body.is-lightbox-open {
   align-items: center;
 }
 .feature-frame__arrow {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(18, 18, 18, 0.6);
   color: rgba(224, 224, 224, 0.9);
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: 2rem;
   line-height: 1;
-  transition: border 0.3s ease, background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  padding: 0.5rem;
+  transition: color 0.3s ease, opacity 0.3s ease;
 }
 .feature-frame__arrow span {
   display: inline-block;
   line-height: 1;
   margin: 0;
   padding: 0;
-  vertical-align: middle;
 }
 .feature-frame__arrow:hover, .feature-frame__arrow:focus-visible {
-  border-color: rgba(255, 255, 255, 0.4);
-  background: rgba(18, 18, 18, 0.8);
   color: #ffffff;
-  transform: scale(1.1);
+  opacity: 1;
 }
 .feature-frame__arrow--disabled {
   opacity: 0.3;
@@ -860,9 +870,8 @@ body.is-lightbox-open {
     gap: 1.5rem;
   }
   .feature-frame__arrow {
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 1.25rem;
+    font-size: 1.75rem;
+    padding: 0.4rem;
   }
   .feature-frame__overlay {
     width: 100%;
@@ -2408,12 +2417,12 @@ h2, .h2 {
 }
 @media screen and (max-width: 450px) {
   header .nav-main {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
   header .nav-main .nav-list li {
-    margin: 0 0.5rem;
+    margin: 0;
   }
   .gallery .gallery-list {
     grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));

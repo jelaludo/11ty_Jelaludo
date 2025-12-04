@@ -141,27 +141,45 @@ const mountHomeLightbox = () => {
         const trigger = item.querySelector(SELECTORS.lightboxTrigger);
         if (!trigger) return;
         
-        // Handle both mouse clicks and touch events for mobile compatibility
-        let touchHandled = false;
+        // Touch handling with scroll detection
+        let touchStartX = 0;
+        let touchStartY = 0;
+        let touchMoved = false;
+        const tapThreshold = 15; // Maximum movement in pixels to consider it a tap
         
-        // Touch events for mobile (iOS/Safari)
+        // Track touch start
+        trigger.addEventListener('touchstart', (event) => {
+            touchStartX = event.touches[0].clientX;
+            touchStartY = event.touches[0].clientY;
+            touchMoved = false;
+        }, { passive: true });
+        
+        // Track touch movement to detect scrolling
+        trigger.addEventListener('touchmove', (event) => {
+            if (!touchMoved) {
+                const deltaX = Math.abs(event.touches[0].clientX - touchStartX);
+                const deltaY = Math.abs(event.touches[0].clientY - touchStartY);
+                // If movement exceeds threshold, it's a scroll, not a tap
+                if (deltaX > tapThreshold || deltaY > tapThreshold) {
+                    touchMoved = true;
+                }
+            }
+        }, { passive: true });
+        
+        // Handle touch end - only trigger if it was a tap (not a scroll)
         trigger.addEventListener('touchend', (event) => {
-            touchHandled = true;
-            event.preventDefault();
-            event.stopPropagation();
-            openLightbox(item);
-            setTimeout(() => {
-                touchHandled = false;
-            }, 300);
-        }, { passive: false });
-        
-        // Click events for desktop and as fallback
-        trigger.addEventListener('click', (event) => {
-            if (touchHandled) {
+            if (!touchMoved) {
+                // It was a tap, not a scroll - trigger lightbox
                 event.preventDefault();
                 event.stopPropagation();
-                return;
+                openLightbox(item);
             }
+            // Reset for next touch
+            touchMoved = false;
+        }, { passive: false });
+        
+        // Click events for desktop
+        trigger.addEventListener('click', (event) => {
             event.preventDefault();
             event.stopPropagation();
             openLightbox(item);
