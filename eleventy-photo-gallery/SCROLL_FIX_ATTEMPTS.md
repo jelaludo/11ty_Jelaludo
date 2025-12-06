@@ -3,6 +3,11 @@
 ## Problem
 On iPhone, scrolling the home page triggers image clicks, opening the lightbox unintentionally. This makes the app unusable.
 
+## ✅ Final Solution (Attempt 6)
+**CSS-based pointer blocking during scroll** - Physically disables pointer events on gallery buttons when scrolling is detected. Simple, reliable, works with browser behavior instead of fighting it.
+
+See "Attempt 6" section below for full implementation details.
+
 ## Attempt History
 
 ### Attempt 1: Touch handlers with movement detection
@@ -92,21 +97,55 @@ On iPhone, scrolling the home page triggers image clicks, opening the lightbox u
 ---
 
 ## Attempt 5: Remove preventDefault + Change touch-action
-**What is being tried:**
+**What was tried:**
 - Remove `event.preventDefault()` from click handler
 - Change CSS `touch-action` from `manipulation` to `pan-y`
 - Keep `stopPropagation()` to prevent event bubbling
 - Theory: `preventDefault()` blocks browser's natural scroll detection, `manipulation` prioritizes taps over scrolls
 
-**Changes made:**
-1. Removed `event.preventDefault()` from click handler
-2. Changed `touch-action: manipulation` to `touch-action: pan-y` in CSS
-3. `pan-y` explicitly allows vertical panning (scrolling) while preventing horizontal
+**Why it failed:**
+- Still triggers clicks when scrolling starts
+- Browser's natural suppression not working as expected
+- iOS Safari fires synthetic click events after touchend even when scrolling occurred
 
-**Expected behavior:**
-- Browser should detect scroll intent naturally
-- Vertical scrolling should work without triggering clicks
-- Taps (without scrolling) should still trigger lightbox
+**Status:** ❌ FAILED
 
-**Status:** ⏳ TESTING - Not yet confirmed working
+---
+
+## Attempt 6: CSS-based pointer blocking during scroll ✅ SUCCESS
+**What was implemented:**
+- JavaScript: Added scroll listener that applies `is-scrolling` class to `body` element
+- Debounce: 150ms timeout after scroll ends before removing class
+- CSS: Added `pointer-events: none` to `.gallery-slide__link` when `body.is-scrolling` is active
+
+**Implementation details:**
+1. **JavaScript (home-gallery-lightbox.js:140-149):**
+   ```javascript
+   let scrollTimeout;
+   const handleScroll = () => {
+       document.body.classList.add('is-scrolling');
+       clearTimeout(scrollTimeout);
+       scrollTimeout = setTimeout(() => {
+           document.body.classList.remove('is-scrolling');
+       }, 150);
+   };
+   window.addEventListener('scroll', handleScroll, { passive: true });
+   ```
+
+2. **CSS (_gallery.scss:58-60):**
+   ```scss
+   body.is-scrolling .gallery-slide__link {
+       pointer-events: none;
+   }
+   ```
+
+**Why it works:**
+- **CSS-based approach**: Physically disables pointer events during scroll
+- **Works with browser behavior**: Doesn't fight iOS Safari's synthetic click events
+- **Simple and reliable**: No complex touch tracking or timing logic
+- **Prevents clicks at the CSS level**: Clicks can't fire if pointer-events is disabled
+
+**Result:** ✅ WORKING - Home page scrolling now works correctly on mobile without triggering unwanted lightbox opens
+
+**Status:** ✅ SUCCESS
 

@@ -667,5 +667,45 @@
     "exposure": "1/6400, f/2.2, ISO 1250",
     "resolution": "240 ppi",
     "flash": "Flash did not fire"
+  },
+  "R6G_9529.jpg": {
+    "model": "Canon EOS R6",
+    "lens": "EF50mm f/1.4 USM",
+    "focalLength": "50mm",
+    "exposure": "1/100, f/1.4, ISO 100",
+    "resolution": "240 ppi",
+    "flash": "Flash did not fire"
+  },
+  "R6G_9534.jpg": {
+    "model": "Canon EOS R6",
+    "lens": "EF50mm f/1.4 USM",
+    "focalLength": "50mm",
+    "exposure": "1/640, f/1.4, ISO 100",
+    "resolution": "240 ppi",
+    "flash": "Flash did not fire"
+  },
+  "R6G_9572.jpg": {
+    "model": "Canon EOS R6",
+    "lens": "EF50mm f/1.4 USM",
+    "focalLength": "50mm",
+    "exposure": "1/60, f/1.4, ISO 500",
+    "resolution": "240 ppi",
+    "flash": "Flash did not fire"
+  },
+  "R6G_9569.jpg": {
+    "model": "Canon EOS R6",
+    "lens": "EF50mm f/1.4 USM",
+    "focalLength": "50mm",
+    "exposure": "1/100, f/1.4, ISO 3200",
+    "resolution": "240 ppi",
+    "flash": "Flash did not fire"
+  },
+  "R6G_9561-3.jpg": {
+    "model": "Canon EOS R6",
+    "lens": "EF50mm f/1.4 USM",
+    "focalLength": "50mm",
+    "exposure": "1/100, f/1.4, ISO 100",
+    "resolution": "240 ppi",
+    "flash": "Flash did not fire"
   }
 }

@@ -8,6 +8,8 @@ const SELECTORS = {
     lightboxLink: '[data-lightbox-link]',
     lightboxGallery: '[data-lightbox-gallery]',
     lightboxCopy: '[data-lightbox-copy]',
+    lightboxPrev: '[data-lightbox-prev]',
+    lightboxNext: '[data-lightbox-next]',
 };
 
 const mountHomeLightbox = () => {
@@ -21,11 +23,16 @@ const mountHomeLightbox = () => {
     const imageEl = lightbox.querySelector(SELECTORS.lightboxImg);
     const linkEl = lightbox.querySelector(SELECTORS.lightboxLink);
     const copyBtn = lightbox.querySelector(SELECTORS.lightboxCopy);
+    const prevBtn = lightbox.querySelector(SELECTORS.lightboxPrev);
+    const nextBtn = lightbox.querySelector(SELECTORS.lightboxNext);
     const header = document.querySelector('[data-site-nav]');
     const footer = document.querySelector('footer');
 
     // Store the previous page URL (home or gallery)
     let previousUrl = '/';
+    
+    // Track current item index for navigation
+    let currentItemIndex = -1;
 
     const closeLightbox = () => {
         lightbox.setAttribute('hidden', '');
@@ -61,6 +68,9 @@ const mountHomeLightbox = () => {
     };
 
     const openLightbox = (item) => {
+        // Find the index of the current item
+        currentItemIndex = items.indexOf(item);
+        
         const src = item.dataset.src;
         const alt = item.dataset.alt || item.dataset.title || '';
         const linkHref = item.dataset.href || '';
@@ -75,6 +85,9 @@ const mountHomeLightbox = () => {
         } else {
             linkEl.removeAttribute('href');
         }
+
+        // Update arrow button visibility
+        updateArrowButtons();
 
         // Store current page as previous URL
         previousUrl = window.location.pathname;
@@ -92,6 +105,38 @@ const mountHomeLightbox = () => {
         // Hide header and footer
         if (header) header.style.display = 'none';
         if (footer) footer.style.display = 'none';
+    };
+    
+    const updateArrowButtons = () => {
+        if (!prevBtn || !nextBtn) return;
+        
+        // Hide prev button on first item
+        if (currentItemIndex <= 0) {
+            prevBtn.style.display = 'none';
+        } else {
+            prevBtn.style.display = '';
+        }
+        
+        // Hide next button on last item
+        if (currentItemIndex >= items.length - 1) {
+            nextBtn.style.display = 'none';
+        } else {
+            nextBtn.style.display = '';
+        }
+    };
+    
+    const navigateToPrevious = () => {
+        if (currentItemIndex > 0) {
+            const prevItem = items[currentItemIndex - 1];
+            openLightbox(prevItem);
+        }
+    };
+    
+    const navigateToNext = () => {
+        if (currentItemIndex < items.length - 1) {
+            const nextItem = items[currentItemIndex + 1];
+            openLightbox(nextItem);
+        }
     };
 
     const copyLinkToClipboard = async () => {
@@ -134,6 +179,10 @@ const mountHomeLightbox = () => {
     const onKeyDown = (event) => {
         if (event.key === 'Escape') {
             closeLightbox();
+        } else if (event.key === 'ArrowLeft') {
+            navigateToPrevious();
+        } else if (event.key === 'ArrowRight') {
+            navigateToNext();
         }
     };
 
@@ -205,6 +254,21 @@ const mountHomeLightbox = () => {
         copyBtn.addEventListener('click', (event) => {
             event.stopPropagation();
             copyLinkToClipboard();
+        });
+    }
+
+    // Handle previous/next navigation buttons
+    if (prevBtn) {
+        prevBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            navigateToPrevious();
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            navigateToNext();
         });
     }
 

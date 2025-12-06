@@ -11,6 +11,8 @@ const SELECTORS = {
     lightboxLink: '[data-lightbox-link]',
     lightboxGallery: '[data-lightbox-gallery]',
     lightboxCopy: '[data-lightbox-copy]',
+    lightboxPrev: '[data-lightbox-prev]',
+    lightboxNext: '[data-lightbox-next]',
 };
 
 // Slugify function matching galleryThemes.js
@@ -25,14 +27,76 @@ const slugify = (value = '') =>
         .replace(/-{2,}/g, '-');
 
 const applyFilters = (state) => {
-    const { items, activeTag, activeLens, tagSlugMap } = state;
-    items.forEach((item) => {
+    const { activeTag, activeLens, tagSlugMap } = state;
+    const grid = document.querySelector(SELECTORS.grid);
+    if (!grid) return;
+    
+    // If "latest" tag is selected, sort by original array position (newest items are at the end)
+    if (activeTag === 'latest') {
+        const fragment = document.createDocumentFragment();
+        // Sort by original index in reverse order (last items first = newest first)
+        // Items with dates take priority, then use original order
+        const sortedItems = [...state.items].sort((a, b) => {
+            const dateA = a.dataset.date || '';
+            const dateB = b.dataset.date || '';
+            
+            // If both have valid dates, sort by date
+            if (dateA && dateB) {
+                const parsedA = new Date(dateA);
+                const parsedB = new Date(dateB);
+                if (!isNaN(parsedA.getTime()) && !isNaN(parsedB.getTime())) {
+                    return parsedB - parsedA; // Latest first
+                }
+            }
+            
+            // If one has a date and the other doesn't, prioritize the one with date
+            if (dateA && !dateB) return -1;
+            if (!dateA && dateB) return 1;
+            
+            // For items without dates, use original array position (reverse order)
+            // Newest items are at the end of the original array, so we reverse
+            const indexA = state.originalOrder.indexOf(a);
+            const indexB = state.originalOrder.indexOf(b);
+            return indexB - indexA; // Higher index (newer) first
+        });
+        
+        // Re-append items in sorted order
+        sortedItems.forEach(item => fragment.appendChild(item));
+        grid.innerHTML = '';
+        grid.appendChild(fragment);
+        
+        // Update state.items to reflect sorted order
+        state.items = sortedItems;
+    } else if (state.previousTag === 'latest' && state.originalOrder) {
+        // Restore original order when switching away from "latest"
+        const fragment = document.createDocumentFragment();
+        state.originalOrder.forEach(item => fragment.appendChild(item));
+        grid.innerHTML = '';
+        grid.appendChild(fragment);
+        state.items = [...state.originalOrder];
+    }
+    
+    // Store previous tag for next comparison
+    state.previousTag = activeTag;
+    
+    // Apply filters
+    state.items.forEach((item, index) => {
         const tagData = item.dataset.tags || '';
         const tagValues = tagData ? tagData.split('|') : [];
         // Convert tag values to slugs for comparison
         const tagSlugs = tagValues.map(tag => tagSlugMap.get(tag) || slugify(tag));
         const lens = item.dataset.lens || '';
-        const matchesTag = activeTag === 'all' || tagSlugs.includes(activeTag);
+        
+        let matchesTag;
+        if (activeTag === 'latest') {
+            // For "latest", show only the first 20 items (already sorted by date)
+            matchesTag = index < 20;
+        } else if (activeTag === 'all') {
+            matchesTag = true;
+        } else {
+            matchesTag = tagSlugs.includes(activeTag);
+        }
+        
         const matchesLens = activeLens === 'all' || lens === activeLens;
         item.hidden = !(matchesTag && matchesLens);
     });
@@ -54,7 +118,6 @@ const mountFilters = () => {
     const tagButtons = Array.from(document.querySelectorAll(SELECTORS.tagFilter));
     const tagSelect = document.querySelector(SELECTORS.tagFilterSelect);
     const lensSelect = document.querySelector(SELECTORS.lensFilter);
-    const sortSelect = document.querySelector(SELECTORS.sortFilter);
 
     // Build a map from tag labels to slugs for filtering
     const tagSlugMap = new Map();
@@ -83,12 +146,16 @@ const mountFilters = () => {
     const urlTag = urlParams.get('tag');
     const urlLens = urlParams.get('lens');
 
+    // Store original order for restoring when switching away from "latest"
+    const originalOrder = [...items];
+    
     const state = {
         items,
+        originalOrder,
         activeTag: urlTag || 'all',
         activeLens: urlLens || 'all',
-        sortOrder: 'default',
         tagSlugMap,
+        previousTag: null,
     };
 
     // Restore filter UI from URL parameters
@@ -149,54 +216,6 @@ const mountFilters = () => {
         });
     }
 
-    // Store original order for restoring default sort
-    const originalOrder = [...items];
-    
-    // Sort functionality
-    const sortItems = (order) => {
-        const fragment = document.createDocumentFragment();
-        let sortedItems;
-        
-        if (order === 'latest') {
-            sortedItems = [...items].sort((a, b) => {
-                const dateA = a.dataset.date || '';
-                const dateB = b.dataset.date || '';
-                // Parse dates if available
-                if (dateA && dateB) {
-                    const parsedA = new Date(dateA);
-                    const parsedB = new Date(dateB);
-                    if (!isNaN(parsedA.getTime()) && !isNaN(parsedB.getTime())) {
-                        return parsedB - parsedA; // Latest first
-                    }
-                }
-                // If one has a date and the other doesn't, prioritize the one with date
-                if (dateA && !dateB) return -1;
-                if (!dateA && dateB) return 1;
-                // If dates are equal or invalid, maintain original order
-                return 0;
-            });
-        } else {
-            // Default order - restore original order
-            sortedItems = [...originalOrder];
-        }
-
-        // Re-append items in sorted order
-        sortedItems.forEach(item => fragment.appendChild(item));
-        grid.innerHTML = ''; // Clear grid
-        grid.appendChild(fragment);
-        
-        // Update state.items to reflect new order
-        state.items = sortedItems;
-    };
-
-    if (sortSelect) {
-        sortSelect.addEventListener('change', (event) => {
-            state.sortOrder = event.target.value || 'default';
-            sortItems(state.sortOrder);
-            applyFilters(state);
-        });
-    }
-
     applyFilters(state);
 
     return { grid, items, state };
@@ -209,11 +228,17 @@ const mountLightbox = ({ items, state }) => {
     const imageEl = lightbox.querySelector(SELECTORS.lightboxImg);
     const linkEl = lightbox.querySelector(SELECTORS.lightboxLink);
     const copyBtn = lightbox.querySelector(SELECTORS.lightboxCopy);
+    const prevBtn = lightbox.querySelector(SELECTORS.lightboxPrev);
+    const nextBtn = lightbox.querySelector(SELECTORS.lightboxNext);
     const header = document.querySelector('[data-site-nav]');
     const footer = document.querySelector('footer');
 
     // Store the previous page URL (home or gallery)
     let previousUrl = '/gallery/';
+    
+    // Track current item index for navigation (only visible/filtered items)
+    let currentItemIndex = -1;
+    let visibleItems = [];
 
     const closeLightbox = () => {
         lightbox.setAttribute('hidden', '');
@@ -227,7 +252,18 @@ const mountLightbox = ({ items, state }) => {
         if (footer) footer.style.display = '';
     };
 
+    // Get visible items (not hidden by filters)
+    const getVisibleItems = () => {
+        return items.filter(item => !item.hidden);
+    };
+
     const openLightbox = (item) => {
+        // Update visible items list (in case filters changed)
+        visibleItems = getVisibleItems();
+        
+        // Find the index of the current item in visible items
+        currentItemIndex = visibleItems.indexOf(item);
+        
         const src = item.dataset.src;
         const alt = item.dataset.alt || item.dataset.title || '';
         let linkHref = item.dataset.href || '';
@@ -257,6 +293,9 @@ const mountLightbox = ({ items, state }) => {
             linkEl.removeAttribute('href');
         }
 
+        // Update arrow button visibility
+        updateArrowButtons();
+
         // Store current page as previous URL (preserve filters)
         const currentUrl = new URL(window.location.href);
         previousUrl = currentUrl.pathname + currentUrl.search;
@@ -267,6 +306,38 @@ const mountLightbox = ({ items, state }) => {
         // Hide header and footer
         if (header) header.style.display = 'none';
         if (footer) footer.style.display = 'none';
+    };
+    
+    const updateArrowButtons = () => {
+        if (!prevBtn || !nextBtn) return;
+        
+        // Hide prev button on first item
+        if (currentItemIndex <= 0) {
+            prevBtn.style.display = 'none';
+        } else {
+            prevBtn.style.display = '';
+        }
+        
+        // Hide next button on last item
+        if (currentItemIndex >= visibleItems.length - 1) {
+            nextBtn.style.display = 'none';
+        } else {
+            nextBtn.style.display = '';
+        }
+    };
+    
+    const navigateToPrevious = () => {
+        if (currentItemIndex > 0) {
+            const prevItem = visibleItems[currentItemIndex - 1];
+            openLightbox(prevItem);
+        }
+    };
+    
+    const navigateToNext = () => {
+        if (currentItemIndex < visibleItems.length - 1) {
+            const nextItem = visibleItems[currentItemIndex + 1];
+            openLightbox(nextItem);
+        }
     };
 
     const copyLinkToClipboard = async () => {
@@ -309,6 +380,10 @@ const mountLightbox = ({ items, state }) => {
     const onKeyDown = (event) => {
         if (event.key === 'Escape') {
             closeLightbox();
+        } else if (event.key === 'ArrowLeft') {
+            navigateToPrevious();
+        } else if (event.key === 'ArrowRight') {
+            navigateToNext();
         }
     };
 
@@ -366,6 +441,21 @@ const mountLightbox = ({ items, state }) => {
         copyBtn.addEventListener('click', (event) => {
             event.stopPropagation();
             copyLinkToClipboard();
+        });
+    }
+
+    // Handle previous/next navigation buttons
+    if (prevBtn) {
+        prevBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            navigateToPrevious();
+        });
+    }
+    
+    if (nextBtn) {
+        nextBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            navigateToNext();
         });
     }
 

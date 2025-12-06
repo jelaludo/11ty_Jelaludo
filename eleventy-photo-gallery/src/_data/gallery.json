@@ -1832,5 +1832,128 @@
       "#C2AE92",
       "#A19387"
     ]
+  },
+  {
+    "title": "Giant TCR SL 1",
+    "date": "",
+    "alt": "R6g 9529",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_9529.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Bicycle",
+      "vehicle",
+      "Tokyo",
+      "Object",
+      "Street"
+    ],
+    "palette": [
+      "#292E3F",
+      "#647EAB",
+      "#8B99AC",
+      "#94ABCD",
+      "#394D71",
+      "#4D5565",
+      "#7994BA",
+      "#5A7D9E"
+    ]
+  },
+  {
+    "title": "X-Mas Bonsai",
+    "date": "",
+    "alt": "R6g 9534",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_9534.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Tokyo",
+      "Close-up",
+      "tree",
+      "bonsai",
+      "Christmas"
+    ],
+    "palette": [
+      "#6C7071",
+      "#EDBC54",
+      "#724435",
+      "#221C24",
+      "#7C6632",
+      "#A9C6D8",
+      "#4F4D4F",
+      "#BBAC96"
+    ]
+  },
+  {
+    "title": "Two Rooms Winter",
+    "date": "",
+    "alt": "R6g 9572",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_9572.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Abstract",
+      "Tokyo",
+      "Close-up"
+    ],
+    "palette": [
+      "#120E1A",
+      "#A11A1E",
+      "#F6642C",
+      "#581E19",
+      "#D93526",
+      "#2A1218",
+      "#FB852F",
+      "#84161D"
+    ]
+  },
+  {
+    "title": "Two Rooms Wine List",
+    "date": "",
+    "alt": "R6g 9569",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_9569.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Tokyo",
+      "Close-up"
+    ],
+    "palette": [
+      "#50291B",
+      "#F4D348",
+      "#C56920",
+      "#292A33",
+      "#7F151B",
+      "#784E3D",
+      "#EE962B",
+      "#8F461B"
+    ]
+  },
+  {
+    "title": "Safety Worker",
+    "date": "",
+    "alt": "R6g 9561 3",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_9561-3.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Shibuya",
+      "Tokyo",
+      "Street"
+    ],
+    "palette": [
+      "#0D0909",
+      "#DEB989",
+      "#DA4E36",
+      "#C282FD",
+      "#725A4C",
+      "#6E7950",
+      "#7481AE",
+      "#E49555"
+    ]
   }
 ]

@@ -13,6 +13,17 @@
                 All
                 <span class="themes-gallery__count">{{ gallery | length }}</span>
             </button>
+            <button
+                class="themes-gallery__tag"
+                type="button"
+                data-tag-filter="latest"
+                data-tag-label="Latest"
+                role="tab"
+                aria-selected="false"
+            >
+                Latest
+                <span class="themes-gallery__count">20</span>
+            </button>
             {% set tagCount = 0 %}
             {% for tag in galleryThemes.tags %}
                 {% if tag.count > 0 %}
@@ -60,13 +71,6 @@
             {% endif %}
         </div>
         <div class="themes-gallery__controls">
-            <label class="themes-gallery__sort">
-                <span class="themes-gallery__sort-label">Sort:</span>
-                <select class="themes-gallery__select" data-sort-filter aria-label="Sort gallery">
-                    <option value="default" selected>Default</option>
-                    <option value="latest">Latest</option>
-                </select>
-            </label>
             {% if galleryThemes.lenses and galleryThemes.lenses | length %}
             <label class="themes-gallery__lens">
                 <span class="themes-gallery__lens-label">Lens</span>
@@ -131,7 +135,13 @@
 </section>
 
 <section class="themes-lightbox" data-lightbox hidden>
+    <button class="themes-lightbox__arrow themes-lightbox__arrow--prev" type="button" data-lightbox-prev aria-label="Previous image">
+        <span>&lt;</span>
+    </button>
     <img class="themes-lightbox__img" alt="" data-lightbox-img />
+    <button class="themes-lightbox__arrow themes-lightbox__arrow--next" type="button" data-lightbox-next aria-label="Next image">
+        <span>&gt;</span>
+    </button>
     <div class="themes-lightbox__actions">
         <a class="themes-lightbox__link" href="/gallery/" data-lightbox-gallery>Gallery</a>
         <a class="themes-lightbox__link" href="" data-lightbox-link>Details</a>

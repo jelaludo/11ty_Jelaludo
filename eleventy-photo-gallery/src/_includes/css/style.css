@@ -562,6 +562,42 @@ body.is-scrolling .gallery-slide__link {
   -ms-user-select: none;
 }
 
+.themes-lightbox__arrow {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1002;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 2.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: auto;
+}
+.themes-lightbox__arrow span {
+  display: inline-block;
+  line-height: 1;
+}
+.themes-lightbox__arrow:hover {
+  color: rgb(255, 255, 255);
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1);
+}
+.themes-lightbox__arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+.themes-lightbox__arrow--prev {
+  left: clamp(1rem, 3vw, 2rem);
+}
+.themes-lightbox__arrow--next {
+  right: clamp(1rem, 3vw, 2rem);
+}
+
 .themes-lightbox__actions {
   position: fixed;
   bottom: clamp(1rem, 3vw, 2rem);
