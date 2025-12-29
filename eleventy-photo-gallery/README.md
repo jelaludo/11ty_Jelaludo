@@ -3,6 +3,11 @@ PS C:\01_Projects\01a_Coding\02_CodingProjects\11ty_Jelaludo\eleventy-photo-gall
 npm run build:colors
 npm run build:exifgit 
 
+NO node server.js NEEDED!!
+This project uses Eleventy's built-in dev server, not a standalone Node.js server file.
+
+
+
 how to git branch and merge...
 
 ## Kanri Admin Workflow
