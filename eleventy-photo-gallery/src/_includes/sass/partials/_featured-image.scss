@@ -26,11 +26,12 @@
         img {
             max-width: 100%;
             max-height: min(80vh, 900px);
-            object-fit: contain;
+            object-fit: scale-down;
             transition: opacity 0.2s ease;
 
             &.is-landscape {
-                width: 100%;
+                width: auto;
+                max-width: 100%;
                 height: auto;
             }
 

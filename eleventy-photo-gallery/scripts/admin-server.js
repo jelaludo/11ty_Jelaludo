@@ -217,7 +217,7 @@ async function ensureDirectories() {
 async function generateDerivatives(absolutePath) {
   await ensureDirectories();
   const metadata = await Image(absolutePath, {
-    widths: [300, 480, 640, 1024],
+    widths: [300, 480, 640, 1024, 1920, 2560],
     formats: ["webp", "jpeg"],
     outputDir,
     urlPath: "/img/",

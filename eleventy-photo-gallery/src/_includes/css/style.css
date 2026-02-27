@@ -174,7 +174,7 @@ body.is-scrolling .gallery-slide__link {
   width: 100%;
   height: auto;
   max-height: min(92vh, 1200px);
-  object-fit: cover;
+  object-fit: scale-down;
   filter: brightness(0.92);
   transition: filter 0.4s ease;
   background: #121212;
@@ -702,11 +702,12 @@ body.is-lightbox-open {
 .feature-frame__media img {
   max-width: 100%;
   max-height: min(80vh, 900px);
-  object-fit: contain;
+  object-fit: scale-down;
   transition: opacity 0.2s ease;
 }
 .feature-frame__media img.is-landscape {
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
 }
 .feature-frame__media img.is-portrait {
@@ -1342,10 +1343,11 @@ footer {
   max-height: 100%;
   width: auto;
   height: auto;
-  object-fit: contain;
+  object-fit: scale-down;
 }
 .splash-hero__image .splash-hero__img.is-landscape {
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
 }
 .splash-hero__image .splash-hero__img.is-portrait {
