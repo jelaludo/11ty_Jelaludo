@@ -1349,29 +1349,6 @@
     ]
   },
   {
-    "title": "Let old dog sleep",
-    "date": "",
-    "alt": "R6g 9290",
-    "credit": "",
-    "linkToAuthor": "",
-    "src": "R6G_9290.jpg",
-    "imgDir": "/images/",
-    "tags": [
-      "Animal",
-      "Dog"
-    ],
-    "palette": [
-      "#A26F5D",
-      "#271C23",
-      "#B9291F",
-      "#7B4D4A",
-      "#A95B1F",
-      "#5A3D34",
-      "#DCAF72",
-      "#926546"
-    ]
-  },
-  {
     "title": "This is MINE",
     "date": "",
     "alt": "R6g 9247",
@@ -1616,31 +1593,6 @@
     ]
   },
   {
-    "title": "Temple Cat",
-    "date": "",
-    "alt": "R6g 7831",
-    "credit": "",
-    "linkToAuthor": "",
-    "src": "R6G_7831.jpg",
-    "imgDir": "/images/",
-    "tags": [
-      "Tokyo",
-      "Animal",
-      "Cat",
-      "Jiyugaoka"
-    ],
-    "palette": [
-      "#77A0A5",
-      "#CF203A",
-      "#392720",
-      "#284814",
-      "#875B65",
-      "#10210F",
-      "#B7D1D9",
-      "#694A30"
-    ]
-  },
-  {
     "title": "F35 Tarmac",
     "date": "",
     "alt": "R6g 2533",
@@ -1820,7 +1772,8 @@
     "imgDir": "/images/",
     "tags": [
       "Tokyo",
-      "Street"
+      "Street",
+      "Punctum"
     ],
     "palette": [
       "#464B56",
@@ -1992,7 +1945,10 @@
     "linkToAuthor": "",
     "src": "Up is a better view",
     "imgDir": "/images/",
-    "tags": [],
+    "tags": [
+      "Kyoto",
+      "Shadows"
+    ],
     "palette": []
   },
   {
@@ -2007,14 +1963,17 @@
     "palette": []
   },
   {
-    "title": "R6g 9787",
+    "title": "Kyoto Umeshu",
     "date": "",
     "alt": "R6g 9787",
     "credit": "",
     "linkToAuthor": "",
     "src": "Straying from the Philosopher's Path",
     "imgDir": "/images/",
-    "tags": [],
+    "tags": [
+      "Kyoto",
+      "Close-up"
+    ],
     "palette": []
   },
   {
@@ -2175,5 +2134,244 @@
       "Kyoto"
     ],
     "palette": []
+  },
+  {
+    "title": "Okinawa Cats",
+    "date": "",
+    "alt": "R6g 0207",
+    "credit": "Jelaludo",
+    "linkToAuthor": "",
+    "src": "R6G_0207.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Cat",
+      "Okinawa",
+      "Street"
+    ],
+    "palette": [
+      "#201D1D",
+      "#C97D35",
+      "#9197AA",
+      "#695E52",
+      "#D6B687",
+      "#B08156",
+      "#C0B6AA",
+      "#595B65"
+    ]
+  },
+  {
+    "title": "R6g 0268",
+    "date": "",
+    "alt": "R6g 0268",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_0268.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Street",
+      "Tokyo",
+      "Jiyugaoka",
+      "Shibuya",
+      "sunset"
+    ],
+    "palette": [
+      "#11140D",
+      "#EA7008",
+      "#CCC3BF",
+      "#DAAF68",
+      "#63849A",
+      "#503115",
+      "#2E5837",
+      "#7C6C5F"
+    ]
+  },
+  {
+    "title": "R6g 0319",
+    "date": "",
+    "alt": "R6g 0319",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_0319.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Street",
+      "Tokyo",
+      "Jiyugaoka",
+      "Neon"
+    ],
+    "palette": [
+      "#110F0B",
+      "#03E416",
+      "#C206EC",
+      "#A8793E",
+      "#027505",
+      "#3F0867",
+      "#866F58",
+      "#61F99F"
+    ]
+  },
+  {
+    "title": "R6g 0325",
+    "date": "",
+    "alt": "R6g 0325",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_0325.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Tokyo",
+      "Street",
+      "Neon"
+    ],
+    "palette": [
+      "#320707",
+      "#EB2A2E",
+      "#3E4D67",
+      "#FC9372",
+      "#920113",
+      "#494333",
+      "#090202",
+      "#FEC2A1"
+    ]
+  },
+  {
+    "title": "R6g 0531",
+    "date": "",
+    "alt": "R6g 0531",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_0531.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Street",
+      "Shibuya",
+      "Neon"
+    ],
+    "palette": [
+      "#152D3A",
+      "#B6BA5B",
+      "#A44FD4",
+      "#68CCCF",
+      "#BC696B",
+      "#382929",
+      "#C793EE",
+      "#4B1B5B"
+    ]
+  },
+  {
+    "title": "R6g 0585",
+    "date": "",
+    "alt": "R6g 0585",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_0585.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Street",
+      "Shibuya",
+      "Tokyo"
+    ],
+    "palette": [
+      "#120D27",
+      "#D8BE48",
+      "#E0544C",
+      "#9F94A2",
+      "#243278",
+      "#493F28",
+      "#5C343C",
+      "#CFA889"
+    ]
+  },
+  {
+    "title": "R6g 1434",
+    "date": "",
+    "alt": "R6g 1434",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_1434.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Gun",
+      "Close-up"
+    ],
+    "palette": [
+      "#0D130F",
+      "#E2A654",
+      "#02A4D5",
+      "#A29178",
+      "#533410",
+      "#025881",
+      "#A7702C",
+      "#494945"
+    ]
+  },
+  {
+    "title": "R6g 1458",
+    "date": "",
+    "alt": "R6g 1458",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_1458.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Close-up",
+      "fire"
+    ],
+    "palette": [
+      "#17111B",
+      "#F46C31",
+      "#E2BE75",
+      "#813021",
+      "#323D12",
+      "#B77248",
+      "#3A2536",
+      "#64382C"
+    ]
+  },
+  {
+    "title": "R6g 1461",
+    "date": "",
+    "alt": "R6g 1461",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_1461.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Cat",
+      "Close-up"
+    ],
+    "palette": [
+      "#2F292F",
+      "#1B549E",
+      "#AC846D",
+      "#A5A7AB",
+      "#333749",
+      "#674841",
+      "#6A696D",
+      "#BDAC9D"
+    ]
+  },
+  {
+    "title": "Piazza Del Duomo",
+    "date": "",
+    "alt": "R6g 1517",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_1517.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Architecture",
+      "Italy"
+    ],
+    "palette": [
+      "#8EACBE",
+      "#22212A",
+      "#AD8D71",
+      "#7F685A",
+      "#577796",
+      "#557280",
+      "#C1AB9B",
+      "#333C47"
+    ]
   }
 ]

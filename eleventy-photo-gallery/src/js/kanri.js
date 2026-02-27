@@ -498,6 +498,7 @@ npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
     imagesToRender.forEach((item) => {
       const card = template.content.firstElementChild.cloneNode(true);
       const checkbox = card.querySelector(".kanri-card__checkbox");
+      const deleteButton = card.querySelector(".kanri-card__delete");
       const editButton = card.querySelector(".kanri-card__edit");
       const img = card.querySelector(".kanri-card__img");
       const title = card.querySelector(".kanri-card__title");
@@ -507,9 +508,11 @@ npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
 
       checkbox.checked = state.selected.has(item.src);
       checkbox.dataset.src = item.src;
+      deleteButton.dataset.src = item.src;
       editButton.dataset.src = item.src;
 
       checkbox.addEventListener("change", handleSelectToggle);
+      deleteButton.addEventListener("click", () => handleDeleteSingle(item.src));
       editButton.addEventListener("click", () => startEditing(item.src));
 
       const displayDir = item.imgDir || "/images/";
@@ -586,6 +589,32 @@ npm run watch:eleventy   # 11ty dev server on http://localhost:8080</code></pre>
         throw new Error(`Delete failed (${response.status})`);
       }
       showToast("Images removed.");
+      await refreshImages();
+    } catch (err) {
+      console.error(err);
+      showToast(err.message, "error");
+    }
+  }
+
+  async function handleDeleteSingle(src) {
+    if (!src) return;
+    const item = state.images.find((entry) => entry.src === src);
+    const displayName = item?.title || item?.alt || src;
+    const confirmed = window.confirm(`Delete "${displayName}"? This cannot be undone.`);
+    if (!confirmed) return;
+
+    try {
+      const response = await fetch(`${ADMIN_BASE}/admin/images`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ items: [src] }),
+      });
+      if (!response.ok) {
+        throw new Error(`Delete failed (${response.status})`);
+      }
+      showToast("Image removed.");
       await refreshImages();
     } catch (err) {
       console.error(err);
