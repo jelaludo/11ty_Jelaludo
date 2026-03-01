@@ -1,0 +1,779 @@
+// ================================================================
+// BareBlocks Tool — all styles scoped under .bb-app
+// This isolates BareBlocks visuals from the Jelaludo site styles
+// ================================================================
+
+.bb-app {
+    // Container inherits BareBlocks body-level defaults
+    font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
+    background: #0d1117;
+    color: #c9d1d9;
+    overflow-x: hidden;
+    min-height: 100vh;
+
+    // Reset only within the tool
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .terminal-container {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background: #0d1117;
+    }
+
+    .terminal-header {
+        background: #161b22;
+        padding: 10px 20px;
+        border-bottom: 1px solid #30363d;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .terminal-title-area {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .terminal-title {
+        color: #6FC3DF;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .thumbnail-container {
+        display: none;
+        align-items: center;
+        max-height: 60px;
+        border-radius: 4px;
+        overflow: hidden;
+        border: 1px solid #30363d;
+    }
+
+    .thumbnail-container.visible {
+        display: flex;
+    }
+
+    .thumbnail-container img {
+        max-height: 60px;
+        max-width: 80px;
+        object-fit: contain;
+    }
+
+    .terminal-tabs {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .tab-button {
+        background: transparent;
+        border: 1px solid #30363d;
+        color: #8b949e;
+        padding: 5px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
+        font-size: 11px;
+        transition: all 0.2s;
+        touch-action: manipulation;
+    }
+
+    .tab-button:hover {
+        background: #21262d;
+        color: #c9d1d9;
+        border-color: #6FC3DF;
+    }
+
+    #output-dimensions:hover {
+        background: #1c2128;
+        border-color: #6FC3DF !important;
+    }
+
+    .tab-button.active {
+        background: #0d1117;
+        color: #6FC3DF;
+        border-color: #6FC3DF;
+    }
+
+    .terminal-content {
+        flex: 1;
+        overflow-y: auto;
+        padding: 20px;
+    }
+
+    .tab-content {
+        display: none;
+    }
+
+    .tab-content.active {
+        display: block;
+    }
+
+    .upload-zone {
+        border: 2px dashed #30363d;
+        border-radius: 8px;
+        padding: 60px 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+        background: #161b22;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .upload-zone:hover,
+    .upload-zone.drag-over {
+        border-color: #6FC3DF;
+        background: #1c2128;
+    }
+
+    .upload-icon {
+        font-size: 48px;
+        margin-bottom: 20px;
+    }
+
+    #fileInput {
+        display: none;
+    }
+
+    .output-line {
+        margin: 5px 0;
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .prompt {
+        color: #6FC3DF;
+    }
+
+    .success {
+        color: #3fb950;
+    }
+
+    .error {
+        color: #f85149;
+    }
+
+    .info {
+        color: #8b949e;
+    }
+
+    /* Category colors */
+    .category-structure { color: #FF6AC1; }
+    .category-metadata { color: #FFA657; }
+    .category-payloads { color: #6FC3DF; }
+    .category-ai { color: #7EE787; }
+
+    /* Copy button */
+    .copy-icon, .copy-text-btn {
+        cursor: pointer;
+        margin-left: 8px;
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 3px;
+        background: #21262d;
+        border: 1px solid #30363d;
+        font-size: 11px;
+        transition: all 0.2s;
+        text-align: center;
+        font-weight: bold;
+        user-select: none;
+    }
+
+    .copy-icon:hover, .copy-text-btn:hover {
+        background: #30363d;
+        border-color: #6FC3DF;
+        transform: scale(1.05);
+    }
+
+    .copy-icon:active, .copy-text-btn:active {
+        transform: scale(0.95);
+    }
+
+    .copy-icon.copied {
+        background: #3fb950;
+        border-color: #3fb950;
+    }
+
+    /* Metadata tables */
+    .metadata-section {
+        margin: 10px 0;
+        background: #161b22;
+        border-radius: 4px;
+        padding: 10px;
+        border: 1px solid #30363d;
+    }
+
+    .section-title {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 6px;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #30363d;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .section-collapse-icon {
+        display: none;
+        font-size: 14px;
+        color: #6FC3DF;
+        user-select: none;
+        margin-left: 10px;
+    }
+
+    .section-content {
+        transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+        overflow: hidden;
+    }
+
+    .section-content.collapsed {
+        max-height: 0 !important;
+        opacity: 0;
+    }
+
+    .metadata-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+        overflow-x: auto;
+        display: block;
+    }
+
+    .metadata-table tbody {
+        display: table;
+        width: 100%;
+    }
+
+    .metadata-table tr {
+        border-bottom: 1px solid #21262d;
+    }
+
+    .metadata-table td {
+        padding: 4px 8px;
+        vertical-align: top;
+    }
+
+    .metadata-table td:first-child {
+        color: #8b949e;
+        width: 35%;
+        font-weight: 500;
+    }
+
+    .metadata-table td:last-child {
+        color: #c9d1d9;
+        word-break: break-word;
+    }
+
+    /* Expandable rows */
+    .expandable {
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .expandable:hover {
+        background: #1c2128;
+    }
+
+    .toggle {
+        display: inline-block;
+        color: #6FC3DF;
+        font-weight: bold;
+        margin-left: 8px;
+        user-select: none;
+        min-width: 15px;
+        text-align: center;
+    }
+
+    .nested {
+        background: #0d1117;
+    }
+
+    .provenance-summary {
+        background: #1c2128;
+        border: 1px solid #30363d;
+        border-radius: 4px;
+        padding: 8px;
+        margin-bottom: 10px;
+        font-size: 12px;
+    }
+
+    .found {
+        color: #3fb950;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    .not-found {
+        color: #f85149;
+    }
+
+    .section-highlight {
+        animation: highlight-pulse 2s ease-in-out;
+        border: 2px solid #6FC3DF !important;
+    }
+
+    .merge-cell.drop-target {
+        outline: 2px solid #6FC3DF;
+        box-shadow: 0 0 0 2px rgba(111, 195, 223, 0.3);
+    }
+
+    @keyframes highlight-pulse {
+        0%, 100% { 
+            background: #161b22; 
+            border-color: #6FC3DF;
+        }
+        50% { 
+            background: #1c2128; 
+            border-color: #3fb950;
+        }
+    }
+
+    /* Data recap styles */
+    .data-recap {
+        margin: 6px 0;
+        font-size: 11px;
+        line-height: 1.5;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 0 8px;
+    }
+
+    .recap-item {
+        display: block;
+        padding: 2px 6px;
+        border: 1px solid #21262d;
+        border-radius: 4px;
+        background: #0d1117;
+        white-space: nowrap;
+    }
+
+    /* Parsing flow */
+    .parsing-flow-content {
+        display: none;
+        padding: 15px 20px;
+        font-size: 11px;
+        line-height: 1.6;
+        color: #c9d1d9;
+    }
+
+    .parsing-flow-content.active {
+        display: block;
+    }
+
+    .parsing-flow-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin: 10px 0;
+    }
+
+    @media (max-width: 768px) {
+        .parsing-flow-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .parsing-flow-phase {
+        background: #0d1117;
+        border: 1px solid #30363d;
+        border-radius: 4px;
+        padding: 12px;
+    }
+
+    .parsing-flow-content h3 {
+        color: #89D185;
+        font-size: 13px;
+        margin: 0 0 8px 0;
+        font-weight: bold;
+    }
+
+    .parsing-flow-content .phase-desc {
+        color: #8b949e;
+        margin-left: 0;
+        margin-bottom: 0;
+        white-space: pre-line;
+        font-size: 10px;
+        line-height: 1.5;
+    }
+
+    .parsing-flow-content .phase-title {
+        color: #6FC3DF;
+        font-weight: bold;
+    }
+
+    .flow-status-line {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .flow-status-actions {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    /* Category colors for table headers */
+    .category-anomaly {
+        color: #f85149;
+    }
+
+    /* Chunks visualization */
+    .chunks-container {
+        margin: 20px 0;
+    }
+
+    .heatmap-container {
+        background: #161b22;
+        border-radius: 6px;
+        padding: 20px;
+        margin: 20px 0;
+        border: 1px solid #30363d;
+    }
+
+    .heatmap {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        border-radius: 4px;
+        overflow: hidden;
+        margin: 10px 0;
+    }
+
+    .heatmap-segment {
+        height: 100%;
+        cursor: pointer;
+        transition: opacity 0.2s;
+        position: relative;
+        min-height: 30px;
+    }
+
+    .heatmap-segment:hover {
+        opacity: 0.8;
+    }
+
+    .chunk-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin: 15px 0;
+        font-size: 11px;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .legend-color {
+        width: 20px;
+        height: 12px;
+        border-radius: 2px;
+    }
+
+    .chunk-list {
+        margin-top: 20px;
+    }
+
+    .chunk-item {
+        background: #1c2128;
+        border: 1px solid #30363d;
+        border-radius: 4px;
+        padding: 10px;
+        margin: 8px 0;
+        font-size: 12px;
+    }
+
+    .chunk-type-label {
+        color: #6FC3DF;
+        cursor: help;
+        text-decoration: underline dotted;
+    }
+
+    /* Mobile responsive */
+    /* Tablet and below (768px) */
+    @media (max-width: 768px) {
+        .terminal-container {
+            min-height: 100vh;
+        }
+
+        .terminal-header {
+            flex-direction: column;
+            align-items: stretch;
+            padding: 12px 15px;
+        }
+
+        .terminal-tabs {
+            width: 100%;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .tab-button {
+            padding: 10px 15px;
+            font-size: 13px;
+            min-height: 44px;
+            flex: 1;
+        }
+
+        .terminal-content {
+            padding: 15px;
+        }
+
+        .upload-zone {
+            padding: 40px 20px;
+            min-height: 180px;
+        }
+
+        .metadata-section {
+            margin: 12px 0;
+            padding: 12px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            padding: 8px 10px;
+            cursor: pointer;
+            user-select: none;
+            background: #0d1117;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .section-title:active {
+            background: #21262d;
+        }
+
+        .section-collapse-icon {
+            display: inline-block;
+        }
+
+        /* Make expandable rows easier to tap */
+        .expandable {
+            min-height: 44px;
+        }
+
+        .toggle {
+            font-size: 16px;
+            min-width: 24px;
+            padding: 5px;
+        }
+
+        .metadata-table td:first-child {
+            width: 45%;
+            font-size: 12px;
+        }
+
+        .metadata-table td:last-child {
+            font-size: 12px;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* ComfyUI specific mobile styles */
+        #section-comfyui .metadata-table td:first-child {
+            width: 35%;
+            max-width: 120px;
+            word-break: break-word;
+        }
+
+        #section-comfyui .metadata-table td:last-child {
+            font-size: 11px;
+        }
+
+        .copy-icon, .copy-text-btn {
+            min-width: 44px;
+            min-height: 36px;
+            padding: 6px 10px;
+            font-size: 11px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .thumbnail-container img {
+            max-width: 60px;
+            max-height: 50px;
+        }
+
+        /* Better spacing for recap items */
+        .data-recap {
+            gap: 6px;
+            font-size: 10px;
+        }
+
+        .recap-item {
+            display: inline-block;
+        }
+
+        .provenance-summary {
+            padding: 12px;
+            margin: 8px 0;
+        }
+    }
+
+    /* Mobile devices (480px and below) */
+    @media (max-width: 480px) {
+    .terminal-header {
+            padding: 10px;
+        }
+
+        .terminal-content {
+            padding: 10px;
+        }
+
+        .terminal-title {
+            font-size: 12px;
+        }
+
+        .tab-button {
+            font-size: 11px;
+            padding: 8px 10px;
+        }
+
+        .metadata-section {
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .section-title {
+            font-size: 13px;
+            padding: 6px 8px;
+        }
+
+        .metadata-table {
+            font-size: 11px;
+        }
+
+        .metadata-table td {
+            padding: 6px 4px;
+        }
+
+        .metadata-table td:first-child {
+            width: 50%;
+        }
+
+        /* ComfyUI specific - narrower label column for more value space */
+        #section-comfyui .metadata-table td:first-child {
+            width: 30%;
+            max-width: 100px;
+            font-size: 10px;
+            word-break: break-word;
+        }
+
+        #section-comfyui .metadata-table td:last-child {
+            width: 70%;
+            font-size: 10px;
+        }
+
+        /* Stack layout for very small screens on key metadata */
+        .provenance-summary table td {
+            display: block;
+            width: 100% !important;
+        }
+
+        .provenance-summary table td:first-child {
+            font-weight: bold;
+            padding-bottom: 2px;
+            border-bottom: none;
+        }
+
+        .provenance-summary table td:last-child {
+            padding-top: 2px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #21262d;
+        }
+
+        .data-recap {
+            gap: 4px;
+            font-size: 10px;
+            line-height: 1.4;
+        }
+
+        .recap-item {
+            font-size: 10px;
+        }
+
+        .upload-zone {
+            padding: 30px 15px;
+            min-height: 150px;
+        }
+
+        .upload-icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+    }
+
+    /* Very small mobile (360px and below) */
+    @media (max-width: 360px) {
+        .terminal-tabs {
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .tab-button {
+            width: 100%;
+            min-height: 40px;
+        }
+
+        .metadata-table td:first-child {
+            width: 55%;
+        }
+
+        /* ComfyUI gets even narrower label on very small screens */
+        #section-comfyui .metadata-table td:first-child {
+            width: 28%;
+            max-width: 80px;
+            font-size: 9px;
+            word-break: break-word;
+        }
+
+        #section-comfyui .metadata-table td:last-child {
+            width: 72%;
+            font-size: 9px;
+        }
+
+        .copy-icon, .copy-text-btn {
+            margin-left: 4px;
+            margin-top: 4px;
+            display: block;
+        }
+    }
+
+    /* Touch device optimizations */
+    @media (hover: none) and (pointer: coarse) {
+        .tab-button:hover {
+            background: transparent;
+        }
+
+        .tab-button:active {
+            background: #21262d;
+            transform: scale(0.98);
+        }
+
+        button, .copy-icon, .copy-text-btn, .chunk-type-label {
+            touch-action: manipulation;
+        }
+    }
+
+}
