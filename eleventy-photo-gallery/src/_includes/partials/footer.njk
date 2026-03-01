@@ -12,6 +12,8 @@
                     <li><a href="{{ link.url | url }}" class="link">SPARK</a></li>
                 {% elseif link.key == "Jelaludo" %}
                     <li><a href="{{ link.url | url }}" class="link">JELALUDO</a></li>
+                {% elseif link.key == "Tools" %}
+                    <li><a href="{{ link.url | url }}" class="link tools-link">[TOOLS]</a></li>
                 {% endif %}
             {% endfor %}
             {% if env.isDev %}

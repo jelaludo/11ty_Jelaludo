@@ -56,6 +56,17 @@
             color: #ffffff;
         }
 
+        &.tools-link {
+            color: #6FC3DF;
+            font-family: 'Courier New', Consolas, monospace;
+            letter-spacing: 0.05em;
+
+            &:hover,
+            &:focus-visible {
+                color: #a8d8ea;
+            }
+        }
+
         &::after {
             content: "";
             position: absolute;

@@ -1,0 +1,303 @@
+---
+title: Tools — BareBlocks
+eleventyNavigation:
+  key: Tools
+  order: 5
+layout: base.njk
+permalink: "/tools/"
+meta_desc: "Inspect image metadata, extract EXIF and GPS data, detect AI-generated images, and merge photos — all in your browser. Nothing leaves your device."
+url: https://jelaludo.com
+img: /images/R6G_5313-Enhanced-NR.jpg
+alt: BareBlocks image tools
+cardType: summary
+---
+
+<main id="main" class="bb-main">
+    <div class="bb-app">
+        <div class="terminal-container">
+            <div class="terminal-header">
+                <div class="terminal-title-area">
+                    <div class="terminal-title">$ BareBlocks - Metadata Inspector</div>
+                    <div class="thumbnail-container" id="thumbnailContainer">
+                        <img id="thumbnailImage" alt="Thumbnail">
+                    </div>
+                </div>
+                <div class="terminal-tabs">
+                    <button class="tab-button active" onclick="switchTab('metadata')">Metadata</button>
+                    <button class="tab-button" onclick="switchTab('imagetools')">Image Tools</button>
+                </div>
+            </div>
+
+            <div class="terminal-content">
+                <!-- Metadata Tab -->
+                <div id="metadata-tab" class="tab-content active">
+                    <div class="upload-zone" id="uploadZone">
+                        <div class="upload-icon">[   ]</div>
+                        <div>Click or drag file here to analyze</div>
+                        <div class="info" style="margin-top: 10px; font-size: 11px;">
+                            Supports: JPEG, PNG, TIFF, HEIC<br>
+                            All processing happens in your browser - files never uploaded
+                        </div>
+                    </div>
+                    <input type="file" id="fileInput" accept="image/*">
+                    <div id="output"></div>
+                    <div class="parsing-flow-content" id="parsingFlowPanel">
+                        <div class="parsing-flow-grid">
+                            <div class="parsing-flow-phase"><h3><span class="phase-title">Phase 0: Orchestration</span></h3><div class="phase-desc">Entry point: file selected or dropped
+Routes to parser based on container type
+Aggregates results into final report</div></div>
+                            <div class="parsing-flow-phase"><h3><span class="phase-title">Phase 1: File Intake</span></h3><div class="phase-desc">Reads file in browser (File API)
+Validates size and type
+Records basic file info (name, size, mime)</div></div>
+                            <div class="parsing-flow-phase"><h3><span class="phase-title">Phase 2: Container Identification</span></h3><div class="phase-desc">Reads first 8-16 bytes (magic bytes)
+Matches known signatures:
+  PNG: 89 50 4E 47 0D 0A 1A 0A
+  JPEG: FF D8 FF
+  WEBP: RIFF....WEBP
+Returns container type and confidence</div></div>
+                            <div class="parsing-flow-phase"><h3><span class="phase-title">Phase 3: Structural Enumeration</span></h3><div class="phase-desc">PNG: iterate chunks (length, type, data, CRC)
+JPEG: iterate segments (marker, length, payload)
+Classifies pixel vs metadata areas
+Returns chunk/segment list and byte totals</div></div>
+                            <div class="parsing-flow-phase"><h3><span class="phase-title">Phase 4: Declared Metadata</span></h3><div class="phase-desc">Uses exifr for EXIF/IPTC/XMP
+Extracts GPS and camera fields
+Returns structured metadata object</div></div>
+                            <div class="parsing-flow-phase"><h3><span class="phase-title">Phase 5: Opaque Payload Detection</span></h3><div class="phase-desc">PNG text chunks (tEXt, zTXt, iTXt)
+Attempts UTF-8 decode and JSON parse
+Classifies: json, text, or binary
+Returns payload list with sizes and sources</div></div>
+                            <div class="parsing-flow-phase"><h3><span class="phase-title">Phase 6: AI Pattern Recognition</span></h3><div class="phase-desc">Scans payloads for ComfyUI/SD patterns
+Looks for workflow nodes and prompt text
+Returns AI metadata summary</div></div>
+                            <div class="parsing-flow-phase"><h3><span class="phase-title">Phase 7: Anomaly Heuristics</span></h3><div class="phase-desc">Computes non-pixel ratio
+Flags large metadata payloads
+Returns anomaly stats and flags</div></div>
+                            <div class="parsing-flow-phase"><h3><span class="phase-title">Phase 8: Report Assembly</span></h3><div class="phase-desc">Merges: summary, structure, metadata, payloads, ai, anomalies
+Formats for table rendering
+Ready for UI display</div></div>
+                            <div class="parsing-flow-phase"><h3><span class="phase-title">UI Rendering</span></h3><div class="phase-desc">Renders tables and collapsible sections
+Enables copy/export actions
+Everything stays client-side</div></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Tools Tab -->
+                <div id="imagetools-tab" class="tab-content">
+                    <div style="max-width: 1400px; margin: 0 auto;">
+                        <h2 class="section-title category-ai" style="margin-bottom: 20px;">Image Merger</h2>
+                        <p class="info" style="margin-bottom: 20px;">Merge multiple images into a single one. Everything happening client-side.</p>
+
+                        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                            <!-- Left Panel: Settings -->
+                            <div style="flex: 0 0 300px; min-width: 250px;">
+                                <div class="metadata-section">
+                                    <div class="section-title">Settings</div>
+                                    <div style="padding: 15px;">
+                                        <!-- Layout Mode -->
+                                        <div style="margin-bottom: 20px;">
+                                            <label style="display: block; margin-bottom: 8px; color: #8b949e; font-size: 12px;">Layout Mode</label>
+                                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                                <button class="tab-button active" id="merge-auto-grid" onclick="setMergeLayout('auto-grid')" style="flex: 1; min-width: 120px; font-size: 11px;">Auto Grid</button>
+                                                <button class="tab-button" id="merge-grid" onclick="setMergeDirection('grid')" style="flex: 1; min-width: 120px; font-size: 11px;">Manual Grid</button>
+                                                <button class="tab-button" id="merge-horizontal" onclick="setMergeDirection('horizontal')" style="flex: 1; min-width: 120px; font-size: 11px;">→ Horizontal</button>
+                                                <button class="tab-button" id="merge-vertical" onclick="setMergeDirection('vertical')" style="flex: 1; min-width: 120px; font-size: 11px;">↓ Vertical</button>
+                                            </div>
+                                            <div class="info" style="margin-top: 8px; font-size: 10px;">Auto Grid adapts to image count. Manual Grid uses the slider below.</div>
+                                        </div>
+
+                                        <!-- Layout Templates -->
+                                        <div style="margin-bottom: 20px;">
+                                            <label style="display: block; margin-bottom: 8px; color: #8b949e; font-size: 12px;">Layout Templates</label>
+                                            <div id="template-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;"></div>
+                                            <div class="info" style="margin-top: 8px; font-size: 10px;">Templates adapt as you add/remove images. For higher counts, it falls back to Auto Grid.</div>
+                                        </div>
+
+                                        <!-- Grid Columns -->
+                                        <div id="grid-columns-container" style="margin-bottom: 20px;">
+                                            <label style="display: block; margin-bottom: 8px; color: #8b949e; font-size: 12px;">Grid Columns: <span id="grid-columns-value">2</span></label>
+                                            <input type="range" id="grid-columns" min="1" max="6" value="2" style="width: 100%;" oninput="updateGridColumns(this.value)">
+                                        </div>
+
+                                        <!-- Image Fit -->
+                                        <div style="margin-bottom: 20px;">
+                                            <label style="display: block; margin-bottom: 8px; color: #8b949e; font-size: 12px;">Image Fit</label>
+                                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                                <button class="tab-button" id="fit-cover" onclick="setImageFit('cover')" style="flex: 1; font-size: 10px;" title="Scales image to cover entire cell (may crop edges)">Cover</button>
+                                                <button class="tab-button active" id="fit-contain" onclick="setImageFit('contain')" style="flex: 1; font-size: 10px;" title="Scales image to fit within cell (maintains aspect ratio, adds padding)">Contain</button>
+                                                <button class="tab-button" id="fit-fill" onclick="setImageFit('fill')" style="flex: 1; font-size: 10px;" title="Stretches image to fill entire cell (may distort)">Fill</button>
+                                                <button class="tab-button" id="fit-scale" onclick="setImageFit('scale')" style="flex: 1; font-size: 10px;" title="Like Contain, but won't enlarge small images">Scale Down</button>
+                                            </div>
+                                            <p style="margin-top: 8px; font-size: 10px; color: #6FC3DF; line-height: 1.4;" id="fit-description">
+                                                Scales to fit within cell, maintains aspect ratio
+                                            </p>
+                                        </div>
+
+                                        <!-- Frame Settings -->
+                                        <div style="margin-bottom: 20px;">
+                                            <label style="display: block; margin-bottom: 8px; color: #8b949e; font-size: 12px;">Frame Size: <span id="frame-size-value">6</span>px</label>
+                                            <input type="range" id="frame-size" min="0" max="40" value="6" style="width: 100%;" oninput="setFrameSize(this.value)">
+                                            <div style="display: flex; gap: 8px; margin-top: 10px;">
+                                                <input type="color" id="frame-color" value="#0d1117" onchange="setFrameColor(this.value)" style="width: 50px; height: 32px; cursor: pointer; border: 1px solid #30363d; border-radius: 4px; background: transparent;">
+                                                <input type="text" id="frame-color-text" value="#0d1117" onchange="setFrameColor(this.value)" style="flex: 1; padding: 6px; background: #0d1117; border: 1px solid #30363d; border-radius: 4px; color: #c9d1d9; font-size: 11px; font-family: monospace;">
+                                            </div>
+                                        </div>
+
+                                        <!-- Output Dimensions -->
+                                        <div id="output-dimensions" onclick="openOutputSizeModal()" style="margin-bottom: 15px; padding: 10px; background: #161b22; border-radius: 4px; font-size: 11px; color: #8b949e; display: none; cursor: pointer; border: 1px solid #30363d; transition: all 0.2s;">
+                                            <strong style="color: #c9d1d9;">Final Size:</strong> <span id="dimensions-text"></span>
+                                            <span style="float: right; color: #6FC3DF; font-size: 10px;">✏️ Click to adjust</span>
+                                        </div>
+
+                                        <!-- Empty Cells -->
+                                        <div style="margin-bottom: 20px; padding: 12px; background: #161b22; border-radius: 4px; border: 1px solid #30363d;">
+                                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin-bottom: 12px;">
+                                                <input type="checkbox" id="include-empty-cells" onchange="toggleEmptyCells(this.checked)" style="cursor: pointer;">
+                                                <span style="color: #c9d1d9; font-size: 12px; font-weight: bold;">Include Empty Cells</span>
+                                            </label>
+                                            <div id="empty-cells-options" style="display: none;">
+                                                <label style="display: block; margin-bottom: 8px; color: #8b949e; font-size: 11px;">Pattern</label>
+                                                <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+                                                    <button class="tab-button" id="pattern-before" onclick="setEmptyCellPattern('before')" style="flex: 1; font-size: 10px;">Before Each</button>
+                                                    <button class="tab-button active" id="pattern-after" onclick="setEmptyCellPattern('after')" style="flex: 1; font-size: 10px;">After Each</button>
+                                                </div>
+                                                <label style="display: block; margin-bottom: 8px; color: #8b949e; font-size: 11px;">Cell Color</label>
+                                                <div style="display: flex; gap: 8px;">
+                                                    <input type="color" id="empty-cell-color" value="#ffffff" onchange="setEmptyCellColor(this.value)" style="width: 50px; height: 32px; cursor: pointer; border: 1px solid #30363d; border-radius: 4px; background: transparent;">
+                                                    <input type="text" id="empty-cell-color-text" value="#ffffff" onchange="setEmptyCellColor(this.value)" style="flex: 1; padding: 6px; background: #0d1117; border: 1px solid #30363d; border-radius: 4px; color: #c9d1d9; font-size: 11px; font-family: monospace;">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Text Overlay hint -->
+                                        <div style="padding: 15px; background: #161b22; border-radius: 4px; border: 1px solid #30363d; text-align: center;">
+                                            <div style="color: #6FC3DF; font-size: 13px; font-weight: bold; margin-bottom: 10px;">✏️ Text Editing</div>
+                                            <p style="color: #8b949e; font-size: 11px; line-height: 1.6; margin: 0;">
+                                                <strong style="color: #c9d1d9;">Click</strong> any text to edit<br>
+                                                <strong style="color: #c9d1d9;">Drag</strong> text to reposition<br>
+                                                <strong style="color: #c9d1d9;">Double-click</strong> empty area to add more images
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Selected Images List -->
+                                <div id="selected-images-list" style="margin-top: 15px;"></div>
+                            </div>
+
+                            <!-- Right Panel: Preview + Upload -->
+                            <div style="flex: 1; min-width: 400px;">
+                                <div class="metadata-section" style="min-height: 500px;">
+                                    <div class="section-title">Preview & Upload</div>
+                                    <div id="merge-preview-container" class="upload-zone" style="padding: 20px; text-align: center; min-height: 450px; cursor: pointer; position: relative; overflow-x: auto; overflow-y: auto;">
+                                        <input type="file" id="mergeFileInput" accept="image/*" multiple style="display: none;">
+                                        <div id="merge-preview" style="width: 100%; min-height: 410px; display: flex; align-items: center; justify-content: center;">
+                                            <div style="text-align: center;">
+                                                <div class="upload-icon" style="font-size: 48px; margin-bottom: 20px;">[   ]</div>
+                                                <div style="font-size: 14px; color: #c9d1d9; margin-bottom: 10px;">Click or drag files here to merge</div>
+                                                <div class="info" style="font-size: 11px;">
+                                                    Supports: JPEG, PNG, TIFF, HEIC<br>
+                                                    All processing happens in your browser
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Merge Button -->
+                                <button class="tab-button" id="merge-download-btn" onclick="openOutputSizeModal()" style="width: 100%; margin-top: 15px; padding: 12px; font-size: 14px; display: none;">
+                                    ⬇ Merge & Download
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Text Edit Modal -->
+    <div id="text-edit-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); z-index: 10000; align-items: center; justify-content: center;">
+        <div id="modal-content" style="background: #161b22; border: 2px solid #6FC3DF; border-radius: 8px; padding: 20px; width: 600px; max-width: 90%; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
+            <div id="modal-header" style="cursor: move; padding: 10px; margin: -20px -20px 15px -20px; background: #0d1117; border-bottom: 1px solid #30363d; border-radius: 6px 6px 0 0; user-select: none;">
+                <h3 style="margin: 0; color: #6FC3DF; font-size: 14px;">✏️ Edit Text</h3>
+            </div>
+            <textarea id="modal-text-input" style="width: 100%; min-height: 100px; padding: 12px; background: #0d1117; border: 1px solid #30363d; border-radius: 4px; color: #c9d1d9; font-family: 'Courier New', monospace; font-size: 13px; resize: vertical; margin-bottom: 15px;" placeholder="Enter text..."></textarea>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                <div>
+                    <label style="display: block; margin-bottom: 6px; color: #8b949e; font-size: 11px;">Font</label>
+                    <select id="modal-text-font" style="width: 100%; padding: 6px; background: #0d1117; border: 1px solid #30363d; border-radius: 4px; color: #c9d1d9; font-size: 11px; cursor: pointer;">
+                        <option value="Arial, sans-serif">Arial</option>
+                        <option value="Georgia, serif">Georgia</option>
+                        <option value="Courier New, monospace">Courier New</option>
+                        <option value="Times New Roman, serif">Times New Roman</option>
+                        <option value="Verdana, sans-serif">Verdana</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 6px; color: #8b949e; font-size: 11px;">Size: <span id="modal-text-size-value">48</span>px</label>
+                    <input type="range" id="modal-text-size" min="6" max="120" value="48" style="width: 100%;">
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                <div>
+                    <label style="display: block; margin-bottom: 6px; color: #8b949e; font-size: 11px;">Color</label>
+                    <div style="display: flex; gap: 8px;">
+                        <input type="color" id="modal-text-color" value="#ffffff" style="width: 50px; height: 32px; cursor: pointer; border: 1px solid #30363d; border-radius: 4px; background: transparent;">
+                        <input type="text" id="modal-text-color-text" value="#ffffff" style="flex: 1; padding: 6px; background: #0d1117; border: 1px solid #30363d; border-radius: 4px; color: #c9d1d9; font-size: 11px; font-family: monospace;">
+                    </div>
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 6px; color: #8b949e; font-size: 11px;">Opacity: <span id="modal-text-opacity-value">100</span>%</label>
+                    <input type="range" id="modal-text-opacity" min="0" max="100" value="100" style="width: 100%;">
+                </div>
+            </div>
+            <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button onclick="closeTextModal(false)" style="padding: 8px 16px; background: #21262d; border: 1px solid #30363d; border-radius: 4px; color: #8b949e; cursor: pointer; font-size: 12px;">Cancel</button>
+                <button onclick="closeTextModal(true)" style="padding: 8px 16px; background: #238636; border: 1px solid #2ea043; border-radius: 4px; color: #fff; cursor: pointer; font-size: 12px; font-weight: bold;">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Output Size Modal -->
+    <div id="output-size-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); z-index: 10000; align-items: center; justify-content: center;">
+        <div style="background: #161b22; border: 2px solid #6FC3DF; border-radius: 8px; padding: 25px; width: 500px; max-width: 90%; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
+            <h3 style="margin: 0 0 20px 0; color: #6FC3DF; font-size: 16px;">📐 Output Size</h3>
+            <div style="background: #0d1117; padding: 15px; border-radius: 6px; margin-bottom: 20px; border: 1px solid #30363d;">
+                <div style="color: #8b949e; font-size: 11px; margin-bottom: 5px;">Current Output Size:</div>
+                <div id="output-size-current" style="color: #c9d1d9; font-size: 18px; font-weight: bold; font-family: monospace;"></div>
+                <div id="output-size-preview" style="color: #6FC3DF; font-size: 11px; margin-top: 5px;"></div>
+            </div>
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 10px; color: #8b949e; font-size: 12px;">Scale Factor:</label>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px;">
+                    <button class="tab-button active" id="scale-100" onclick="setOutputScale(1.0)" style="font-size: 11px;">100% (1×)</button>
+                    <button class="tab-button" id="scale-75" onclick="setOutputScale(0.75)" style="font-size: 11px;">75%</button>
+                    <button class="tab-button" id="scale-50" onclick="setOutputScale(0.5)" style="font-size: 11px;">50%</button>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
+                    <button class="tab-button" id="scale-25" onclick="setOutputScale(0.25)" style="font-size: 11px;">25%</button>
+                    <button class="tab-button" id="scale-custom" onclick="setOutputScale('custom')" style="font-size: 11px;">Custom</button>
+                </div>
+            </div>
+            <div id="custom-scale-input" style="display: none; margin-bottom: 20px;">
+                <label style="display: block; margin-bottom: 8px; color: #8b949e; font-size: 11px;">Custom Scale: <span id="custom-scale-value">100</span>%</label>
+                <input type="range" id="custom-scale-slider" min="10" max="200" value="100" oninput="updateCustomScale(this.value)" style="width: 100%; margin-bottom: 8px;">
+                <div style="display: flex; gap: 8px;">
+                    <input type="number" id="custom-scale-number" min="10" max="200" value="100" onchange="updateCustomScale(this.value)" style="flex: 1; padding: 6px; background: #0d1117; border: 1px solid #30363d; border-radius: 4px; color: #c9d1d9; font-size: 11px;">
+                    <span style="color: #8b949e; line-height: 32px;">%</span>
+                </div>
+            </div>
+            <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                <button onclick="closeOutputSizeModal()" style="padding: 8px 16px; background: #21262d; border: 1px solid #30363d; border-radius: 4px; color: #8b949e; cursor: pointer; font-size: 12px;">Cancel</button>
+                <button onclick="proceedWithDownload()" style="padding: 8px 16px; background: #238636; border: 1px solid #2ea043; border-radius: 4px; color: #fff; cursor: pointer; font-size: 12px; font-weight: bold;">Download</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CDN deps (client-side only, loaded per page) -->
+    <script src="https://cdn.jsdelivr.net/npm/exifr@7.1.3/dist/full.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js"></script>
+    <script src="/js/bareblocks-metadata.js"></script>
+    <script src="/js/bareblocks-merger.js"></script>
+</main>
