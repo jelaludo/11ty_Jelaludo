@@ -463,6 +463,115 @@ body.is-scrolling .gallery-slide__link {
     padding-bottom: 0.25rem;
 }
 
+// ─── Immersive mode trigger button ───────────────────────────────────────────
+
+.themes-gallery__immersive-btn {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.05);
+    color: #f0f0f0;
+    padding: 0.45rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    transition: border 0.25s ease, background 0.25s ease, color 0.25s ease;
+
+    &[hidden] { display: none; }
+
+    &:hover,
+    &:focus-visible {
+        border-color: rgba(255, 255, 255, 0.55);
+        background: rgba(255, 255, 255, 0.1);
+        color: #fff;
+        outline: none;
+    }
+}
+
+// ─── Full-screen immersive overlay ───────────────────────────────────────────
+
+.immersive-view {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    background: #121212;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    overscroll-behavior: contain;
+
+    &[hidden] { display: none; }
+
+    // Gallery slides fill the remaining height below the nav bar
+    .immersive-gallery {
+        padding-top: 3.25rem; // height of .immersive-view__bar
+    }
+}
+
+.immersive-view__bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 502;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.6rem clamp(1rem, 4vw, 2rem);
+    height: 3.25rem;
+    background: rgba(10, 10, 10, 0.88);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.immersive-view__back {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.82);
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    flex-shrink: 0;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.07);
+        outline: none;
+    }
+}
+
+.immersive-view__title {
+    font-size: 0.82rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.88);
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.immersive-view__count {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.4);
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+body.is-immersive-open {
+    overflow: hidden;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 .themes-lightbox {
     position: fixed;
     inset: 0;

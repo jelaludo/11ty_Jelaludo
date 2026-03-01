@@ -82,6 +82,13 @@
                 </select>
             </label>
             {% endif %}
+            <button
+                class="themes-gallery__immersive-btn"
+                type="button"
+                data-immersive-trigger
+                hidden
+                aria-label="View filtered photos in immersive mode"
+            >View [<span data-immersive-label></span>] photos</button>
         </div>
     </header>
     <div class="themes-gallery__grid" data-gallery-grid>
@@ -133,6 +140,15 @@
         {% endfor %}
     </div>
 </section>
+
+<div class="immersive-view" data-immersive-view hidden>
+    <nav class="immersive-view__bar">
+        <button class="immersive-view__back" type="button" data-immersive-close>&#8592; Gallery</button>
+        <span class="immersive-view__title" data-immersive-title></span>
+        <span class="immersive-view__count" data-immersive-count></span>
+    </nav>
+    <div class="immersive-gallery" data-immersive-gallery></div>
+</div>
 
 <section class="themes-lightbox" data-lightbox hidden>
     <button class="themes-lightbox__arrow themes-lightbox__arrow--prev" type="button" data-lightbox-prev aria-label="Previous image">

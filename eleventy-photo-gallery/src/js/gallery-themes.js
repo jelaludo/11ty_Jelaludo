@@ -13,6 +13,13 @@ const SELECTORS = {
     lightboxCopy: '[data-lightbox-copy]',
     lightboxPrev: '[data-lightbox-prev]',
     lightboxNext: '[data-lightbox-next]',
+    immersiveTrigger: '[data-immersive-trigger]',
+    immersiveLabel: '[data-immersive-label]',
+    immersiveView: '[data-immersive-view]',
+    immersiveClose: '[data-immersive-close]',
+    immersiveGallery: '[data-immersive-gallery]',
+    immersiveTitle: '[data-immersive-title]',
+    immersiveCount: '[data-immersive-count]',
 };
 
 // Slugify function matching galleryThemes.js
@@ -100,6 +107,8 @@ const applyFilters = (state) => {
         const matchesLens = activeLens === 'all' || lens === activeLens;
         item.hidden = !(matchesTag && matchesLens);
     });
+
+    updateImmersiveButton(state);
 };
 
 const updateActiveTag = (buttons, nextTag) => {
@@ -460,6 +469,120 @@ const mountLightbox = ({ items, state }) => {
     }
 
     document.addEventListener('keydown', onKeyDown);
+
+    // Wire the immersive mode — needs access to openLightbox defined in this closure
+    mountImmersiveMode(items, state, openLightbox);
+};
+
+// Show/hide the "View [tag] photos" button based on active filter
+const updateImmersiveButton = (state) => {
+    const btn = document.querySelector(SELECTORS.immersiveTrigger);
+    const labelEl = document.querySelector(SELECTORS.immersiveLabel);
+    if (!btn || !labelEl) return;
+
+    const isSpecificTag = state.activeTag !== 'all' && state.activeTag !== 'latest';
+    if (isSpecificTag) {
+        // Resolve human-readable tag label from buttons or select
+        let tagLabel = state.activeTag;
+        document.querySelectorAll(SELECTORS.tagFilter).forEach(b => {
+            if (b.dataset.tagFilter === state.activeTag && b.dataset.tagLabel) {
+                tagLabel = b.dataset.tagLabel;
+            }
+        });
+        const tagSelect = document.querySelector(SELECTORS.tagFilterSelect);
+        if (tagSelect) {
+            const opt = Array.from(tagSelect.options).find(o => o.value === state.activeTag);
+            if (opt && opt.dataset.tagLabel) tagLabel = opt.dataset.tagLabel;
+        }
+        labelEl.textContent = tagLabel;
+        btn.removeAttribute('hidden');
+    } else {
+        btn.setAttribute('hidden', '');
+    }
+};
+
+// Full-screen immersive view for a filtered tag
+const mountImmersiveMode = (items, state, openLightbox) => {
+    const trigger = document.querySelector(SELECTORS.immersiveTrigger);
+    const view = document.querySelector(SELECTORS.immersiveView);
+    const closeBtn = document.querySelector(SELECTORS.immersiveClose);
+    const galleryContainer = document.querySelector(SELECTORS.immersiveGallery);
+    const titleEl = document.querySelector(SELECTORS.immersiveTitle);
+    const countEl = document.querySelector(SELECTORS.immersiveCount);
+    const header = document.querySelector('[data-site-nav]');
+    const footer = document.querySelector('footer');
+
+    if (!trigger || !view || !galleryContainer) return;
+
+    const openImmersive = () => {
+        const visibleItems = items.filter(item => !item.hidden);
+
+        // Build gallery slides from currently visible (filtered) items
+        galleryContainer.innerHTML = '';
+        visibleItems.forEach((item, i) => {
+            const src = item.dataset.src || '';
+            const alt = item.dataset.alt || item.dataset.title || '';
+            const isFirst = i === 0;
+
+            const slide = document.createElement('div');
+            slide.className = 'gallery-slide' + (isFirst ? ' gallery-slide--first' : '');
+
+            const btn = document.createElement('button');
+            btn.className = 'gallery-slide__link';
+            btn.type = 'button';
+            btn.setAttribute('aria-label', `View ${alt}`);
+
+            const media = document.createElement('div');
+            media.className = 'gallery-slide__media';
+
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = alt;
+            img.className = 'gallery-slide__img' + (isFirst ? ' gallery-slide__img--focus' : '');
+            img.loading = isFirst ? 'eager' : 'lazy';
+            media.appendChild(img);
+            btn.appendChild(media);
+
+            if (isFirst) {
+                const bokeh = document.createElement('div');
+                bokeh.className = 'gallery-slide__bokeh-overlay';
+                bokeh.innerHTML = `<p class="gallery-slide__cta">
+                    <span class="gallery-slide__cta-line">Scroll to</span>
+                    <span class="gallery-slide__cta-line">Explore</span>
+                </p>`;
+                btn.appendChild(bokeh);
+            }
+
+            btn.addEventListener('click', () => openLightbox(item));
+            slide.appendChild(btn);
+            galleryContainer.appendChild(slide);
+        });
+
+        // Update bar text
+        const tagLabel = document.querySelector(SELECTORS.immersiveLabel)?.textContent || '';
+        if (titleEl) titleEl.textContent = tagLabel.toUpperCase();
+        if (countEl) countEl.textContent = `${visibleItems.length} photos`;
+
+        view.removeAttribute('hidden');
+        document.body.classList.add('is-immersive-open');
+        if (header) header.style.display = 'none';
+        if (footer) footer.style.display = 'none';
+        view.scrollTop = 0;
+    };
+
+    const closeImmersive = () => {
+        view.setAttribute('hidden', '');
+        document.body.classList.remove('is-immersive-open');
+        if (header) header.style.display = '';
+        if (footer) footer.style.display = '';
+    };
+
+    trigger.addEventListener('click', openImmersive);
+    if (closeBtn) closeBtn.addEventListener('click', closeImmersive);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !view.hasAttribute('hidden')) closeImmersive();
+    });
 };
 
 const init = () => {
