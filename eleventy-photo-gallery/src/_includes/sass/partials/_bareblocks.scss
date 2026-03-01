@@ -84,7 +84,7 @@
         cursor: pointer;
         font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
         font-size: 11px;
-        transition: all 0.2s;
+        transition: background 0.2s, color 0.2s, border-color 0.2s;
         touch-action: manipulation;
     }
 
@@ -125,7 +125,7 @@
         padding: 60px 20px;
         text-align: center;
         cursor: pointer;
-        transition: all 0.3s;
+        transition: border-color 0.3s, background 0.3s;
         background: #161b22;
         min-height: 200px;
         display: flex;
@@ -187,7 +187,7 @@
         background: #21262d;
         border: 1px solid #30363d;
         font-size: 11px;
-        transition: all 0.2s;
+        transition: background 0.2s, border-color 0.2s, transform 0.2s;
         text-align: center;
         font-weight: bold;
         user-select: none;
@@ -633,7 +633,7 @@
 
     /* Mobile devices (480px and below) */
     @media (max-width: 480px) {
-    .terminal-header {
+        .terminal-header {
             padding: 10px;
         }
 

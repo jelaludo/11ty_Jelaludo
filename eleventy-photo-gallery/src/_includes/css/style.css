@@ -52,7 +52,7 @@
 }
 .top-nav .link.tools-link {
   color: #6FC3DF;
-  font-family: "Courier New", Consolas, monospace;
+  font-family: "Courier New", "Consolas", "Monaco", monospace;
   letter-spacing: 0.05em;
 }
 .top-nav .link.tools-link:hover, .top-nav .link.tools-link:focus-visible {
@@ -538,23 +538,23 @@ body.is-scrolling .gallery-slide__link {
 }
 
 .themes-gallery__immersive-btn {
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  border: 1px solid rgba(111, 195, 223, 0.3);
   background: rgba(255, 255, 255, 0.05);
-  color: #f0f0f0;
+  color: #6FC3DF;
   padding: 0.45rem 1.1rem;
   border-radius: 999px;
   font-size: 0.82rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   cursor: pointer;
-  font-family: inherit;
+  font-family: "Courier New", "Consolas", "Monaco", monospace;
   transition: border 0.25s ease, background 0.25s ease, color 0.25s ease;
 }
 .themes-gallery__immersive-btn[hidden] {
   display: none;
 }
 .themes-gallery__immersive-btn:hover, .themes-gallery__immersive-btn:focus-visible {
-  border-color: rgba(255, 255, 255, 0.55);
+  border-color: rgba(111, 195, 223, 0.65);
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
   outline: none;
@@ -632,7 +632,8 @@ body.is-scrolling .gallery-slide__link {
   flex-shrink: 0;
 }
 
-body.is-immersive-open {
+body.is-immersive-open,
+body.is-lightbox-open {
   overflow: hidden;
 }
 
@@ -759,10 +760,6 @@ body.is-immersive-open {
 }
 .themes-lightbox__copy:active {
   color: rgb(255, 255, 255);
-}
-
-body.is-lightbox-open {
-  overflow: hidden;
 }
 
 @media screen and (max-width: 900px) {
@@ -2406,7 +2403,7 @@ footer {
   cursor: pointer;
   font-family: "Courier New", "Consolas", "Monaco", monospace;
   font-size: 11px;
-  transition: all 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
   touch-action: manipulation;
 }
 .bb-app .tab-button:hover {
@@ -2440,7 +2437,7 @@ footer {
   padding: 60px 20px;
   text-align: center;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: border-color 0.3s, background 0.3s;
   background: #161b22;
   min-height: 200px;
   display: flex;
@@ -2498,7 +2495,7 @@ footer {
   background: #21262d;
   border: 1px solid #30363d;
   font-size: 11px;
-  transition: all 0.2s;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
   text-align: center;
   font-weight: bold;
   user-select: none;
@@ -3313,3 +3310,5 @@ h2, .h2 {
     padding: 0.6rem 2px;
   }
 }
+
+/*# sourceMappingURL=style.css.map */

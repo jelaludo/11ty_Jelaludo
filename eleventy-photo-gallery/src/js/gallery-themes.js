@@ -161,7 +161,7 @@ const mountFilters = () => {
     const state = {
         items,
         originalOrder,
-        activeTag: urlTag || 'all',
+        activeTag: urlTag || 'latest',
         activeLens: urlLens || 'all',
         tagSlugMap,
         previousTag: null,
@@ -480,25 +480,20 @@ const updateImmersiveButton = (state) => {
     const labelEl = document.querySelector(SELECTORS.immersiveLabel);
     if (!btn || !labelEl) return;
 
-    const isSpecificTag = state.activeTag !== 'all' && state.activeTag !== 'latest';
-    if (isSpecificTag) {
-        // Resolve human-readable tag label from buttons or select
-        let tagLabel = state.activeTag;
-        document.querySelectorAll(SELECTORS.tagFilter).forEach(b => {
-            if (b.dataset.tagFilter === state.activeTag && b.dataset.tagLabel) {
-                tagLabel = b.dataset.tagLabel;
-            }
-        });
-        const tagSelect = document.querySelector(SELECTORS.tagFilterSelect);
-        if (tagSelect) {
-            const opt = Array.from(tagSelect.options).find(o => o.value === state.activeTag);
-            if (opt && opt.dataset.tagLabel) tagLabel = opt.dataset.tagLabel;
+    // Resolve human-readable tag label from buttons or select
+    let tagLabel = state.activeTag;
+    document.querySelectorAll(SELECTORS.tagFilter).forEach(b => {
+        if (b.dataset.tagFilter === state.activeTag && b.dataset.tagLabel) {
+            tagLabel = b.dataset.tagLabel;
         }
-        labelEl.textContent = tagLabel;
-        btn.removeAttribute('hidden');
-    } else {
-        btn.setAttribute('hidden', '');
+    });
+    const tagSelect = document.querySelector(SELECTORS.tagFilterSelect);
+    if (tagSelect) {
+        const opt = Array.from(tagSelect.options).find(o => o.value === state.activeTag);
+        if (opt && opt.dataset.tagLabel) tagLabel = opt.dataset.tagLabel;
     }
+    labelEl.textContent = tagLabel;
+    btn.removeAttribute('hidden');
 };
 
 // Full-screen immersive view for a filtered tag

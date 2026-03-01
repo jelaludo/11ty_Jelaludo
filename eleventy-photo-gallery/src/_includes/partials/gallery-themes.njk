@@ -4,22 +4,22 @@
     <header class="themes-gallery__header">
         <div class="themes-gallery__tags" role="tablist" aria-label="Gallery themes">
             <button
-                class="themes-gallery__tag is-active"
+                class="themes-gallery__tag"
                 type="button"
                 data-tag-filter="all"
                 role="tab"
-                aria-selected="true"
+                aria-selected="false"
             >
                 All
                 <span class="themes-gallery__count">{{ gallery | length }}</span>
             </button>
             <button
-                class="themes-gallery__tag"
+                class="themes-gallery__tag is-active"
                 type="button"
                 data-tag-filter="latest"
                 data-tag-label="Latest"
                 role="tab"
-                aria-selected="false"
+                aria-selected="true"
             >
                 Latest
                 <span class="themes-gallery__count">20</span>
