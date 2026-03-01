@@ -89,6 +89,37 @@ If you don't want to use a [global data file](https://www.11ty.dev/docs/data-glo
 %}
 ```
 
+## Cloudflare Pages Deployment
+
+This site is deployed via **Cloudflare Pages** (GitHub → Cloudflare → jelaludo.com).
+
+### Finding Build Settings
+
+From your Cloudflare account home:
+
+1. Left sidebar → **Compute (Workers)** → **Workers & Pages**
+2. Click the **11ty-jelaludo** project
+3. Go to the **Settings** tab
+4. Under **Build** → **Build configuration** → click the pencil icon to edit
+
+### Build Command
+
+The build command must compile Sass before running Eleventy:
+
+```
+npx sass src/_includes/sass:src/_includes/css --no-source-map && npx @11ty/eleventy
+```
+
+> **Why this matters:** `style.css` is committed to the repo and inlined directly into `base.njk` via `{% include "css/style.css" %}`. Cloudflare does not run `npm run build` automatically — it only ran `npx @11ty/eleventy` before this was fixed. Any new SCSS added locally would be invisible on the deployed site until this command ran the Sass step.
+
+### The CSS Deployment Trap
+
+If you add new SCSS partials (e.g. `_bareblocks.scss`, new `_gallery.scss` rules) and push without recompiling, the deployed site will appear **completely unstyled for those sections** — even though localhost looks correct.
+
+**Fix options:**
+- The Cloudflare build command above handles it automatically on every deploy (preferred).
+- Or compile manually before pushing: `npx sass src/_includes/sass:src/_includes/css --no-source-map`
+
 ## Compiling SCSS to CSS
 All of the projects CSS is compiled from Sass at build-time. The main SCSS file is `src/_includes/sass/style.scss` and thats where partials, mixins, and variables are loaded in with `@use` rules. 
 
