@@ -7,7 +7,7 @@ let mergeItems = [];
 // Each item: { file, dataUrl, img, width, height, imageOffsetX, imageOffsetY }
 
 let selectedTemplateId = null;
-let imageFit        = 'contain'; // 'contain' | 'cover' | 'fill'
+let imageFit        = 'cover'; // 'contain' | 'cover' | 'fill'
 let spacing         = 6;         // px — gap + outer frame
 let cornerRadius    = 0;         // px — cell corner rounding
 let frameColor      = '#0d1117';
@@ -18,6 +18,12 @@ let isPanningImage  = false;
 let panCellIndex    = -1;
 let panStartX       = 0;
 let panStartY       = 0;
+let panLastX        = 0;
+let panLastY        = 0;
+let panMoved        = false;
+
+// Click-to-swap state
+let selectedCellIndex = -1;
 
 // ── State machine ───────────────────────────────────────────
 function setState(state) {
@@ -69,6 +75,7 @@ function initMerger() {
     clearBtn.addEventListener('click', () => {
         mergeItems = [];
         selectedTemplateId = null;
+        selectedCellIndex  = -1;
         setState('empty');
     });
 
@@ -109,6 +116,7 @@ async function handleFiles(files) {
         selectedTemplateId = defaultTemplateFor(mergeItems.length);
     }
 
+    selectedCellIndex = -1;
     setState('loaded');
     renderTemplateStrip();
     updatePreview();
@@ -425,6 +433,686 @@ const templateLibrary = [
             ]
         }),
         thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><path d="M50 86 L18 54 C8 44 8 28 22 20 C32 14 44 18 50 28 C56 18 68 14 78 20 C92 28 92 44 82 54 Z"/></svg>'
+    },
+
+    // ── Count-specific layouts (5–10) ────────────────────────────────
+
+    // COUNT 5
+    {
+        id: 'hero-5',
+        minImages: 5,
+        maxImages: 5,
+        layout: () => ({
+            columns: 4, rows: 2,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 2, colSpan: 2 },
+                { index: 1, row: 0, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 0, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 1, col: 3, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="42" height="88" rx="3"/><rect x="52" y="6" width="19" height="41" rx="3"/><rect x="75" y="6" width="19" height="41" rx="3"/><rect x="52" y="53" width="19" height="41" rx="3"/><rect x="75" y="53" width="19" height="41" rx="3"/></svg>'
+    },
+    {
+        id: 'panorama-top-5',
+        minImages: 5,
+        maxImages: 5,
+        layout: () => ({
+            columns: 4, rows: 2,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 1, colSpan: 4 },
+                { index: 1, row: 1, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 1, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 1, col: 3, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="88" height="41" rx="3"/><rect x="6" y="53" width="19" height="41" rx="3"/><rect x="29" y="53" width="19" height="41" rx="3"/><rect x="52" y="53" width="19" height="41" rx="3"/><rect x="75" y="53" width="19" height="41" rx="3"/></svg>'
+    },
+    {
+        id: 'panorama-bottom-5',
+        minImages: 5,
+        maxImages: 5,
+        layout: () => ({
+            columns: 4, rows: 2,
+            cells: [
+                { index: 0, row: 1, col: 0, rowSpan: 1, colSpan: 4 },
+                { index: 1, row: 0, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 0, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 0, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 0, col: 3, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="19" height="41" rx="3"/><rect x="29" y="6" width="19" height="41" rx="3"/><rect x="52" y="6" width="19" height="41" rx="3"/><rect x="75" y="6" width="19" height="41" rx="3"/><rect x="6" y="53" width="88" height="41" rx="3"/></svg>'
+    },
+    {
+        id: 'featured-5',
+        minImages: 5,
+        maxImages: 5,
+        layout: () => ({
+            columns: 4, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 2, colSpan: 2 },
+                { index: 1, row: 0, col: 2, rowSpan: 1, colSpan: 2 },
+                { index: 2, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 2, col: 0, rowSpan: 1, colSpan: 4 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="42" height="57" rx="3"/><rect x="52" y="6" width="42" height="26" rx="3"/><rect x="52" y="37" width="19" height="26" rx="3"/><rect x="75" y="37" width="19" height="26" rx="3"/><rect x="6" y="68" width="88" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 't-shape-5',
+        minImages: 5,
+        maxImages: 5,
+        layout: () => ({
+            columns: 3, rows: 2,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 1, row: 0, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 0, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 0, rowSpan: 1, colSpan: 2 },
+                { index: 4, row: 1, col: 2, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="26" height="41" rx="3"/><rect x="37" y="6" width="26" height="41" rx="3"/><rect x="68" y="6" width="26" height="41" rx="3"/><rect x="6" y="53" width="57" height="41" rx="3"/><rect x="68" y="53" width="26" height="41" rx="3"/></svg>'
+    },
+    {
+        id: 'tall-strip-5',
+        minImages: 5,
+        maxImages: 5,
+        layout: () => ({
+            columns: 3, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 3, colSpan: 1 },
+                { index: 1, row: 0, col: 1, rowSpan: 1, colSpan: 2 },
+                { index: 2, row: 1, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 2, col: 1, rowSpan: 1, colSpan: 2 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="26" height="88" rx="3"/><rect x="37" y="6" width="57" height="26" rx="3"/><rect x="37" y="37" width="26" height="26" rx="3"/><rect x="68" y="37" width="26" height="26" rx="3"/><rect x="37" y="68" width="57" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'row-5',
+        minImages: 5,
+        maxImages: 5,
+        layout: () => buildGridLayout(5, 5),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="16" height="88" rx="3"/><rect x="24" y="6" width="16" height="88" rx="3"/><rect x="42" y="6" width="16" height="88" rx="3"/><rect x="60" y="6" width="16" height="88" rx="3"/><rect x="78" y="6" width="16" height="88" rx="3"/></svg>'
+    },
+
+    // COUNT 6
+    {
+        id: 'hero-tl-6',
+        minImages: 6,
+        maxImages: 6,
+        layout: () => ({
+            columns: 3, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 2, colSpan: 2 },
+                { index: 1, row: 0, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 2, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 2, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 2, col: 2, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="57" height="57" rx="3"/><rect x="68" y="6" width="26" height="26" rx="3"/><rect x="68" y="37" width="26" height="26" rx="3"/><rect x="6" y="68" width="26" height="26" rx="3"/><rect x="37" y="68" width="26" height="26" rx="3"/><rect x="68" y="68" width="26" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'hero-tr-6',
+        minImages: 6,
+        maxImages: 6,
+        layout: () => ({
+            columns: 3, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 1, rowSpan: 2, colSpan: 2 },
+                { index: 1, row: 0, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 1, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 2, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 2, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 2, col: 2, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="37" y="6" width="57" height="57" rx="3"/><rect x="6" y="6" width="26" height="26" rx="3"/><rect x="6" y="37" width="26" height="26" rx="3"/><rect x="6" y="68" width="26" height="26" rx="3"/><rect x="37" y="68" width="26" height="26" rx="3"/><rect x="68" y="68" width="26" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'tall-left-6',
+        minImages: 6,
+        maxImages: 6,
+        layout: () => ({
+            columns: 3, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 3, colSpan: 1 },
+                { index: 1, row: 0, col: 1, rowSpan: 1, colSpan: 2 },
+                { index: 2, row: 1, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 2, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 2, col: 2, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="26" height="88" rx="3"/><rect x="37" y="6" width="57" height="26" rx="3"/><rect x="37" y="37" width="26" height="26" rx="3"/><rect x="68" y="37" width="26" height="26" rx="3"/><rect x="37" y="68" width="26" height="26" rx="3"/><rect x="68" y="68" width="26" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'tall-right-6',
+        minImages: 6,
+        maxImages: 6,
+        layout: () => ({
+            columns: 3, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 2, rowSpan: 3, colSpan: 1 },
+                { index: 1, row: 0, col: 0, rowSpan: 1, colSpan: 2 },
+                { index: 2, row: 1, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 2, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 2, col: 1, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="68" y="6" width="26" height="88" rx="3"/><rect x="6" y="6" width="57" height="26" rx="3"/><rect x="6" y="37" width="26" height="26" rx="3"/><rect x="37" y="37" width="26" height="26" rx="3"/><rect x="6" y="68" width="26" height="26" rx="3"/><rect x="37" y="68" width="26" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'panorama-top-6',
+        minImages: 6,
+        maxImages: 6,
+        layout: () => ({
+            columns: 5, rows: 2,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 1, colSpan: 5 },
+                { index: 1, row: 1, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 1, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 1, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 1, col: 4, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="88" height="41" rx="3"/><rect x="6" y="53" width="16" height="41" rx="3"/><rect x="24" y="53" width="16" height="41" rx="3"/><rect x="42" y="53" width="16" height="41" rx="3"/><rect x="60" y="53" width="16" height="41" rx="3"/><rect x="78" y="53" width="16" height="41" rx="3"/></svg>'
+    },
+    {
+        id: 'panorama-bottom-6',
+        minImages: 6,
+        maxImages: 6,
+        layout: () => ({
+            columns: 5, rows: 2,
+            cells: [
+                { index: 0, row: 1, col: 0, rowSpan: 1, colSpan: 5 },
+                { index: 1, row: 0, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 0, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 0, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 0, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 0, col: 4, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="16" height="41" rx="3"/><rect x="24" y="6" width="16" height="41" rx="3"/><rect x="42" y="6" width="16" height="41" rx="3"/><rect x="60" y="6" width="16" height="41" rx="3"/><rect x="78" y="6" width="16" height="41" rx="3"/><rect x="6" y="53" width="88" height="41" rx="3"/></svg>'
+    },
+    {
+        id: 'mosaic-6',
+        minImages: 6,
+        maxImages: 6,
+        layout: () => ({
+            columns: 4, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 2, colSpan: 2 },
+                { index: 1, row: 0, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 0, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 2, rowSpan: 1, colSpan: 2 },
+                { index: 4, row: 2, col: 0, rowSpan: 1, colSpan: 2 },
+                { index: 5, row: 2, col: 2, rowSpan: 1, colSpan: 2 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="42" height="57" rx="3"/><rect x="52" y="6" width="19" height="26" rx="3"/><rect x="75" y="6" width="19" height="26" rx="3"/><rect x="52" y="37" width="42" height="26" rx="3"/><rect x="6" y="68" width="42" height="26" rx="3"/><rect x="52" y="68" width="42" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'double-hero-6',
+        minImages: 6,
+        maxImages: 6,
+        layout: () => ({
+            columns: 4, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 2, colSpan: 2 },
+                { index: 1, row: 0, col: 2, rowSpan: 2, colSpan: 2 },
+                { index: 2, row: 2, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 2, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 2, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 2, col: 3, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="42" height="57" rx="3"/><rect x="52" y="6" width="42" height="57" rx="3"/><rect x="6" y="68" width="19" height="26" rx="3"/><rect x="29" y="68" width="19" height="26" rx="3"/><rect x="52" y="68" width="19" height="26" rx="3"/><rect x="75" y="68" width="19" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'diptych-6',
+        minImages: 6,
+        maxImages: 6,
+        layout: () => ({
+            columns: 4, rows: 2,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 1, colSpan: 2 },
+                { index: 1, row: 0, col: 2, rowSpan: 1, colSpan: 2 },
+                { index: 2, row: 1, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 1, col: 3, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="42" height="41" rx="3"/><rect x="52" y="6" width="42" height="41" rx="3"/><rect x="6" y="53" width="19" height="41" rx="3"/><rect x="29" y="53" width="19" height="41" rx="3"/><rect x="52" y="53" width="19" height="41" rx="3"/><rect x="75" y="53" width="19" height="41" rx="3"/></svg>'
+    },
+    {
+        id: 'panorama-mid-6',
+        minImages: 6,
+        maxImages: 6,
+        layout: () => ({
+            columns: 3, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 1, row: 0, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 0, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 0, rowSpan: 1, colSpan: 3 },
+                { index: 4, row: 2, col: 0, rowSpan: 1, colSpan: 2 },
+                { index: 5, row: 2, col: 2, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="26" height="26" rx="3"/><rect x="37" y="6" width="26" height="26" rx="3"/><rect x="68" y="6" width="26" height="26" rx="3"/><rect x="6" y="37" width="88" height="26" rx="3"/><rect x="6" y="68" width="57" height="26" rx="3"/><rect x="68" y="68" width="26" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'mosaic-alt-6',
+        minImages: 6,
+        maxImages: 6,
+        layout: () => ({
+            columns: 4, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 1, colSpan: 2 },
+                { index: 1, row: 0, col: 2, rowSpan: 1, colSpan: 2 },
+                { index: 2, row: 1, col: 0, rowSpan: 2, colSpan: 1 },
+                { index: 3, row: 1, col: 1, rowSpan: 2, colSpan: 1 },
+                { index: 4, row: 1, col: 2, rowSpan: 1, colSpan: 2 },
+                { index: 5, row: 2, col: 2, rowSpan: 1, colSpan: 2 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="42" height="26" rx="3"/><rect x="52" y="6" width="42" height="26" rx="3"/><rect x="6" y="37" width="19" height="57" rx="3"/><rect x="29" y="37" width="19" height="57" rx="3"/><rect x="52" y="37" width="42" height="26" rx="3"/><rect x="52" y="68" width="42" height="26" rx="3"/></svg>'
+    },
+
+    // COUNT 7
+    {
+        id: 'hero-tl-7',
+        minImages: 7,
+        maxImages: 7,
+        layout: () => ({
+            columns: 4, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 2, colSpan: 2 },
+                { index: 1, row: 0, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 0, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 1, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 2, col: 0, rowSpan: 1, colSpan: 2 },
+                { index: 6, row: 2, col: 2, rowSpan: 1, colSpan: 2 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="42" height="57" rx="3"/><rect x="52" y="6" width="19" height="26" rx="3"/><rect x="75" y="6" width="19" height="26" rx="3"/><rect x="52" y="37" width="19" height="26" rx="3"/><rect x="75" y="37" width="19" height="26" rx="3"/><rect x="6" y="68" width="42" height="26" rx="3"/><rect x="52" y="68" width="42" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'panorama-top-7',
+        minImages: 7,
+        maxImages: 7,
+        layout: () => ({
+            columns: 3, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 1, colSpan: 3 },
+                { index: 1, row: 1, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 1, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 2, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 2, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 6, row: 2, col: 2, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="88" height="26" rx="3"/><rect x="6" y="37" width="26" height="26" rx="3"/><rect x="37" y="37" width="26" height="26" rx="3"/><rect x="68" y="37" width="26" height="26" rx="3"/><rect x="6" y="68" width="26" height="26" rx="3"/><rect x="37" y="68" width="26" height="26" rx="3"/><rect x="68" y="68" width="26" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'tall-strip-7',
+        minImages: 7,
+        maxImages: 7,
+        layout: () => ({
+            columns: 3, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 3, colSpan: 1 },
+                { index: 1, row: 0, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 0, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 2, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 6, row: 2, col: 2, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="26" height="88" rx="3"/><rect x="37" y="6" width="26" height="26" rx="3"/><rect x="68" y="6" width="26" height="26" rx="3"/><rect x="37" y="37" width="26" height="26" rx="3"/><rect x="68" y="37" width="26" height="26" rx="3"/><rect x="37" y="68" width="26" height="26" rx="3"/><rect x="68" y="68" width="26" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'mosaic-7',
+        minImages: 7,
+        maxImages: 7,
+        layout: () => ({
+            columns: 4, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 2, colSpan: 2 },
+                { index: 1, row: 0, col: 2, rowSpan: 1, colSpan: 2 },
+                { index: 2, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 2, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 2, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 6, row: 2, col: 2, rowSpan: 1, colSpan: 2 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="42" height="57" rx="3"/><rect x="52" y="6" width="42" height="26" rx="3"/><rect x="52" y="37" width="19" height="26" rx="3"/><rect x="75" y="37" width="19" height="26" rx="3"/><rect x="6" y="68" width="19" height="26" rx="3"/><rect x="29" y="68" width="19" height="26" rx="3"/><rect x="52" y="68" width="42" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'three-two-two-7',
+        minImages: 7,
+        maxImages: 7,
+        layout: () => ({
+            columns: 3, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 1, row: 0, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 0, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 0, rowSpan: 1, colSpan: 2 },
+                { index: 4, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 2, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 6, row: 2, col: 1, rowSpan: 1, colSpan: 2 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="26" height="26" rx="3"/><rect x="37" y="6" width="26" height="26" rx="3"/><rect x="68" y="6" width="26" height="26" rx="3"/><rect x="6" y="37" width="57" height="26" rx="3"/><rect x="68" y="37" width="26" height="26" rx="3"/><rect x="6" y="68" width="26" height="26" rx="3"/><rect x="37" y="68" width="57" height="26" rx="3"/></svg>'
+    },
+
+    // COUNT 8
+    {
+        id: 'hero-tl-8',
+        minImages: 8,
+        maxImages: 8,
+        layout: () => ({
+            columns: 4, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 2, colSpan: 2 },
+                { index: 1, row: 0, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 0, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 1, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 2, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 6, row: 2, col: 1, rowSpan: 1, colSpan: 2 },
+                { index: 7, row: 2, col: 3, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="42" height="57" rx="3"/><rect x="52" y="6" width="19" height="26" rx="3"/><rect x="75" y="6" width="19" height="26" rx="3"/><rect x="52" y="37" width="19" height="26" rx="3"/><rect x="75" y="37" width="19" height="26" rx="3"/><rect x="6" y="68" width="19" height="26" rx="3"/><rect x="29" y="68" width="42" height="26" rx="3"/><rect x="75" y="68" width="19" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'panorama-top-8',
+        minImages: 8,
+        maxImages: 8,
+        layout: () => ({
+            columns: 4, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 1, colSpan: 4 },
+                { index: 1, row: 1, col: 0, rowSpan: 1, colSpan: 2 },
+                { index: 2, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 2, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 2, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 6, row: 2, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 7, row: 2, col: 3, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="88" height="26" rx="3"/><rect x="6" y="37" width="42" height="26" rx="3"/><rect x="52" y="37" width="19" height="26" rx="3"/><rect x="75" y="37" width="19" height="26" rx="3"/><rect x="6" y="68" width="19" height="26" rx="3"/><rect x="29" y="68" width="19" height="26" rx="3"/><rect x="52" y="68" width="19" height="26" rx="3"/><rect x="75" y="68" width="19" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'tall-left-8',
+        minImages: 8,
+        maxImages: 8,
+        layout: () => ({
+            columns: 4, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 3, colSpan: 1 },
+                { index: 1, row: 0, col: 1, rowSpan: 1, colSpan: 3 },
+                { index: 2, row: 1, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 1, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 2, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 6, row: 2, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 7, row: 2, col: 3, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="19" height="88" rx="3"/><rect x="29" y="6" width="65" height="26" rx="3"/><rect x="29" y="37" width="19" height="26" rx="3"/><rect x="52" y="37" width="19" height="26" rx="3"/><rect x="75" y="37" width="19" height="26" rx="3"/><rect x="29" y="68" width="19" height="26" rx="3"/><rect x="52" y="68" width="19" height="26" rx="3"/><rect x="75" y="68" width="19" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'mosaic-8',
+        minImages: 8,
+        maxImages: 8,
+        layout: () => ({
+            columns: 4, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 2, colSpan: 2 },
+                { index: 1, row: 0, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 0, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 2, rowSpan: 1, colSpan: 2 },
+                { index: 4, row: 2, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 2, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 6, row: 2, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 7, row: 2, col: 3, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="42" height="57" rx="3"/><rect x="52" y="6" width="19" height="26" rx="3"/><rect x="75" y="6" width="19" height="26" rx="3"/><rect x="52" y="37" width="42" height="26" rx="3"/><rect x="6" y="68" width="19" height="26" rx="3"/><rect x="29" y="68" width="19" height="26" rx="3"/><rect x="52" y="68" width="19" height="26" rx="3"/><rect x="75" y="68" width="19" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'double-panorama-8',
+        minImages: 8,
+        maxImages: 8,
+        layout: () => ({
+            columns: 3, rows: 4,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 1, colSpan: 3 },
+                { index: 1, row: 1, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 1, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 2, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 2, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 6, row: 2, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 7, row: 3, col: 0, rowSpan: 1, colSpan: 3 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="88" height="19" rx="2"/><rect x="6" y="29" width="26" height="19" rx="2"/><rect x="37" y="29" width="26" height="19" rx="2"/><rect x="68" y="29" width="26" height="19" rx="2"/><rect x="6" y="52" width="26" height="19" rx="2"/><rect x="37" y="52" width="26" height="19" rx="2"/><rect x="68" y="52" width="26" height="19" rx="2"/><rect x="6" y="75" width="88" height="19" rx="2"/></svg>'
+    },
+
+    // COUNT 9
+    {
+        id: 'hero-tl-9',
+        minImages: 9,
+        maxImages: 9,
+        layout: () => ({
+            columns: 4, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 2, colSpan: 2 },
+                { index: 1, row: 0, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 0, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 1, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 2, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 6, row: 2, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 7, row: 2, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 8, row: 2, col: 3, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="42" height="57" rx="3"/><rect x="52" y="6" width="19" height="26" rx="3"/><rect x="75" y="6" width="19" height="26" rx="3"/><rect x="52" y="37" width="19" height="26" rx="3"/><rect x="75" y="37" width="19" height="26" rx="3"/><rect x="6" y="68" width="19" height="26" rx="3"/><rect x="29" y="68" width="19" height="26" rx="3"/><rect x="52" y="68" width="19" height="26" rx="3"/><rect x="75" y="68" width="19" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'banner-top-9',
+        minImages: 9,
+        maxImages: 9,
+        layout: () => ({
+            columns: 4, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 1, colSpan: 4 },
+                { index: 1, row: 1, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 1, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 1, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 2, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 6, row: 2, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 7, row: 2, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 8, row: 2, col: 3, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="88" height="26" rx="3"/><rect x="6" y="37" width="19" height="26" rx="3"/><rect x="29" y="37" width="19" height="26" rx="3"/><rect x="52" y="37" width="19" height="26" rx="3"/><rect x="75" y="37" width="19" height="26" rx="3"/><rect x="6" y="68" width="19" height="26" rx="3"/><rect x="29" y="68" width="19" height="26" rx="3"/><rect x="52" y="68" width="19" height="26" rx="3"/><rect x="75" y="68" width="19" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'asymmetric-9',
+        minImages: 9,
+        maxImages: 9,
+        layout: () => ({
+            columns: 4, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 1, colSpan: 2 },
+                { index: 1, row: 0, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 0, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 0, rowSpan: 2, colSpan: 1 },
+                { index: 4, row: 1, col: 1, rowSpan: 1, colSpan: 2 },
+                { index: 5, row: 1, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 6, row: 2, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 7, row: 2, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 8, row: 2, col: 3, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="42" height="26" rx="3"/><rect x="52" y="6" width="19" height="26" rx="3"/><rect x="75" y="6" width="19" height="26" rx="3"/><rect x="6" y="37" width="19" height="57" rx="3"/><rect x="29" y="37" width="42" height="26" rx="3"/><rect x="75" y="37" width="19" height="26" rx="3"/><rect x="29" y="68" width="19" height="26" rx="3"/><rect x="52" y="68" width="19" height="26" rx="3"/><rect x="75" y="68" width="19" height="26" rx="3"/></svg>'
+    },
+
+    // COUNT 10
+    {
+        id: 'panorama-top-10',
+        minImages: 10,
+        maxImages: 10,
+        layout: () => ({
+            columns: 3, rows: 4,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 1, colSpan: 3 },
+                { index: 1, row: 1, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 1, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 2, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 2, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 6, row: 2, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 7, row: 3, col: 0, rowSpan: 1, colSpan: 1 },
+                { index: 8, row: 3, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 9, row: 3, col: 2, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="88" height="19" rx="2"/><rect x="6" y="29" width="26" height="19" rx="2"/><rect x="37" y="29" width="26" height="19" rx="2"/><rect x="68" y="29" width="26" height="19" rx="2"/><rect x="6" y="52" width="26" height="19" rx="2"/><rect x="37" y="52" width="26" height="19" rx="2"/><rect x="68" y="52" width="26" height="19" rx="2"/><rect x="6" y="75" width="26" height="19" rx="2"/><rect x="37" y="75" width="26" height="19" rx="2"/><rect x="68" y="75" width="26" height="19" rx="2"/></svg>'
+    },
+    {
+        id: 'hero-tl-10',
+        minImages: 10,
+        maxImages: 10,
+        layout: () => ({
+            columns: 5, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 2, colSpan: 2 },
+                { index: 1, row: 0, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 2, row: 0, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 0, col: 4, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 1, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 6, row: 1, col: 4, rowSpan: 1, colSpan: 1 },
+                { index: 7, row: 2, col: 0, rowSpan: 1, colSpan: 2 },
+                { index: 8, row: 2, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 9, row: 2, col: 3, rowSpan: 1, colSpan: 2 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="34" height="57" rx="3"/><rect x="42" y="6" width="16" height="26" rx="3"/><rect x="60" y="6" width="16" height="26" rx="3"/><rect x="78" y="6" width="16" height="26" rx="3"/><rect x="42" y="37" width="16" height="26" rx="3"/><rect x="60" y="37" width="16" height="26" rx="3"/><rect x="78" y="37" width="16" height="26" rx="3"/><rect x="6" y="68" width="34" height="26" rx="3"/><rect x="42" y="68" width="16" height="26" rx="3"/><rect x="60" y="68" width="34" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'mosaic-10',
+        minImages: 10,
+        maxImages: 10,
+        layout: () => ({
+            columns: 5, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 2, colSpan: 2 },
+                { index: 1, row: 0, col: 2, rowSpan: 1, colSpan: 2 },
+                { index: 2, row: 0, col: 4, rowSpan: 1, colSpan: 1 },
+                { index: 3, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 1, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 1, col: 4, rowSpan: 1, colSpan: 1 },
+                { index: 6, row: 2, col: 0, rowSpan: 1, colSpan: 2 },
+                { index: 7, row: 2, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 8, row: 2, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 9, row: 2, col: 4, rowSpan: 1, colSpan: 1 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="34" height="57" rx="3"/><rect x="42" y="6" width="34" height="26" rx="3"/><rect x="78" y="6" width="16" height="26" rx="3"/><rect x="42" y="37" width="16" height="26" rx="3"/><rect x="60" y="37" width="16" height="26" rx="3"/><rect x="78" y="37" width="16" height="26" rx="3"/><rect x="6" y="68" width="34" height="26" rx="3"/><rect x="42" y="68" width="16" height="26" rx="3"/><rect x="60" y="68" width="16" height="26" rx="3"/><rect x="78" y="68" width="16" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'tall-strip-10',
+        minImages: 10,
+        maxImages: 10,
+        layout: () => ({
+            columns: 5, rows: 3,
+            cells: [
+                { index: 0, row: 0, col: 0, rowSpan: 3, colSpan: 1 },
+                { index: 1, row: 0, col: 1, rowSpan: 1, colSpan: 2 },
+                { index: 2, row: 0, col: 3, rowSpan: 1, colSpan: 2 },
+                { index: 3, row: 1, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 4, row: 1, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 5, row: 1, col: 3, rowSpan: 1, colSpan: 1 },
+                { index: 6, row: 1, col: 4, rowSpan: 1, colSpan: 1 },
+                { index: 7, row: 2, col: 1, rowSpan: 1, colSpan: 1 },
+                { index: 8, row: 2, col: 2, rowSpan: 1, colSpan: 1 },
+                { index: 9, row: 2, col: 3, rowSpan: 1, colSpan: 2 }
+            ]
+        }),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="16" height="88" rx="3"/><rect x="24" y="6" width="34" height="26" rx="3"/><rect x="60" y="6" width="34" height="26" rx="3"/><rect x="24" y="37" width="16" height="26" rx="3"/><rect x="42" y="37" width="16" height="26" rx="3"/><rect x="60" y="37" width="16" height="26" rx="3"/><rect x="78" y="37" width="16" height="26" rx="3"/><rect x="24" y="68" width="16" height="26" rx="3"/><rect x="42" y="68" width="16" height="26" rx="3"/><rect x="60" y="68" width="34" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'two-by-five-10',
+        minImages: 10,
+        maxImages: 10,
+        layout: () => buildGridLayout(10, 5),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="16" height="41" rx="3"/><rect x="24" y="6" width="16" height="41" rx="3"/><rect x="42" y="6" width="16" height="41" rx="3"/><rect x="60" y="6" width="16" height="41" rx="3"/><rect x="78" y="6" width="16" height="41" rx="3"/><rect x="6" y="53" width="16" height="41" rx="3"/><rect x="24" y="53" width="16" height="41" rx="3"/><rect x="42" y="53" width="16" height="41" rx="3"/><rect x="60" y="53" width="16" height="41" rx="3"/><rect x="78" y="53" width="16" height="41" rx="3"/></svg>'
+    },
+    {
+        id: 'grid-1col',
+        minImages: 1,
+        maxImages: 999,
+        isGrid: true,
+        layout: (count) => buildGridLayout(count, 1),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="88" height="26" rx="3"/><rect x="6" y="37" width="88" height="26" rx="3"/><rect x="6" y="68" width="88" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'grid-2col',
+        minImages: 2,
+        maxImages: 999,
+        isGrid: true,
+        layout: (count) => buildGridLayout(count, 2),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="40" height="26" rx="3"/><rect x="54" y="6" width="40" height="26" rx="3"/><rect x="6" y="37" width="40" height="26" rx="3"/><rect x="54" y="37" width="40" height="26" rx="3"/><rect x="6" y="68" width="40" height="26" rx="3"/><rect x="54" y="68" width="40" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'grid-3col',
+        minImages: 3,
+        maxImages: 999,
+        isGrid: true,
+        layout: (count) => buildGridLayout(count, 3),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="24" height="26" rx="3"/><rect x="38" y="6" width="24" height="26" rx="3"/><rect x="70" y="6" width="24" height="26" rx="3"/><rect x="6" y="37" width="24" height="26" rx="3"/><rect x="38" y="37" width="24" height="26" rx="3"/><rect x="70" y="37" width="24" height="26" rx="3"/><rect x="6" y="68" width="24" height="26" rx="3"/><rect x="38" y="68" width="24" height="26" rx="3"/><rect x="70" y="68" width="24" height="26" rx="3"/></svg>'
+    },
+    {
+        id: 'grid-4col',
+        minImages: 4,
+        maxImages: 999,
+        isGrid: true,
+        layout: (count) => buildGridLayout(count, 4),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="4" y="6" width="18" height="26" rx="2"/><rect x="28" y="6" width="18" height="26" rx="2"/><rect x="54" y="6" width="18" height="26" rx="2"/><rect x="78" y="6" width="18" height="26" rx="2"/><rect x="4" y="37" width="18" height="26" rx="2"/><rect x="28" y="37" width="18" height="26" rx="2"/><rect x="54" y="37" width="18" height="26" rx="2"/><rect x="78" y="37" width="18" height="26" rx="2"/><rect x="4" y="68" width="18" height="26" rx="2"/><rect x="28" y="68" width="18" height="26" rx="2"/><rect x="54" y="68" width="18" height="26" rx="2"/><rect x="78" y="68" width="18" height="26" rx="2"/></svg>'
+    },
+    {
+        id: 'grid-5col',
+        minImages: 5,
+        maxImages: 999,
+        isGrid: true,
+        layout: (count) => buildGridLayout(count, 5),
+        thumbnail: '<svg viewBox="0 0 100 100" width="100%" height="100%"><rect x="6" y="6" width="16" height="41" rx="2"/><rect x="24" y="6" width="16" height="41" rx="2"/><rect x="42" y="6" width="16" height="41" rx="2"/><rect x="60" y="6" width="16" height="41" rx="2"/><rect x="78" y="6" width="16" height="41" rx="2"/><rect x="6" y="53" width="16" height="41" rx="2"/><rect x="24" y="53" width="16" height="41" rx="2"/><rect x="42" y="53" width="16" height="41" rx="2"/><rect x="60" y="53" width="16" height="41" rx="2"/><rect x="78" y="53" width="16" height="41" rx="2"/></svg>'
     }
 ];
 
@@ -443,6 +1131,7 @@ function getLayoutConfig(count) {
     if (selectedTemplateId) {
         const tpl = templateLibrary.find(t => t.id === selectedTemplateId);
         if (tpl) {
+            if (tpl.isGrid) return tpl.layout(count);
             const base = Math.min(count, tpl.maxImages);
             const layout = tpl.layout(base);
             if (layout) return extendLayoutWithOverflow(layout, count);
@@ -455,12 +1144,16 @@ function getLayoutConfig(count) {
 function templateFitsCount(templateId, count) {
     const tpl = templateLibrary.find(t => t.id === templateId);
     if (!tpl) return false;
-    return count >= tpl.minImages;
+    if (tpl.isGrid) return count >= tpl.minImages;
+    return count >= tpl.minImages && count <= tpl.maxImages;
 }
 
 function defaultTemplateFor(count) {
-    const match = templateLibrary.find(t => count >= t.minImages && count <= t.maxImages);
-    return match ? match.id : null;
+    const named = templateLibrary.find(t => !t.isGrid && count >= t.minImages && count <= t.maxImages);
+    if (named) return named.id;
+    const cols = getAutoGridColumns(count);
+    const gridId = `grid-${cols}col`;
+    return templateLibrary.find(t => t.id === gridId) ? gridId : 'grid-2col';
 }
 
 // ── Template strip renderer ───────────────────────────────────
@@ -469,8 +1162,11 @@ function renderTemplateStrip() {
     if (!strip) return;
 
     const count = mergeItems.length;
-    // Show templates that work for this count, plus auto-grid always
-    const available = templateLibrary.filter(t => count >= t.minImages && count <= t.maxImages + 2);
+    const available = templateLibrary.filter(t =>
+        t.isGrid
+            ? count >= t.minImages
+            : count >= t.minImages && count <= t.maxImages
+    );
 
     strip.innerHTML = available.map(tpl => {
         const isActive = tpl.id === selectedTemplateId;
@@ -486,6 +1182,7 @@ function renderTemplateStrip() {
     strip.querySelectorAll('.bb-merger__template-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             selectedTemplateId = btn.dataset.template;
+            selectedCellIndex  = -1;
             renderTemplateStrip();
             updatePreview();
         });
@@ -598,7 +1295,7 @@ function updatePreview() {
             `display:block`
         ].join(';');
 
-        html += `<div style="${cellStyle}">`;
+        html += `<div class="merger-cell" data-cell="${index}" style="${cellStyle}">`;
         html += `<div style="${innerStyle}">`;
         html += `<img src="${item.dataUrl}" class="merger-img${imageFit === 'cover' ? ' merger-image-cover' : ''}" data-cell="${index}" style="${imgStyle}">`;
         html += `</div></div>`;
@@ -606,6 +1303,7 @@ function updatePreview() {
 
     html += '</div>';
     container.innerHTML = html;
+    updateCellSelection();
 }
 
 // ── Advanced controls ────────────────────────────────────────
@@ -836,86 +1534,126 @@ async function downloadMergedImage() {
     }, 'image/png');
 }
 
-// ── Image pan in cover mode ──────────────────────────────────
+// ── Click-to-swap ────────────────────────────────────────────
+function handleCellClick(index) {
+    if (selectedCellIndex === -1) {
+        selectedCellIndex = index;
+        updateCellSelection();
+    } else if (selectedCellIndex === index) {
+        selectedCellIndex = -1;
+        updateCellSelection();
+    } else {
+        [mergeItems[selectedCellIndex], mergeItems[index]] =
+            [mergeItems[index], mergeItems[selectedCellIndex]];
+        selectedCellIndex = -1;
+        updatePreview();
+    }
+}
+
+function updateCellSelection() {
+    const preview = document.getElementById('merger-preview');
+    if (!preview) return;
+    preview.querySelectorAll('.merger-cell').forEach(el => {
+        const idx = parseInt(el.dataset.cell, 10);
+        el.classList.toggle('merger-cell--selected', idx === selectedCellIndex);
+    });
+    preview.classList.toggle('merger-preview--selecting', selectedCellIndex >= 0);
+}
+
+// ── Image pan + tap-to-swap (unified) ───────────────────────
 function wirePan() {
-    // Mouse
+    // ── Mouse ────────────────────────────────────────────────
     document.addEventListener('mousedown', e => {
-        const img = e.target.closest('.merger-image-cover');
-        if (!img || imageFit !== 'cover') return;
-        isPanningImage = true;
-        panCellIndex   = parseInt(img.dataset.cell, 10);
-        panStartX      = e.clientX;
-        panStartY      = e.clientY;
-        e.preventDefault();
+        const cell = e.target.closest('.merger-cell');
+        if (!cell) return;
+        panCellIndex = parseInt(cell.dataset.cell, 10);
+        panStartX = e.clientX;
+        panStartY = e.clientY;
+        panLastX  = e.clientX;
+        panLastY  = e.clientY;
+        panMoved  = false;
+        if (imageFit === 'cover') {
+            isPanningImage = true;
+            e.preventDefault();
+        }
     });
 
     document.addEventListener('mousemove', e => {
-        if (!isPanningImage || panCellIndex < 0) return;
-        const item = mergeItems[panCellIndex];
-        if (!item) return;
+        if (panCellIndex < 0) return;
+        const totalDx = e.clientX - panStartX;
+        const totalDy = e.clientY - panStartY;
+        if (Math.abs(totalDx) > 4 || Math.abs(totalDy) > 4) panMoved = true;
 
-        const dx = e.clientX - panStartX;
-        const dy = e.clientY - panStartY;
-        panStartX = e.clientX;
-        panStartY = e.clientY;
-
-        const preview = document.getElementById('merger-preview');
-        const w = preview.clientWidth  || 400;
-        const h = preview.clientHeight || 300;
-
-        item.imageOffsetX = Math.max(0, Math.min(100, (item.imageOffsetX ?? 50) - (dx / w * 100)));
-        item.imageOffsetY = Math.max(0, Math.min(100, (item.imageOffsetY ?? 50) - (dy / h * 100)));
-
-        // Live update: just update the img element directly (no full re-render)
-        const imgEl = preview.querySelector(`.merger-img[data-cell="${panCellIndex}"]`);
-        if (imgEl) {
-            imgEl.style.objectPosition = `${item.imageOffsetX}% ${item.imageOffsetY}%`;
+        if (isPanningImage && panMoved) {
+            const item = mergeItems[panCellIndex];
+            if (item) {
+                const dx = e.clientX - panLastX;
+                const dy = e.clientY - panLastY;
+                const preview = document.getElementById('merger-preview');
+                const w = preview.clientWidth  || 400;
+                const h = preview.clientHeight || 300;
+                item.imageOffsetX = Math.max(0, Math.min(100, (item.imageOffsetX ?? 50) - (dx / w * 100)));
+                item.imageOffsetY = Math.max(0, Math.min(100, (item.imageOffsetY ?? 50) - (dy / h * 100)));
+                const imgEl = preview.querySelector(`.merger-img[data-cell="${panCellIndex}"]`);
+                if (imgEl) imgEl.style.objectPosition = `${item.imageOffsetX}% ${item.imageOffsetY}%`;
+            }
         }
+        panLastX = e.clientX;
+        panLastY = e.clientY;
     });
 
     document.addEventListener('mouseup', () => {
-        if (isPanningImage) {
-            isPanningImage = false;
-            panCellIndex   = -1;
-        }
+        if (!panMoved && panCellIndex >= 0) handleCellClick(panCellIndex);
+        isPanningImage = false;
+        panCellIndex   = -1;
+        panMoved       = false;
     });
 
-    // Touch
+    // ── Touch ────────────────────────────────────────────────
     document.addEventListener('touchstart', e => {
-        const img = e.target.closest('.merger-image-cover');
-        if (!img || imageFit !== 'cover') return;
-        isPanningImage = true;
-        panCellIndex   = parseInt(img.dataset.cell, 10);
-        panStartX      = e.touches[0].clientX;
-        panStartY      = e.touches[0].clientY;
-    }, { passive: true });
-
-    document.addEventListener('touchmove', e => {
-        if (!isPanningImage || panCellIndex < 0) return;
-        const item = mergeItems[panCellIndex];
-        if (!item) return;
-
-        const dx = e.touches[0].clientX - panStartX;
-        const dy = e.touches[0].clientY - panStartY;
+        const cell = e.target.closest('.merger-cell');
+        if (!cell) return;
+        panCellIndex = parseInt(cell.dataset.cell, 10);
         panStartX = e.touches[0].clientX;
         panStartY = e.touches[0].clientY;
-
-        const preview = document.getElementById('merger-preview');
-        const w = preview.clientWidth  || 400;
-        const h = preview.clientHeight || 300;
-
-        item.imageOffsetX = Math.max(0, Math.min(100, (item.imageOffsetX ?? 50) - (dx / w * 100)));
-        item.imageOffsetY = Math.max(0, Math.min(100, (item.imageOffsetY ?? 50) - (dy / h * 100)));
-
-        const imgEl = preview.querySelector(`.merger-img[data-cell="${panCellIndex}"]`);
-        if (imgEl) {
-            imgEl.style.objectPosition = `${item.imageOffsetX}% ${item.imageOffsetY}%`;
+        panLastX  = e.touches[0].clientX;
+        panLastY  = e.touches[0].clientY;
+        panMoved  = false;
+        if (imageFit === 'cover') {
+            isPanningImage = true;
+            e.preventDefault();
         }
+    }, { passive: false });
+
+    document.addEventListener('touchmove', e => {
+        if (panCellIndex < 0) return;
+        const totalDx = e.touches[0].clientX - panStartX;
+        const totalDy = e.touches[0].clientY - panStartY;
+        if (Math.abs(totalDx) > 4 || Math.abs(totalDy) > 4) panMoved = true;
+
+        if (isPanningImage && panMoved) {
+            const item = mergeItems[panCellIndex];
+            if (item) {
+                const dx = e.touches[0].clientX - panLastX;
+                const dy = e.touches[0].clientY - panLastY;
+                const preview = document.getElementById('merger-preview');
+                const w = preview.clientWidth  || 400;
+                const h = preview.clientHeight || 300;
+                item.imageOffsetX = Math.max(0, Math.min(100, (item.imageOffsetX ?? 50) - (dx / w * 100)));
+                item.imageOffsetY = Math.max(0, Math.min(100, (item.imageOffsetY ?? 50) - (dy / h * 100)));
+                const imgEl = preview.querySelector(`.merger-img[data-cell="${panCellIndex}"]`);
+                if (imgEl) imgEl.style.objectPosition = `${item.imageOffsetX}% ${item.imageOffsetY}%`;
+            }
+        }
+        panLastX = e.touches[0].clientX;
+        panLastY = e.touches[0].clientY;
     }, { passive: true });
 
     document.addEventListener('touchend', () => {
+        if (!panMoved && panCellIndex >= 0) handleCellClick(panCellIndex);
         isPanningImage = false;
         panCellIndex   = -1;
+        panMoved       = false;
     });
 }
 

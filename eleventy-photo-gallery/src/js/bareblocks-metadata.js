@@ -14,7 +14,7 @@ function switchTab(tabName) {
     event.target.classList.add('active');
     
     // Reset image merger if switching away
-    if (tabName !== 'imagetools') {
+    if (tabName !== 'collage') {
         // Keep merger state
     }
 }
@@ -99,16 +99,18 @@ async function processFile(file) {
     output.innerHTML = '<div class="output-line"><span class="prompt">$</span> Analyzing file...</div>';
     
     try {
-        // Show thumbnail
+        // Show image preview inside upload zone
+        const zonePreview = document.getElementById('upload-zone-preview');
         if (file.type.startsWith('image/')) {
             const reader = new FileReader();
             reader.onload = (e) => {
-                document.getElementById('thumbnailImage').src = e.target.result;
-                document.getElementById('thumbnailContainer').classList.add('visible');
+                zonePreview.src = e.target.result;
+                uploadZone.classList.add('has-preview');
             };
             reader.readAsDataURL(file);
         } else {
-            document.getElementById('thumbnailContainer').classList.remove('visible');
+            zonePreview.src = '';
+            uploadZone.classList.remove('has-preview');
         }
         
         // Extract metadata

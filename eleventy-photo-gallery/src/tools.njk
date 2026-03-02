@@ -16,15 +16,9 @@ cardType: summary
     <div class="bb-app">
         <div class="terminal-container">
             <div class="terminal-header">
-                <div class="terminal-title-area">
-                    <div class="terminal-title">$ BareBlocks - Metadata Inspector</div>
-                    <div class="thumbnail-container" id="thumbnailContainer">
-                        <img id="thumbnailImage" alt="Thumbnail">
-                    </div>
-                </div>
                 <div class="terminal-tabs">
                     <button class="tab-button active" onclick="switchTab('metadata')">Metadata</button>
-                    <button class="tab-button" onclick="switchTab('imagetools')">Image Tools</button>
+                    <button class="tab-button" onclick="switchTab('collage')">Collage</button>
                 </div>
             </div>
 
@@ -32,6 +26,7 @@ cardType: summary
                 <!-- Metadata Tab -->
                 <div id="metadata-tab" class="tab-content active">
                     <div class="upload-zone" id="uploadZone">
+                        <img id="upload-zone-preview" class="upload-zone__preview" alt="">
                         <div class="upload-icon">[   ]</div>
                         <div>Click or drag file here to analyze</div>
                         <div class="info" style="margin-top: 10px; font-size: 11px;">
@@ -83,7 +78,7 @@ Everything stays client-side</div></div>
                 </div>
 
                 <!-- Image Tools Tab -->
-                <div id="imagetools-tab" class="tab-content">
+                <div id="collage-tab" class="tab-content">
                     <div class="bb-merger">
                         <!-- EMPTY STATE: drop zone -->
                         <div class="bb-merger__dropzone" id="merger-dropzone">
@@ -122,8 +117,8 @@ Everything stays client-side</div></div>
                                 <div class="bb-merger__control">
                                     <span class="bb-merger__label">Image Fit</span>
                                     <div class="bb-merger__pills" id="merger-fit-pills">
-                                        <button class="bb-merger__pill active" data-fit="contain">Contain</button>
-                                        <button class="bb-merger__pill" data-fit="cover">Cover</button>
+                                        <button class="bb-merger__pill" data-fit="contain">Contain</button>
+                                        <button class="bb-merger__pill active" data-fit="cover">Cover</button>
                                         <button class="bb-merger__pill" data-fit="fill">Fill</button>
                                     </div>
                                 </div>
@@ -194,7 +189,7 @@ Everything stays client-side</div></div>
                         </div>
                     </div><!-- /modal -->
 
-                </div><!-- /imagetools-tab -->
+                </div><!-- /collage-tab -->
             </div>
         </div>
     </div>
