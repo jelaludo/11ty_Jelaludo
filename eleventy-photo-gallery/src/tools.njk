@@ -84,213 +84,117 @@ Everything stays client-side</div></div>
 
                 <!-- Image Tools Tab -->
                 <div id="imagetools-tab" class="tab-content">
-                    <div style="max-width: 1400px; margin: 0 auto;">
-                        <h2 class="section-title category-ai" style="margin-bottom: 20px;">Image Merger</h2>
-                        <p class="info" style="margin-bottom: 20px;">Merge multiple images into a single one. Everything happening client-side.</p>
+                    <div class="bb-merger">
+                        <!-- EMPTY STATE: drop zone -->
+                        <div class="bb-merger__dropzone" id="merger-dropzone">
+                            <input type="file" id="merger-file-input" accept="image/*" multiple hidden>
+                            <div class="upload-icon">[   ]</div>
+                            <p class="bb-merger__drop-label">Drop images here · or tap to browse</p>
+                            <p class="info">JPEG · PNG · TIFF · HEIC · Stays in your browser</p>
+                        </div>
 
-                        <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                            <!-- Left Panel: Settings -->
-                            <div style="flex: 0 0 300px; min-width: 250px;">
-                                <div class="metadata-section">
-                                    <div class="section-title">Settings</div>
-                                    <div style="padding: 15px;">
-                                        <!-- Layout Mode -->
-                                        <div style="margin-bottom: 20px;">
-                                            <label style="display: block; margin-bottom: 8px; color: #8b949e; font-size: 12px;">Layout Mode</label>
-                                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                                                <button class="tab-button active" id="merge-auto-grid" onclick="setMergeLayout('auto-grid')" style="flex: 1; min-width: 120px; font-size: 11px;">Auto Grid</button>
-                                                <button class="tab-button" id="merge-grid" onclick="setMergeDirection('grid')" style="flex: 1; min-width: 120px; font-size: 11px;">Manual Grid</button>
-                                                <button class="tab-button" id="merge-horizontal" onclick="setMergeDirection('horizontal')" style="flex: 1; min-width: 120px; font-size: 11px;">→ Horizontal</button>
-                                                <button class="tab-button" id="merge-vertical" onclick="setMergeDirection('vertical')" style="flex: 1; min-width: 120px; font-size: 11px;">↓ Vertical</button>
-                                            </div>
-                                            <div class="info" style="margin-top: 8px; font-size: 10px;">Auto Grid adapts to image count. Manual Grid uses the slider below.</div>
-                                        </div>
+                        <!-- LOADED STATE: everything else -->
+                        <div class="bb-merger__loaded" id="merger-loaded" hidden>
 
-                                        <!-- Layout Templates -->
-                                        <div style="margin-bottom: 20px;">
-                                            <label style="display: block; margin-bottom: 8px; color: #8b949e; font-size: 12px;">Layout Templates</label>
-                                            <div id="template-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;"></div>
-                                            <div class="info" style="margin-top: 8px; font-size: 10px;">Templates adapt as you add/remove images. For higher counts, it falls back to Auto Grid.</div>
-                                        </div>
+                            <!-- Live preview -->
+                            <div class="bb-merger__preview" id="merger-preview"></div>
 
-                                        <!-- Grid Columns -->
-                                        <div id="grid-columns-container" style="margin-bottom: 20px;">
-                                            <label style="display: block; margin-bottom: 8px; color: #8b949e; font-size: 12px;">Grid Columns: <span id="grid-columns-value">2</span></label>
-                                            <input type="range" id="grid-columns" min="1" max="6" value="2" style="width: 100%;" oninput="updateGridColumns(this.value)">
-                                        </div>
+                            <!-- Template strip -->
+                            <div class="bb-merger__strip" id="merger-strip" role="listbox" aria-label="Layout templates"></div>
 
-                                        <!-- Image Fit -->
-                                        <div style="margin-bottom: 20px;">
-                                            <label style="display: block; margin-bottom: 8px; color: #8b949e; font-size: 12px;">Image Fit</label>
-                                            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                                                <button class="tab-button" id="fit-cover" onclick="setImageFit('cover')" style="flex: 1; font-size: 10px;" title="Scales image to cover entire cell (may crop edges)">Cover</button>
-                                                <button class="tab-button active" id="fit-contain" onclick="setImageFit('contain')" style="flex: 1; font-size: 10px;" title="Scales image to fit within cell (maintains aspect ratio, adds padding)">Contain</button>
-                                                <button class="tab-button" id="fit-fill" onclick="setImageFit('fill')" style="flex: 1; font-size: 10px;" title="Stretches image to fill entire cell (may distort)">Fill</button>
-                                                <button class="tab-button" id="fit-scale" onclick="setImageFit('scale')" style="flex: 1; font-size: 10px;" title="Like Contain, but won't enlarge small images">Scale Down</button>
-                                            </div>
-                                            <p style="margin-top: 8px; font-size: 10px; color: #6FC3DF; line-height: 1.4;" id="fit-description">
-                                                Scales to fit within cell, maintains aspect ratio
-                                            </p>
-                                        </div>
-
-                                        <!-- Frame Settings -->
-                                        <div style="margin-bottom: 20px;">
-                                            <label style="display: block; margin-bottom: 8px; color: #8b949e; font-size: 12px;">Frame Size: <span id="frame-size-value">6</span>px</label>
-                                            <input type="range" id="frame-size" min="0" max="40" value="6" style="width: 100%;" oninput="setFrameSize(this.value)">
-                                            <div style="display: flex; gap: 8px; margin-top: 10px;">
-                                                <input type="color" id="frame-color" value="#0d1117" onchange="setFrameColor(this.value)" style="width: 50px; height: 32px; cursor: pointer; border: 1px solid #30363d; border-radius: 4px; background: transparent;">
-                                                <input type="text" id="frame-color-text" value="#0d1117" onchange="setFrameColor(this.value)" style="flex: 1; padding: 6px; background: #0d1117; border: 1px solid #30363d; border-radius: 4px; color: #c9d1d9; font-size: 11px; font-family: monospace;">
-                                            </div>
-                                        </div>
-
-                                        <!-- Output Dimensions -->
-                                        <div id="output-dimensions" onclick="openOutputSizeModal()" style="margin-bottom: 15px; padding: 10px; background: #161b22; border-radius: 4px; font-size: 11px; color: #8b949e; display: none; cursor: pointer; border: 1px solid #30363d; transition: all 0.2s;">
-                                            <strong style="color: #c9d1d9;">Final Size:</strong> <span id="dimensions-text"></span>
-                                            <span style="float: right; color: #6FC3DF; font-size: 10px;">✏️ Click to adjust</span>
-                                        </div>
-
-                                        <!-- Empty Cells -->
-                                        <div style="margin-bottom: 20px; padding: 12px; background: #161b22; border-radius: 4px; border: 1px solid #30363d;">
-                                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; margin-bottom: 12px;">
-                                                <input type="checkbox" id="include-empty-cells" onchange="toggleEmptyCells(this.checked)" style="cursor: pointer;">
-                                                <span style="color: #c9d1d9; font-size: 12px; font-weight: bold;">Include Empty Cells</span>
-                                            </label>
-                                            <div id="empty-cells-options" style="display: none;">
-                                                <label style="display: block; margin-bottom: 8px; color: #8b949e; font-size: 11px;">Pattern</label>
-                                                <div style="display: flex; gap: 8px; margin-bottom: 12px;">
-                                                    <button class="tab-button" id="pattern-before" onclick="setEmptyCellPattern('before')" style="flex: 1; font-size: 10px;">Before Each</button>
-                                                    <button class="tab-button active" id="pattern-after" onclick="setEmptyCellPattern('after')" style="flex: 1; font-size: 10px;">After Each</button>
-                                                </div>
-                                                <label style="display: block; margin-bottom: 8px; color: #8b949e; font-size: 11px;">Cell Color</label>
-                                                <div style="display: flex; gap: 8px;">
-                                                    <input type="color" id="empty-cell-color" value="#ffffff" onchange="setEmptyCellColor(this.value)" style="width: 50px; height: 32px; cursor: pointer; border: 1px solid #30363d; border-radius: 4px; background: transparent;">
-                                                    <input type="text" id="empty-cell-color-text" value="#ffffff" onchange="setEmptyCellColor(this.value)" style="flex: 1; padding: 6px; background: #0d1117; border: 1px solid #30363d; border-radius: 4px; color: #c9d1d9; font-size: 11px; font-family: monospace;">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Text Overlay hint -->
-                                        <div style="padding: 15px; background: #161b22; border-radius: 4px; border: 1px solid #30363d; text-align: center;">
-                                            <div style="color: #6FC3DF; font-size: 13px; font-weight: bold; margin-bottom: 10px;">✏️ Text Editing</div>
-                                            <p style="color: #8b949e; font-size: 11px; line-height: 1.6; margin: 0;">
-                                                <strong style="color: #c9d1d9;">Click</strong> any text to edit<br>
-                                                <strong style="color: #c9d1d9;">Drag</strong> text to reposition<br>
-                                                <strong style="color: #c9d1d9;">Double-click</strong> empty area to add more images
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Selected Images List -->
-                                <div id="selected-images-list" style="margin-top: 15px;"></div>
+                            <!-- Add / Clear actions -->
+                            <div class="bb-merger__actions">
+                                <input type="file" id="merger-add-input" accept="image/*" multiple hidden>
+                                <button class="bb-merger__add-btn" id="merger-add-btn">+ Add images</button>
+                                <button class="bb-merger__clear-btn" id="merger-clear-btn">× Clear all</button>
                             </div>
 
-                            <!-- Right Panel: Preview + Upload -->
-                            <div style="flex: 1; min-width: 400px;">
-                                <div class="metadata-section" style="min-height: 500px;">
-                                    <div class="section-title">Preview & Upload</div>
-                                    <div id="merge-preview-container" class="upload-zone" style="padding: 20px; text-align: center; min-height: 450px; cursor: pointer; position: relative; overflow-x: auto; overflow-y: auto;">
-                                        <input type="file" id="mergeFileInput" accept="image/*" multiple style="display: none;">
-                                        <div id="merge-preview" style="width: 100%; min-height: 410px; display: flex; align-items: center; justify-content: center;">
-                                            <div style="text-align: center;">
-                                                <div class="upload-icon" style="font-size: 48px; margin-bottom: 20px;">[   ]</div>
-                                                <div style="font-size: 14px; color: #c9d1d9; margin-bottom: 10px;">Click or drag files here to merge</div>
-                                                <div class="info" style="font-size: 11px;">
-                                                    Supports: JPEG, PNG, TIFF, HEIC<br>
-                                                    All processing happens in your browser
-                                                </div>
-                                            </div>
-                                        </div>
+                            <!-- Advanced options toggle -->
+                            <button class="bb-merger__advanced-toggle" id="merger-advanced-toggle" aria-expanded="false">
+                                <span class="bb-merger__toggle-icon" id="merger-toggle-icon">▾</span>
+                                Advanced options
+                            </button>
+
+                            <!-- Advanced options panel (hidden by default) -->
+                            <div class="bb-merger__advanced" id="merger-advanced" hidden>
+
+                                <!-- Image Fit -->
+                                <div class="bb-merger__control">
+                                    <span class="bb-merger__label">Image Fit</span>
+                                    <div class="bb-merger__pills" id="merger-fit-pills">
+                                        <button class="bb-merger__pill active" data-fit="contain">Contain</button>
+                                        <button class="bb-merger__pill" data-fit="cover">Cover</button>
+                                        <button class="bb-merger__pill" data-fit="fill">Fill</button>
                                     </div>
                                 </div>
 
-                                <!-- Merge Button -->
-                                <button class="tab-button" id="merge-download-btn" onclick="openOutputSizeModal()" style="width: 100%; margin-top: 15px; padding: 12px; font-size: 14px; display: none;">
-                                    ⬇ Merge & Download
-                                </button>
+                                <!-- Spacing -->
+                                <div class="bb-merger__control">
+                                    <label for="merger-spacing" class="bb-merger__label">
+                                        Spacing: <span id="merger-spacing-value">6</span>px
+                                    </label>
+                                    <input type="range" id="merger-spacing" class="bb-merger__slider"
+                                           min="0" max="40" value="6">
+                                </div>
+
+                                <!-- Corner Radius -->
+                                <div class="bb-merger__control">
+                                    <label for="merger-radius" class="bb-merger__label">
+                                        Corner Radius: <span id="merger-radius-value">0</span>px
+                                    </label>
+                                    <input type="range" id="merger-radius" class="bb-merger__slider"
+                                           min="0" max="20" value="0">
+                                </div>
+
+                                <!-- Frame Color -->
+                                <div class="bb-merger__control">
+                                    <span class="bb-merger__label">Frame Color</span>
+                                    <div class="bb-merger__color-row">
+                                        <input type="color" id="merger-color" value="#0d1117">
+                                        <input type="text" id="merger-color-text" value="#0d1117"
+                                               maxlength="7" placeholder="#0d1117">
+                                    </div>
+                                </div>
+
+                            </div><!-- /advanced -->
+
+                            <!-- Download button -->
+                            <button class="bb-merger__download" id="merger-download-btn">
+                                ⬇ Download
+                            </button>
+
+                        </div><!-- /loaded -->
+                    </div><!-- /bb-merger -->
+
+                    <!-- Download size modal -->
+                    <div class="bb-merger__modal" id="merger-modal" hidden>
+                        <div class="bb-merger__modal-inner">
+                            <h3 class="bb-merger__modal-title">Output Size</h3>
+                            <div class="bb-merger__modal-info">
+                                <div class="bb-merger__modal-dims" id="merger-modal-dims">—</div>
+                                <div class="bb-merger__modal-size" id="merger-modal-size">~— MB</div>
+                            </div>
+                            <div class="bb-merger__modal-scales" id="merger-modal-scales">
+                                <button class="bb-merger__pill active" data-scale="1.0">100%</button>
+                                <button class="bb-merger__pill" data-scale="0.75">75%</button>
+                                <button class="bb-merger__pill" data-scale="0.5">50%</button>
+                                <button class="bb-merger__pill" data-scale="0.25">25%</button>
+                            </div>
+                            <div class="bb-merger__control">
+                                <label for="merger-custom-scale" class="bb-merger__label">
+                                    Custom: <span id="merger-custom-scale-value">100</span>%
+                                </label>
+                                <input type="range" id="merger-custom-scale" class="bb-merger__slider"
+                                       min="10" max="200" value="100">
+                            </div>
+                            <div class="bb-merger__modal-footer">
+                                <button class="bb-merger__cancel-btn" id="merger-modal-cancel">Cancel</button>
+                                <button class="bb-merger__confirm-btn" id="merger-modal-confirm">Download</button>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                    </div><!-- /modal -->
 
-    <!-- Text Edit Modal -->
-    <div id="text-edit-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); z-index: 10000; align-items: center; justify-content: center;">
-        <div id="modal-content" style="background: #161b22; border: 2px solid #6FC3DF; border-radius: 8px; padding: 20px; width: 600px; max-width: 90%; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
-            <div id="modal-header" style="cursor: move; padding: 10px; margin: -20px -20px 15px -20px; background: #0d1117; border-bottom: 1px solid #30363d; border-radius: 6px 6px 0 0; user-select: none;">
-                <h3 style="margin: 0; color: #6FC3DF; font-size: 14px;">✏️ Edit Text</h3>
-            </div>
-            <textarea id="modal-text-input" style="width: 100%; min-height: 100px; padding: 12px; background: #0d1117; border: 1px solid #30363d; border-radius: 4px; color: #c9d1d9; font-family: 'Courier New', monospace; font-size: 13px; resize: vertical; margin-bottom: 15px;" placeholder="Enter text..."></textarea>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
-                <div>
-                    <label style="display: block; margin-bottom: 6px; color: #8b949e; font-size: 11px;">Font</label>
-                    <select id="modal-text-font" style="width: 100%; padding: 6px; background: #0d1117; border: 1px solid #30363d; border-radius: 4px; color: #c9d1d9; font-size: 11px; cursor: pointer;">
-                        <option value="Arial, sans-serif">Arial</option>
-                        <option value="Georgia, serif">Georgia</option>
-                        <option value="Courier New, monospace">Courier New</option>
-                        <option value="Times New Roman, serif">Times New Roman</option>
-                        <option value="Verdana, sans-serif">Verdana</option>
-                    </select>
-                </div>
-                <div>
-                    <label style="display: block; margin-bottom: 6px; color: #8b949e; font-size: 11px;">Size: <span id="modal-text-size-value">48</span>px</label>
-                    <input type="range" id="modal-text-size" min="6" max="120" value="48" style="width: 100%;">
-                </div>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
-                <div>
-                    <label style="display: block; margin-bottom: 6px; color: #8b949e; font-size: 11px;">Color</label>
-                    <div style="display: flex; gap: 8px;">
-                        <input type="color" id="modal-text-color" value="#ffffff" style="width: 50px; height: 32px; cursor: pointer; border: 1px solid #30363d; border-radius: 4px; background: transparent;">
-                        <input type="text" id="modal-text-color-text" value="#ffffff" style="flex: 1; padding: 6px; background: #0d1117; border: 1px solid #30363d; border-radius: 4px; color: #c9d1d9; font-size: 11px; font-family: monospace;">
-                    </div>
-                </div>
-                <div>
-                    <label style="display: block; margin-bottom: 6px; color: #8b949e; font-size: 11px;">Opacity: <span id="modal-text-opacity-value">100</span>%</label>
-                    <input type="range" id="modal-text-opacity" min="0" max="100" value="100" style="width: 100%;">
-                </div>
-            </div>
-            <div style="display: flex; gap: 10px; justify-content: flex-end;">
-                <button onclick="closeTextModal(false)" style="padding: 8px 16px; background: #21262d; border: 1px solid #30363d; border-radius: 4px; color: #8b949e; cursor: pointer; font-size: 12px;">Cancel</button>
-                <button onclick="closeTextModal(true)" style="padding: 8px 16px; background: #238636; border: 1px solid #2ea043; border-radius: 4px; color: #fff; cursor: pointer; font-size: 12px; font-weight: bold;">Save</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Output Size Modal -->
-    <div id="output-size-modal" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.7); z-index: 10000; align-items: center; justify-content: center;">
-        <div style="background: #161b22; border: 2px solid #6FC3DF; border-radius: 8px; padding: 25px; width: 500px; max-width: 90%; box-shadow: 0 10px 40px rgba(0,0,0,0.5);">
-            <h3 style="margin: 0 0 20px 0; color: #6FC3DF; font-size: 16px;">📐 Output Size</h3>
-            <div style="background: #0d1117; padding: 15px; border-radius: 6px; margin-bottom: 20px; border: 1px solid #30363d;">
-                <div style="color: #8b949e; font-size: 11px; margin-bottom: 5px;">Current Output Size:</div>
-                <div id="output-size-current" style="color: #c9d1d9; font-size: 18px; font-weight: bold; font-family: monospace;"></div>
-                <div id="output-size-preview" style="color: #6FC3DF; font-size: 11px; margin-top: 5px;"></div>
-            </div>
-            <div style="margin-bottom: 20px;">
-                <label style="display: block; margin-bottom: 10px; color: #8b949e; font-size: 12px;">Scale Factor:</label>
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px;">
-                    <button class="tab-button active" id="scale-100" onclick="setOutputScale(1.0)" style="font-size: 11px;">100% (1×)</button>
-                    <button class="tab-button" id="scale-75" onclick="setOutputScale(0.75)" style="font-size: 11px;">75%</button>
-                    <button class="tab-button" id="scale-50" onclick="setOutputScale(0.5)" style="font-size: 11px;">50%</button>
-                </div>
-                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px;">
-                    <button class="tab-button" id="scale-25" onclick="setOutputScale(0.25)" style="font-size: 11px;">25%</button>
-                    <button class="tab-button" id="scale-custom" onclick="setOutputScale('custom')" style="font-size: 11px;">Custom</button>
-                </div>
-            </div>
-            <div id="custom-scale-input" style="display: none; margin-bottom: 20px;">
-                <label style="display: block; margin-bottom: 8px; color: #8b949e; font-size: 11px;">Custom Scale: <span id="custom-scale-value">100</span>%</label>
-                <input type="range" id="custom-scale-slider" min="10" max="200" value="100" oninput="updateCustomScale(this.value)" style="width: 100%; margin-bottom: 8px;">
-                <div style="display: flex; gap: 8px;">
-                    <input type="number" id="custom-scale-number" min="10" max="200" value="100" onchange="updateCustomScale(this.value)" style="flex: 1; padding: 6px; background: #0d1117; border: 1px solid #30363d; border-radius: 4px; color: #c9d1d9; font-size: 11px;">
-                    <span style="color: #8b949e; line-height: 32px;">%</span>
-                </div>
-            </div>
-            <div style="display: flex; gap: 10px; justify-content: flex-end;">
-                <button onclick="closeOutputSizeModal()" style="padding: 8px 16px; background: #21262d; border: 1px solid #30363d; border-radius: 4px; color: #8b949e; cursor: pointer; font-size: 12px;">Cancel</button>
-                <button onclick="proceedWithDownload()" style="padding: 8px 16px; background: #238636; border: 1px solid #2ea043; border-radius: 4px; color: #fff; cursor: pointer; font-size: 12px; font-weight: bold;">Download</button>
+                </div><!-- /imagetools-tab -->
             </div>
         </div>
     </div>
