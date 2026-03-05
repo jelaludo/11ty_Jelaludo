@@ -566,6 +566,29 @@ body.is-scrolling .gallery-slide__link {
     flex-shrink: 0;
 }
 
+.immersive-view__link-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.82);
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    flex-shrink: 0;
+    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.07);
+        outline: none;
+    }
+}
+
 body.is-immersive-open,
 body.is-lightbox-open {
     overflow: hidden;

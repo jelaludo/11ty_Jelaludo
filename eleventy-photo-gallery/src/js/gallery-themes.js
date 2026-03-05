@@ -20,6 +20,7 @@ const SELECTORS = {
     immersiveGallery: '[data-immersive-gallery]',
     immersiveTitle: '[data-immersive-title]',
     immersiveCount: '[data-immersive-count]',
+    immersiveLink: '[data-immersive-link]',
 };
 
 // Slugify function matching galleryThemes.js
@@ -501,6 +502,7 @@ const mountImmersiveMode = (items, state, openLightbox) => {
     const trigger = document.querySelector(SELECTORS.immersiveTrigger);
     const view = document.querySelector(SELECTORS.immersiveView);
     const closeBtn = document.querySelector(SELECTORS.immersiveClose);
+    const linkBtn = document.querySelector(SELECTORS.immersiveLink);
     const galleryContainer = document.querySelector(SELECTORS.immersiveGallery);
     const titleEl = document.querySelector(SELECTORS.immersiveTitle);
     const countEl = document.querySelector(SELECTORS.immersiveCount);
@@ -575,9 +577,40 @@ const mountImmersiveMode = (items, state, openLightbox) => {
     trigger.addEventListener('click', openImmersive);
     if (closeBtn) closeBtn.addEventListener('click', closeImmersive);
 
+    if (linkBtn) {
+        linkBtn.addEventListener('click', async () => {
+            const params = new URLSearchParams();
+            if (state.activeTag && state.activeTag !== 'all') {
+                params.set('tag', state.activeTag);
+            }
+            params.set('view', 'immersive');
+            const url = window.location.origin + '/gallery/?' + params.toString();
+            try {
+                await navigator.clipboard.writeText(url);
+            } catch (_) {
+                const ta = document.createElement('textarea');
+                ta.value = url;
+                ta.style.cssText = 'position:fixed;opacity:0';
+                document.body.appendChild(ta);
+                ta.select();
+                try { document.execCommand('copy'); } catch (_) {}
+                document.body.removeChild(ta);
+            }
+            const orig = linkBtn.textContent;
+            linkBtn.textContent = 'Copied!';
+            setTimeout(() => { linkBtn.textContent = orig; }, 2000);
+        });
+    }
+
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !view.hasAttribute('hidden')) closeImmersive();
     });
+
+    // Auto-open if deep-linked with ?view=immersive
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('view') === 'immersive') {
+        openImmersive();
+    }
 };
 
 const init = () => {
