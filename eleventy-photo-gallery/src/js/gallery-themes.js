@@ -578,27 +578,44 @@ const mountImmersiveMode = (items, state, openLightbox) => {
     if (closeBtn) closeBtn.addEventListener('click', closeImmersive);
 
     if (linkBtn) {
-        linkBtn.addEventListener('click', async () => {
+        linkBtn.addEventListener('click', () => {
             const params = new URLSearchParams();
             if (state.activeTag && state.activeTag !== 'all') {
                 params.set('tag', state.activeTag);
             }
             params.set('view', 'immersive');
             const url = window.location.origin + '/gallery/?' + params.toString();
-            try {
-                await navigator.clipboard.writeText(url);
-            } catch (_) {
+
+            // Show feedback synchronously — clipboard is fire-and-forget.
+            // The immersive view's overflow-y/scroll-snap context causes the
+            // Clipboard API promise to hang on iOS Safari if awaited.
+            const orig = linkBtn.textContent;
+            linkBtn.textContent = 'Copied!';
+            setTimeout(() => { linkBtn.textContent = orig; }, 2000);
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).catch(() => {
+                    const ta = document.createElement('textarea');
+                    ta.value = url;
+                    ta.setAttribute('readonly', '');
+                    ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none';
+                    document.body.appendChild(ta);
+                    ta.focus();
+                    ta.select();
+                    try { document.execCommand('copy'); } catch (_) {}
+                    document.body.removeChild(ta);
+                });
+            } else {
                 const ta = document.createElement('textarea');
                 ta.value = url;
-                ta.style.cssText = 'position:fixed;opacity:0';
+                ta.setAttribute('readonly', '');
+                ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;pointer-events:none';
                 document.body.appendChild(ta);
+                ta.focus();
                 ta.select();
                 try { document.execCommand('copy'); } catch (_) {}
                 document.body.removeChild(ta);
             }
-            const orig = linkBtn.textContent;
-            linkBtn.textContent = 'Copied!';
-            setTimeout(() => { linkBtn.textContent = orig; }, 2000);
         });
     }
 
