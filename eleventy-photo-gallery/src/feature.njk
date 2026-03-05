@@ -110,6 +110,34 @@ url: https://eleventy-gallery.netlify.app
                     </ul>
                 </section>
                 {% endif %}
+                {% if image.tags and image.tags | length %}
+                <section class="feature-frame__tags" aria-label="Explore by tag">
+                    <div class="feature-frame__tag-row">
+                        {% for tag in image.tags %}
+                        {% set tagSlug = '' %}
+                        {% set tagCount = 0 %}
+                        {% for t in galleryThemes.tags %}
+                            {% if t.tag == tag %}
+                                {% set tagSlug = t.slug %}
+                                {% set tagCount = t.count %}
+                            {% endif %}
+                        {% endfor %}
+                        <button
+                            class="themes-gallery__tag"
+                            type="button"
+                            data-feature-tag="{{ tagSlug }}"
+                            data-feature-tag-label="{{ tag }}"
+                        >
+                            {{ tag }}
+                            <span class="themes-gallery__count">{{ tagCount }}</span>
+                        </button>
+                        {% endfor %}
+                    </div>
+                    <button class="themes-gallery__immersive-btn" type="button" data-feature-explore hidden>
+                        View [<span data-feature-explore-label></span>] photos
+                    </button>
+                </section>
+                {% endif %}
                 <nav class="feature-frame__nav" aria-label="Gallery navigation">
                     {% if pagination.href.previous %}
                     <a class="feature-frame__navlink" href="{{ pagination.href.previous }}">
@@ -127,5 +155,6 @@ url: https://eleventy-gallery.netlify.app
         {% include "partials/footer.njk" %}
         <script type="module" src="/js/orientation.js"></script>
         <script src="/js/feature-navigation.js"></script>
+        <script src="/js/feature-tags.js"></script>
     </body>
 </html>
