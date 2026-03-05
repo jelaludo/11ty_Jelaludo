@@ -77,6 +77,34 @@ url: https://eleventy-gallery.netlify.app
                     <a class="feature-frame__source" href="{{ image.linkToAuthor }}" target="_blank" rel="noopener">View Original</a>
                     {% endif %}
                 </header>
+                {% if image.tags and image.tags | length %}
+                <section class="feature-frame__tags" aria-label="Explore by tag">
+                    <div class="feature-frame__tag-row">
+                        {% for tag in image.tags %}
+                        {% set tagSlug = '' %}
+                        {% set tagCount = 0 %}
+                        {% for t in galleryThemes.tags %}
+                            {% if t.tag == tag %}
+                                {% set tagSlug = t.slug %}
+                                {% set tagCount = t.count %}
+                            {% endif %}
+                        {% endfor %}
+                        <button
+                            class="themes-gallery__tag"
+                            type="button"
+                            data-feature-tag="{{ tagSlug }}"
+                            data-feature-tag-label="{{ tag }}"
+                        >
+                            {{ tag }}
+                            <span class="themes-gallery__count">{{ tagCount }}</span>
+                        </button>
+                        {% endfor %}
+                    </div>
+                    <button class="themes-gallery__immersive-btn" type="button" data-feature-explore hidden>
+                        View [<span data-feature-explore-label></span>] photos
+                    </button>
+                </section>
+                {% endif %}
                 {% set treemapData = colorTreemap[image.src] %}
                 {% if not treemapData %}
                 {{ palette.render(image.palette, "feature-frame__palette") }}
@@ -108,34 +136,6 @@ url: https://eleventy-gallery.netlify.app
                         <li>{{ exifData.flash }}</li>
                         {% endif %}
                     </ul>
-                </section>
-                {% endif %}
-                {% if image.tags and image.tags | length %}
-                <section class="feature-frame__tags" aria-label="Explore by tag">
-                    <div class="feature-frame__tag-row">
-                        {% for tag in image.tags %}
-                        {% set tagSlug = '' %}
-                        {% set tagCount = 0 %}
-                        {% for t in galleryThemes.tags %}
-                            {% if t.tag == tag %}
-                                {% set tagSlug = t.slug %}
-                                {% set tagCount = t.count %}
-                            {% endif %}
-                        {% endfor %}
-                        <button
-                            class="themes-gallery__tag"
-                            type="button"
-                            data-feature-tag="{{ tagSlug }}"
-                            data-feature-tag-label="{{ tag }}"
-                        >
-                            {{ tag }}
-                            <span class="themes-gallery__count">{{ tagCount }}</span>
-                        </button>
-                        {% endfor %}
-                    </div>
-                    <button class="themes-gallery__immersive-btn" type="button" data-feature-explore hidden>
-                        View [<span data-feature-explore-label></span>] photos
-                    </button>
                 </section>
                 {% endif %}
                 <nav class="feature-frame__nav" aria-label="Gallery navigation">
