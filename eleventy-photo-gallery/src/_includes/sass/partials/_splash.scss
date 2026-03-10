@@ -1,3 +1,5 @@
+@use "../vars" as *;
+
 .splash-layout {
     min-height: 100vh;
     background: #000;
@@ -17,7 +19,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #121212;
+        background: $bg-dark;
 
         .splash-hero__img {
             max-width: 100%;

@@ -1,9 +1,11 @@
+@use "../vars" as *;
+
 .feature-frame {
     display: flex;
     flex-direction: column;
     gap: clamp(1.5rem, 3vw, 3rem);
     padding-bottom: clamp(2rem, 4vw, 3rem);
-    background: #121212;
+    background: $bg-dark;
 
     &__media {
         width: min(1100px, 92vw);
@@ -11,7 +13,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background: #121212;
+        background: $bg-dark;
         border-radius: 28px;
         overflow: hidden;
         box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
@@ -185,7 +187,7 @@
         flex-wrap: wrap;
 
         a {
-            color: #e0e0e0;
+            color: $text-primary;
         }
     }
 

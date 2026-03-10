@@ -1,3 +1,5 @@
+@use "../vars" as *;
+
 .gallery-intro {
     max-width: 1100px;
     margin: 0 auto;
@@ -11,7 +13,7 @@
 
     p {
         margin: 0;
-        color: #b0b0b0;
+        color: $text-secondary;
         font-size: 0.95rem;
     }
 }
@@ -20,13 +22,13 @@
     display: flex;
     flex-direction: column;
     scroll-snap-type: y mandatory;
-    background: #121212;
+    background: $bg-dark;
 }
 
 .gallery-slide {
     scroll-snap-align: start;
     position: relative;
-    background: #121212;
+    background: $bg-dark;
     isolation: isolate;
     padding: 0;
     margin: 0;
@@ -44,7 +46,7 @@
     padding: 0;
     border: none;
     outline: none;
-    background: #121212;
+    background: $bg-dark;
     // ATTEMPT 5: Change from manipulation to pan-y to allow vertical scrolling
     // manipulation prioritizes taps, pan-y allows vertical panning (scrolling)
     touch-action: pan-y;
@@ -64,7 +66,7 @@ body.is-scrolling .gallery-slide__link {
     max-width: 100%;
     margin: 0;
     display: block;
-    background: #121212;
+    background: $bg-dark;
     border: none;
     outline: none;
 }
@@ -72,7 +74,7 @@ body.is-scrolling .gallery-slide__link {
 .gallery-slide__media picture {
     display: block;
     width: 100%;
-    background: #121212;
+    background: $bg-dark;
     border: none;
     outline: none;
     margin: 0;
@@ -87,7 +89,7 @@ body.is-scrolling .gallery-slide__link {
     object-fit: scale-down;
     filter: brightness(0.92);
     transition: filter 0.4s ease;
-    background: #121212;
+    background: $bg-dark;
     border: none;
     outline: none;
     margin: 0;
@@ -495,7 +497,7 @@ body.is-scrolling .gallery-slide__link {
     position: fixed;
     inset: 0;
     z-index: 500;
-    background: #121212;
+    background: $bg-dark;
     overflow-y: auto;
     scroll-snap-type: y mandatory;
     overscroll-behavior: contain;
