@@ -14,9 +14,29 @@ const imagesRoot = path.join(projectRoot, "src", "images");
 const outputDir = path.join(projectRoot, "_site", "img");
 const port = Number(process.env.KANRI_PORT) || 8686;
 
+const ALLOWED_MIMETYPES = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/webp",
+  "image/gif",
+  "image/tiff",
+  "image/avif",
+]);
+
+const ALLOWED_EXTENSIONS = new Set([
+  ".jpg", ".jpeg", ".png", ".webp", ".gif", ".tiff", ".tif", ".avif",
+]);
+
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: 25 * 1024 * 1024 },
+  fileFilter(_req, file, cb) {
+    const ext = path.extname(file.originalname).toLowerCase();
+    if (!ALLOWED_MIMETYPES.has(file.mimetype) || !ALLOWED_EXTENSIONS.has(ext)) {
+      return cb(new Error(`File type not allowed: ${file.mimetype} (${ext})`));
+    }
+    cb(null, true);
+  },
 });
 
 const app = express();
@@ -403,7 +423,7 @@ app.post("/admin/images", upload.single("file"), async (req, res) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`[Kanri] Admin server listening on http://localhost:${port}`);
+app.listen(port, "127.0.0.1", () => {
+  console.log(`[Kanri] Admin server listening on http://127.0.0.1:${port}`);
 });
 

@@ -14,8 +14,6 @@ module.exports = (eleventyConfig) => {
     "njk"
   ]);
 
-  markdownTemplateEngine: "njk";
-
   // Perform manual passthrough file copy to include directories in the build output _site
   eleventyConfig.addPassthroughCopy("./src/photos");
   eleventyConfig.addPassthroughCopy("./src/css");
@@ -39,16 +37,6 @@ module.exports = (eleventyConfig) => {
       console.log(`Terser error: ${err}`);
       callback(null, code);
     }
-  });
-
-  // Configure image in a template paired shortcode
-  eleventyConfig.addPairedShortcode("image", (srcSet, src, alt, sizes = "(min-width: 400px) 33.3vw, 100vw") => {
-    return `<img srcset="${srcSet}" src="${src}" alt="${alt}" sizes="${sizes}" />`;
-  });
-
-  // Configure outgoing Pexels anchor elements in a template paried shortcode
-  eleventyConfig.addPairedShortcode("link", (href, cls = "image-link", rel = "noopener", target = "_blank", btnTxt = "Pexels") => {
-    return `<a class="${cls}" href="${href}" rel="${rel}" target="${target}">${btnTxt}</a>`;
   });
 
   // Get the current year
@@ -132,6 +120,7 @@ module.exports = (eleventyConfig) => {
       includes: "_includes",
     },
     templateFormats: ["md", "liquid", "njk"],
+    markdownTemplateEngine: "njk",
     passthroughFileCopy: true
   }
 };

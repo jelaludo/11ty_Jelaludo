@@ -36,6 +36,9 @@
   ],
   "homepage": "https://github.com/tannerdolby/eleventy-photo-gallery#readme",
   "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "dependencies": {
     "@11ty/eleventy": "^2.0.1",
     "@11ty/eleventy-img": "^4.0.2",

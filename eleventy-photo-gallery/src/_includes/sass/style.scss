@@ -16,8 +16,8 @@ body {
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    background: #121212;
-    color: #e0e0e0;
+    background: $bg-dark;
+    color: $text-primary;
     font-family: $system-font;
     font-size: 16px;
     line-height: 1.6;
@@ -33,11 +33,11 @@ p {
     font-size: clamp(1rem, 3vw, 1.0625rem);
     line-height: 1.5;
     font-family: $system-font;
-    color: #b0b0b0;
+    color: $text-secondary;
 }
 
 a {
-    color: #e0e0e0;
+    color: $text-primary;
     text-decoration: none;
     font-family: $system-font;
 
@@ -79,7 +79,7 @@ main {
     transition: transform .3s ease-in-out;
     padding: .5rem;
     background: #e0e0e0;
-    color: #121212;
+    color: $bg-dark;
     z-index: 999;
 
     &:focus {
@@ -89,7 +89,7 @@ main {
 
 h1, h2, h3, h4, h5 {
     font-family: $system-font;
-    color: #e0e0e0;
+    color: $text-primary;
 }
 
 .inspiration {
@@ -101,7 +101,7 @@ h1, h2, h3, h4, h5 {
         margin-bottom: 2rem;
 
         p {
-            color: #b0b0b0;
+            color: $text-secondary;
         }
     }
 }
@@ -125,7 +125,7 @@ h1, h2, h3, h4, h5 {
         text-transform: uppercase;
         letter-spacing: 0.14em;
         font-size: 0.95rem;
-        color: #e0e0e0;
+        color: $text-primary;
         padding-bottom: 0.35rem;
         border-bottom: 1px solid transparent;
         transition: border-color 0.3s ease, color 0.3s ease;
