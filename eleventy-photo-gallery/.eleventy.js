@@ -9,11 +9,6 @@ module.exports = (eleventyConfig) => {
   eleventyConfig.addPlugin(metagen);
   eleventyConfig.addPlugin(eleventyNavigation);
 
-  eleventyConfig.setTemplateFormats([
-    "md",
-    "njk"
-  ]);
-
   // Perform manual passthrough file copy to include directories in the build output _site
   eleventyConfig.addPassthroughCopy("./src/photos");
   eleventyConfig.addPassthroughCopy("./src/css");

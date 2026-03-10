@@ -78,7 +78,7 @@ main {
     transform: translateY(-10rem);
     transition: transform .3s ease-in-out;
     padding: .5rem;
-    background: #e0e0e0;
+    background: $text-primary;
     color: $bg-dark;
     z-index: 999;
 

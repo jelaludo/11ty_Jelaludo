@@ -49,7 +49,7 @@
     display: -webkit-flex;
     flex-direction: column;
     max-width: 60ch;
-    color: #e0e0e0;
+    color: $text-primary;
 
     label {
         &.form-label {
@@ -65,7 +65,7 @@
         font-size: 16px;
         -webkit-appearance: none;
         background: #1a1a1a;
-        color: #e0e0e0;
+        color: $text-primary;
 
         &:focus {
             outline: none;
@@ -89,7 +89,7 @@
         border-radius: 3px;
         font-family: $system-font;
         border: 1px solid #444444;
-        color: #e0e0e0;
+        color: $text-primary;
         margin-top: 1.35rem;
         max-width: fit-content;
         max-width: -moz-fit-content;

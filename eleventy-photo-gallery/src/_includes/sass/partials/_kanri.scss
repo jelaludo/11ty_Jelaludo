@@ -4,7 +4,7 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 3rem 1.5rem 4rem;
-    color: #e0e0e0;
+    color: $text-primary;
 }
 
 .kanri-header {
@@ -19,7 +19,7 @@
 
     .kanri-subtitle {
         margin: 0.5rem 0 0;
-        color: #b0b0b0;
+        color: $text-secondary;
     }
 }
 
@@ -71,7 +71,7 @@
         font-size: 0.82rem;
         text-transform: uppercase;
         letter-spacing: 0.09em;
-        color: #e0e0e0;
+        color: $text-primary;
         white-space: nowrap;
     }
 }
@@ -82,7 +82,7 @@
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
     background: rgba(8, 8, 8, 0.92);
-    color: #e0e0e0;
+    color: $text-primary;
     cursor: pointer;
     transition: border 0.2s ease;
     min-width: 180px;
@@ -94,7 +94,7 @@
 
     option {
         background: rgba(18, 18, 18, 0.98);
-        color: #e0e0e0;
+        color: $text-primary;
     }
 }
 
@@ -106,7 +106,7 @@
     font-size: 0.82rem;
     text-transform: uppercase;
     letter-spacing: 0.09em;
-    color: #e0e0e0;
+    color: $text-primary;
     user-select: none;
 }
 
@@ -139,7 +139,7 @@
     font-size: 0.82rem;
     text-transform: uppercase;
     letter-spacing: 0.09em;
-    color: #e0e0e0;
+    color: $text-primary;
     min-width: 120px;
 }
 
@@ -220,7 +220,7 @@
     padding: 0.55rem 0.7rem;
     font-size: 0.9rem;
     background: rgba(8, 8, 8, 0.92);
-    color: #e0e0e0;
+    color: $text-primary;
     cursor: pointer;
     transition: border 0.2s ease;
     min-width: 180px;
@@ -233,7 +233,7 @@
 
     option {
         background: rgba(18, 18, 18, 0.98);
-        color: #e0e0e0;
+        color: $text-primary;
     }
 }
 
@@ -243,7 +243,7 @@
     padding: 0.55rem 0.7rem;
     font-size: 0.9rem;
     background: rgba(8, 8, 8, 0.92);
-    color: #e0e0e0;
+    color: $text-primary;
     transition: border 0.2s ease;
     flex: 1 1 auto;
     min-width: 200px;
@@ -330,7 +330,7 @@
     border: 1px solid #444444;
     border-radius: 999px;
     background: rgba(12, 12, 12, 0.9);
-    color: #e0e0e0;
+    color: $text-primary;
     padding: 0.48rem 1.5rem;
     font-weight: 600;
     letter-spacing: 0.08em;
@@ -375,7 +375,7 @@
     p {
         grid-column: 1 / -1;
         margin: 0;
-        color: #b0b0b0;
+        color: $text-secondary;
     }
 }
 
@@ -441,7 +441,7 @@
         display: grid;
         gap: 0.35rem;
         font-size: 0.78rem;
-        color: #b0b0b0;
+        color: $text-secondary;
 
         dt {
             font-weight: 600;
@@ -536,7 +536,7 @@
             padding: 0.55rem 0.7rem;
             font-size: 0.95rem;
             background: rgba(8, 8, 8, 0.92);
-            color: #e0e0e0;
+            color: $text-primary;
             transition: border 0.2s ease;
 
             &:focus {
@@ -597,7 +597,7 @@
 .kanri-loading {
     text-align: center;
     margin: 2rem 0;
-    color: #b0b0b0;
+    color: $text-secondary;
 }
 
 .kanri-modal {
@@ -668,7 +668,7 @@
     &__close {
         background: transparent;
         border: none;
-        color: #e0e0e0;
+        color: $text-primary;
         font-size: 2rem;
         line-height: 1;
         cursor: pointer;
