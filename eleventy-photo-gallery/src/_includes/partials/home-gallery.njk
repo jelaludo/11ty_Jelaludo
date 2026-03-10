@@ -6,7 +6,7 @@
     class="gallery-slide{% if loop.first %} gallery-slide--first{% endif %}"
     data-gallery-item
     data-title="{{ image.title }}"
-    data-src="{{ image.imgDir }}{{ image.src }}"
+    data-src="{% imgUrl src=image.src %}"
     data-alt="{{ image.alt }}"
     data-href="/gallery/{{ image.title | slug }}/"
   >

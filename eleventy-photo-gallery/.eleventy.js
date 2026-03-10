@@ -17,7 +17,6 @@ module.exports = (eleventyConfig) => {
   markdownTemplateEngine: "njk";
 
   // Perform manual passthrough file copy to include directories in the build output _site
-  eleventyConfig.addPassthroughCopy("./src/images");
   eleventyConfig.addPassthroughCopy("./src/photos");
   eleventyConfig.addPassthroughCopy("./src/css");
   eleventyConfig.addPassthroughCopy("./src/js");
@@ -111,6 +110,18 @@ module.exports = (eleventyConfig) => {
       >`;
 
     return `<picture>\n\t${sources}\n\t${img}</picture>`;
+  });
+
+  // Return the URL of the largest optimized image variant (for lightbox/OG usage)
+  eleventyConfig.addShortcode("imgUrl", async function ({ src, format = "webp" }) {
+    const metadata = await Image("./src/images/" + src, {
+      widths: [2560],
+      formats: [format],
+      urlPath: "/img/",
+      outputDir: "_site/img",
+    });
+
+    return metadata[format][0].url;
   });
 
   return {

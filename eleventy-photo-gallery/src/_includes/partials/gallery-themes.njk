@@ -103,7 +103,7 @@
             data-tag-labels="{{ tags | join(', ') }}"
             data-lens="{{ lensInfo.slug if lensInfo else '' }}"
             data-title="{{ image.title }}"
-            data-src="{{ image.imgDir }}{{ image.src }}"
+            data-src="{% imgUrl src=image.src %}"
             data-alt="{{ image.alt }}"
             data-href="/gallery/{{ image.title | slug }}/"
             data-date="{{ image.date or '' }}"

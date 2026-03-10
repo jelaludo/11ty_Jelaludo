@@ -11,11 +11,12 @@ url: https://eleventy-gallery.netlify.app
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
     <head>
-        {% metagen 
+        {% setAsync "ogImage" %}{% imgUrl src=image.src, format="jpeg" %}{% endsetAsync %}
+        {% metagen
             title=image.title,
             desc=image.title + " " + site.pageMetadata.featured.content,
             url=url + "/gallery/" + image.title | slug + "/",
-            img=url + image.imgDir + image.src,
+            img=url + ogImage | trim,
             img_alt=image.alt,
             twitter_card_type='summary_large_image',
             twitter_handle=site.author.twitterHandle,
