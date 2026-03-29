@@ -30,6 +30,9 @@
             max-height: min(80vh, 900px);
             object-fit: scale-down;
             transition: opacity 0.2s ease;
+            // Touch zoom support
+            will-change: transform;
+            transform-origin: center center;
 
             &.is-landscape {
                 width: auto;
