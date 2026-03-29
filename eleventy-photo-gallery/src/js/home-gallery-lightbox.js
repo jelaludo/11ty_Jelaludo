@@ -41,6 +41,8 @@ const mountHomeLightbox = () => {
         imageEl.removeAttribute('alt');
         linkEl.removeAttribute('href');
         document.body.classList.remove('is-lightbox-open');
+        if (gestures) { gestures.destroy(); gestures = null; }
+        imageEl.style.touchAction = '';
         // Show header and footer
         if (header) header.style.display = '';
         if (footer) footer.style.display = '';
@@ -105,8 +107,26 @@ const mountHomeLightbox = () => {
         // Hide header and footer
         if (header) header.style.display = 'none';
         if (footer) footer.style.display = 'none';
+
+        // Prevent browser zoom fighting with JS zoom
+        imageEl.style.touchAction = 'none';
+
+        // Initialize touch gestures
+        if (gestures) gestures.destroy();
+        gestures = window.createTouchGestures(imageEl, {
+            onTap: handleImageBack,
+            onSwipeLeft: navigateToNext,
+            onSwipeRight: navigateToPrevious,
+            onZoomChange: (scale) => {
+                // Hide/show nav arrows based on zoom state
+                if (prevBtn) prevBtn.style.opacity = scale > 1.05 ? '0' : '';
+                if (nextBtn) nextBtn.style.opacity = scale > 1.05 ? '0' : '';
+            },
+        });
     };
-    
+
+    let gestures = null;
+
     const updateArrowButtons = () => {
         if (!prevBtn || !nextBtn) return;
         
@@ -222,7 +242,6 @@ const mountHomeLightbox = () => {
         }
     };
     imageEl.addEventListener('click', handleImageBack);
-    imageEl.addEventListener('touchend', handleImageBack);
 
     // Click/touch lightbox background to close
     const handleBackgroundClose = (event) => {
@@ -232,7 +251,12 @@ const mountHomeLightbox = () => {
         }
     };
     lightbox.addEventListener('click', handleBackgroundClose);
-    lightbox.addEventListener('touchend', handleBackgroundClose);
+    lightbox.addEventListener('touchend', (e) => {
+        if (e.target === lightbox && !(gestures && gestures.isZoomed())) {
+            e.preventDefault();
+            closeLightbox();
+        }
+    });
 
     // Prevent link clicks from closing lightbox
     linkEl.addEventListener('click', (event) => {
