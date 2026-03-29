@@ -631,6 +631,9 @@ body.is-lightbox-open {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
+    // Touch zoom support
+    will-change: transform;
+    transform-origin: center center;
 }
 
 .themes-lightbox__arrow {
