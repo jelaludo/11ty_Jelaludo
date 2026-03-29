@@ -23,6 +23,11 @@
     flex-direction: column;
     scroll-snap-type: y mandatory;
     background: $bg-dark;
+
+    // Disable scroll-snap while viewport is zoomed to prevent jump-back
+    .is-viewport-zoomed & {
+        scroll-snap-type: none;
+    }
 }
 
 .gallery-slide {
@@ -47,9 +52,7 @@
     border: none;
     outline: none;
     background: $bg-dark;
-    // ATTEMPT 5: Change from manipulation to pan-y to allow vertical scrolling
-    // manipulation prioritizes taps, pan-y allows vertical panning (scrolling)
-    touch-action: pan-y;
+    touch-action: pan-y pinch-zoom;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
@@ -501,6 +504,11 @@ body.is-scrolling .gallery-slide__link {
     overflow-y: auto;
     scroll-snap-type: y mandatory;
     overscroll-behavior: contain;
+
+    // Disable scroll-snap while viewport is zoomed to prevent jump-back
+    .is-viewport-zoomed & {
+        scroll-snap-type: none;
+    }
 
     &[hidden] { display: none; }
 
