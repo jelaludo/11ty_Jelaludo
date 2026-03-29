@@ -64,6 +64,12 @@ body.is-scrolling .gallery-slide__link {
     pointer-events: none;
 }
 
+// Disable pointer events during/after pinch-zoom to prevent accidental clicks
+body.is-pinch-active .gallery-slide__link,
+body.is-pinch-active .themes-gallery__image {
+    pointer-events: none;
+}
+
 .gallery-slide__media {
     width: 100%;
     max-width: 100%;
