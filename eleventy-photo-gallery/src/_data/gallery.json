@@ -2373,5 +2373,147 @@
       "#C1AB9B",
       "#333C47"
     ]
+  },
+  {
+    "title": "Coffee Chatan",
+    "date": "",
+    "alt": "R6g 1795",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_1795.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Okinawa",
+      "coffee",
+      "Punctum"
+    ],
+    "palette": [
+      "#9F7B54",
+      "#C7CA3D",
+      "#C12B2F",
+      "#33252B",
+      "#B9D7CD",
+      "#647B43",
+      "#7F1D25",
+      "#C8B49E"
+    ]
+  },
+  {
+    "title": "Chatan Sunset",
+    "date": "",
+    "alt": "R6g 1856",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_1856.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Okinawa",
+      "sunset"
+    ],
+    "palette": [
+      "#C8A67C",
+      "#0F1B22",
+      "#758A96",
+      "#FFDE82",
+      "#F1E2B7",
+      "#BBBFAE",
+      "#333D45",
+      "#988779"
+    ]
+  },
+  {
+    "title": "Trek Sunrise",
+    "date": "",
+    "alt": "R6g 1882",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_1882.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Bicycle",
+      "Okinawa",
+      "Sunrise"
+    ],
+    "palette": [
+      "#8D7D6B",
+      "#FBD63F",
+      "#060403",
+      "#DFBC8C",
+      "#322817",
+      "#4D2221",
+      "#FBDB9C",
+      "#856749"
+    ]
+  },
+  {
+    "title": "East Okinawa",
+    "date": "",
+    "alt": "R6g 1929",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_1929.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Okinawa",
+      "Object",
+      "Ocean"
+    ],
+    "palette": [
+      "#85908D",
+      "#F1AF46",
+      "#201610",
+      "#E6836E",
+      "#5A2F09",
+      "#8A6026",
+      "#C0CDC8",
+      "#676A65"
+    ]
+  },
+  {
+    "title": "AV SF Cafe",
+    "date": "",
+    "alt": "R6g 1757",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_1757.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "coffee",
+      "Okinawa"
+    ],
+    "palette": [
+      "#350506",
+      "#EBB811",
+      "#109A9A",
+      "#DFB78C",
+      "#186557",
+      "#B1620C",
+      "#574D55",
+      "#786B17"
+    ]
+  },
+  {
+    "title": "Okinawa Hiyagon Beach",
+    "date": "",
+    "alt": "R6g 1881",
+    "credit": "",
+    "linkToAuthor": "",
+    "src": "R6G_1881.jpg",
+    "imgDir": "/images/",
+    "tags": [
+      "Ocean",
+      "Beach",
+      "Sunrise"
+    ],
+    "palette": [
+      "#474C5A",
+      "#22212C",
+      "#9E9083",
+      "#989DA9",
+      "#484548",
+      "#B3BBC4",
+      "#616672",
+      "#C3B4A4"
+    ]
   }
 ]

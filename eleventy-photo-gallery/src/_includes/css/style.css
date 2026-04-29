@@ -123,6 +123,9 @@
   scroll-snap-type: y mandatory;
   background: #121212;
 }
+.is-viewport-zoomed .immersive-gallery {
+  scroll-snap-type: none;
+}
 
 .gallery-slide {
   scroll-snap-align: start;
@@ -146,7 +149,7 @@
   border: none;
   outline: none;
   background: #121212;
-  touch-action: pan-y;
+  touch-action: pan-y pinch-zoom;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   user-select: none;
@@ -154,6 +157,11 @@
 }
 
 body.is-scrolling .gallery-slide__link {
+  pointer-events: none;
+}
+
+body.is-pinch-active .gallery-slide__link,
+body.is-pinch-active .themes-gallery__image {
   pointer-events: none;
 }
 
@@ -569,6 +577,9 @@ body.is-scrolling .gallery-slide__link {
   scroll-snap-type: y mandatory;
   overscroll-behavior: contain;
 }
+.is-viewport-zoomed .immersive-view {
+  scroll-snap-type: none;
+}
 .immersive-view[hidden] {
   display: none;
 }
@@ -689,6 +700,8 @@ body.is-lightbox-open {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  will-change: transform;
+  transform-origin: center center;
 }
 
 .themes-lightbox__arrow {
@@ -829,6 +842,8 @@ body.is-lightbox-open {
   max-height: min(80vh, 900px);
   object-fit: scale-down;
   transition: opacity 0.2s ease;
+  will-change: transform;
+  transform-origin: center center;
 }
 .feature-frame__media img.is-landscape {
   width: auto;
