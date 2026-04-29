@@ -73,6 +73,11 @@
 .top-nav .link:hover::after, .top-nav .link:focus-visible::after {
   transform: scaleX(1);
 }
+@media all and (display-mode: standalone) {
+  .top-nav {
+    padding-top: env(safe-area-inset-top);
+  }
+}
 
 @media screen and (max-width: 520px) {
   .top-nav .nav-list {
@@ -1446,6 +1451,13 @@ footer {
   margin-top: 3rem;
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+@media all and (display-mode: standalone) {
+  footer {
+    padding-bottom: calc(2rem + env(safe-area-inset-bottom));
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
 }
 
 /* 404 page styles */

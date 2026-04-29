@@ -87,6 +87,10 @@
             transform: scaleX(1);
         }
     }
+
+    @media all and (display-mode: standalone) {
+        padding-top: env(safe-area-inset-top);
+    }
 }
 
 @media screen and (max-width: 520px) {
