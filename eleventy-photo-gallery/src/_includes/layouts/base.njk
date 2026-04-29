@@ -17,6 +17,12 @@
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon_data/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon_data/favicon-16x16.png">
         <link rel="manifest" href="/favicon_data/site.webmanifest">
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        <meta name="theme-color" content="#111111">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <meta name="apple-mobile-web-app-title" content="Jelaludo">
+        <meta name="mobile-web-app-capable" content="yes">
         {% set css %}
             {% include "css/style.css" %}
             {% include "css/reset.css" %}
@@ -34,5 +40,6 @@
         {% include "partials/footer.njk" %}
         <script src="/js/viewport-zoom.js"></script>
         <script type="module" src="/js/orientation.js"></script>
+        <script src="/js/sw-register.js" defer></script>
     </body>
 </html>
